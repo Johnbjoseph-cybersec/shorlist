@@ -1,0 +1,37 @@
+id: "SL-1120"
+title: ".NET: SlhDsa.GenerateKey SLH-DSA-SHA2-128s"
+family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHA2-128s"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using SlhDsa slh = SlhDsa.GenerateKey(SlhDsaAlgorithm.SlhDsaSha2_128s);"
+context_filename: "Keys.cs"
+context_template: |
+  #pragma warning disable SYSLIB5006
+  using System.Security.Cryptography;
+
+  class Keys
+  {
+      static void Main()
+      {
+          using SlhDsa slh = SlhDsa.GenerateKey(SlhDsaAlgorithm.SlhDsaSha2_128s);
+      }
+  }
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.slhdsa.generatekey"
+    section: "SlhDsa.GenerateKey(SlhDsaAlgorithm)"
+    read_at: "2026-11-05"
+    quote: "public static System.Security.Cryptography.SlhDsa GenerateKey(System.Security.Cryptography.SlhDsaAlgorithm algorithm);"
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.slhdsaalgorithm"
+    section: "SlhDsaAlgorithm.SlhDsaSha2_128s"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "SlhDsaAlgorithm carries [Experimental(\"SYSLIB5006\")]; the pragma line names no algorithm."

@@ -1,0 +1,33 @@
+id: "SL-1166"
+title: "strongSwan: IKE proposal with x25519"
+family: "X25519"
+parameter_set: "x25519"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128gcm16-prfsha256-x25519"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128gcm16-prfsha256-x25519
+      }
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: Key Exchange Methods"
+    read_at: "2026-11-05"
+    quote: "curve25519 or x25519"
+  - url: "https://docs.strongswan.org/docs/latest/swanctl/swanctlConf.html"
+    section: "connections.<conn>.proposals"
+    read_at: "2026-11-05"
+    quote: "Algorithm keywords get separated using dashes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "aes128gcm16 and prfsha256 are symmetric and outside the v1 scope; the proposal needs them to be complete."

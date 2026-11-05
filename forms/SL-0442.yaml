@@ -1,0 +1,25 @@
+id: "SL-0442"
+title: "IANA TLS cipher suite TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256 (Recommended: D)"
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC0,0x90"
+    read_at: "2026-11-05"
+    quote: "\"0xC0,0x90\",TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256,Y,D,[RFC 6367]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Authentication by pre-shared key. The registry marks this entry Recommended: D; it stays in because deployed code still uses it."

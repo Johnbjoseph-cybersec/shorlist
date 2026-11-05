@@ -1,0 +1,25 @@
+id: "SL-1044"
+title: "OID id-RSASSA-PSS as a string"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_RSASSA_PSS_OID = \"1.2.840.113549.1.1.10\""
+context_filename: "oids.py"
+context_template: |
+  ID_RSASSA_PSS_OID = "1.2.840.113549.1.1.10"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "Appendix C. ASN.1 Module (pkcs-1 = 1.2.840.113549.1.1)"
+    read_at: "2026-11-05"
+    quote: "id-RSASSA-PSS OBJECT IDENTIFIER ::= { pkcs-1 10 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

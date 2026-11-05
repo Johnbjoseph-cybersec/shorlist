@@ -1,0 +1,25 @@
+id: "SL-0639"
+title: "IANA JOSE JWK crv P-256"
+family: "EC"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: false
+literal: "jwk = {\"kty\": \"EC\", \"crv\": \"P-256\"}"
+context_filename: "jwk.py"
+context_template: |
+  jwk = {"kty": "EC", "crv": "P-256"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-key-elliptic-curve"
+    section: "JSON Web Key Elliptic Curve registry (CSV web-key-elliptic-curve.csv)"
+    read_at: "2026-11-05"
+    quote: "P-256,P-256 Curve,Recommended+,[IESG],\"[RFC 7518, Section 6.2.1.1]\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A curve pins the family and size but not the role (the key may be used for ECDSA or ECDH)."

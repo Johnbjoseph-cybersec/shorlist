@@ -1,0 +1,26 @@
+id: "SL-1150"
+title: "Node.js: generateKeyPairSync dh modp14"
+family: "DH"
+parameter_set: "modp14"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+literal: "const { publicKey, privateKey } = crypto.generateKeyPairSync('dh', { groupName: 'modp14' });"
+context_filename: "keys.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  const { publicKey, privateKey } = crypto.generateKeyPairSync('dh', { groupName: 'modp14' });
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.generateKeyPairSync(type, options); Asymmetric key types (Node.js v26.13.0)"
+    read_at: "2026-11-05"
+    quote: "'modp14' (2048 bits, RFC 3526 Section 3)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

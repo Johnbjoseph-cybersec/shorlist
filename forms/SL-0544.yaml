@@ -1,0 +1,29 @@
+id: "SL-0544"
+title: "IANA SSH public key algorithm x509v3-ssh-rsa"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "PUBLIC_KEY_ALGORITHM = \"x509v3-ssh-rsa\""
+context_filename: "ssh_policy.py"
+context_template: |
+  PUBLIC_KEY_ALGORITHM = "x509v3-ssh-rsa"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "x509v3-ssh-rsa,x509v3-ssh-rsa,[RFC 6187],"
+  - url: "https://www.rfc-editor.org/rfc/rfc6187.html"
+    section: "3.2 x509v3-ssh-rsa"
+    read_at: "2026-11-05"
+    quote: "Signing and verifying using the x509v3-ssh-rsa key format is performed according to the RSASSA-PKCS1-v1_5 scheme in [RFC3447]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

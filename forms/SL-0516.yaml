@@ -1,0 +1,30 @@
+id: "SL-0516"
+title: "IANA SSH key exchange method rsa1024-sha1 (OK to Implement: MUST NOT)"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"rsa1024-sha1\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "rsa1024-sha1"
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: 1024
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "rsa1024-sha1,[RFC 4432],,MUST NOT"
+  - url: "https://www.rfc-editor.org/rfc/rfc4432.html"
+    section: "4. Details"
+    read_at: "2026-11-05"
+    quote: "The encryption is performed according to the RSAES-OAEP scheme of [RFC3447]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry marks this entry OK to Implement: MUST NOT; it stays in because deployed code still uses it."

@@ -1,0 +1,24 @@
+id: "SL-1066"
+title: "Curve name P-224 (SP 800-186)"
+family: "EC"
+parameter_set: "P-224"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"P-224\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "P-224"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 224
+source:
+  - url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf"
+    section: "3.2.1.2 P-224"
+    read_at: "2026-11-05"
+    quote: "3.2.1.2. P-224"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

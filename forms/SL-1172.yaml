@@ -1,0 +1,25 @@
+id: "SL-1172"
+title: "OpenSSH: Ed25519 host key algorithm"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms ssh-ed25519"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms ssh-ed25519
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "HostKeyAlgorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+    quote: "ssh-mldsa44-ed25519-cert, ssh-ed25519, ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,24 @@
+id: "SL-1092"
+title: "Decoy: DSA OID in a deny list"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: true
+decoy_class: "ban_list"
+literal: "FORBIDDEN_KEY_OIDS = {\"1.2.840.10040.4.1\"}"
+context_filename: "oid_policy.py"
+context_template: |
+  FORBIDDEN_KEY_OIDS = {"1.2.840.10040.4.1"}
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc3279.txt"
+    section: "2.3.2 DSA Signature Keys"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,26 @@
+id: "SL-1177"
+title: "OpenSSH: hybrid mlkem768nistp256-sha256 key exchange"
+family: "ML-KEM"
+parameter_set: "mlkem768nistp256-sha256"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "KexAlgorithms mlkem768nistp256-sha256"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms mlkem768nistp256-sha256
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+    quote: "ecdh-sha2-nistp521 mlkem768nistp256-sha256 mlkem768x25519-sha256"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM)."

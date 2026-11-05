@@ -1,0 +1,33 @@
+id: "SL-1169"
+title: "strongSwan: X25519 plus ke1_mlkem768 (RFC 9370)"
+family: "ML-KEM"
+parameter_set: "x25519-ke1_mlkem768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128gcm16-prfsha256-x25519-ke1_mlkem768"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128gcm16-prfsha256-x25519-ke1_mlkem768
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: Using Multiple Key Exchanges"
+    read_at: "2026-11-05"
+    quote: "For example, x25519-ke1_mlkem768 adds ML-KEM-768 as additional key exchange method after the initial key exchange with X25519."
+  - url: "https://docs.strongswan.org/docs/latest/swanctl/swanctlConf.html"
+    section: "connections.<conn>.proposals"
+    read_at: "2026-11-05"
+    quote: "Algorithm keywords get separated using dashes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM)."

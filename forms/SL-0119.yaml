@@ -1,0 +1,24 @@
+id: "SL-0119"
+title: "IANA TLS SignatureScheme ecdsa_brainpoolP512r1tls13_sha512"
+family: "ECDSA"
+parameter_set: "brainpoolP512r1"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"ecdsa_brainpoolP512r1tls13_sha512\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "ecdsa_brainpoolP512r1tls13_sha512"
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 512
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x081C"
+    read_at: "2026-11-05"
+    quote: "0x081C,ecdsa_brainpoolP512r1tls13_sha512,N,[RFC 8734],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

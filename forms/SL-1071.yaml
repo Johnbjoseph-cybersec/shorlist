@@ -1,0 +1,24 @@
+id: "SL-1071"
+title: "Curve name K-233 (SP 800-186)"
+family: "EC"
+parameter_set: "K-233"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"K-233\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "K-233"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 233
+source:
+  - url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf"
+    section: "3.3.1.2 K-233"
+    read_at: "2026-11-05"
+    quote: "3.3.1.2. Curve K-233"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

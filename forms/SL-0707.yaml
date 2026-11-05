@@ -1,0 +1,28 @@
+id: "SL-0707"
+title: "Decoy: IANA COSE 2 (EC2) in a Python log message"
+family: "EC"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered COSE key type 2 (EC2); rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered COSE key type 2 (EC2); rejected by policy")
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#key-type"
+    section: "COSE Key Types registry (CSV key-type.csv): 2"
+    read_at: "2026-11-05"
+    quote: "EC2,2,Elliptic Curve Keys w/ x- and y-coordinate pair,\"[kty(2), crv]\",[RFC 9053]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

@@ -1,0 +1,25 @@
+id: "SL-1089"
+title: "Decoy: secp256r1 OID in a Python comment"
+family: "EC"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: true
+decoy_class: "comment"
+literal: "# 1.2.840.10045.3.1.7 (secp256r1) is no longer accepted; see the migration notes."
+context_filename: "policy.py"
+context_template: |
+  # 1.2.840.10045.3.1.7 (secp256r1) is no longer accepted; see the migration notes.
+  ACCEPTED = []
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc5480.txt"
+    section: "2.1.1.1 Named Curve"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

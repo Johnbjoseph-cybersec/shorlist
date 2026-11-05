@@ -1,0 +1,29 @@
+id: "SL-1005"
+title: "PyCryptodome: DSA key from components"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "    key = DSA.construct(tup)"
+context_filename: "dsa_construct.py"
+context_template: |
+  from Crypto.PublicKey import DSA
+
+
+  def build(tup):
+      key = DSA.construct(tup)
+      return key
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/public_key/dsa"
+    section: "DSA: Crypto.PublicKey.DSA.construct(tup, consistency_check=True)"
+    read_at: "2026-11-05"
+    quote: "Crypto.PublicKey.DSA.construct(tup, consistency_check=True)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

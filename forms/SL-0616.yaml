@@ -1,0 +1,24 @@
+id: "SL-0616"
+title: "IANA JOSE alg Ed25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: false
+literal: "header = {\"alg\": \"Ed25519\", \"typ\": \"JWT\"}"
+context_filename: "jwt_header.py"
+context_template: |
+  header = {"alg": "Ed25519", "typ": "JWT"}
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms"
+    section: "JSON Web Signature and Encryption Algorithms registry (CSV web-signature-encryption-algorithms.csv)"
+    read_at: "2026-11-05"
+    quote: "Ed25519,EdDSA using the Ed25519 parameter set in [Section 5.1 of RFC 8032],alg,Optional,[IETF],\"[RFC 9864, Section 2.2]\",[RFC 8032]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

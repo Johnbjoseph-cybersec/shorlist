@@ -1,0 +1,25 @@
+id: "SL-0257"
+title: "IANA TLS cipher suite TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA (Recommended: D)"
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x88"
+    read_at: "2026-11-05"
+    quote: "\"0x00,0x88\",TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,Y,D,[RFC 5932]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The suite also pins RSA for authentication. When a suite names two algorithms the row's family is the key-exchange half; a record of the other family on the same line does not change the outcome. The registry marks this entry Recommended: D; it stays in because deployed code still uses it."

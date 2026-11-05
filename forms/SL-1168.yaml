@@ -1,0 +1,33 @@
+id: "SL-1168"
+title: "strongSwan: IKE proposal with mlkem768"
+family: "ML-KEM"
+parameter_set: "mlkem768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128gcm16-prfsha256-mlkem768"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128gcm16-prfsha256-mlkem768
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: Key Exchange Methods"
+    read_at: "2026-11-05"
+    quote: "mlkem768"
+  - url: "https://docs.strongswan.org/docs/latest/swanctl/swanctlConf.html"
+    section: "connections.<conn>.proposals"
+    read_at: "2026-11-05"
+    quote: "Algorithm keywords get separated using dashes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "aes128gcm16 and prfsha256 are symmetric and outside the v1 scope; the proposal needs them to be complete."

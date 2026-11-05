@@ -1,0 +1,26 @@
+id: "SL-0665"
+title: "IANA COSE alg -41 (RSAES-OAEP w/ SHA-256)"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-41: \"RSAES-OAEP w/ SHA-256\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-41: "RSAES-OAEP w/ SHA-256"}
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -41"
+    read_at: "2026-11-05"
+    quote: "RSAES-OAEP w/ SHA-256,-41,RSAES-OAEP w/ SHA-256,[kty],,[RFC 8230]; [RFC 9053],Yes"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

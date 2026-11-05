@@ -1,0 +1,25 @@
+id: "SL-0509"
+title: "IANA SSH key exchange method diffie-hellman-group1-sha1 (OK to Implement: SHOULD NOT)"
+family: "DH"
+parameter_set: "group1"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"diffie-hellman-group1-sha1\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "diffie-hellman-group1-sha1"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "diffie-hellman-group1-sha1,[RFC 4253],Section 8.1,SHOULD NOT"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry marks this entry OK to Implement: SHOULD NOT; it stays in because deployed code still uses it."

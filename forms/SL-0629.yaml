@@ -1,0 +1,25 @@
+id: "SL-0629"
+title: "IANA JOSE alg HPKE-3-KE"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: false
+literal: "header = {\"alg\": \"HPKE-3-KE\", \"typ\": \"JWT\"}"
+context_filename: "jwt_header.py"
+context_template: |
+  header = {"alg": "HPKE-3-KE", "typ": "JWT"}
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms"
+    section: "JSON Web Signature and Encryption Algorithms registry (CSV web-signature-encryption-algorithms.csv)"
+    read_at: "2026-11-05"
+    quote: "HPKE-3-KE,\"Key Encryption with HPKE using DHKEM(X25519, HKDF-SHA256) KEM, HKDF-SHA256 KDF, and AES-128-GCM AEAD\",alg,Optional,[IETF],\"[RFC-ietf-jose-hpke-encrypt-22, Section 6.2]\",\"[draft-ietf-hpke-hpke-03, Section 5]\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "HPKE with DHKEM(X25519); the row's family is the KEM's. Registered from a document not yet published as an RFC."

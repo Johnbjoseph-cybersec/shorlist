@@ -1,0 +1,35 @@
+id: "SL-1010"
+title: "OpenSSL: object lookup by long name rsassaPss"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "    int nid = OBJ_txt2nid(\"rsassaPss\");"
+context_filename: "obj.c"
+context_template: |
+  #include <openssl/objects.h>
+
+  int main(void)
+  {
+      int nid = OBJ_txt2nid("rsassaPss");
+      return nid == NID_undef;
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/crypto/objects/objects.txt"
+    section: "crypto/objects/objects.txt: pkcs1 10"
+    read_at: "2026-11-05"
+    quote: "pkcs1 10 : RSASSA-PSS : rsassaPss"
+  - url: "https://docs.openssl.org/3.5/man3/OBJ_nid2obj/"
+    section: "DESCRIPTION: OBJ_txt2nid()"
+    read_at: "2026-11-05"
+    quote: "OBJ_txt2nid() returns NID corresponding to text string s. s can be a long name, a short name or the numerical representation of an object."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

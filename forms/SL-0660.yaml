@@ -1,0 +1,25 @@
+id: "SL-0660"
+title: "IANA COSE alg -49 (ML-DSA-65)"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-49: \"ML-DSA-65\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-49: "ML-DSA-65"}
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -49"
+    read_at: "2026-11-05"
+    quote: "ML-DSA-65,-49,CBOR Object Signing Algorithm for ML-DSA-65,[kty],IETF,[RFC 9964],Yes"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

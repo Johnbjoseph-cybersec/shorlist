@@ -1,0 +1,24 @@
+id: "SL-1111"
+title: "OID of curve FRP256v1 as a string"
+family: "EC"
+parameter_set: "FRP256v1"
+role: "both"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE_OID = \"1.2.250.1.223.101.256.1\""
+context_filename: "oids.py"
+context_template: |
+  CURVE_OID = "1.2.250.1.223.101.256.1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > anssi > FRP256v1"
+    read_at: "2026-11-05"
+    quote: "\"oid\": \"1.2.250.1.223.101.256.1\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

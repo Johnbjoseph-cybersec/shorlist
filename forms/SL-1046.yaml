@@ -1,0 +1,25 @@
+id: "SL-1046"
+title: "OID sha256WithRSAEncryption as a string"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "SHA256WITHRSAENCRYPTION_OID = \"1.2.840.113549.1.1.11\""
+context_filename: "oids.py"
+context_template: |
+  SHA256WITHRSAENCRYPTION_OID = "1.2.840.113549.1.1.11"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "Appendix C. ASN.1 Module (pkcs-1 = 1.2.840.113549.1.1)"
+    read_at: "2026-11-05"
+    quote: "sha256WithRSAEncryption OBJECT IDENTIFIER ::= { pkcs-1 11 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

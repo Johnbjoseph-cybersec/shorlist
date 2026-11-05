@@ -1,0 +1,25 @@
+id: "SL-1134"
+title: "OpenSSL CLI: ecparam -genkey prime192v1"
+family: "EC"
+parameter_set: "P-192"
+role: "both"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI"
+negative: false
+literal: "openssl ecparam -out ec_key.pem -name prime192v1 -genkey"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  openssl ecparam -out ec_key.pem -name prime192v1 -genkey
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 192
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ecparam/"
+    section: "EXAMPLES"
+    read_at: "2026-11-05"
+    quote: "openssl ecparam -out ec_key.pem -name prime192v1 -genkey"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

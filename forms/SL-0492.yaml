@@ -1,0 +1,26 @@
+id: "SL-0492"
+title: "Decoy: IANA TLS TLS_ECDH_RSA_WITH_AES_256_CBC_SHA switched off in a Python flag map"
+family: "ECDH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "switch_off"
+literal: "ENABLED = {\"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA\": False}"
+context_filename: "tls_policy.py"
+context_template: |
+  ENABLED = {"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA": False}
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC0,0x0F"
+    read_at: "2026-11-05"
+    quote: "\"0xC0,0x0F\",TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,Y,D,[RFC 8422]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The only mention sets the entry to False, i.e. disabled."

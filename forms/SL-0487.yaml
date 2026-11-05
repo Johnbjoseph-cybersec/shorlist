@@ -1,0 +1,27 @@
+id: "SL-0487"
+title: "Decoy: IANA TLS TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 in a Python comment"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: CIPHER_SUITE = \"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256\""
+context_filename: "tls_policy.py"
+context_template: |
+  # Removed in v3: CIPHER_SUITE = "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+  POLICY_SOURCE = "system default"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x9E"
+    read_at: "2026-11-05"
+    quote: "\"0x00,0x9E\",TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,Y,D,[RFC 5288]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

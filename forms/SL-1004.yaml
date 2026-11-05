@@ -1,0 +1,29 @@
+id: "SL-1004"
+title: "PyCryptodome: DSA key import"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "    key = DSA.import_key(data)"
+context_filename: "dsa_load.py"
+context_template: |
+  from Crypto.PublicKey import DSA
+
+
+  def load(data):
+      key = DSA.import_key(data)
+      return key
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/public_key/dsa"
+    section: "DSA: Crypto.PublicKey.DSA.import_key(extern_key, passphrase=None, ...)"
+    read_at: "2026-11-05"
+    quote: "Crypto.PublicKey.DSA.import_key(extern_key, passphrase=None, *, max_iteration_count=None, threads=1, max_memory=None)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

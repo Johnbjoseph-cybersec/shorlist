@@ -1,0 +1,35 @@
+id: "SL-1118"
+title: ".NET: MLKem.GenerateKey ML-KEM-768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using MLKem kem = MLKem.GenerateKey(MLKemAlgorithm.MLKem768);"
+context_filename: "Keys.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Keys
+  {
+      static void Main()
+      {
+          using MLKem kem = MLKem.GenerateKey(MLKemAlgorithm.MLKem768);
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.mlkem.generatekey"
+    section: "MLKem.GenerateKey(MLKemAlgorithm)"
+    read_at: "2026-11-05"
+    quote: "public static System.Security.Cryptography.MLKem GenerateKey(System.Security.Cryptography.MLKemAlgorithm algorithm);"
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.mlkemalgorithm"
+    section: "MLKemAlgorithm.MLKem768"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

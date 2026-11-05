@@ -1,0 +1,27 @@
+id: "SL-1018"
+title: "Decoy: PyCryptodome DSS.new in a comment"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: true
+decoy_class: "comment"
+literal: "    # Was: DSS.new(key, 'fips-186-3'); signing now happens in the HSM."
+context_filename: "signer.py"
+context_template: |
+  def sign(blob):
+      # Was: DSS.new(key, 'fips-186-3'); signing now happens in the HSM.
+      return blob
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/signature/dsa"
+    section: "Crypto.Signature.DSS.new(key, mode, encoding='binary', randfunc=None)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file imports no cryptographic module."

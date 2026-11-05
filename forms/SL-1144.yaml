@@ -1,0 +1,33 @@
+id: "SL-1144"
+title: "Bouncy Castle: XMSS KeyPairGenerator"
+family: "XMSS"
+cyclonedx_family: "XMSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Java / Bouncy Castle (JCA)"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"XMSS\", \"BC\");"
+context_filename: "Keys.java"
+context_template: |
+  import java.security.KeyPairGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("XMSS", "BC");
+          System.out.println(kpg.getAlgorithm());
+      }
+  }
+expected:
+  family: "XMSS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/bcgit/bc-java/blob/r1rv86/prov/src/main/java/org/bouncycastle/pqc/jcajce/provider/XMSS.java"
+    section: "org.bouncycastle.pqc.jcajce.provider.XMSS.Mappings.configure (bc-java r1rv86)"
+    read_at: "2026-11-05"
+    quote: "provider.addAlgorithm(\"KeyPairGenerator.XMSS\", PREFIX + \"XMSSKeyPairGeneratorSpi\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Compiles against the JDK alone; at run time the \"BC\" provider must be installed."

@@ -1,0 +1,27 @@
+id: "SL-0686"
+title: "Decoy: IANA COSE -65535 (RS1) in a Python comment"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: COSE_ALGORITHMS = {-65535: \"RS1\"}"
+context_filename: "cose_params.py"
+context_template: |
+  # Removed in v3: COSE_ALGORITHMS = {-65535: "RS1"}
+  POLICY_SOURCE = "system default"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -65535"
+    read_at: "2026-11-05"
+    quote: "RS1,-65535,RSASSA-PKCS1-v1_5 using SHA-1,[kty],IESG,[RFC 8812]; [RFC 9053],Deprecated"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

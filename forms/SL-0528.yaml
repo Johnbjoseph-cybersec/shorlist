@@ -1,0 +1,25 @@
+id: "SL-0528"
+title: "IANA SSH key exchange method mlkem1024-sha384"
+family: "ML-KEM"
+parameter_set: "ML-KEM-1024"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"mlkem1024-sha384\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "mlkem1024-sha384"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "mlkem1024-sha384,[draft-harrison-mlkem-ssh-01],,MAY"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Registered from a document not yet published as an RFC."

@@ -1,0 +1,26 @@
+id: "SL-1154"
+title: "Node.js: createECDH secp521r1"
+family: "ECDH"
+parameter_set: "P-521"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+literal: "const ecdh = crypto.createECDH('secp521r1');"
+context_filename: "ecdh.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  const ecdh = crypto.createECDH('secp521r1');
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 521
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createECDH(curveName); class ECDH example"
+    read_at: "2026-11-05"
+    quote: "const alice = createECDH('secp521r1');"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

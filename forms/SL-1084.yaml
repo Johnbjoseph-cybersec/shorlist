@@ -1,0 +1,24 @@
+id: "SL-1084"
+title: "Curve name Edwards448 (SP 800-186)"
+family: "EdDSA"
+parameter_set: "Edwards448"
+role: "signature"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"Edwards448\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "Edwards448"
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf"
+    section: "3.2.3.2 Edwards448"
+    read_at: "2026-11-05"
+    quote: "3.2.3.2. Edwards448"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

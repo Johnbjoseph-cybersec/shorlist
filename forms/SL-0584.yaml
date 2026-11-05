@@ -1,0 +1,28 @@
+id: "SL-0584"
+title: "Decoy: IANA IKEv2 1 (768-bit MODP Group) in a Python log message"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered KE method 1 (768-bit MODP Group); rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered KE method 1 (768-bit MODP Group); rejected by policy")
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 768
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-8"
+    section: "Transform Type 4 - Key Exchange Method Transform IDs registry (CSV ikev2-parameters-8.csv): 1"
+    read_at: "2026-11-05"
+    quote: "1,768-bit MODP Group,DEPRECATED [RFC 8247],\"[RFC 6989, Section 2.1]\",[RFC 7296]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

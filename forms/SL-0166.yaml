@@ -1,0 +1,25 @@
+id: "SL-0166"
+title: "IANA TLS group brainpoolP512r1"
+family: "ECDH"
+parameter_set: "brainpoolP512r1"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"brainpoolP512r1\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "brainpoolP512r1"
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 512
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 28"
+    read_at: "2026-11-05"
+    quote: "28,brainpoolP512r1,Y,N,[RFC 7027],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "In TLS 1.3 a group is the key-exchange group; in TLS 1.2 (RFC 8422) the same list also restricts ECDSA curves. The row expects the key-exchange role."

@@ -1,0 +1,24 @@
+id: "SL-1095"
+title: "Curve name BLS12-381 (CycloneDX bls)"
+family: "EC"
+parameter_set: "BLS12-381"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"BLS12-381\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "BLS12-381"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > bls (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"BLS12-381\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

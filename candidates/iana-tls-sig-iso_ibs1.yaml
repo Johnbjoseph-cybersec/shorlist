@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA TLS SignatureScheme iso_ibs1"
+family: "IBS (ISO/IEC 14888-3)"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"iso_ibs1\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "iso_ibs1"
+expected:
+  family: "IBS (ISO/IEC 14888-3)"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x0705"
+    read_at: "2026-11-05"
+    quote: "0x0705,iso_ibs1,N,[draft-wang-tls-raw-public-key-with-ibc-02],"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: Identity-based signature over elliptic curves/pairings (Shor-vulnerable); not in families.yaml. Needs a family decision before it can enter forms/."

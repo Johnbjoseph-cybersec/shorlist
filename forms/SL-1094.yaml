@@ -1,0 +1,25 @@
+id: "SL-1094"
+title: "Curve name SM2 (CycloneDX oscaa)"
+family: "EC"
+parameter_set: "SM2"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"SM2\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "SM2"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > oscaa (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"SM2\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "SM2 here is the curve; the SM2 signature and key-exchange schemes are a different matter."

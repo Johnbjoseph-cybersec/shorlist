@@ -126,6 +126,11 @@ def test_catalogue_hash_is_stable_and_content_sensitive(tmp_path):
     ("sshd_config", "KexAlgorithms\n", False),
     ("java.security", "no equals sign here\n", False),
     ("unknown.xyz", "", False),
+    ("Keys.cs", "class Keys {\n", False),
+    ("swanctl.conf", "connections {\n  proposals aes128\n}\n", False),
+    ("httpd.conf", "<VirtualHost *:443>\n  SSLEngine on\n", False),
+    ("fortigate.conf", "config vpn ipsec phase1-interface\n", False),
+    ("running-config", "crypto ikev2 proposal P\n group 19\n", False),
     ("a.py", "x = 1\n", True),
 ])
 def test_parsecheck_rejects_broken_templates(name, text, ok):

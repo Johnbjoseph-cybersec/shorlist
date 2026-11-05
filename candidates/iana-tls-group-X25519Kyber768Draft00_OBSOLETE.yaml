@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA TLS group X25519Kyber768Draft00 (OBSOLETE)"
+family: "Kyber (pre-FIPS 203)"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"X25519Kyber768Draft00 (OBSOLETE)\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "X25519Kyber768Draft00 (OBSOLETE)"
+expected:
+  family: "Kyber (pre-FIPS 203)"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 25497"
+    read_at: "2026-11-05"
+    quote: "25497,X25519Kyber768Draft00 (OBSOLETE),Y,D,[draft-tls-westerbaan-xyber768d00-02]; [RFC 10024],Pre-standards version of Kyber768. Obsoleted by [RFC 10024]."
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: Pre-standards Kyber768 hybrid, obsoleted by RFC 10024. Kyber draft 00 is not ML-KEM (FIPS 203) and is not in families.yaml. Needs a family decision before it can enter forms/."

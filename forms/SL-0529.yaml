@@ -1,0 +1,27 @@
+id: "SL-0529"
+title: "Decoy: IANA SSH diffie-hellman-group-exchange-sha1 in a Python comment"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: KEX_ALGORITHM = \"diffie-hellman-group-exchange-sha1\""
+context_filename: "ssh_policy.py"
+context_template: |
+  # Removed in v3: KEX_ALGORITHM = "diffie-hellman-group-exchange-sha1"
+  POLICY_SOURCE = "system default"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "diffie-hellman-group-exchange-sha1,[RFC 4419]; [RFC 8270],Section 4.1,SHOULD NOT"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

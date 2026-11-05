@@ -1,0 +1,25 @@
+id: "SL-1161"
+title: "Decoy: DSA key type in a Node.js log string"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: true
+decoy_class: "log_string"
+literal: "console.log(\"generateKeyPairSync('dsa') is not supported in FIPS mode\");"
+context_filename: "probe.js"
+context_template: |
+  console.log("generateKeyPairSync('dsa') is not supported in FIPS mode");
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.generateKeyPairSync(type, options)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not load node:crypto."

@@ -1,0 +1,24 @@
+id: "SL-0168"
+title: "IANA TLS group x448"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"x448\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "x448"
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 30"
+    read_at: "2026-11-05"
+    quote: "30,x448,Y,Y,[RFC 9846]; [RFC 8422],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

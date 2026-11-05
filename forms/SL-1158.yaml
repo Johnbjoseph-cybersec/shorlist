@@ -1,0 +1,31 @@
+id: "SL-1158"
+title: "Go: elliptic.P224 curve"
+family: "EC"
+parameter_set: "P-224"
+role: "both"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "curve := elliptic.P224()"
+context_filename: "curve.go"
+context_template: |
+  package main
+
+  import "crypto/elliptic"
+
+  func main() {
+  	curve := elliptic.P224()
+  	_ = curve
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 224
+source:
+  - url: "https://pkg.go.dev/crypto/elliptic"
+    section: "func P224() Curve"
+    read_at: "2026-11-05"
+    quote: "func P224() Curve"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

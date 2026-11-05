@@ -1,0 +1,25 @@
+id: "SL-1097"
+title: "Curve name gost256 (CycloneDX gost)"
+family: "EC"
+parameter_set: "gost256"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"gost256\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "gost256"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > gost (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"gost256\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A GOST R 34.10 curve; the GOST signature algorithm itself has no family in v1, the curve is filed as EC."

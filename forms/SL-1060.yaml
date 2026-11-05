@@ -1,0 +1,25 @@
+id: "SL-1060"
+title: "OID rsaEncryption as DER content bytes in C"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "oid"
+language_or_product: "C / any"
+negative: false
+literal: "static const unsigned char oid_rsaEncryption[] = {0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x01};"
+context_filename: "oids.c"
+context_template: |
+  static const unsigned char oid_rsaEncryption[] = {0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x01};
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/crypto/objects/obj_dat.h"
+    section: "crypto/objects/obj_dat.h: so[] (DER content octets of every OID)"
+    read_at: "2026-11-05"
+    quote: "0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x01, /* ["
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The bytes are the OID's DER content octets as OpenSSL's generated obj_dat.h lists them (without the 0x06 tag and length)."

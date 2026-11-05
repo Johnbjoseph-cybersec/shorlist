@@ -1,0 +1,25 @@
+id: "SL-0185"
+title: "IANA TLS group MLKEM1024X448"
+family: "ML-KEM"
+parameter_set: "MLKEM1024X448"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"MLKEM1024X448\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "MLKEM1024X448"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 4591"
+    read_at: "2026-11-05"
+    quote: "4591,MLKEM1024X448,Y,N,[draft-preussmattsson-tls-mlkem1024-x448-01],PQ/T hybrid combining ML-KEM-1024 with X448"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid group; scored on the post-quantum half (ML-KEM), as SL-0018 and the README define. The classical half is ML-KEM-1024 with X448. Registered from a document not yet published as an RFC."

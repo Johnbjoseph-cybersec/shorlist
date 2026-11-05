@@ -1,0 +1,30 @@
+id: "SL-1002"
+title: "PyCryptodome: DSS signer (DSA/ECDSA)"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "    signer = DSS.new(key, 'fips-186-3')"
+context_filename: "dss_sign.py"
+context_template: |
+  from Crypto.Signature import DSS
+
+
+  def make_signer(key):
+      signer = DSS.new(key, 'fips-186-3')
+      return signer
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/signature/dsa"
+    section: "Digital Signature Algorithm (DSA and ECDSA): Crypto.Signature.DSS.new(key, mode, encoding='binary', randfunc=None)"
+    read_at: "2026-11-05"
+    quote: "Crypto.Signature.DSS.new(key, mode, encoding='binary', randfunc=None)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "DSS.new signs with a DSA key or an ECC key; the key arrives as a parameter, so the line alone does not say which. Filed as DSA, the FIPS 186 name the module carries; a scanner reporting ECDSA here is scored wrong_family, and that choice is open for review."

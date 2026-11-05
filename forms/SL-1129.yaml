@@ -1,0 +1,26 @@
+id: "SL-1129"
+title: "OpenSSL CLI: genpkey X25519"
+family: "X25519"
+cyclonedx_family: "ECDH"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI"
+negative: false
+literal: "openssl genpkey -algorithm X25519 -out xkey.pem"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  openssl genpkey -algorithm X25519 -out xkey.pem
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-genpkey/"
+    section: "EXAMPLES"
+    read_at: "2026-11-05"
+    quote: "openssl genpkey -algorithm X25519 -out xkey.pem"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

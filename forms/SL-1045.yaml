@@ -1,0 +1,25 @@
+id: "SL-1045"
+title: "OID id-RSAES-OAEP as a string"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_RSAES_OAEP_OID = \"1.2.840.113549.1.1.7\""
+context_filename: "oids.py"
+context_template: |
+  ID_RSAES_OAEP_OID = "1.2.840.113549.1.1.7"
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "Appendix C. ASN.1 Module (pkcs-1 = 1.2.840.113549.1.1)"
+    read_at: "2026-11-05"
+    quote: "id-RSAES-OAEP OBJECT IDENTIFIER ::= { pkcs-1 7 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

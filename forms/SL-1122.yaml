@@ -1,0 +1,26 @@
+id: "SL-1122"
+title: "PyCryptodome: DSA key generation"
+family: "DSA"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "key = DSA.generate(2048)"
+context_filename: "keys.py"
+context_template: |
+  from Crypto.PublicKey import DSA
+
+  key = DSA.generate(2048)
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://www.pycryptodome.org/src/public_key/dsa"
+    section: "DSA: Crypto.PublicKey.DSA.generate(bits, randfunc=None, domain=None)"
+    read_at: "2026-11-05"
+    quote: "Crypto.PublicKey.DSA.generate(bits, randfunc=None, domain=None)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

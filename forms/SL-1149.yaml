@@ -1,0 +1,26 @@
+id: "SL-1149"
+title: "Node.js: generateKeyPairSync dsa"
+family: "DSA"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+literal: "const { publicKey, privateKey } = crypto.generateKeyPairSync('dsa', { modulusLength: 2048 });"
+context_filename: "keys.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  const { publicKey, privateKey } = crypto.generateKeyPairSync('dsa', { modulusLength: 2048 });
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.generateKeyPairSync(type, options); Asymmetric key types (Node.js v26.13.0)"
+    read_at: "2026-11-05"
+    quote: "'dsa' — OID 1.2.840.10040.4.1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

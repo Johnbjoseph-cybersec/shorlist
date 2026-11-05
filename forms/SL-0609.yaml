@@ -1,0 +1,26 @@
+id: "SL-0609"
+title: "IANA JOSE alg RS1 (Prohibited)"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: false
+literal: "header = {\"alg\": \"RS1\", \"typ\": \"JWT\"}"
+context_filename: "jwt_header.py"
+context_template: |
+  header = {"alg": "RS1", "typ": "JWT"}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms"
+    section: "JSON Web Signature and Encryption Algorithms registry (CSV web-signature-encryption-algorithms.csv)"
+    read_at: "2026-11-05"
+    quote: "RS1,RSASSA-PKCS1-v1_5 with SHA-1,JWK,Prohibited,[W3C_Web_Application_Security_WG],[https://www.w3.org/TR/WebCryptoAPI],[draft-irtf-cfrg-webcrypto-algorithms-00]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Registered from a document not yet published as an RFC. The registry marks this entry Prohibited; it stays in because deployed code still uses it."

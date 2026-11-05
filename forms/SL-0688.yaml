@@ -1,0 +1,28 @@
+id: "SL-0688"
+title: "Decoy: IANA COSE -47 (ES256K) in a Python log message"
+family: "ECDSA"
+parameter_set: "secp256k1"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered COSE alg -47 (ES256K); rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered COSE alg -47 (ES256K); rejected by policy")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -47"
+    read_at: "2026-11-05"
+    quote: "ES256K,-47,ECDSA using secp256k1 curve and SHA-256,[kty],IESG,[RFC 8812]; [RFC 9053],No"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

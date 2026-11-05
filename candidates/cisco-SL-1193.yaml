@@ -1,0 +1,30 @@
+id: "candidate"
+title: "Decoy: Cisco IOS comment naming DH group 14"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Cisco IOS XE"
+negative: true
+decoy_class: "comment"
+literal: "! group 14 was removed from PROP-1 after the 2026 audit"
+context_filename: "running-config"
+context_template: |
+  crypto ikev2 proposal PROP-1
+   encryption aes-cbc-256
+   integrity sha256
+  ! group 14 was removed from PROP-1 after the 2026 audit
+  end
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-cfg-ikev2-flex.html"
+    section: "Configuring IKEv2 Proposal"
+    read_at: "2026-11-05"
+status: "candidate"
+candidate_reason: "quote read only through a summariser; cisco.com refused a direct fetch — needs a direct read of the vendor page"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "An IKEv2 proposal without a group line names no key exchange on any line; the defaults are not in the file."

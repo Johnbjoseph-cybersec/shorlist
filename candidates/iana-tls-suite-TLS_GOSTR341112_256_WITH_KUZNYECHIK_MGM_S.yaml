@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA TLS cipher suite TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S"
+family: "GOST R 34.10-2012"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S"
+expected:
+  family: "GOST R 34.10-2012"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC1,0x05"
+    read_at: "2026-11-05"
+    quote: "\"0xC1,0x05\",TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S,N,N,[RFC 9367],"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: GOST key exchange/authentication suite (RFC 9189, Shor-vulnerable); not in families.yaml. Needs a family decision before it can enter forms/."

@@ -1,0 +1,25 @@
+id: "SL-0434"
+title: "IANA TLS cipher suite TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256"
+family: "ECDH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256"
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC0,0x86"
+    read_at: "2026-11-05"
+    quote: "\"0xC0,0x86\",TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256,Y,N,[RFC 6367],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The suite also pins ECDSA for authentication. When a suite names two algorithms the row's family is the key-exchange half; a record of the other family on the same line does not change the outcome."

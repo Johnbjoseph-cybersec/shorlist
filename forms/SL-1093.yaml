@@ -1,0 +1,24 @@
+id: "SL-1093"
+title: "Curve name FRP256v1 (CycloneDX anssi)"
+family: "EC"
+parameter_set: "FRP256v1"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"FRP256v1\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "FRP256v1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > anssi (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"FRP256v1\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

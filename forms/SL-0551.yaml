@@ -1,0 +1,25 @@
+id: "SL-0551"
+title: "IANA SSH public key algorithm ssh-mldsa-44"
+family: "ML-DSA"
+parameter_set: "ML-DSA-44"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "PUBLIC_KEY_ALGORITHM = \"ssh-mldsa-44\""
+context_filename: "ssh_policy.py"
+context_template: |
+  PUBLIC_KEY_ALGORITHM = "ssh-mldsa-44"
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "ssh-mldsa-44,ssh-mldsa-44,[draft-sfluhrer-ssh-mldsa-08],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Registered from a document not yet published as an RFC."

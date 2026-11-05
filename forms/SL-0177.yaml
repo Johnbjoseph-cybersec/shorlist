@@ -1,0 +1,25 @@
+id: "SL-0177"
+title: "IANA TLS group MLKEM512"
+family: "ML-KEM"
+parameter_set: "ML-KEM-512"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"MLKEM512\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "MLKEM512"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 512"
+    read_at: "2026-11-05"
+    quote: "512,MLKEM512,Y,N,[RFC-ietf-tls-mlkem-10],FIPS 203 version of ML-KEM-512"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Registered from a document not yet published as an RFC."

@@ -1,0 +1,26 @@
+id: "candidate"
+title: "OpenSSH: hybrid sntrup761x25519-sha512 key exchange in sshd_config"
+family: "sntrup761 (NTRU Prime) + X25519"
+parameter_set: "sntrup761x25519-sha512"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "KexAlgorithms sntrup761x25519-sha512"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms sntrup761x25519-sha512
+expected:
+  family: "sntrup761 (NTRU Prime) + X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms: supported algorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+    quote: "mlkem768x25519-sha256 sntrup761x25519-sha512 sntrup761x25519-sha512@openssh.com"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: hybrids are scored on the post-quantum half, and Streamlined NTRU Prime is not in families.yaml. The IANA registry name is a separate candidate (iana-ssh-kex-sntrup761x25519-sha512.yaml). Could be filed as X25519 if the maintainers decide so."

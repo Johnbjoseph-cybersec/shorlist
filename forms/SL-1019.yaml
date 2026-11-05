@@ -1,0 +1,28 @@
+id: "SL-1019"
+title: "Decoy: RawDSA named in a Java log string"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: true
+decoy_class: "log_string"
+literal: "        System.out.println(\"Signature RawDSA is disabled on this host\");"
+context_filename: "Probe.java"
+context_template: |
+  public class Probe {
+      public static void main(String[] args) {
+          System.out.println("Signature RawDSA is disabled on this host");
+      }
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/sun/security/util/SecurityProviderConstants.java"
+    section: "SecurityProviderConstants: alias table"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

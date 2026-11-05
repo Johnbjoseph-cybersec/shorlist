@@ -1,0 +1,27 @@
+id: "SL-0137"
+title: "Decoy: IANA TLS rsa_pss_pss_sha512 in a Python comment"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: SIGNATURE_SCHEME = \"rsa_pss_pss_sha512\""
+context_filename: "tls_policy.py"
+context_template: |
+  # Removed in v3: SIGNATURE_SCHEME = "rsa_pss_pss_sha512"
+  POLICY_SOURCE = "system default"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x080B"
+    read_at: "2026-11-05"
+    quote: "0x080B,rsa_pss_pss_sha512,Y,[RFC 9846],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

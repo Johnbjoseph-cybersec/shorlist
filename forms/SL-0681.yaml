@@ -1,0 +1,25 @@
+id: "SL-0681"
+title: "IANA COSE alg -25 (ECDH-ES + HKDF-256)"
+family: "ECDH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-25: \"ECDH-ES + HKDF-256\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-25: "ECDH-ES + HKDF-256"}
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -25"
+    read_at: "2026-11-05"
+    quote: "ECDH-ES + HKDF-256,-25,ECDH ES w/ HKDF - generate key directly,[kty],,[RFC 9053],Yes"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

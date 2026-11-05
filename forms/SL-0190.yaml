@@ -1,0 +1,27 @@
+id: "SL-0190"
+title: "Decoy: IANA TLS sect409r1 in a Python comment"
+family: "ECDH"
+parameter_set: "sect409r1"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: TLS_GROUP = \"sect409r1\""
+context_filename: "tls_policy.py"
+context_template: |
+  # Removed in v3: TLS_GROUP = "sect409r1"
+  POLICY_SOURCE = "system default"
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 409
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 12"
+    read_at: "2026-11-05"
+    quote: "12,sect409r1,Y,N,[RFC 8422],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

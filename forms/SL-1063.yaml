@@ -1,0 +1,32 @@
+id: "SL-1063"
+title: "Go: P-224 OID as asn1.ObjectIdentifier"
+family: "EC"
+parameter_set: "P-224"
+role: "both"
+form_kind: "oid"
+language_or_product: "Go / encoding/asn1"
+negative: false
+literal: "var oidNamedCurveP224 = asn1.ObjectIdentifier{1, 3, 132, 0, 33}"
+context_filename: "oids.go"
+context_template: |
+  package main
+
+  import "encoding/asn1"
+
+  var oidNamedCurveP224 = asn1.ObjectIdentifier{1, 3, 132, 0, 33}
+
+  func main() {
+  	_ = oidNamedCurveP224
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 224
+source:
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/x509/x509.go"
+    section: "src/crypto/x509/x509.go (go1.25.0)"
+    read_at: "2026-11-05"
+    quote: "oidNamedCurveP224 = asn1.ObjectIdentifier{1, 3, 132, 0, 33}"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

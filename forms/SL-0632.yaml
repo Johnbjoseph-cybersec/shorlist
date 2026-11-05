@@ -1,0 +1,28 @@
+id: "SL-0632"
+title: "Decoy: IANA JOSE EdDSA in a Python log message"
+family: "EdDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered alg EdDSA; rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered alg EdDSA; rejected by policy")
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms"
+    section: "JSON Web Signature and Encryption Algorithms registry (CSV web-signature-encryption-algorithms.csv)"
+    read_at: "2026-11-05"
+    quote: "EdDSA,EdDSA signature algorithms,alg,Deprecated,[IETF],\"[RFC 9864, Section 2.2]\",[RFC 8032]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

@@ -1,0 +1,28 @@
+id: "SL-0497"
+title: "Decoy: IANA TLS TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384 in a Python log message"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered cipher suite TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384; rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered cipher suite TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384; rejected by policy")
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC0,0x59"
+    read_at: "2026-11-05"
+    quote: "\"0xC0,0x59\",TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384,Y,D,[RFC 6209]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

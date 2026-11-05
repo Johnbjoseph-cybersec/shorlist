@@ -1,0 +1,24 @@
+id: "SL-1085"
+title: "Curve name secp256k1 (SP 800-186 H.2)"
+family: "EC"
+parameter_set: "secp256k1"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"secp256k1\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "secp256k1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf"
+    section: "H.2 The Curve secp256k1"
+    read_at: "2026-11-05"
+    quote: "The curve secp256k1 is allowed to be used for blockchain-related applications."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

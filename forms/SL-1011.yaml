@@ -1,0 +1,35 @@
+id: "SL-1011"
+title: "JCA: RawDSA signature alias"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Signature sig = Signature.getInstance(\"RawDSA\");"
+context_filename: "RawSign.java"
+context_template: |
+  import java.security.Signature;
+
+  public class RawSign {
+      public static void main(String[] args) throws Exception {
+          Signature sig = Signature.getInstance("RawDSA");
+          System.out.println(sig.getAlgorithm());
+      }
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/sun/security/util/SecurityProviderConstants.java"
+    section: "SecurityProviderConstants: alias table"
+    read_at: "2026-11-05"
+    quote: "store(\"NONEwithDSA\", null, \"RawDSA\");"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Signature Algorithms: NONEwithDSA"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "RawDSA is the JDK's alias for NONEwithDSA (DSA over a caller-supplied digest)."

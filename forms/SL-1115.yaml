@@ -1,0 +1,32 @@
+id: "SL-1115"
+title: ".NET: DSA.Create(2048)"
+family: "DSA"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using DSA dsa = DSA.Create(2048);"
+context_filename: "Keys.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Keys
+  {
+      static void Main()
+      {
+          using DSA dsa = DSA.Create(2048);
+      }
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsa.create"
+    section: "DSA.Create(Int32)"
+    read_at: "2026-11-05"
+    quote: "public static System.Security.Cryptography.DSA Create(int keySizeInBits);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,25 @@
+id: "SL-0180"
+title: "IANA TLS group MLKEM512X25519"
+family: "ML-KEM"
+parameter_set: "MLKEM512X25519"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"MLKEM512X25519\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "MLKEM512X25519"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 4586"
+    read_at: "2026-11-05"
+    quote: "4586,MLKEM512X25519,Y,N,[draft-rosomakho-tls-ecdhe-mlkem512-00],Combining ML-KEM-512 with X25519 ECDH"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid group; scored on the post-quantum half (ML-KEM), as SL-0018 and the README define. The classical half is ML-KEM-512 with X25519 ECDH. Registered from a document not yet published as an RFC."

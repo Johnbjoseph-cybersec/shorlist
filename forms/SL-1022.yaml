@@ -1,0 +1,28 @@
+id: "SL-1022"
+title: "OID secp192r1 as a string"
+family: "EC"
+parameter_set: "P-192"
+role: "both"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "SECP192R1_OID = \"1.2.840.10045.3.1.1\""
+context_filename: "oids.py"
+context_template: |
+  SECP192R1_OID = "1.2.840.10045.3.1.1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 192
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc5480.txt"
+    section: "2.1.1.1 Named Curve"
+    read_at: "2026-11-05"
+    quote: "secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) curves(3) prime(1) 1 }"
+  - url: "https://www.rfc-editor.org/rfc/rfc5480.txt"
+    section: "2.1.1.1 Named Curve (note on FIPS 186-3 names)"
+    read_at: "2026-11-05"
+    quote: "Note that [FIPS186-3] refers to secp192r1 as P-192, secp224r1 as -- P-224, secp256r1 as P-256, secp384r1 as P-384, and secp521r1 as -- P-521."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

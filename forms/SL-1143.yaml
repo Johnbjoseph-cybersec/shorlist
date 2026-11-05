@@ -1,0 +1,33 @@
+id: "SL-1143"
+title: "Bouncy Castle: LMS KeyPairGenerator"
+family: "LMS"
+cyclonedx_family: "LMS"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Java / Bouncy Castle (JCA)"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"LMS\", \"BC\");"
+context_filename: "Keys.java"
+context_template: |
+  import java.security.KeyPairGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("LMS", "BC");
+          System.out.println(kpg.getAlgorithm());
+      }
+  }
+expected:
+  family: "LMS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/bcgit/bc-java/blob/r1rv86/prov/src/main/java/org/bouncycastle/pqc/jcajce/provider/LMS.java"
+    section: "org.bouncycastle.pqc.jcajce.provider.LMS.Mappings.configure (bc-java r1rv86)"
+    read_at: "2026-11-05"
+    quote: "provider.addAlgorithm(\"KeyPairGenerator.LMS\", PREFIX + \"LMSKeyPairGeneratorSpi\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Compiles against the JDK alone; at run time the \"BC\" provider must be installed."

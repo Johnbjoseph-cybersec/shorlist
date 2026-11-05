@@ -1,0 +1,31 @@
+id: "candidate"
+title: "Cisco IOS XE: IKEv2 proposal group 19"
+family: "ECDH"
+parameter_set: "IKE group 19"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Cisco IOS XE"
+negative: false
+literal: " group 19"
+context_filename: "running-config"
+context_template: |
+  crypto ikev2 proposal PROP-1
+   encryption aes-cbc-256
+   integrity sha256
+   group 19
+  !
+  end
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/sec-vpn/b-security-vpn/m_sec-cfg-ikev2-flex.html"
+    section: "Configuring IKEv2 Proposal"
+    read_at: "2026-11-05"
+    quote: "19 —Specifies the 256-bit elliptic curve DH (ECDH) group."
+status: "candidate"
+candidate_reason: "quote read only through a summariser; cisco.com refused a direct fetch — needs a direct read of the vendor page"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "aes-cbc-256 and sha256 are symmetric and outside the v1 scope."

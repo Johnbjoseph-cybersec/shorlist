@@ -1,0 +1,32 @@
+id: "candidate"
+title: "Go: mldsa.GenerateKey(mldsa.MLDSA65())"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "priv, err := mldsa.GenerateKey(mldsa.MLDSA65())"
+context_filename: "sig.go"
+context_template: |
+  package main
+
+  import "crypto/mldsa"
+
+  func main() {
+  	priv, err := mldsa.GenerateKey(mldsa.MLDSA65())
+  	_, _ = priv, err
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://pkg.go.dev/crypto/mldsa"
+    section: "func GenerateKey(params Parameters) (*PrivateKey, error); func MLDSA65() Parameters"
+    read_at: "2026-11-05"
+    quote: "func GenerateKey(params Parameters) (*PrivateKey, error)"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row yet: the pkg.go.dev page (Version go1.27.3, published Oct 20, 2026) also says \"This package is not in the latest version of its module.\" Which released Go version ships crypto/mldsa, if any, was not established. Check the Go release notes before moving it in."

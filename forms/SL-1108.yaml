@@ -1,0 +1,24 @@
+id: "SL-1108"
+title: "Curve name FourQ (CycloneDX other)"
+family: "EC"
+parameter_set: "FourQ"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"FourQ\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "FourQ"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > other (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"FourQ\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

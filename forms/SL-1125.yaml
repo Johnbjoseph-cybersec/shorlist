@@ -1,0 +1,30 @@
+id: "SL-1125"
+title: "PyCryptodome: RSA PKCS#1 v1.5 signer"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "    signer = pkcs1_15.new(key)"
+context_filename: "use_key.py"
+context_template: |
+  from Crypto.Signature import pkcs1_15
+
+
+  def make(key):
+      signer = pkcs1_15.new(key)
+      return signer
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/signature/pkcs1_v1_5"
+    section: "PKCS#1 v1.5 (RSA): Crypto.Signature.pkcs1_15.new(rsa_key)"
+    read_at: "2026-11-05"
+    quote: "Crypto.Signature.pkcs1_15.new(rsa_key)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

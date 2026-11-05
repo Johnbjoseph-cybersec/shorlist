@@ -1,0 +1,35 @@
+id: "SL-1170"
+title: "Apache mod_ssl: SSLOpenSSLConfCmd Curves P-384"
+family: "ECDH"
+parameter_set: "P-384"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Apache httpd mod_ssl"
+negative: false
+literal: "SSLOpenSSLConfCmd Curves P-384"
+context_filename: "httpd.conf"
+context_template: |
+  Listen 443
+  <VirtualHost *:443>
+      SSLEngine on
+      SSLCertificateFile cert.pem
+      SSLCertificateKeyFile key.pem
+      SSLOpenSSLConfCmd Curves P-384
+  </VirtualHost>
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 384
+source:
+  - url: "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
+    section: "SSLOpenSSLConfCmd Directive"
+    read_at: "2026-11-05"
+    quote: "Syntax: | SSLOpenSSLConfCmd command-name command-value"
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CONF_cmd/"
+    section: "SUPPORTED CONFIGURATION FILE COMMANDS: Groups / Curves"
+    read_at: "2026-11-05"
+    quote: "Such an alias could be a NIST name (e.g. P-256), an OpenSSL OID name (e.g. prime256v1), or some other commonly used name."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Curves is a synonym for Groups. The certificate file names are placeholders and carry no algorithm."

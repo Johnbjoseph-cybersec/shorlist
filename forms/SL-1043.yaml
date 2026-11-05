@@ -1,0 +1,24 @@
+id: "SL-1043"
+title: "OID dhpublicnumber as a string"
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "DHPUBLICNUMBER_OID = \"1.2.840.10046.2.1\""
+context_filename: "oids.py"
+context_template: |
+  DHPUBLICNUMBER_OID = "1.2.840.10046.2.1"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc3279.txt"
+    section: "2.3.3 Diffie-Hellman Key Exchange Keys"
+    read_at: "2026-11-05"
+    quote: "dhpublicnumber OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-x942(10046) number-type(2) 1 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

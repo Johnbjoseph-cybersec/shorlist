@@ -1,0 +1,25 @@
+id: "SL-1049"
+title: "OID id-alg-ml-kem-1024 as a string"
+family: "ML-KEM"
+cyclonedx_family: "ML-KEM"
+parameter_set: "ML-KEM-1024"
+role: "key_establishment"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_ALG_ML_KEM_1024_OID = \"2.16.840.1.101.3.4.4.3\""
+context_filename: "oids.py"
+context_template: |
+  ID_ALG_ML_KEM_1024_OID = "2.16.840.1.101.3.4.4.3"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration"
+    section: "Algorithm Registration > ML-KEM (kems = nistAlgorithms 4); nistAlgorithms = 2.16.840.1.101.3.4"
+    read_at: "2026-11-05"
+    quote: "id-alg-ml-kem-1024 OBJECT IDENTIFIER ::= { kems 3 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

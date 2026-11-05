@@ -1,0 +1,25 @@
+id: "SL-1034"
+title: "OID ecdsa-with-SHA256 as a string"
+family: "ECDSA"
+cyclonedx_family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ECDSA_WITH_SHA256_OID = \"1.2.840.10045.4.3.2\""
+context_filename: "oids.py"
+context_template: |
+  ECDSA_WITH_SHA256_OID = "1.2.840.10045.4.3.2"
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc5758.txt"
+    section: "3.2 ECDSA Signature Algorithm"
+    read_at: "2026-11-05"
+    quote: "ecdsa-with-SHA256 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 2 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

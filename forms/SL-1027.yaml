@@ -1,0 +1,24 @@
+id: "SL-1027"
+title: "OID sect163k1 as a string"
+family: "EC"
+parameter_set: "sect163k1"
+role: "both"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "SECT163K1_OID = \"1.3.132.0.1\""
+context_filename: "oids.py"
+context_template: |
+  SECT163K1_OID = "1.3.132.0.1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 163
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc5480.txt"
+    section: "2.1.1.1 Named Curve"
+    read_at: "2026-11-05"
+    quote: "sect163k1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) certicom(132) curve(0) 1 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

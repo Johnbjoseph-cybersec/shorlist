@@ -1,0 +1,25 @@
+id: "SL-1054"
+title: "OID id-slh-dsa-shake-256f as a string"
+family: "SLH-DSA"
+cyclonedx_family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHAKE-256f"
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_SLH_DSA_SHAKE_256F_OID = \"2.16.840.1.101.3.4.3.31\""
+context_filename: "oids.py"
+context_template: |
+  ID_SLH_DSA_SHAKE_256F_OID = "2.16.840.1.101.3.4.3.31"
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration"
+    section: "Algorithm Registration > SLH-DSA (sigAlgs = nistAlgorithms 3); nistAlgorithms = 2.16.840.1.101.3.4"
+    read_at: "2026-11-05"
+    quote: "id-slh-dsa-shake-256f OBJECT IDENTIFIER ::= { sigAlgs 31 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

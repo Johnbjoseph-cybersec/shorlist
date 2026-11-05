@@ -1,0 +1,24 @@
+id: "SL-0513"
+title: "IANA SSH key exchange method diffie-hellman-group16-sha512"
+family: "DH"
+parameter_set: "group16"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"diffie-hellman-group16-sha512\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "diffie-hellman-group16-sha512"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "diffie-hellman-group16-sha512,[RFC 8268],,SHOULD"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,30 @@
+id: "SL-1003"
+title: "PyCryptodome: RSASSA-PSS signer"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "    signer = pss.new(key)"
+context_filename: "pss_sign.py"
+context_template: |
+  from Crypto.Signature import pss
+
+
+  def make_signer(key):
+      signer = pss.new(key)
+      return signer
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.pycryptodome.org/src/signature/pkcs1_pss"
+    section: "PKCS#1 PSS (RSA): Crypto.Signature.pss.new(rsa_key, *, mask_func=None, salt_bytes=None, rand_func=None)"
+    read_at: "2026-11-05"
+    quote: "Crypto.Signature.pss.new(rsa_key, *, mask_func=None, salt_bytes=None, rand_func=None)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

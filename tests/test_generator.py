@@ -61,19 +61,19 @@ class NaiveToken(Adapter):
 def test_oracle_scores_perfect():
     res = run(Oracle())
     s = res["summary"]
-    assert s["positive"]["hit"] == s["positive"]["n"] == 20
-    assert s["decoys"]["ok"] == s["decoys"]["n"] == 10
+    assert s["positive"]["hit"] == s["positive"]["n"] >= 20
+    assert s["decoys"]["ok"] == s["decoys"]["n"] >= 10
     assert s["role_ok"]["false"] == 0 and s["size_ok"]["false"] == 0
 
 
 def test_silent_scanner_misses_everything_and_raises_no_alarm():
     s = run(Silent())["summary"]
-    assert s["positive"]["miss"] == 20 and s["decoys"]["false_alarm"] == 0
+    assert s["positive"]["miss"] == s["positive"]["n"] and s["decoys"]["false_alarm"] == 0
 
 
 def test_decoys_catch_a_naive_scanner():
-    s = run(NaiveToken())["summary"]
-    assert s["decoys"]["false_alarm"] == 10
+    out = {r["id"]: r["outcome"] for r in run(NaiveToken())["rows"]}
+    assert all(out[f"SL-{i:04d}"] == "false_alarm" for i in range(21, 31))
 
 
 def test_result_is_repeatable():

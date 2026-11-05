@@ -1,0 +1,37 @@
+id: "SL-1165"
+title: "strongSwan: ESP proposal with modp2048"
+family: "DH"
+parameter_set: "modp2048"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "esp_proposals = aes128gcm16-modp2048"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          children {
+              net {
+                  esp_proposals = aes128gcm16-modp2048
+              }
+          }
+      }
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: Key Exchange Methods"
+    read_at: "2026-11-05"
+    quote: "modp2048"
+  - url: "https://docs.strongswan.org/docs/latest/swanctl/swanctlConf.html"
+    section: "connections.<conn>.children.<child>.esp_proposals"
+    read_at: "2026-11-05"
+    quote: "Algorithm keywords get separated using dashes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "aes128gcm16 and prfsha256 are symmetric and outside the v1 scope; the proposal needs them to be complete."

@@ -1,0 +1,24 @@
+id: "SL-1082"
+title: "Curve name Curve448 (SP 800-186)"
+family: "X448"
+parameter_set: "Curve448"
+role: "key_establishment"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"Curve448\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "Curve448"
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf"
+    section: "3.2.2.2 Curve448"
+    read_at: "2026-11-05"
+    quote: "3.2.2.2. Curve448"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

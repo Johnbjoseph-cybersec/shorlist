@@ -1,0 +1,31 @@
+id: "SL-1155"
+title: "Go: mlkem.GenerateKey1024"
+family: "ML-KEM"
+parameter_set: "ML-KEM-1024"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "dk, err := mlkem.GenerateKey1024()"
+context_filename: "kem.go"
+context_template: |
+  package main
+
+  import "crypto/mlkem"
+
+  func main() {
+  	dk, err := mlkem.GenerateKey1024()
+  	_, _ = dk, err
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://pkg.go.dev/crypto/mlkem"
+    section: "func GenerateKey1024() (*DecapsulationKey1024, error)"
+    read_at: "2026-11-05"
+    quote: "func GenerateKey1024() (*DecapsulationKey1024, error)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

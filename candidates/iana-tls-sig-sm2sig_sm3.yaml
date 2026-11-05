@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA TLS SignatureScheme sm2sig_sm3"
+family: "SM2"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"sm2sig_sm3\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "sm2sig_sm3"
+expected:
+  family: "SM2"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x0708"
+    read_at: "2026-11-05"
+    quote: "0x0708,sm2sig_sm3,N,[RFC 8998],"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: SM2 signature (elliptic curve, Shor-vulnerable); SM2 is not in families.yaml. Needs a family decision before it can enter forms/."

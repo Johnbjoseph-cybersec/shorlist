@@ -1,0 +1,28 @@
+id: "SL-0531"
+title: "Decoy: IANA SSH ecdh-sha2-nistp384 in a Python log message"
+family: "ECDH"
+parameter_set: "P-384"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered key exchange method ecdh-sha2-nistp384; rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered key exchange method ecdh-sha2-nistp384; rejected by policy")
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 384
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "ecdh-sha2-nistp384,[RFC 5656],,SHOULD"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

@@ -1,0 +1,28 @@
+id: "SL-0188"
+title: "Decoy: IANA TLS sect163k1 in a Python log message"
+family: "ECDH"
+parameter_set: "sect163k1"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered group sect163k1; rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered group sect163k1; rejected by policy")
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 163
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 1"
+    read_at: "2026-11-05"
+    quote: "1,sect163k1,Y,D,[RFC 8422]; [RFC 9847],[https://datatracker.ietf.org/meeting/118/materials/slides-118-tls-rfc8447bis-00]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only inside a log message; nothing negotiates or uses it."

@@ -1,0 +1,25 @@
+id: "SL-0106"
+title: "IANA TLS SignatureScheme rsa_pkcs1_sha384_legacy"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"rsa_pkcs1_sha384_legacy\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "rsa_pkcs1_sha384_legacy"
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x0520"
+    read_at: "2026-11-05"
+    quote: "0x0520,rsa_pkcs1_sha384_legacy,N,[RFC 9963],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

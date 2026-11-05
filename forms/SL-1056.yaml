@@ -1,0 +1,25 @@
+id: "SL-1056"
+title: "OID id-alg-hss-lms-hashsig as a string"
+family: "LMS"
+cyclonedx_family: "LMS"
+parameter_set: null
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "HSS_LMS_HASHSIG_OID = \"1.2.840.113549.1.9.16.3.17\""
+context_filename: "oids.py"
+context_template: |
+  HSS_LMS_HASHSIG_OID = "1.2.840.113549.1.9.16.3.17"
+expected:
+  family: "LMS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc9708.txt"
+    section: "3. Algorithm Identifiers and Parameters"
+    read_at: "2026-11-05"
+    quote: "id-alg-hss-lms-hashsig OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 17 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,24 @@
+id: "SL-0520"
+title: "IANA SSH key exchange method ecdh-sha2-nistp256"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"ecdh-sha2-nistp256\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "ecdh-sha2-nistp256"
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "ecdh-sha2-nistp256,[RFC 5656],,SHOULD"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

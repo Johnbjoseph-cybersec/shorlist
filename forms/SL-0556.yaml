@@ -1,0 +1,30 @@
+id: "SL-0556"
+title: "Decoy: IANA SSH ssh-dss in a Python block list"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: true
+decoy_class: "ban_list"
+literal: "BLOCKED_PUBLIC_KEY_ALGORITHMS = {\"ssh-dss\"}"
+context_filename: "ssh_policy.py"
+context_template: |
+  BLOCKED_PUBLIC_KEY_ALGORITHMS = {"ssh-dss"}
+
+
+  def allowed(x):
+      return x not in BLOCKED_PUBLIC_KEY_ALGORITHMS
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "ssh-dss,ssh-dss,[RFC 4253],Section 6.6"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only in a set of rejected values; the function refuses it."

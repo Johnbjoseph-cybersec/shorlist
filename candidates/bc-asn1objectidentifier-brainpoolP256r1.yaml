@@ -1,0 +1,32 @@
+id: "candidate"
+title: "Bouncy Castle: brainpoolP256r1 OID as ASN1ObjectIdentifier"
+family: "EC"
+parameter_set: "brainpoolP256r1"
+role: "both"
+form_kind: "oid"
+language_or_product: "Java / Bouncy Castle"
+negative: false
+literal: "ASN1ObjectIdentifier curve = new ASN1ObjectIdentifier(\"1.3.36.3.3.2.8.1.1.7\");"
+context_filename: "Curve.java"
+context_template: |
+  import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
+  public class Curve {
+      public static void main(String[] args) {
+          ASN1ObjectIdentifier curve = new ASN1ObjectIdentifier("1.3.36.3.3.2.8.1.1.7");
+          System.out.println(curve);
+      }
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc5639.txt"
+    section: "4.1 Object Identifiers"
+    read_at: "2026-11-05"
+    quote: "brainpoolP256r1 OBJECT IDENTIFIER ::= {versionOne 7}"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row yet: the template imports org.bouncycastle.asn1, which javac cannot resolve in CI (JDK only, no Bouncy Castle on the classpath), so test_every_template_parses would fail. The ASN1ObjectIdentifier(String) constructor was not read in BC's own javadoc or source either. K2 found this exact shape missed. Needs a parse rule for BC templates (or BC on the CI classpath) and a BC source citation."

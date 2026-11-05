@@ -1,0 +1,26 @@
+id: "SL-0635"
+title: "Decoy: IANA JOSE HPKE-2 switched off in a Python flag map"
+family: "ECDH"
+parameter_set: "P-521"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: true
+decoy_class: "switch_off"
+literal: "ENABLED = {\"HPKE-2\": False}"
+context_filename: "jwt_header.py"
+context_template: |
+  ENABLED = {"HPKE-2": False}
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 521
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms"
+    section: "JSON Web Signature and Encryption Algorithms registry (CSV web-signature-encryption-algorithms.csv)"
+    read_at: "2026-11-05"
+    quote: "HPKE-2,\"Integrated Encryption with HPKE using DHKEM(P-521, HKDF-SHA512) KEM, HKDF-SHA512 KDF, and AES-256-GCM AEAD\",alg,Optional,[IETF],\"[RFC-ietf-jose-hpke-encrypt-22, Section 5.1]\",\"[draft-ietf-hpke-hpke-03, Section 6.1]\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The only mention sets the entry to False, i.e. disabled."

@@ -1,0 +1,29 @@
+id: "SL-0540"
+title: "IANA SSH public key algorithm ecdsa-sha2-nistp256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "PUBLIC_KEY_ALGORITHM = \"ecdsa-sha2-nistp256\""
+context_filename: "ssh_policy.py"
+context_template: |
+  PUBLIC_KEY_ALGORITHM = "ecdsa-sha2-nistp256"
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "ecdsa-sha2-*,ecdsa-sha2-*,[RFC 5656],"
+  - url: "https://www.rfc-editor.org/rfc/rfc5656.html"
+    section: "6.2 ECC Public Key Algorithm (ecdsa-sha2-*); 10.1 Required Curves"
+    read_at: "2026-11-05"
+    quote: "Each identifier is the concatenation of the string \"ecdsa-sha2-\" with the elliptic curve domain parameter identifier as defined in Section 6.1."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry lists the wildcard ecdsa-sha2-*; the concrete name is formed with one of the three REQUIRED curves of RFC 5656 Section 10.1 (nistp256, nistp384, nistp521)."

@@ -1,0 +1,30 @@
+id: "SL-0478"
+title: "Decoy: IANA TLS TLS_RSA_WITH_NULL_MD5 in a Python block list"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "ban_list"
+literal: "BLOCKED_CIPHER_SUITES = {\"TLS_RSA_WITH_NULL_MD5\"}"
+context_filename: "tls_policy.py"
+context_template: |
+  BLOCKED_CIPHER_SUITES = {"TLS_RSA_WITH_NULL_MD5"}
+
+
+  def allowed(x):
+      return x not in BLOCKED_CIPHER_SUITES
+expected:
+  family: "RSA"
+  role: "both"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x01"
+    read_at: "2026-11-05"
+    quote: "\"0x00,0x01\",TLS_RSA_WITH_NULL_MD5,Y,D,[RFC 5246]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only in a set of rejected values; the function refuses it."

@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA TLS SignatureScheme gostr34102012_512a"
+family: "GOST R 34.10-2012"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"gostr34102012_512a\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "gostr34102012_512a"
+expected:
+  family: "GOST R 34.10-2012"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x070D"
+    read_at: "2026-11-05"
+    quote: "0x070D,gostr34102012_512a,N,[RFC 9367],"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: GOST elliptic-curve signature (Shor-vulnerable); not in families.yaml. Needs a family decision before it can enter forms/."

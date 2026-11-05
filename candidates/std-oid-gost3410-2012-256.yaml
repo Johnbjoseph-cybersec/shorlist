@@ -1,0 +1,25 @@
+id: "candidate"
+title: "OID id-GostR3410-2012-256 (1.2.643.7.1.1.1.1) as a string"
+family: "GOST R 34.10-2012"
+parameter_set: "256"
+role: "n.a."
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "GOST2012_256_OID = \"1.2.643.7.1.1.1.1\""
+context_filename: "oids.py"
+context_template: |
+  GOST2012_256_OID = "1.2.643.7.1.1.1.1"
+expected:
+  family: "GOST R 34.10-2012"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/crypto/objects/objects.txt"
+    section: "crypto/objects/objects.txt: id-tc26-sign 1 (id-tc26 = 1.2.643.7.1, id-tc26-algorithms = id-tc26 1)"
+    read_at: "2026-11-05"
+    quote: "id-tc26-sign 1 : gost2012_256: GOST R 34.10-2012 with 256 bit modulus"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: GOST R 34.10 (an elliptic-curve signature, Shor-vulnerable) has no family in families.yaml. K2 lists GOST 1.2.643.* OIDs as a gap. Needs a family decision (own family, or EC/ECDSA-like under a parent) before it can enter forms/. GOST curve names (e.g. gost256 from CycloneDX) are already rows as family EC."

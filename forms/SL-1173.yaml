@@ -1,0 +1,26 @@
+id: "SL-1173"
+title: "OpenSSH: hybrid ssh-mldsa44-ed25519 host key algorithm"
+family: "ML-DSA"
+parameter_set: "ssh-mldsa44-ed25519"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms ssh-mldsa44-ed25519"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms ssh-mldsa44-ed25519
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "HostKeyAlgorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+    quote: "rsa-sha2-512,rsa-sha2-256, ssh-mldsa44-ed25519 The list of available signature algorithms may also be obtained using \"ssh -Q HostKeyAlgorithms\"."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid (ML-DSA-44 with Ed25519): scored on the post-quantum half (ML-DSA)."

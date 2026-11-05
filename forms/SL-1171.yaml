@@ -1,0 +1,35 @@
+id: "SL-1171"
+title: "Apache mod_ssl: SSLOpenSSLConfCmd Groups SecP384r1MLKEM1024"
+family: "ML-KEM"
+parameter_set: "SecP384r1MLKEM1024"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Apache httpd mod_ssl"
+negative: false
+literal: "SSLOpenSSLConfCmd Groups SecP384r1MLKEM1024"
+context_filename: "httpd.conf"
+context_template: |
+  Listen 443
+  <VirtualHost *:443>
+      SSLEngine on
+      SSLCertificateFile cert.pem
+      SSLCertificateKeyFile key.pem
+      SSLOpenSSLConfCmd Groups SecP384r1MLKEM1024
+  </VirtualHost>
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
+    section: "SSLOpenSSLConfCmd Directive"
+    read_at: "2026-11-05"
+    quote: "Syntax: | SSLOpenSSLConfCmd command-name command-value"
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CONF_cmd/"
+    section: "SUPPORTED CONFIGURATION FILE COMMANDS: Groups / Curves"
+    read_at: "2026-11-05"
+    quote: "OpenSSL 3.5 also introduces support for three hybrid ECDH PQ key exchange TLS groups: X25519MLKEM768, SecP256r1MLKEM768 and SecP384r1MLKEM1024."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). The certificate file names are placeholders and carry no algorithm."

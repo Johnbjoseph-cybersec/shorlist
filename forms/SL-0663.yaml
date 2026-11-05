@@ -1,0 +1,25 @@
+id: "SL-0663"
+title: "IANA COSE alg -46 (HSS-LMS)"
+family: "LMS"
+parameter_set: "HSS/LMS"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-46: \"HSS-LMS\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-46: "HSS-LMS"}
+expected:
+  family: "LMS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -46"
+    read_at: "2026-11-05"
+    quote: "HSS-LMS,-46,HSS/LMS hash-based digital signature,[kty],,[RFC 8778]; [RFC 9053],Yes"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

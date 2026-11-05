@@ -1,0 +1,30 @@
+id: "SL-0506"
+title: "Decoy: IANA TLS TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256 in a Python block list"
+family: "ECDH"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "ban_list"
+literal: "BLOCKED_CIPHER_SUITES = {\"TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256\"}"
+context_filename: "tls_policy.py"
+context_template: |
+  BLOCKED_CIPHER_SUITES = {"TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256"}
+
+
+  def allowed(x):
+      return x not in BLOCKED_CIPHER_SUITES
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0xC0,0x37"
+    read_at: "2026-11-05"
+    quote: "\"0xC0,0x37\",TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256,Y,N,[RFC 5489],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The name occurs only in a set of rejected values; the function refuses it."

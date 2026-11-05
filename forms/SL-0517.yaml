@@ -1,0 +1,29 @@
+id: "SL-0517"
+title: "IANA SSH key exchange method rsa2048-sha256"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"rsa2048-sha256\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "rsa2048-sha256"
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "rsa2048-sha256,[RFC 4432],,MAY"
+  - url: "https://www.rfc-editor.org/rfc/rfc4432.html"
+    section: "4. Details"
+    read_at: "2026-11-05"
+    quote: "The encryption is performed according to the RSAES-OAEP scheme of [RFC3447]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

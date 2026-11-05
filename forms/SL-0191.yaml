@@ -1,0 +1,26 @@
+id: "SL-0191"
+title: "Decoy: IANA TLS brainpoolP512r1 switched off in a Python flag map"
+family: "ECDH"
+parameter_set: "brainpoolP512r1"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "switch_off"
+literal: "ENABLED = {\"brainpoolP512r1\": False}"
+context_filename: "tls_policy.py"
+context_template: |
+  ENABLED = {"brainpoolP512r1": False}
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 512
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 28"
+    read_at: "2026-11-05"
+    quote: "28,brainpoolP512r1,Y,N,[RFC 7027],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The only mention sets the entry to False, i.e. disabled."

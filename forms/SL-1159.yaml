@@ -1,0 +1,27 @@
+id: "SL-1159"
+title: "Decoy: DH small keys in the JDK TLS ban list"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Java / java.security"
+negative: true
+decoy_class: "ban_list"
+literal: "jdk.tls.disabledAlgorithms=DH keySize < 2048"
+context_filename: "java.security"
+context_template: |
+  # Site override of the JDK security properties.
+  jdk.tls.disabledAlgorithms=DH keySize < 2048
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openjdk/jdk/blob/master/src/java.base/share/conf/security/java.security"
+    section: "jdk.tls.disabledAlgorithms"
+    read_at: "2026-11-05"
+    quote: "In some environments, certain algorithms or key lengths may be undesirable # when using SSL/TLS/DTLS."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Names DH only to forbid keys under 2048 bits. Not a use."

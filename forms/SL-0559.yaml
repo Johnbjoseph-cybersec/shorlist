@@ -1,0 +1,25 @@
+id: "SL-0559"
+title: "IANA IKEv2 key exchange method 1 (768-bit MODP Group) (DEPRECATED)"
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_KE_METHODS = {1: \"768-bit MODP Group\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_KE_METHODS = {1: "768-bit MODP Group"}
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 768
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-8"
+    section: "Transform Type 4 - Key Exchange Method Transform IDs registry (CSV ikev2-parameters-8.csv): 1"
+    read_at: "2026-11-05"
+    quote: "1,768-bit MODP Group,DEPRECATED [RFC 8247],\"[RFC 6989, Section 2.1]\",[RFC 7296]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm. The registry marks this entry DEPRECATED; it stays in because deployed code still uses it."

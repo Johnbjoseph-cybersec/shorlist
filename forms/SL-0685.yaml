@@ -1,0 +1,25 @@
+id: "SL-0685"
+title: "IANA COSE alg -7 (ES256) (Deprecated)"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-7: \"ES256\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-7: "ES256"}
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -7"
+    read_at: "2026-11-05"
+    quote: "ES256,-7,ECDSA w/ SHA-256,[kty],IETF,[RFC 9053]; [RFC 9864],Deprecated"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "COSE ES256/ES384/ES512 name the hash, not the curve (the curve comes from the key); size is undetermined. The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm. The registry marks this entry Deprecated; it stays in because deployed code still uses it."

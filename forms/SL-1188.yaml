@@ -1,0 +1,30 @@
+id: "SL-1188"
+title: "FortiOS: phase1-interface rsa-signature-format pss"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Fortinet FortiOS"
+negative: false
+literal: "set rsa-signature-format pss"
+context_filename: "fortigate.conf"
+context_template: |
+  config vpn ipsec phase1-interface
+      edit "vpn-1"
+          set rsa-signature-format pss
+      next
+  end
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.fortinet.com/document/fortigate/7.4.0/cli-reference/331620/config-vpn-ipsec-phase1-interface"
+    section: "config vpn ipsec phase1-interface: rsa-signature-format"
+    read_at: "2026-11-05"
+    quote: "Digital Signature Authentication RSA signature format."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "FortiOS 7.4.0 CLI reference; options pkcs1 and pss."

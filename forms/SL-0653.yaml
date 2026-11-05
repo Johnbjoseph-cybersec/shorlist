@@ -1,0 +1,26 @@
+id: "SL-0653"
+title: "IANA COSE alg -259 (RS512)"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-259: \"RS512\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-259: "RS512"}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -259"
+    read_at: "2026-11-05"
+    quote: "RS512,-259,RSASSA-PKCS1-v1_5 using SHA-512,[kty],IESG,[RFC 8812]; [RFC 9053],No"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

@@ -1,0 +1,25 @@
+id: "candidate"
+title: "IANA IKEv2 key exchange method 33 (GOST3410_2012_256)"
+family: "GOST R 34.10-2012"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_KE_METHODS = {33: \"GOST3410_2012_256\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_KE_METHODS = {33: "GOST3410_2012_256"}
+expected:
+  family: "GOST R 34.10-2012"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-8"
+    section: "Transform Type 4 - Key Exchange Method Transform IDs registry (CSV ikev2-parameters-8.csv): 33"
+    read_at: "2026-11-05"
+    quote: "33,GOST3410_2012_256,,\"[RFC 9385, Section 6.1]\",[RFC 9385]"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: GOST elliptic-curve key exchange (RFC 9385, Shor-vulnerable); not in families.yaml. Needs a family decision before it can enter forms/."

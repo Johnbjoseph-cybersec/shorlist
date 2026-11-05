@@ -1,0 +1,24 @@
+id: "SL-1105"
+title: "Curve name secp160r1 (CycloneDX secg)"
+family: "EC"
+parameter_set: "secp160r1"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"secp160r1\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "secp160r1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 160
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > secg (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"secp160r1\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

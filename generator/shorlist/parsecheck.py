@@ -6,6 +6,13 @@
 | *.go                 | gofmt -e (skipped when gofmt is not installed)            |
 | *.java               | javac into a temp dir (skipped when javac is absent)      |
 | *.sh                 | sh -n                                                     |
+| *.js                 | node --check (skipped when node is not installed)         |
+| *.c                  | gcc -fsyntax-only (skipped without gcc or OpenSSL headers)|
+| *.cs                 | balanced braces and parentheses (no C# compiler is run)   |
+| swanctl.conf         | strongSwan: 'name {', '}' or 'key = value'; balanced      |
+| httpd.conf           | Apache: 'Directive args' or balanced '<Section>' tags     |
+| fortigate.conf       | FortiOS: config/edit/set/unset/next/end; balanced         |
+| running-config       | Cisco IOS: '!' or a command; one-space indents; 'end'     |
 | nginx.conf, *.conf   | balanced braces; every statement ends in ';', '{' or '}'  |
 | sshd_config          | each line is 'Keyword value', Keyword alphabetic           |
 | java.security        | each line is a comment or key=value                       |
@@ -68,6 +75,79 @@ def _properties(text: str) -> tuple[str, str]:
     return OK, ""
 
 
+def _lines(text: str, comment: str):
+    for n, raw in enumerate(text.split("\n"), 1):
+        if raw.strip() and not raw.strip().startswith(comment):
+            yield n, raw
+
+
+def _csharp(text: str) -> tuple[str, str]:
+    code = re.sub(r'"(?:\\.|[^"\\])*"', '""', re.sub(r"//[^\n]*", "", text))
+    for o, c in ("{}", "()"):
+        depth = 0
+        for ch in code:
+            depth += (ch == o) - (ch == c)
+            if depth < 0:
+                return FAIL, f"unbalanced '{c}'"
+        if depth:
+            return FAIL, f"unbalanced '{o}'"
+    return OK, ""
+
+
+def _swanctl(text: str) -> tuple[str, str]:
+    depth = 0
+    for n, raw in _lines(text, "#"):
+        line = raw.strip()
+        if line == "}":
+            depth -= 1
+        elif re.fullmatch(r"[A-Za-z0-9_.-]+\s*\{", line):
+            depth += 1
+        elif not re.fullmatch(r"[A-Za-z0-9_.-]+\s*=.*", line):
+            return FAIL, f"line {n}: not 'name {{', '}}' or 'key = value'"
+        if depth < 0:
+            return FAIL, f"line {n}: unbalanced '}}'"
+    return (OK, "") if depth == 0 else (FAIL, "unbalanced braces")
+
+
+def _apache(text: str) -> tuple[str, str]:
+    stack = []
+    for n, raw in _lines(text, "#"):
+        line = raw.strip()
+        m = re.fullmatch(r"<(/?)([A-Za-z]+)[^>]*>", line)
+        if m and m.group(1):
+            if not stack or stack.pop() != m.group(2):
+                return FAIL, f"line {n}: unbalanced </{m.group(2)}>"
+        elif m:
+            stack.append(m.group(2))
+        elif not re.fullmatch(r"[A-Za-z][A-Za-z0-9]*(\s+\S.*)?", line):
+            return FAIL, f"line {n}: not 'Directive args'"
+    return (OK, "") if not stack else (FAIL, f"unclosed <{stack[-1]}>")
+
+
+def _fortios(text: str) -> tuple[str, str]:
+    depth = 0
+    for n, raw in _lines(text, "#"):
+        word = raw.split()[0]
+        if word in ("config", "edit"):
+            depth += 1
+        elif word in ("end", "next"):
+            depth -= 1
+        elif word not in ("set", "unset"):
+            return FAIL, f"line {n}: not a FortiOS CLI command"
+        if depth < 0:
+            return FAIL, f"line {n}: 'end' or 'next' without 'config' or 'edit'"
+    return (OK, "") if depth == 0 else (FAIL, "unbalanced config/edit")
+
+
+def _ios(text: str) -> tuple[str, str]:
+    last = ""
+    for n, raw in _lines(text, "!"):
+        if not re.fullmatch(r"( *)[a-z][A-Za-z0-9_.:/ -]*", raw) or "\t" in raw:
+            return FAIL, f"line {n}: not a Cisco IOS command line"
+        last = raw.strip()
+    return (OK, "") if last == "end" else (FAIL, "does not end with 'end'")
+
+
 def check(filename: str, text: str) -> tuple[str, str]:
     """Return (status, detail); status is ok, skipped or fail."""
     if filename.endswith(".py"):
@@ -87,6 +167,27 @@ def check(filename: str, text: str) -> tuple[str, str]:
             return _run(["javac", "-d", out], text, ".java", name=filename)
     if filename.endswith(".sh"):
         return _run(["sh", "-n"], text, ".sh")
+    if filename.endswith(".js"):
+        if not shutil.which("node"):
+            return SKIP, "node not installed"
+        return _run(["node", "--check"], text, ".js")
+    if filename.endswith(".c"):
+        if not shutil.which("gcc"):
+            return SKIP, "gcc not installed"
+        status, detail = _run(["gcc", "-fsyntax-only"], text, ".c")
+        if status == FAIL and re.search(r"openssl/\w+\.h: No such file", detail):
+            return SKIP, "OpenSSL headers not installed"
+        return status, detail
+    if filename.endswith(".cs"):
+        return _csharp(text)
+    if filename == "swanctl.conf":
+        return _swanctl(text)
+    if filename == "httpd.conf":
+        return _apache(text)
+    if filename == "fortigate.conf":
+        return _fortios(text)
+    if filename == "running-config":
+        return _ios(text)
     if filename == "sshd_config":
         return _sshd(text)
     if filename == "nginx.conf" or filename.endswith(".conf"):

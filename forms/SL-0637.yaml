@@ -1,0 +1,25 @@
+id: "SL-0637"
+title: "IANA JOSE JWK kty RSA"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA JOSE"
+negative: false
+literal: "jwk = {\"kty\": \"RSA\"}"
+context_filename: "jwk.py"
+context_template: |
+  jwk = {"kty": "RSA"}
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/jose/jose.xhtml#web-key-types"
+    section: "JSON Web Key Types registry (CSV web-key-types.csv)"
+    read_at: "2026-11-05"
+    quote: "RSA,RSA,Required,[IESG],\"[RFC 7518, Section 6.3]\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A key type pins the family but not the role or the size."

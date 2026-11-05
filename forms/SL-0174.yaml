@@ -1,0 +1,24 @@
+id: "SL-0174"
+title: "IANA TLS group ffdhe4096"
+family: "DH"
+parameter_set: "ffdhe4096"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "TLS_GROUP = \"ffdhe4096\""
+context_filename: "tls_policy.py"
+context_template: |
+  TLS_GROUP = "ffdhe4096"
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 4096
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv): 258"
+    read_at: "2026-11-05"
+    quote: "258,ffdhe4096,Y,N,[RFC 7919],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

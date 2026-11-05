@@ -1,0 +1,25 @@
+id: "SL-0523"
+title: "IANA SSH key exchange method mlkem768nistp256-sha256"
+family: "ML-KEM"
+parameter_set: "mlkem768nistp256-sha256"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"mlkem768nistp256-sha256\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "mlkem768nistp256-sha256"
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+    quote: "mlkem768nistp256-sha256,[RFC 10042],,SHOULD"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid; scored on the post-quantum half (ML-KEM). The classical half is nistp256."

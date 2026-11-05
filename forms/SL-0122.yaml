@@ -1,0 +1,25 @@
+id: "SL-0122"
+title: "IANA TLS SignatureScheme mldsa87"
+family: "ML-DSA"
+parameter_set: "ML-DSA-87"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"mldsa87\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "mldsa87"
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv): 0x0906"
+    read_at: "2026-11-05"
+    quote: "0x0906,mldsa87,N,[RFC-ietf-tls-mldsa-06],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Registered from a document not yet published as an RFC."

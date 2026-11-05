@@ -1,0 +1,24 @@
+id: "SL-1103"
+title: "Curve name ansit571k1 (CycloneDX x963)"
+family: "EC"
+parameter_set: "ansit571k1"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"ansit571k1\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "ansit571k1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 571
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > x963 (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"ansit571k1\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

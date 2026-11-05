@@ -1,0 +1,25 @@
+id: "SL-0589"
+title: "IANA IKEv2 authentication method 9 (ECDSA with SHA-256 on the P-256 curve)"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_AUTH_METHODS = {9: \"ECDSA with SHA-256 on the P-256 curve\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_AUTH_METHODS = {9: "ECDSA with SHA-256 on the P-256 curve"}
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-12"
+    section: "IKEv2 Authentication Method registry (CSV ikev2-parameters-12.csv): 9"
+    read_at: "2026-11-05"
+    quote: "9,ECDSA with SHA-256 on the P-256 curve,[RFC 4754]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

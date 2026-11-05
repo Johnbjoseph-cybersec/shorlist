@@ -1,0 +1,31 @@
+id: "SL-1009"
+title: "OpenSSL EVP: key context by name \"dhpublicnumber\""
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "EVP_PKEY_CTX *pctx = EVP_PKEY_CTX_new_from_name(NULL, \"dhpublicnumber\", NULL);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int main(void)
+  {
+      EVP_PKEY_CTX *pctx = EVP_PKEY_CTX_new_from_name(NULL, "dhpublicnumber", NULL);
+      EVP_PKEY_CTX_free(pctx);
+      return 0;
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h: PROV_NAMES_DHX"
+    read_at: "2026-11-05"
+    quote: "#define PROV_NAMES_DHX \"DHX:X9.42 DH:dhpublicnumber:1.2.840.10046.2.1\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

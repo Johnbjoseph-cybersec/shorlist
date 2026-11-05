@@ -1,0 +1,25 @@
+id: "SL-1051"
+title: "OID id-ml-dsa-65 as a string"
+family: "ML-DSA"
+cyclonedx_family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_ML_DSA_65_OID = \"2.16.840.1.101.3.4.3.18\""
+context_filename: "oids.py"
+context_template: |
+  ID_ML_DSA_65_OID = "2.16.840.1.101.3.4.3.18"
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration"
+    section: "Algorithm Registration > ML-DSA (sigAlgs = nistAlgorithms 3); nistAlgorithms = 2.16.840.1.101.3.4"
+    read_at: "2026-11-05"
+    quote: "id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,33 @@
+id: "SL-0547"
+title: "IANA SSH public key algorithm x509v3-ecdsa-sha2-nistp384"
+family: "ECDSA"
+parameter_set: "P-384"
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "PUBLIC_KEY_ALGORITHM = \"x509v3-ecdsa-sha2-nistp384\""
+context_filename: "ssh_policy.py"
+context_template: |
+  PUBLIC_KEY_ALGORITHM = "x509v3-ecdsa-sha2-nistp384"
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 384
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "x509v3-ecdsa-sha2-*,x509v3-ecdsa-sha2-*,[RFC 6187],"
+  - url: "https://www.rfc-editor.org/rfc/rfc6187.html"
+    section: "3.4 x509v3-ecdsa-sha2-*"
+    read_at: "2026-11-05"
+    quote: "The string [identifier] is the identifier of the elliptic curve domain parameters. The format of this string is specified in Section 6.1 of [RFC5656]."
+  - url: "https://www.rfc-editor.org/rfc/rfc5656.html"
+    section: "6.2 ECC Public Key Algorithm (ecdsa-sha2-*); 10.1 Required Curves"
+    read_at: "2026-11-05"
+    quote: "Each identifier is the concatenation of the string \"ecdsa-sha2-\" with the elliptic curve domain parameter identifier as defined in Section 6.1."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry lists the wildcard x509v3-ecdsa-sha2-*; the concrete name is formed with one of the three REQUIRED curves of RFC 5656 Section 10.1 (nistp256, nistp384, nistp521)."

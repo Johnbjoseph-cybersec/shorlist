@@ -1,0 +1,26 @@
+id: "SL-0648"
+title: "IANA COSE alg -65535 (RS1) (Deprecated)"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_ALGORITHMS = {-65535: \"RS1\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_ALGORITHMS = {-65535: "RS1"}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#algorithms"
+    section: "COSE Algorithms registry (CSV algorithms.csv): -65535"
+    read_at: "2026-11-05"
+    quote: "RS1,-65535,RSASSA-PKCS1-v1_5 using SHA-1,[kty],IESG,[RFC 8812]; [RFC 9053],Deprecated"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm. The registry marks this entry Deprecated; it stays in because deployed code still uses it."

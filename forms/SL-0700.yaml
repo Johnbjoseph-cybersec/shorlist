@@ -1,0 +1,25 @@
+id: "SL-0700"
+title: "IANA COSE curve 258 (brainpoolP384r1)"
+family: "EC"
+parameter_set: "brainpoolP384r1"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_CURVES = {258: \"brainpoolP384r1\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_CURVES = {258: "brainpoolP384r1"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 384
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves"
+    section: "COSE Elliptic Curves registry (CSV elliptic-curves.csv): 258"
+    read_at: "2026-11-05"
+    quote: "brainpoolP384r1,258,EC2,BrainpoolP384r1,[ISO/IEC JTC 1/SC 17/WG 10],\"[ISO/IEC 18013-5:2021, 9.1.5.2]\",No"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A curve pins the family and size but not the role (the key may be used for ECDSA or ECDH). The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

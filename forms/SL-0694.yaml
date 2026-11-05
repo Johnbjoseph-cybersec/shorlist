@@ -1,0 +1,25 @@
+id: "SL-0694"
+title: "IANA COSE curve 5 (X448)"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "registry_id"
+language_or_product: "IANA COSE"
+negative: false
+literal: "COSE_CURVES = {5: \"X448\"}"
+context_filename: "cose_params.py"
+context_template: |
+  COSE_CURVES = {5: "X448"}
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves"
+    section: "COSE Elliptic Curves registry (CSV elliptic-curves.csv): 5"
+    read_at: "2026-11-05"
+    quote: "X448,5,OKP,X448 for use w/ ECDH only,,[RFC 9053],Yes"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The registry identifies this entry by number; the name is the registry's descriptive label, kept beside the number in a string so the line names the algorithm."

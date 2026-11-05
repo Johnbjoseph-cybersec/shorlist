@@ -1,0 +1,31 @@
+id: "SL-1140"
+title: "OpenSSL EVP: EVP_PKEY_Q_keygen ML-KEM-768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "EVP_PKEY *pkey = EVP_PKEY_Q_keygen(NULL, NULL, \"ML-KEM-768\");"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int main(void)
+  {
+      EVP_PKEY *pkey = EVP_PKEY_Q_keygen(NULL, NULL, "ML-KEM-768");
+      EVP_PKEY_free(pkey);
+      return 0;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man7/EVP_PKEY-ML-KEM/"
+    section: "EXAMPLES"
+    read_at: "2026-11-05"
+    quote: "pkey = EVP_PKEY_Q_keygen(NULL, NULL, \"ML-KEM-768\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

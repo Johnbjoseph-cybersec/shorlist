@@ -1,0 +1,24 @@
+id: "SL-1101"
+title: "Curve name c2tnb191v1 (CycloneDX x962)"
+family: "EC"
+parameter_set: "c2tnb191v1"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "Python / any"
+negative: false
+literal: "CURVE = \"c2tnb191v1\""
+context_filename: "curve.py"
+context_template: |
+  CURVE = "c2tnb191v1"
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 191
+source:
+  - url: "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json"
+    section: "ellipticCurves > x962 (lastUpdated 2026-02-24)"
+    read_at: "2026-11-05"
+    quote: "\"name\": \"c2tnb191v1\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

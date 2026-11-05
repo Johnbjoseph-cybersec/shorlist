@@ -1,0 +1,33 @@
+id: "SL-1186"
+title: "FortiOS: phase1-interface dhgrp 14"
+family: "DH"
+parameter_set: "IKE group 14"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Fortinet FortiOS"
+negative: false
+literal: "set dhgrp 14"
+context_filename: "fortigate.conf"
+context_template: |
+  config vpn ipsec phase1-interface
+      edit "vpn-1"
+          set dhgrp 14
+      next
+  end
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://docs.fortinet.com/document/fortigate/7.4.0/cli-reference/331620/config-vpn-ipsec-phase1-interface"
+    section: "config vpn ipsec phase1-interface: dhgrp"
+    read_at: "2026-11-05"
+    quote: "DH Group 14."
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-8"
+    section: "Transform Type 4 - Key Exchange Method Transform IDs (CSV ikev2-parameters-8.csv)"
+    read_at: "2026-11-05"
+    quote: "14,2048-bit MODP Group"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "FortiOS 7.4.0 CLI reference. The group number is the IKE transform ID; its size comes from the IANA registry."

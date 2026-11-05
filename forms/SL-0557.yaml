@@ -1,0 +1,27 @@
+id: "SL-0557"
+title: "Decoy: IANA SSH ecdsa-sha2-nistp256 in a Python comment"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: true
+decoy_class: "comment"
+literal: "# Removed in v3: PUBLIC_KEY_ALGORITHM = \"ecdsa-sha2-nistp256\""
+context_filename: "ssh_policy.py"
+context_template: |
+  # Removed in v3: PUBLIC_KEY_ALGORITHM = "ecdsa-sha2-nistp256"
+  POLICY_SOURCE = "system default"
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+    quote: "ecdsa-sha2-*,ecdsa-sha2-*,[RFC 5656],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The assignment is commented out; the file contains no use."

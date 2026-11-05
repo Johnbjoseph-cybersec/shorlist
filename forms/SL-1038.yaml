@@ -1,0 +1,25 @@
+id: "SL-1038"
+title: "OID id-X25519 as a string"
+family: "X25519"
+cyclonedx_family: "ECDH"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "oid"
+language_or_product: "Python / any"
+negative: false
+literal: "ID_X25519_OID = \"1.3.101.110\""
+context_filename: "oids.py"
+context_template: |
+  ID_X25519_OID = "1.3.101.110"
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc8410.txt"
+    section: "3. Curve25519 and Curve448 Algorithm Identifiers"
+    read_at: "2026-11-05"
+    quote: "id-X25519 OBJECT IDENTIFIER ::= { 1 3 101 110 }"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
