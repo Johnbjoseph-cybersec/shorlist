@@ -1,0 +1,30 @@
+id: "SL-2058"
+title: "OpenSSL EVP: EVP_PKEY_CTX_set_dh_nid(NID_ffdhe2048)"
+family: "DH"
+parameter_set: "ffdhe2048"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return EVP_PKEY_CTX_set_dh_nid(ctx, NID_ffdhe2048);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/dh.h>
+  #include <openssl/obj_mac.h>
+
+  int group(EVP_PKEY_CTX *ctx)
+  {
+      return EVP_PKEY_CTX_set_dh_nid(ctx, NID_ffdhe2048);
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_PKEY_CTX_ctrl/"
+    section: "DESCRIPTION: DH parameters"
+    read_at: "2026-11-05"
+    quote: "EVP_PKEY_CTX_set_dh_nid() sets the DH parameters to values corresponding to nid as defined in RFC7919 or RFC3526."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

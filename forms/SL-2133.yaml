@@ -1,0 +1,26 @@
+id: "SL-2133"
+title: "Decoy: wolfSSL RSA compiled out with NO_RSA"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "config_key"
+language_or_product: "C / wolfSSL 5.9"
+negative: true
+decoy_class: "switch_off"
+literal: "#define NO_RSA"
+context_filename: "user_settings.h"
+context_template: |
+  #define NO_RSA
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/wolfcrypt/rsa.h"
+    section: "wolfssl/wolfcrypt/rsa.h: build guard"
+    read_at: "2026-11-05"
+    quote: "#ifndef NO_RSA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "NO_RSA in user_settings.h removes RSA from the build; it names RSA and turns it off."

@@ -1,0 +1,31 @@
+id: "SL-2541"
+title: "RbNaCl PrivateKey.generate (Curve25519 box)"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Ruby / RbNaCl 7.1"
+negative: false
+literal: "private_key = RbNaCl::PrivateKey.generate"
+context_filename: "box.rb"
+context_template: |
+  require "rbnacl"
+
+  private_key = RbNaCl::PrivateKey.generate
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/RubyCrypto/rbnacl/blob/v7.1.2/lib/rbnacl.rb"
+    section: "lib/rbnacl.rb: aliases"
+    read_at: "2026-11-05"
+    quote: "PrivateKey   = Boxes::Curve25519XSalsa20Poly1305::PrivateKey"
+  - url: "https://github.com/RubyCrypto/rbnacl/blob/v7.1.2/lib/rbnacl/boxes/curve25519xsalsa20poly1305/private_key.rb"
+    section: "lib/rbnacl/boxes/curve25519xsalsa20poly1305/private_key.rb: PrivateKey.generate"
+    read_at: "2026-11-05"
+    quote: "def self.generate"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The box key is a Curve25519 key used for X25519 key agreement; XSalsa20-Poly1305 is symmetric and outside the v1 scope."

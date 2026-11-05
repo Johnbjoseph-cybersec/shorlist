@@ -1,0 +1,36 @@
+id: "SL-2157"
+title: "Botan: X448_PrivateKey generation"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::X448_PrivateKey key(rng);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/x448.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::X448_PrivateKey key(rng);
+      return 0;
+  }
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/curve448/x448/x448.h"
+    section: "src/lib/pubkey/curve448/x448/x448.h"
+    read_at: "2026-11-05"
+    quote: "explicit X448_PrivateKey(RandomNumberGenerator& rng);"
+  - url: "https://botan.randombit.net/handbook/api_ref/pubkey.html"
+    section: "Creating A New EC Private Key"
+    read_at: "2026-11-05"
+    quote: "X448_PrivateKey::X448_PrivateKey(RandomNumberGenerator &rng)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

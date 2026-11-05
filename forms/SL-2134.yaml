@@ -1,0 +1,29 @@
+id: "SL-2134"
+title: "Decoy: wolfCrypt EC key call in a log string"
+family: "EC"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / wolfSSL 5.9"
+negative: true
+decoy_class: "log_string"
+literal: "printf(\"wc_ecc_make_key_ex failed: %d\\n\", ret);"
+context_filename: "log.c"
+context_template: |
+  #include <stdio.h>
+
+  void report(int ret)
+  {
+      printf("wc_ecc_make_key_ex failed: %d\n", ret);
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/wolfcrypt/ecc.h"
+    section: "wolfssl/wolfcrypt/ecc.h: wc_ecc_make_key_ex"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,34 @@
+id: "candidate"
+title: "Botan: Dilithium_PrivateKey with DilithiumMode::Dilithium6x5"
+family: "ML-DSA"
+parameter_set: "Dilithium3"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::Dilithium_PrivateKey key(rng, Botan::DilithiumMode::Dilithium6x5);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/dilithium.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::Dilithium_PrivateKey key(rng, Botan::DilithiumMode::Dilithium6x5);
+      return 0;
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/dilithium/dilithium_common/dilithium.h"
+    section: "src/lib/pubkey/dilithium/dilithium_common/dilithium.h: DilithiumMode::Mode"
+    read_at: "2026-11-05"
+    quote: "Dilithium6x5 BOTAN_DEPRECATED(\"Dilithium R3 is deprecated - use ML-DSA\"),"
+status: "candidate"
+candidate_reason: "pre-standard parameter set (round-3 Kyber/Dilithium) or a family outside families.yaml; families.yaml has no family for it, so it cannot be a row until the family question is decided"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Round-3 Dilithium, not FIPS 204 ML-DSA-65 (Botan's ML_DSA_6x5 is the standard one and is row SL-2159)."

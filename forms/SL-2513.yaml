@@ -1,0 +1,30 @@
+id: "SL-2513"
+title: "PHP sodium_crypto_scalarmult (X25519 ECDH)"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "PHP / ext/sodium"
+negative: false
+literal: "$shared = sodium_crypto_scalarmult($secret_key, $peer_public_key);"
+context_filename: "kx.php"
+context_template: |
+  <?php
+
+  function agree(string $secret_key, string $peer_public_key): string
+  {
+      $shared = sodium_crypto_scalarmult($secret_key, $peer_public_key);
+      return $shared;
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.sodium-crypto-scalarmult.php"
+    section: "sodium_crypto_scalarmult(): Description"
+    read_at: "2026-11-05"
+    quote: "Elliptic Curve Diffie-Hellman. Calculates scalar n times point p, on an elliptic curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

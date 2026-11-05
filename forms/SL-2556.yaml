@@ -1,0 +1,30 @@
+id: "SL-2556"
+title: "Kotlin Cipher.getInstance RSA OAEP SHA-256"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+literal: "val cipher = Cipher.getInstance(\"RSA/ECB/OAEPWithSHA-256AndMGF1Padding\")"
+context_filename: "Decrypt.kt"
+context_template: |
+  import javax.crypto.Cipher
+
+  fun main() {
+      val cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding")
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Example: RSA key pair for encryption/decryption using RSA OAEP"
+    read_at: "2026-11-05"
+    quote: "Cipher cipher = Cipher.getInstance(\"RSA/ECB/OAEPWithSHA-256AndMGF1Padding\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "RSA-OAEP encrypts (key transport); filed as key_establishment."

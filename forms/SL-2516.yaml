@@ -1,0 +1,32 @@
+id: "SL-2516"
+title: "phpseclib EC::createKey('Ed25519')"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$private = EC::createKey('Ed25519');"
+context_filename: "ec.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\EC;
+
+  $private = EC::createKey('Ed25519');
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "EC::createKey() only supports the creation of named curves."
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "$private = EC::createKey('Ed25519');"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

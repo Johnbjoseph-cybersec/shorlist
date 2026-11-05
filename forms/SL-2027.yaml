@@ -1,0 +1,28 @@
+id: "SL-2027"
+title: "aws-lc-rs: Ed25519 signature verification"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / aws-lc-rs 1.19"
+negative: false
+literal: "let key = aws_lc_rs::signature::UnparsedPublicKey::new(&aws_lc_rs::signature::ED25519, pk);"
+context_filename: "verify.rs"
+context_template: |
+  fn verifier(pk: &[u8]) {
+      let key = aws_lc_rs::signature::UnparsedPublicKey::new(&aws_lc_rs::signature::ED25519, pk);
+  }
+
+  fn main() {}
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/aws-lc-rs/1.19.0/aws_lc_rs/signature/index.html"
+    section: "Module signature > Statics: ED25519"
+    read_at: "2026-11-05"
+    quote: "ED25519 Verification of Ed25519 signatures."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

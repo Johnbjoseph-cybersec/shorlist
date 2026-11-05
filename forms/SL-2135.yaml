@@ -1,0 +1,29 @@
+id: "SL-2135"
+title: "libsodium: crypto_sign_keypair"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / libsodium 1.0.22"
+negative: false
+literal: "crypto_sign_keypair(pk, sk);"
+context_filename: "box.c"
+context_template: |
+  #include <sodium.h>
+
+  void run(unsigned char *pk, unsigned char *sk)
+  {
+      crypto_sign_keypair(pk, sk);
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/jedisct1/libsodium/blob/1.0.22-RELEASE/src/libsodium/include/sodium/crypto_sign.h"
+    section: "src/libsodium/include/sodium/crypto_sign.h: crypto_sign_PRIMITIVE"
+    read_at: "2026-11-05"
+    quote: "#define crypto_sign_PRIMITIVE \"ed25519\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

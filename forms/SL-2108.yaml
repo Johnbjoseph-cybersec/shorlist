@@ -1,0 +1,30 @@
+id: "SL-2108"
+title: "Mbed TLS PSA: PSA_ALG_RSA_OAEP(PSA_ALG_SHA_256"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "psa_set_key_algorithm(attr, PSA_ALG_RSA_OAEP(PSA_ALG_SHA_256));"
+context_filename: "psa.c"
+context_template: |
+  #include <psa/crypto.h>
+
+  void attrs(psa_key_attributes_t *attr)
+  {
+      psa_set_key_algorithm(attr, PSA_ALG_RSA_OAEP(PSA_ALG_SHA_256));
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/psa/crypto_values.h"
+    section: "include/psa/crypto_values.h"
+    read_at: "2026-11-05"
+    quote: "#define PSA_ALG_RSA_OAEP(hash_alg) \\"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

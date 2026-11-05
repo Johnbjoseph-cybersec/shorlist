@@ -1,0 +1,30 @@
+id: "candidate"
+title: "Kotlin KeyAgreement.getInstance(\"XDH\")"
+family: "X25519"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+literal: "val ka = KeyAgreement.getInstance(\"XDH\")"
+context_filename: "Agree.kt"
+context_template: |
+  import javax.crypto.KeyAgreement
+
+  fun main() {
+      val ka = KeyAgreement.getInstance("XDH")
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.android.com/reference/javax/crypto/KeyAgreement"
+    section: "KeyAgreement: algorithm table (XDH, API levels 33+)"
+    read_at: "2026-11-05"
+    quote: "| XDH | 33+"
+status: "candidate"
+candidate_reason: "XDH covers both X25519 and X448; the line pins neither, and the family vocabulary has no XDH entry and no parent for the two other than EC. Needs a decision on the family before it can be a row."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Filed provisionally as X25519 only because the schema needs a family value."

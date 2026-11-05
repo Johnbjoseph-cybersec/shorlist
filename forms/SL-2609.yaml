@@ -1,0 +1,27 @@
+id: "SL-2609"
+title: "Decoy: DHE cipher string in a Python log message"
+family: "DH"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / ssl"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"cipher DHE-RSA-AES256-GCM-SHA384 refused by the TLS policy\")"
+context_filename: "tlslog.py"
+context_template: |
+  import logging
+
+  logging.warning("cipher DHE-RSA-AES256-GCM-SHA384 refused by the TLS policy")
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not import ssl."

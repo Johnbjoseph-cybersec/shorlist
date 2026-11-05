@@ -1,0 +1,28 @@
+id: "SL-2598"
+title: "Decoy: Web Crypto ECDH generateKey in a comment"
+family: "ECDH"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: true
+decoy_class: "comment"
+literal: "  // crypto.subtle.generateKey({ name: \"ECDH\", namedCurve: \"P-256\" }, ...) moved to the worker"
+context_filename: "legacy.js"
+context_template: |
+  function makeKey() {
+    // crypto.subtle.generateKey({ name: "ECDH", namedCurve: "P-256" }, ...) moved to the worker
+    return null;
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "ECDH Registration"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file calls no crypto.subtle method."

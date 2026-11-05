@@ -1,0 +1,25 @@
+id: "SL-2543"
+title: "Decoy: EC curve named in a Ruby warning"
+family: "EC"
+parameter_set: "secp256k1"
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: true
+decoy_class: "log_string"
+literal: "warn 'OpenSSL::PKey::EC.generate(\"secp256k1\") is refused by policy'"
+context_filename: "probe.rb"
+context_template: |
+  warn 'OpenSSL::PKey::EC.generate("secp256k1") is refused by policy'
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/PKey/EC.html"
+    section: "OpenSSL::PKey::EC.generate"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not require openssl."

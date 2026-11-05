@@ -1,0 +1,28 @@
+id: "SL-2006"
+title: "ring: RSA key pair loaded from DER"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "api_call"
+language_or_product: "Rust / ring 0.17"
+negative: false
+literal: "let key_pair = ring::rsa::KeyPair::from_der(der).unwrap();"
+context_filename: "load.rs"
+context_template: |
+  fn load(der: &[u8]) {
+      let key_pair = ring::rsa::KeyPair::from_der(der).unwrap();
+  }
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ring/0.17.14/ring/signature/index.html"
+    section: "Module signature > Examples: Signing and verifying with RSA (PKCS#1 1.5 padding)"
+    read_at: "2026-11-05"
+    quote: "let key_pair = rsa::KeyPair::from_der(&private_key_der)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

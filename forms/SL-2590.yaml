@@ -1,0 +1,31 @@
+id: "SL-2590"
+title: "Web Crypto generateKey X25519"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"X25519\" }, true, [\"deriveBits\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "X25519" }, true, ["deriveBits"]);
+    return key;
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "Web Cryptography API (W3C Editor's Draft 22 October 2026): 26 X25519"
+    read_at: "2026-11-05"
+    quote: "The \"X25519\" algorithm identifier is used to perform key agreement using the X25519 algorithm specified in [RFC7748]."
+  - url: "https://wicg.github.io/webcrypto-secure-curves/"
+    section: "Secure Curves in the Web Cryptography API (WICG Draft Community Group Report): X25519"
+    read_at: "2026-11-05"
+    quote: "The \"X25519\" algorithm identifier is used to perform"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

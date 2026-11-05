@@ -1,0 +1,26 @@
+id: "SL-2048"
+title: "RustCrypto dsa: DSA signing key generation"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto dsa 0.7"
+negative: false
+literal: "let signing_key = dsa::SigningKey::generate();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let signing_key = dsa::SigningKey::generate();
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/dsa/0.7.0/dsa/index.html"
+    section: "Crate dsa > Examples: Generate a DSA keypair"
+    read_at: "2026-11-05"
+    quote: "let signing_key = SigningKey::generate();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

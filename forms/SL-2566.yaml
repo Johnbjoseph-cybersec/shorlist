@@ -1,0 +1,28 @@
+id: "SL-2566"
+title: "CryptoKit Curve25519.KeyAgreement.PrivateKey()"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let key = Curve25519.KeyAgreement.PrivateKey()"
+context_filename: "Keys.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() {
+      let key = Curve25519.KeyAgreement.PrivateKey()
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/curve25519/keyagreement/privatekey"
+    section: "CryptoKit Curve25519.KeyAgreement.PrivateKey (DocC JSON of the page)"
+    read_at: "2026-11-05"
+    quote: "A Curve25519 private key used for key agreement."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

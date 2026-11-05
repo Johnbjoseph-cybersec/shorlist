@@ -1,0 +1,29 @@
+id: "SL-2087"
+title: "BoringSSL: SLHDSA_SHA2_128S_generate_key"
+family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHA2-128s"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / BoringSSL"
+negative: false
+literal: "SLHDSA_SHA2_128S_generate_key(pub, priv);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/slhdsa.h>
+
+  void gen(uint8_t *pub, uint8_t *priv)
+  {
+      SLHDSA_SHA2_128S_generate_key(pub, priv);
+  }
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/google/boringssl/blob/0.20261020.0/include/openssl/slhdsa.h"
+    section: "include/openssl/slhdsa.h: SLHDSA_SHA2_128S_generate_key"
+    read_at: "2026-11-05"
+    quote: "OPENSSL_EXPORT void SLHDSA_SHA2_128S_generate_key("
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

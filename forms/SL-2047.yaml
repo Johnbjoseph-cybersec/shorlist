@@ -1,0 +1,27 @@
+id: "SL-2047"
+title: "RustCrypto slh-dsa: SLH-DSA-SHAKE-128f signing key"
+family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHAKE-128f"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto slh-dsa 0.1"
+negative: false
+literal: "let sk = slh_dsa::SigningKey::<slh_dsa::Shake128f>::new(&mut rng);"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let mut rng = rand::thread_rng();
+      let sk = slh_dsa::SigningKey::<slh_dsa::Shake128f>::new(&mut rng);
+  }
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/slh-dsa/0.1.0/slh_dsa/index.html"
+    section: "Crate slh_dsa > Usage"
+    read_at: "2026-11-05"
+    quote: "let sk = SigningKey::<Shake128f>::new(&mut rng);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

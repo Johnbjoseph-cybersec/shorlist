@@ -1,0 +1,29 @@
+id: "SL-2180"
+title: "Decoy: Crypto++ RSA signer in a C++ comment"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: true
+decoy_class: "comment"
+literal: "// CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA1>::Signer was replaced by PSS in 2.0"
+context_filename: "main.cpp"
+context_template: |
+  int main()
+  {
+      // CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA1>::Signer was replaced by PSS in 2.0
+      return 0;
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/rsa.h"
+    section: "rsa.h: struct RSASS"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

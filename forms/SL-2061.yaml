@@ -1,0 +1,34 @@
+id: "SL-2061"
+title: "OpenSSL TLS: SSL_CTX_set1_groups_list \"SecP384r1MLKEM1024\""
+family: "ML-KEM"
+parameter_set: "SecP384r1MLKEM1024"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return SSL_CTX_set1_groups_list(ctx, \"SecP384r1MLKEM1024\");"
+context_filename: "tls.c"
+context_template: |
+  #include <openssl/ssl.h>
+
+  long groups(SSL_CTX *ctx)
+  {
+      return SSL_CTX_set1_groups_list(ctx, "SecP384r1MLKEM1024");
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/ssl.h.in"
+    section: "include/openssl/ssl.h.in: SSL_CTX_set1_groups_list"
+    read_at: "2026-11-05"
+    quote: "# define SSL_CTX_set1_groups_list(ctx, s) \\"
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CTX_set1_curves/"
+    section: "NOTES / HISTORY"
+    read_at: "2026-11-05"
+    quote: "OpenSSL 3.5 also introduces support for three hybrid ECDH PQ key exchange TLS groups: X25519MLKEM768, SecP256r1MLKEM768 and SecP384r1MLKEM1024."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM), as the README and SL-0011 define."

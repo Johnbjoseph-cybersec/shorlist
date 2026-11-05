@@ -1,0 +1,30 @@
+id: "SL-2005"
+title: "ring: RSA-PSS signing with SHA-256"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / ring 0.17"
+negative: false
+literal: "key_pair.sign(&ring::signature::RSA_PSS_SHA256, &rng, msg, &mut sig).unwrap();"
+context_filename: "sign.rs"
+context_template: |
+  fn sign(key_pair: &ring::rsa::KeyPair, msg: &[u8], sig: &mut [u8]) {
+      let rng = ring::rand::SystemRandom::new();
+      key_pair.sign(&ring::signature::RSA_PSS_SHA256, &rng, msg, &mut sig).unwrap();
+  }
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ring/0.17.14/ring/signature/index.html"
+    section: "Module signature > Re-exports: RSA_PSS_SHA256"
+    read_at: "2026-11-05"
+    quote: "pub use crate::rsa::padding::RSA_PSS_SHA256;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

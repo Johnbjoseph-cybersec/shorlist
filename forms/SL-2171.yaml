@@ -1,0 +1,31 @@
+id: "SL-2171"
+title: "Crypto++: RSAES<OAEP<SHA256>> encryptor"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::RSAES<CryptoPP::OAEP<CryptoPP::SHA256> >::Encryptor enc(pub);"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/rsa.h>
+
+  int make(const CryptoPP::RSA::PublicKey& pub)
+  {
+      CryptoPP::RSAES<CryptoPP::OAEP<CryptoPP::SHA256> >::Encryptor enc(pub);
+      return 0;
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/rsa.h"
+    section: "rsa.h: struct RSAES"
+    read_at: "2026-11-05"
+    quote: "struct RSAES : public TF_ES<RSA, STANDARD>"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

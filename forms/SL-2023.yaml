@@ -1,0 +1,26 @@
+id: "SL-2023"
+title: "aws-lc-rs: ML-DSA-65 key pair generation"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / aws-lc-rs 1.19"
+negative: false
+literal: "let key_pair = aws_lc_rs::signature::PqdsaKeyPair::generate(&aws_lc_rs::signature::ML_DSA_65_SIGNING).unwrap();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let key_pair = aws_lc_rs::signature::PqdsaKeyPair::generate(&aws_lc_rs::signature::ML_DSA_65_SIGNING).unwrap();
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/aws-lc-rs/1.19.0/aws_lc_rs/signature/index.html"
+    section: "Module signature > Statics: ML_DSA_65_SIGNING; Examples: Signing and verifying with ML-DSA-44"
+    read_at: "2026-11-05"
+    quote: "ML_DSA_65_SIGNING Signing using ML-DSA-65."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,32 @@
+id: "SL-2163"
+title: "Botan: ECDH_PrivateKey on a given EC_Group"
+family: "ECDH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::ECDH_PrivateKey key(rng, group);"
+context_filename: "keygen.cpp"
+context_template: |
+  #include <botan/ecdh.h>
+  #include <botan/rng.h>
+
+  int make(Botan::RandomNumberGenerator& rng, const Botan::EC_Group& group)
+  {
+      Botan::ECDH_PrivateKey key(rng, group);
+      return 0;
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/ecdh/ecdh.h"
+    section: "src/lib/pubkey/ecdh/ecdh.h"
+    read_at: "2026-11-05"
+    quote: "ECDH_PrivateKey(RandomNumberGenerator& rng, const EC_Group& group) : EC_PrivateKey(rng, group) {}"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The curve comes in as a parameter; the line pins the algorithm, not the curve."

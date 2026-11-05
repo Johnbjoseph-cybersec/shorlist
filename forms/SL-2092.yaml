@@ -1,0 +1,33 @@
+id: "SL-2092"
+title: "Mbed TLS: mbedtls_pk_setup with MBEDTLS_PK_RSA"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_pk_setup(pk, mbedtls_pk_info_from_type(MBEDTLS_PK_RSA));"
+context_filename: "pk.c"
+context_template: |
+  #include <mbedtls/pk.h>
+
+  int setup(mbedtls_pk_context *pk)
+  {
+      return mbedtls_pk_setup(pk, mbedtls_pk_info_from_type(MBEDTLS_PK_RSA));
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/pk.h"
+    section: "include/mbedtls/pk.h: mbedtls_pk_setup"
+    read_at: "2026-11-05"
+    quote: "int mbedtls_pk_setup(mbedtls_pk_context *ctx, const mbedtls_pk_info_t *info);"
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/pk.h"
+    section: "include/mbedtls/pk.h: mbedtls_pk_type_t MBEDTLS_PK_RSA"
+    read_at: "2026-11-05"
+    quote: "MBEDTLS_PK_RSA,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,29 @@
+id: "SL-2140"
+title: "libsodium: crypto_box_curve25519xchacha20poly1305_keypair"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / libsodium 1.0.22"
+negative: false
+literal: "crypto_box_curve25519xchacha20poly1305_keypair(pk, sk);"
+context_filename: "box.c"
+context_template: |
+  #include <sodium.h>
+
+  void run(unsigned char *pk, unsigned char *sk)
+  {
+      crypto_box_curve25519xchacha20poly1305_keypair(pk, sk);
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/jedisct1/libsodium/blob/1.0.22-RELEASE/src/libsodium/include/sodium/crypto_box_curve25519xchacha20poly1305.h"
+    section: "src/libsodium/include/sodium/crypto_box_curve25519xchacha20poly1305.h"
+    read_at: "2026-11-05"
+    quote: "int crypto_box_curve25519xchacha20poly1305_keypair(unsigned char *pk,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

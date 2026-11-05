@@ -1,0 +1,35 @@
+id: "SL-2550"
+title: "Android KeyGenParameterSpec secp256r1 for signing"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android Keystore"
+negative: false
+literal: "val spec = KeyGenParameterSpec.Builder(\"key1\", KeyProperties.PURPOSE_SIGN).setAlgorithmParameterSpec(ECGenParameterSpec(\"secp256r1\")).build()"
+context_filename: "Spec.kt"
+context_template: |
+  import android.security.keystore.KeyGenParameterSpec
+  import android.security.keystore.KeyProperties
+  import java.security.spec.ECGenParameterSpec
+
+  fun main() {
+      val spec = KeyGenParameterSpec.Builder("key1", KeyProperties.PURPOSE_SIGN).setAlgorithmParameterSpec(ECGenParameterSpec("secp256r1")).build()
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Class overview: Example: NIST P-256 EC key pair for signing/verification using ECDSA"
+    read_at: "2026-11-05"
+    quote: "This example illustrates how to generate a NIST P-256 (aka secp256r1 aka prime256v1) EC key pair"
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Class overview: examples"
+    read_at: "2026-11-05"
+    quote: ".setAlgorithmParameterSpec(new ECGenParameterSpec(\"secp256r1\"))"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The purpose (PURPOSE_SIGN) on the same line decides the role of the EC key."

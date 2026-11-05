@@ -1,0 +1,29 @@
+id: "SL-2557"
+title: "Kotlin Signature.getInstance(\"ML-DSA\")"
+family: "ML-DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+literal: "val signature = Signature.getInstance(\"ML-DSA\")"
+context_filename: "Sign.kt"
+context_template: |
+  import java.security.Signature
+
+  fun main() {
+      val signature = Signature.getInstance("ML-DSA")
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Example: ML-DSA key pair for signing"
+    read_at: "2026-11-05"
+    quote: "Signature signature = Signature.getInstance(\"ML-DSA\"); // Or \"ML-DSA-65\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The parameter set comes from the key, not from this name."

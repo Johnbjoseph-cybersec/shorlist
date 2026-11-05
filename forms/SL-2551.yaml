@@ -1,0 +1,35 @@
+id: "SL-2551"
+title: "Android KeyGenParameterSpec secp256r1 for key agreement"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android Keystore"
+negative: false
+literal: "val spec = KeyGenParameterSpec.Builder(\"key1\", KeyProperties.PURPOSE_AGREE_KEY).setAlgorithmParameterSpec(ECGenParameterSpec(\"secp256r1\")).build()"
+context_filename: "Spec.kt"
+context_template: |
+  import android.security.keystore.KeyGenParameterSpec
+  import android.security.keystore.KeyProperties
+  import java.security.spec.ECGenParameterSpec
+
+  fun main() {
+      val spec = KeyGenParameterSpec.Builder("key1", KeyProperties.PURPOSE_AGREE_KEY).setAlgorithmParameterSpec(ECGenParameterSpec("secp256r1")).build()
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Class overview: Example: EC key for ECDH key agreement"
+    read_at: "2026-11-05"
+    quote: "This example illustrates how to generate an elliptic curve key pair, used to establish a shared secret with another party using ECDH key agreement."
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Class overview: examples"
+    read_at: "2026-11-05"
+    quote: ".setAlgorithmParameterSpec(new ECGenParameterSpec(\"secp256r1\"))"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The purpose (PURPOSE_AGREE_KEY) on the same line decides the role of the EC key."

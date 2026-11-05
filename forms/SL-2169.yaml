@@ -1,0 +1,37 @@
+id: "SL-2169"
+title: "Crypto++: RSA::PrivateKey"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::RSA::PrivateKey key;"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/rsa.h>
+  #include <cryptopp/osrng.h>
+
+  int main()
+  {
+      CryptoPP::AutoSeededRandomPool rng;
+      CryptoPP::RSA::PrivateKey key;
+      key.Initialize(rng, 3072);
+      return 0;
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/rsa.h"
+    section: "rsa.h: struct RSA"
+    read_at: "2026-11-05"
+    quote: "typedef InvertibleRSAFunction PrivateKey;"
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/rsa.h"
+    section: "rsa.h: InvertibleRSAFunction::Initialize"
+    read_at: "2026-11-05"
+    quote: "void Initialize(RandomNumberGenerator &rng, unsigned int modulusBits, const Integer &e = 17);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

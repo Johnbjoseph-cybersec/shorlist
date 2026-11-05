@@ -1,0 +1,26 @@
+id: "SL-2028"
+title: "aws-lc-rs: ECDH P-521 key agreement algorithm"
+family: "ECDH"
+parameter_set: "P-521"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / aws-lc-rs 1.19"
+negative: false
+literal: "let alg = &aws_lc_rs::agreement::ECDH_P521;"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let alg = &aws_lc_rs::agreement::ECDH_P521;
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 521
+source:
+  - url: "https://docs.rs/aws-lc-rs/1.19.0/aws_lc_rs/agreement/index.html"
+    section: "Module agreement > Constants: ECDH_P521"
+    read_at: "2026-11-05"
+    quote: "ECDH_P521 ECDH using the NSA Suite B P-521 (secp521r1) curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

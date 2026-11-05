@@ -1,0 +1,28 @@
+id: "SL-2044"
+title: "x25519-dalek: bare x25519 function"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / x25519-dalek 3"
+negative: false
+literal: "let shared = x25519_dalek::x25519(k, u);"
+context_filename: "dh.rs"
+context_template: |
+  fn dh(k: [u8; 32], u: [u8; 32]) {
+      let shared = x25519_dalek::x25519(k, u);
+  }
+
+  fn main() {}
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/x25519-dalek/3.0.0/x25519_dalek/index.html"
+    section: "Crate x25519_dalek > Functions: x25519"
+    read_at: "2026-11-05"
+    quote: "x25519 The bare, byte-oriented x25519 function, exactly as specified in RFC7748."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

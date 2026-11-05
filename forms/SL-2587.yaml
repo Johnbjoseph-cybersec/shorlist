@@ -1,0 +1,31 @@
+id: "SL-2587"
+title: "Web Crypto generateKey ECDH P-384"
+family: "ECDH"
+parameter_set: "P-384"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"ECDH\", namedCurve: \"P-384\" }, true, [\"deriveBits\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "ECDH", namedCurve: "P-384" }, true, ["deriveBits"]);
+    return key;
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 384
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "Web Cryptography API (W3C Editor's Draft 22 October 2026): ECDH Registration"
+    read_at: "2026-11-05"
+    quote: "The recognized algorithm name for this algorithm is \"ECDH\"."
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "EcKeyGenParams: namedCurve"
+    read_at: "2026-11-05"
+    quote: "The namedCurve member of the EcKeyGenParams dictionary represents a named curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

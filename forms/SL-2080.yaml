@@ -1,0 +1,31 @@
+id: "SL-2080"
+title: "Decoy: hybrid group removed from the OpenSSL groups list"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: true
+decoy_class: "removal_list"
+literal: "return SSL_CTX_set1_groups_list(ctx, \"DEFAULT:-X25519MLKEM768\");"
+context_filename: "tls.c"
+context_template: |
+  #include <openssl/ssl.h>
+
+  long groups(SSL_CTX *ctx)
+  {
+      return SSL_CTX_set1_groups_list(ctx, "DEFAULT:-X25519MLKEM768");
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CTX_set1_curves/"
+    section: "DESCRIPTION"
+    read_at: "2026-11-05"
+    quote: "If a group name is prefixed with the - character, it will be removed from the list of groups specified up to that point."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Removes the hybrid; the groups that remain come from DEFAULT and are not named in the file."

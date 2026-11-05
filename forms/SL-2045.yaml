@@ -1,0 +1,26 @@
+id: "SL-2045"
+title: "RustCrypto ml-kem: ML-KEM-768 key pair generation"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto ml-kem 0.3"
+negative: false
+literal: "let (dk, ek) = ml_kem::MlKem768::generate_keypair();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let (dk, ek) = ml_kem::MlKem768::generate_keypair();
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ml-kem/0.3.4/ml_kem/index.html"
+    section: "Crate ml_kem > Usage"
+    read_at: "2026-11-05"
+    quote: "let (dk, ek) = MlKem768::generate_keypair();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

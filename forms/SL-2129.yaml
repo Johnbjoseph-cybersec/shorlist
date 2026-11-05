@@ -1,0 +1,35 @@
+id: "SL-2129"
+title: "wolfSSL TLS: supported group WOLFSSL_X25519MLKEM768"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / wolfSSL 5.9"
+negative: false
+literal: "return wolfSSL_CTX_UseSupportedCurve(ctx, WOLFSSL_X25519MLKEM768);"
+context_filename: "tls.c"
+context_template: |
+  #include <wolfssl/options.h>
+  #include <wolfssl/ssl.h>
+
+  int groups(WOLFSSL_CTX *ctx)
+  {
+      return wolfSSL_CTX_UseSupportedCurve(ctx, WOLFSSL_X25519MLKEM768);
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/ssl.h"
+    section: "wolfssl/ssl.h: wolfSSL_CTX_UseSupportedCurve"
+    read_at: "2026-11-05"
+    quote: "WOLFSSL_API int wolfSSL_CTX_UseSupportedCurve(WOLFSSL_CTX* ctx,"
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/ssl.h"
+    section: "wolfssl/ssl.h: named groups"
+    read_at: "2026-11-05"
+    quote: "WOLFSSL_X25519MLKEM768 = 4588,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM), as the README and SL-0011 define."

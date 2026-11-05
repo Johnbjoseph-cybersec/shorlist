@@ -1,0 +1,34 @@
+id: "SL-2098"
+title: "Mbed TLS: ECP group Curve25519"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_ecp_group_load(grp, MBEDTLS_ECP_DP_CURVE25519);"
+context_filename: "ecp.c"
+context_template: |
+  #include <mbedtls/ecp.h>
+
+  int load(mbedtls_ecp_group *grp)
+  {
+      return mbedtls_ecp_group_load(grp, MBEDTLS_ECP_DP_CURVE25519);
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecp.h"
+    section: "include/mbedtls/ecp.h: mbedtls_ecp_group_load"
+    read_at: "2026-11-05"
+    quote: "int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id);"
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecp.h"
+    section: "include/mbedtls/ecp.h: mbedtls_ecp_group_id"
+    read_at: "2026-11-05"
+    quote: "MBEDTLS_ECP_DP_CURVE25519, /*!< Domain parameters for Curve25519. */"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "In Mbed TLS the Curve25519 group serves ECDH only (X25519); Ed25519 is not implemented on it."

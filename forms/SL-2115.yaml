@@ -1,0 +1,26 @@
+id: "SL-2115"
+title: "Decoy: Mbed TLS ECDHE-RSA option commented out"
+family: "ECDH"
+parameter_set: null
+role: "n.a."
+form_kind: "config_key"
+language_or_product: "C / Mbed TLS 3.6"
+negative: true
+decoy_class: "comment"
+literal: "//#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED"
+context_filename: "mbedtls_config.h"
+context_template: |
+  //#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/mbedtls_config.h"
+    section: "include/mbedtls/mbedtls_config.h: MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED"
+    read_at: "2026-11-05"
+    quote: "#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Mbed TLS ships disabled options as commented-out #define lines; this is one."

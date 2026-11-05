@@ -1,0 +1,35 @@
+id: "SL-2070"
+title: "OpenSSL params: OSSL_PKEY_PARAM_RSA_BITS"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "params[0] = OSSL_PARAM_construct_uint(OSSL_PKEY_PARAM_RSA_BITS, bits);"
+context_filename: "params.c"
+context_template: |
+  #include <openssl/core_names.h>
+  #include <openssl/params.h>
+
+  void set_bits(OSSL_PARAM *params, unsigned int *bits)
+  {
+      params[0] = OSSL_PARAM_construct_uint(OSSL_PKEY_PARAM_RSA_BITS, bits);
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/util/perl/OpenSSL/paramnames.pm"
+    section: "util/perl/OpenSSL/paramnames.pm: PKEY_PARAM_RSA_BITS"
+    read_at: "2026-11-05"
+    quote: "'PKEY_PARAM_RSA_BITS' => '*PKEY_PARAM_BITS',"
+  - url: "https://docs.openssl.org/3.5/man7/EVP_PKEY-RSA/"
+    section: "RSA key generation parameters"
+    read_at: "2026-11-05"
+    quote: "\"bits\" (OSSL_PKEY_PARAM_RSA_BITS) <unsigned integer>"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The parameter name pins RSA; the bit count is a variable."

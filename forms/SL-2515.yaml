@@ -1,0 +1,28 @@
+id: "SL-2515"
+title: "phpseclib RSA::createKey(3072)"
+family: "RSA"
+parameter_set: "3072"
+role: "both"
+form_kind: "api_call"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$private = RSA::createKey(3072);"
+context_filename: "rsa.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\RSA;
+
+  $private = RSA::createKey(3072);
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 3072
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/rsa"
+    section: "RSA: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "By default keys are 2048 bits. Alternate key lengths can be specified by doing RSA::createKey(1024) or whatever."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

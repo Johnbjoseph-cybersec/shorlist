@@ -1,0 +1,30 @@
+id: "SL-2178"
+title: "Crypto++: DH domain"
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::DH dh;"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/dh.h>
+
+  int main()
+  {
+      CryptoPP::DH dh;
+      return 0;
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/dh.h"
+    section: "dh.h: DH"
+    read_at: "2026-11-05"
+    quote: "typedef DH_Domain<DL_GroupParameters_GFP_DefaultSafePrime> DH;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

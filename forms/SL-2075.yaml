@@ -1,0 +1,30 @@
+id: "SL-2075"
+title: "OpenSSL: DSA_generate_parameters_ex (legacy DSA parameters)"
+family: "DSA"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return DSA_generate_parameters_ex(dsa, 2048, NULL, 0, NULL, NULL, NULL);"
+context_filename: "dsagen.c"
+context_template: |
+  #include <openssl/dsa.h>
+
+  int generate(DSA *dsa)
+  {
+      return DSA_generate_parameters_ex(dsa, 2048, NULL, 0, NULL, NULL, NULL);
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://docs.openssl.org/3.5/man3/DSA_generate_parameters/"
+    section: "DESCRIPTION"
+    read_at: "2026-11-05"
+    quote: "DSA_generate_parameters_ex() generates primes p and q and a generator g for use in the DSA and stores the result in dsa."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Deprecated since OpenSSL 3.0, still declared and still found in deployed code."

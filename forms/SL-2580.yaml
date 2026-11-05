@@ -1,0 +1,30 @@
+id: "SL-2580"
+title: "Security framework SecKeyAlgorithm .rsaEncryptionOAEPSHA256"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Swift / Apple Security framework"
+negative: false
+literal: "let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA256"
+context_filename: "Algo.swift"
+context_template: |
+  import Security
+
+  func makeKey() {
+      let algorithm: SecKeyAlgorithm = .rsaEncryptionOAEPSHA256
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/security/seckeyalgorithm/rsaencryptionoaepsha256"
+    section: "Security: SecKeyAlgorithm.rsaEncryptionOAEPSHA256 (DocC JSON)"
+    read_at: "2026-11-05"
+    quote: "static let rsaEncryptionOAEPSHA256: SecKeyAlgorithm"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "RSA-OAEP encrypts (key transport); filed as key_establishment."

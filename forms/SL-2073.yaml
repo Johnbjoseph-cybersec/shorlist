@@ -1,0 +1,31 @@
+id: "SL-2073"
+title: "OpenSSL PEM: PEM_read_bio_DSAPrivateKey"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "DSA *dsa = PEM_read_bio_DSAPrivateKey(bio, NULL, NULL, NULL);"
+context_filename: "load.c"
+context_template: |
+  #include <openssl/pem.h>
+
+  DSA *load(BIO *bio)
+  {
+      DSA *dsa = PEM_read_bio_DSAPrivateKey(bio, NULL, NULL, NULL);
+      return dsa;
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man3/PEM_read_bio_PrivateKey/"
+    section: "NAME"
+    read_at: "2026-11-05"
+    quote: "PEM_read_bio_DSAPrivateKey, PEM_read_DSAPrivateKey"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Deprecated since OpenSSL 3.0, still declared and still found in deployed code."

@@ -1,0 +1,37 @@
+id: "SL-2054"
+title: "OpenSSL: EC_KEY_new_by_curve_name(NID_X9_62_prime256v1)"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "EC_KEY *key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);"
+context_filename: "eckey.c"
+context_template: |
+  #include <openssl/ec.h>
+  #include <openssl/obj_mac.h>
+
+  int main(void)
+  {
+      EC_KEY *key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+      EC_KEY_free(key);
+      return 0;
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/ec.h"
+    section: "include/openssl/ec.h"
+    read_at: "2026-11-05"
+    quote: "OSSL_DEPRECATEDIN_3_0 EC_KEY *EC_KEY_new_by_curve_name(int nid);"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/obj_mac.h"
+    section: "include/openssl/obj_mac.h"
+    read_at: "2026-11-05"
+    quote: "#define NID_X9_62_prime256v1 415"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Deprecated since OpenSSL 3.0, still declared and still found in deployed code."

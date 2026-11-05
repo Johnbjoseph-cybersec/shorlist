@@ -1,0 +1,30 @@
+id: "SL-2168"
+title: "Decoy: Botan ECDSA key class in a log string"
+family: "ECDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: true
+decoy_class: "log_string"
+literal: "std::cerr << \"ECDSA_PrivateKey rejected by policy\\n\";"
+context_filename: "log.cpp"
+context_template: |
+  #include <iostream>
+
+  int main()
+  {
+      std::cerr << "ECDSA_PrivateKey rejected by policy\n";
+      return 0;
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/ecdsa/ecdsa.h"
+    section: "src/lib/pubkey/ecdsa/ecdsa.h"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

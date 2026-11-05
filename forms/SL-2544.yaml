@@ -1,0 +1,28 @@
+id: "SL-2544"
+title: "Decoy: commented-out Ruby ecdh_curves setting"
+family: "ECDH"
+parameter_set: "P-224"
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: true
+decoy_class: "comment"
+literal: "# ctx.ecdh_curves = \"P-224\""
+context_filename: "tls.rb"
+context_template: |
+  def context_options
+    # ctx.ecdh_curves = "P-224"
+    {}
+  end
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 224
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/SSL/SSLContext.html"
+    section: "OpenSSL::SSL::SSLContext#ecdh_curves="
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The setting is commented out and the file does not require openssl."

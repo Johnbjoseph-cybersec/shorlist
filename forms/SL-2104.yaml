@@ -1,0 +1,24 @@
+id: "SL-2104"
+title: "Mbed TLS config: MBEDTLS_ECDSA_C"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "config_key"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "#define MBEDTLS_ECDSA_C"
+context_filename: "mbedtls_config.h"
+context_template: |
+  #define MBEDTLS_ECDSA_C
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/mbedtls_config.h"
+    section: "include/mbedtls/mbedtls_config.h: MBEDTLS_ECDSA_C"
+    read_at: "2026-11-05"
+    quote: "#define MBEDTLS_ECDSA_C"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

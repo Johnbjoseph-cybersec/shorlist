@@ -1,0 +1,28 @@
+id: "SL-2583"
+title: "Web Crypto generateKey RSA-PSS 2048"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"RSA-PSS\", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: \"SHA-256\" }, true, [\"sign\", \"verify\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "RSA-PSS", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
+    return key;
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "Web Cryptography API (W3C Editor's Draft 22 October 2026): RSA-PSS Registration"
+    read_at: "2026-11-05"
+    quote: "The recognized algorithm name for this algorithm is \"RSA-PSS\"."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

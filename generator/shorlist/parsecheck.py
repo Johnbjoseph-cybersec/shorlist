@@ -7,8 +7,13 @@
 | *.java               | javac into a temp dir (skipped when javac is absent)      |
 | *.sh                 | sh -n                                                     |
 | *.js                 | node --check (skipped when node is not installed)         |
-| *.c                  | gcc -fsyntax-only (skipped without gcc or OpenSSL headers)|
+| *.c, *.h             | gcc -fsyntax-only; header not installed: delimiters only  |
+| *.cpp                | g++ -fsyntax-only; header not installed: delimiters only  |
+| *.rs                 | rustfmt (parses, resolves no crate); else delimiters only |
 | *.cs                 | balanced braces and parentheses (no C# compiler is run)   |
+| *.php                | php -l; without php: balanced braces and parentheses      |
+| *.rb                 | ruby -c; without ruby: balanced braces and parentheses    |
+| *.kt, *.swift        | balanced braces and parentheses (no compiler is run)      |
 | swanctl.conf         | strongSwan: 'name {', '}' or 'key = value'; balanced      |
 | httpd.conf           | Apache: 'Directive args' or balanced '<Section>' tags     |
 | fortigate.conf       | FortiOS: config/edit/set/unset/next/end; balanced         |
@@ -94,6 +99,32 @@ def _csharp(text: str) -> tuple[str, str]:
     return OK, ""
 
 
+def _delims(text: str) -> tuple[str, str]:
+    """Balanced (), [] and {} outside comments, strings and char literals (C, C++, Rust)."""
+    code = re.sub(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])\'', " ", text, flags=re.S)
+    stack = []
+    for ch in code:
+        if ch in "([{":
+            stack.append(")]}"["([{".index(ch)])
+        elif ch in ")]}":
+            if not stack or stack.pop() != ch:
+                return FAIL, f"unbalanced '{ch}'"
+    return (OK, "") if not stack else (FAIL, f"unclosed, expected '{stack[-1]}'")
+
+
+def _cc(compiler: str, text: str, suffix: str) -> tuple[str, str]:
+    """Compile for syntax; when a header is not installed, fall back to the delimiter check."""
+    if not shutil.which(compiler):
+        status, detail = _delims(text)
+        return (SKIP, f"{compiler} not installed; delimiters balanced") if status == OK else (status, detail)
+    status, detail = _run([compiler, "-fsyntax-only"], text, suffix)
+    m = re.search(r"fatal error: ([^:\s]+): No such file", detail) if status == FAIL else None
+    if m:
+        status, detail = _delims(text)
+        return (SKIP, f"{m.group(1)} not installed; delimiters balanced") if status == OK else (status, detail)
+    return status, detail
+
+
 def _swanctl(text: str) -> tuple[str, str]:
     depth = 0
     for n, raw in _lines(text, "#"):
@@ -171,13 +202,15 @@ def check(filename: str, text: str) -> tuple[str, str]:
         if not shutil.which("node"):
             return SKIP, "node not installed"
         return _run(["node", "--check"], text, ".js")
-    if filename.endswith(".c"):
-        if not shutil.which("gcc"):
-            return SKIP, "gcc not installed"
-        status, detail = _run(["gcc", "-fsyntax-only"], text, ".c")
-        if status == FAIL and re.search(r"openssl/\w+\.h: No such file", detail):
-            return SKIP, "OpenSSL headers not installed"
-        return status, detail
+    if filename.endswith((".c", ".h")):
+        return _cc("gcc", text, filename[filename.rindex("."):])
+    if filename.endswith(".cpp"):
+        return _cc("g++", text, ".cpp")
+    if filename.endswith(".rs"):
+        if not shutil.which("rustfmt"):
+            status, detail = _delims(text)
+            return (SKIP, "rustfmt not installed; delimiters balanced") if status == OK else (status, detail)
+        return _run(["rustfmt", "--edition", "2021", "--emit", "stdout"], text, ".rs")
     if filename.endswith(".cs"):
         return _csharp(text)
     if filename == "swanctl.conf":
@@ -194,4 +227,11 @@ def check(filename: str, text: str) -> tuple[str, str]:
         return _nginx(text)
     if filename == "java.security":
         return _properties(text)
+    if filename.endswith((".php", ".rb")):
+        tool = ["php", "-l"] if filename.endswith(".php") else ["ruby", "-c"]
+        if not shutil.which(tool[0]):
+            return _csharp(text)
+        return _run(tool, text, filename[filename.rindex("."):])
+    if filename.endswith((".kt", ".swift")):
+        return _csharp(text)
     return FAIL, f"no syntax check for {filename!r}; add one to parsecheck.py"

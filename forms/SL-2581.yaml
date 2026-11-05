@@ -1,0 +1,28 @@
+id: "SL-2581"
+title: "Decoy: CryptoKit P-256 signing key in a Swift comment"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: true
+decoy_class: "comment"
+literal: "    // P256.Signing.PrivateKey() moved to the signing service"
+context_filename: "Legacy.swift"
+context_template: |
+  func sign() {
+      // P256.Signing.PrivateKey() moved to the signing service
+      print("remote signing")
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/p256/signing/privatekey"
+    section: "CryptoKit P256.Signing.PrivateKey"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file imports neither CryptoKit nor Security."

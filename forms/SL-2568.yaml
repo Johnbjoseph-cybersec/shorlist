@@ -1,0 +1,32 @@
+id: "SL-2568"
+title: "CryptoKit MLKEM768.PrivateKey.generate()"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let key = try MLKEM768.PrivateKey.generate()"
+context_filename: "Kem.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() throws {
+      let key = try MLKEM768.PrivateKey.generate()
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/mlkem768/privatekey/generate()"
+    section: "CryptoKit MLKEM768.PrivateKey.generate() (iOS 26.0, macOS 26.0; DocC JSON)"
+    read_at: "2026-11-05"
+    quote: "static func generate() throws -> MLKEM768.PrivateKey"
+  - url: "https://developer.apple.com/documentation/cryptokit/mlkem768/privatekey"
+    section: "CryptoKit MLKEM768.PrivateKey"
+    read_at: "2026-11-05"
+    quote: "A private key you use to decapsulate shared secrets with the Module-Lattice key encapsulation mechanism."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

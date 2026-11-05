@@ -1,0 +1,30 @@
+id: "SL-2540"
+title: "RbNaCl SigningKey.generate (Ed25519)"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Ruby / RbNaCl 7.1"
+negative: false
+literal: "signing_key = RbNaCl::SigningKey.generate"
+context_filename: "sign.rb"
+context_template: |
+  require "rbnacl"
+
+  signing_key = RbNaCl::SigningKey.generate
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/RubyCrypto/rbnacl/blob/v7.1.2/lib/rbnacl/signatures/ed25519/signing_key.rb"
+    section: "lib/rbnacl/signatures/ed25519/signing_key.rb"
+    read_at: "2026-11-05"
+    quote: "# Private key for producing digital signatures using the Ed25519 algorithm."
+  - url: "https://github.com/RubyCrypto/rbnacl/blob/v7.1.2/lib/rbnacl.rb"
+    section: "lib/rbnacl.rb: aliases"
+    read_at: "2026-11-05"
+    quote: "SigningKey   = Signatures::Ed25519::SigningKey"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

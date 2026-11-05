@@ -1,0 +1,28 @@
+id: "SL-2520"
+title: "phpseclib DSA::createKey(2048, 224)"
+family: "DSA"
+parameter_set: "L=2048, N=224"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$private = DSA::createKey(2048, 224);"
+context_filename: "dsa.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\DSA;
+
+  $private = DSA::createKey(2048, 224);
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/dsa"
+    section: "DSA: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "This is basically the same thing as doing DSA::createKey(2048, 224)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

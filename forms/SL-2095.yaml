@@ -1,0 +1,29 @@
+id: "SL-2095"
+title: "Mbed TLS: mbedtls_rsa_gen_key"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_rsa_gen_key(rsa, f_rng, p_rng, 2048, 65537);"
+context_filename: "rsagen.c"
+context_template: |
+  #include <mbedtls/rsa.h>
+
+  int gen(mbedtls_rsa_context *rsa, int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
+  {
+      return mbedtls_rsa_gen_key(rsa, f_rng, p_rng, 2048, 65537);
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/rsa.h"
+    section: "include/mbedtls/rsa.h: mbedtls_rsa_gen_key"
+    read_at: "2026-11-05"
+    quote: "int mbedtls_rsa_gen_key(mbedtls_rsa_context *ctx,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

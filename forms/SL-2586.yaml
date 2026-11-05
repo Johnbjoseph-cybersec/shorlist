@@ -1,0 +1,31 @@
+id: "SL-2586"
+title: "Web Crypto generateKey ECDSA P-256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"ECDSA\", namedCurve: \"P-256\" }, true, [\"sign\", \"verify\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+    return key;
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "Web Cryptography API (W3C Editor's Draft 22 October 2026): ECDSA Registration"
+    read_at: "2026-11-05"
+    quote: "The recognized algorithm name for this algorithm is \"ECDSA\"."
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "EcKeyGenParams: namedCurve"
+    read_at: "2026-11-05"
+    quote: "The namedCurve member of the EcKeyGenParams dictionary represents a named curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

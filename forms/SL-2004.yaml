@@ -1,0 +1,30 @@
+id: "SL-2004"
+title: "ring: RSA PKCS#1 v1.5 verification, 2048-8192 bit keys"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: "2048-8192"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / ring 0.17"
+negative: false
+literal: "let key = ring::signature::UnparsedPublicKey::new(&ring::signature::RSA_PKCS1_2048_8192_SHA256, pk);"
+context_filename: "verify.rs"
+context_template: |
+  fn verifier(pk: &[u8]) {
+      let key = ring::signature::UnparsedPublicKey::new(&ring::signature::RSA_PKCS1_2048_8192_SHA256, pk);
+  }
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ring/0.17.14/ring/signature/index.html"
+    section: "Module signature > Statics: RSA_PKCS1_2048_8192_SHA256"
+    read_at: "2026-11-05"
+    quote: "RSA_PKCS1_2048_8192_SHA256 Verification of signatures using RSA keys of 2048-8192 bits, PKCS#1.5 padding, and SHA-256."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The algorithm accepts a key of 2048 to 8192 bits; the size of the key in use is not on the line."

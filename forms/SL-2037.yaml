@@ -1,0 +1,26 @@
+id: "SL-2037"
+title: "RustCrypto p256: ECDSA signing key generation"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto p256 0.14"
+negative: false
+literal: "let signing_key = p256::ecdsa::SigningKey::generate();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let signing_key = p256::ecdsa::SigningKey::generate();
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://docs.rs/p256/0.14.0/p256/ecdsa/index.html"
+    section: "Module ecdsa > Type Aliases: SigningKey; Signing/Verification Example"
+    read_at: "2026-11-05"
+    quote: "SigningKeyecdsa ECDSA/P-256 signing key"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

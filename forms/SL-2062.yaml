@@ -1,0 +1,33 @@
+id: "SL-2062"
+title: "OpenSSL TLS: SSL_CTX_set1_groups_list \"X25519\""
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return SSL_CTX_set1_groups_list(ctx, \"X25519\");"
+context_filename: "tls.c"
+context_template: |
+  #include <openssl/ssl.h>
+
+  long groups(SSL_CTX *ctx)
+  {
+      return SSL_CTX_set1_groups_list(ctx, "X25519");
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/ssl.h.in"
+    section: "include/openssl/ssl.h.in: SSL_CTX_set1_groups_list"
+    read_at: "2026-11-05"
+    quote: "# define SSL_CTX_set1_groups_list(ctx, s) \\"
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CTX_set1_curves/"
+    section: "DESCRIPTION"
+    read_at: "2026-11-05"
+    quote: "When setting such groups applications should use the \"list\" form of these functions (i.e. SSL_CTX_set1_groups_list() and SSL_set1_groups_list())."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,35 @@
+id: "SL-2179"
+title: "Crypto++: EC group parameters from ASN1::secp256r1()"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::DL_GroupParameters_EC<CryptoPP::ECP> params(CryptoPP::ASN1::secp256r1());"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/eccrypto.h>
+  #include <cryptopp/oids.h>
+
+  int main()
+  {
+      CryptoPP::DL_GroupParameters_EC<CryptoPP::ECP> params(CryptoPP::ASN1::secp256r1());
+      return 0;
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/oids.h"
+    section: "oids.h: ASN1::secp256r1"
+    read_at: "2026-11-05"
+    quote: "DEFINE_OID(ansi_x9_62_curves_prime()+7, secp256r1)"
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/eccrypto.h"
+    section: "eccrypto.h: DL_GroupParameters_EC"
+    read_at: "2026-11-05"
+    quote: "DL_GroupParameters_EC(const OID &oid)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

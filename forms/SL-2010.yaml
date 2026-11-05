@@ -1,0 +1,27 @@
+id: "SL-2010"
+title: "rustls (aws-lc-rs provider): key exchange group X25519MLKEM768"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / rustls 0.23"
+negative: false
+literal: "let group = rustls::crypto::aws_lc_rs::kx_group::X25519MLKEM768;"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let group = rustls::crypto::aws_lc_rs::kx_group::X25519MLKEM768;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rustls/0.23.46/rustls/crypto/aws_lc_rs/kx_group/index.html"
+    section: "Module crypto::aws_lc_rs::kx_group > Statics: X25519MLKEM768"
+    read_at: "2026-11-05"
+    quote: "X25519MLKEM768 This is the X25519MLKEM768 key exchange."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM), as the README and SL-0011 define."

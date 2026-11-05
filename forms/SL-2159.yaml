@@ -1,0 +1,37 @@
+id: "SL-2159"
+title: "Botan: ML_DSA_PrivateKey with ML_DSA_6x5"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::ML_DSA_PrivateKey key(rng, Botan::ML_DSA_Mode::ML_DSA_6x5);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/ml_dsa.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::ML_DSA_PrivateKey key(rng, Botan::ML_DSA_Mode::ML_DSA_6x5);
+      return 0;
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/dilithium/ml_dsa/ml_dsa.h"
+    section: "src/lib/pubkey/dilithium/ml_dsa/ml_dsa.h"
+    read_at: "2026-11-05"
+    quote: "using ML_DSA_PrivateKey = Dilithium_PrivateKey;"
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/dilithium/dilithium_common/dilithium.h"
+    section: "src/lib/pubkey/dilithium/dilithium_common/dilithium.h: DilithiumMode::Mode"
+    read_at: "2026-11-05"
+    quote: "ML_DSA_6x5,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "ML_DSA_6x5 is FIPS 204 ML-DSA-65 (k=6, l=5); the round-3 Dilithium6x5 is a separate, deprecated mode."

@@ -1,0 +1,28 @@
+id: "SL-2593"
+title: "Web Crypto generateKey ML-KEM-768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"ML-KEM-768\" }, true, [\"encapsulateBits\", \"decapsulateBits\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "ML-KEM-768" }, true, ["encapsulateBits", "decapsulateBits"]);
+    return key;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://wicg.github.io/webcrypto-modern-algos/"
+    section: "Modern Algorithms in the Web Cryptography API (WICG Draft Community Group Report, 23 October 2026): ML-KEM Registration"
+    read_at: "2026-11-05"
+    quote: "this algorithm are \"ML-KEM-512\", \"ML-KEM-768\" and \"ML-KEM-1024\"."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Specified only in the WICG Modern Algorithms draft, a Community Group report and not a W3C Standard; browser support was not checked."

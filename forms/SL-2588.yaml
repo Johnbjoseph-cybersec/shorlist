@@ -1,0 +1,31 @@
+id: "SL-2588"
+title: "Web Crypto importKey ECDSA P-521 (spki)"
+family: "ECDSA"
+parameter_set: "P-521"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.importKey(\"spki\", der, { name: \"ECDSA\", namedCurve: \"P-521\" }, true, [\"verify\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function importKey(der) {
+    const key = await crypto.subtle.importKey("spki", der, { name: "ECDSA", namedCurve: "P-521" }, true, ["verify"]);
+    return key;
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 521
+source:
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "Web Cryptography API (W3C Editor's Draft 22 October 2026): ECDSA Registration"
+    read_at: "2026-11-05"
+    quote: "The recognized algorithm name for this algorithm is \"ECDSA\"."
+  - url: "https://w3c.github.io/webcrypto/"
+    section: "EcKeyImportParams: namedCurve"
+    read_at: "2026-11-05"
+    quote: "The namedCurve member represents a named curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

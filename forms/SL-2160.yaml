@@ -1,0 +1,36 @@
+id: "SL-2160"
+title: "Botan: HSS_LMS_PrivateKey with parameter string"
+family: "LMS"
+parameter_set: "HSS-LMS(SHA-256,HW(5,1),HW(5,1))"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::HSS_LMS_PrivateKey key(rng, \"HSS-LMS(SHA-256,HW(5,1),HW(5,1))\");"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/hss_lms.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::HSS_LMS_PrivateKey key(rng, "HSS-LMS(SHA-256,HW(5,1),HW(5,1))");
+      return 0;
+  }
+expected:
+  family: "LMS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/hss_lms/hss_lms.h"
+    section: "src/lib/pubkey/hss_lms/hss_lms.h"
+    read_at: "2026-11-05"
+    quote: "HSS_LMS_PrivateKey(RandomNumberGenerator& rng, std::string_view algo_params);"
+  - url: "https://botan.randombit.net/handbook/api_ref/pubkey.html"
+    section: "HSS-LMS"
+    read_at: "2026-11-05"
+    quote: "e.g. HSS-LMS(SHA-256,HW(5,1),HW(5,1)) to use SHA-256 in a two-layer HSS instance"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

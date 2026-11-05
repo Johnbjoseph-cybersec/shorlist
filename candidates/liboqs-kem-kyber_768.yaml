@@ -1,0 +1,32 @@
+id: "candidate"
+title: "liboqs: OQS_KEM_new(OQS_KEM_alg_kyber_768)"
+family: "ML-KEM"
+parameter_set: "Kyber768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / liboqs 0.16"
+negative: false
+literal: "OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768);"
+context_filename: "pq.c"
+context_template: |
+  #include <oqs/oqs.h>
+
+  OQS_KEM *make(void)
+  {
+      OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768);
+      return kem;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/open-quantum-safe/liboqs/blob/0.16.0/src/kem/kem.h"
+    section: "src/kem/kem.h"
+    read_at: "2026-11-05"
+    quote: "#define OQS_KEM_alg_kyber_768 \"Kyber768\""
+status: "candidate"
+candidate_reason: "pre-standard parameter set (round-3 Kyber/Dilithium) or a family outside families.yaml; families.yaml has no family for it, so it cannot be a row until the family question is decided"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Round-3 Kyber768, not FIPS 203 ML-KEM-768 (different key derivation and encodings). Filed under ML-KEM only as the nearest family; whether pre-standard Kyber counts as ML-KEM or needs its own family is open."

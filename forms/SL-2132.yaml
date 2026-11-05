@@ -1,0 +1,35 @@
+id: "SL-2132"
+title: "wolfSSL TLS: wolfSSL_CTX_set_groups with WOLFSSL_ECC_X25519"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / wolfSSL 5.9"
+negative: false
+literal: "int groups[] = {WOLFSSL_ECC_X25519};"
+context_filename: "tls.c"
+context_template: |
+  #include <wolfssl/options.h>
+  #include <wolfssl/ssl.h>
+
+  int set(WOLFSSL_CTX *ctx)
+  {
+      int groups[] = {WOLFSSL_ECC_X25519};
+      return wolfSSL_CTX_set_groups(ctx, groups, 1);
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/ssl.h"
+    section: "wolfssl/ssl.h: wolfSSL_CTX_set_groups"
+    read_at: "2026-11-05"
+    quote: "WOLFSSL_API int wolfSSL_CTX_set_groups(WOLFSSL_CTX* ctx, int* groups,"
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/ssl.h"
+    section: "wolfssl/ssl.h: named groups"
+    read_at: "2026-11-05"
+    quote: "WOLFSSL_ECC_X25519 = 29,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

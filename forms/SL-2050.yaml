@@ -1,0 +1,26 @@
+id: "SL-2050"
+title: "Decoy: hybrid group name in a Rust log string"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Rust / rustls 0.23"
+negative: true
+decoy_class: "log_string"
+literal: "eprintln!(\"peer did not offer X25519MLKEM768\");"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      eprintln!("peer did not offer X25519MLKEM768");
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rustls/0.23.46/rustls/crypto/aws_lc_rs/kx_group/index.html"
+    section: "Module crypto::aws_lc_rs::kx_group > Statics: X25519MLKEM768"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

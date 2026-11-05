@@ -1,0 +1,28 @@
+id: "SL-2591"
+title: "Web Crypto generateKey Ed448"
+family: "EdDSA"
+parameter_set: "Ed448"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"Ed448\" }, true, [\"sign\", \"verify\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "Ed448" }, true, ["sign", "verify"]);
+    return key;
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://wicg.github.io/webcrypto-secure-curves/"
+    section: "Secure Curves in the Web Cryptography API (WICG Draft Community Group Report): Ed448"
+    read_at: "2026-11-05"
+    quote: "The \"Ed448\" algorithm identifier is used to perform signing"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Ed448 and X448 are specified only in the WICG Secure Curves draft (a Community Group report, not a W3C Standard)."

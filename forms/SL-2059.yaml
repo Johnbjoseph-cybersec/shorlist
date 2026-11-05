@@ -1,0 +1,29 @@
+id: "SL-2059"
+title: "OpenSSL EVP: EVP_PKEY_CTX_set_dsa_paramgen_bits"
+family: "DSA"
+parameter_set: "2048"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return EVP_PKEY_CTX_set_dsa_paramgen_bits(ctx, 2048);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/dsa.h>
+
+  int bits(EVP_PKEY_CTX *ctx)
+  {
+      return EVP_PKEY_CTX_set_dsa_paramgen_bits(ctx, 2048);
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_PKEY_CTX_ctrl/"
+    section: "DESCRIPTION: DSA parameters"
+    read_at: "2026-11-05"
+    quote: "EVP_PKEY_CTX_set_dsa_paramgen_bits() sets the number of bits used for DSA parameter generation to nbits. If not specified, 2048 is used."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

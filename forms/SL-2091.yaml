@@ -1,0 +1,28 @@
+id: "SL-2091"
+title: "Decoy: BoringSSL ML-KEM call in a C comment"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / BoringSSL"
+negative: true
+decoy_class: "comment"
+literal: "/* MLKEM768_generate_key() replaced Kyber768 in 2024 */"
+context_filename: "notes.c"
+context_template: |
+  int main(void)
+  {
+      /* MLKEM768_generate_key() replaced Kyber768 in 2024 */
+      return 0;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/google/boringssl/blob/0.20261020.0/include/openssl/mlkem.h"
+    section: "include/openssl/mlkem.h"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,28 @@
+id: "SL-2035"
+title: "RustCrypto rsa: OAEP padding with SHA-256"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto rsa 0.9"
+negative: false
+literal: "let padding = rsa::Oaep::new::<rsa::sha2::Sha256>();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let padding = rsa::Oaep::new::<rsa::sha2::Sha256>();
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rsa/0.9.8/rsa/index.html"
+    section: "Crate rsa > OAEP encryption"
+    read_at: "2026-11-05"
+    quote: "let padding = Oaep::new::<Sha256>();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Read at rsa 0.9.8 on docs.rs: the page for 0.9.10 (latest) says docs.rs failed to build it."

@@ -1,0 +1,28 @@
+id: "SL-2592"
+title: "Web Crypto generateKey X448"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "JavaScript / Web Crypto API"
+negative: false
+literal: "const key = await crypto.subtle.generateKey({ name: \"X448\" }, true, [\"deriveBits\"]);"
+context_filename: "keys.js"
+context_template: |
+  async function makeKey() {
+    const key = await crypto.subtle.generateKey({ name: "X448" }, true, ["deriveBits"]);
+    return key;
+  }
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://wicg.github.io/webcrypto-secure-curves/"
+    section: "Secure Curves in the Web Cryptography API (WICG Draft Community Group Report): X448"
+    read_at: "2026-11-05"
+    quote: "The \"X448\" algorithm identifier is used to perform"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Ed448 and X448 are specified only in the WICG Secure Curves draft (a Community Group report, not a W3C Standard)."

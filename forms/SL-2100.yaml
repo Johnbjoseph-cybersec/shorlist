@@ -1,0 +1,29 @@
+id: "SL-2100"
+title: "Mbed TLS: mbedtls_ecdh_setup on secp256r1"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_ecdh_setup(ctx, MBEDTLS_ECP_DP_SECP256R1);"
+context_filename: "ecdh.c"
+context_template: |
+  #include <mbedtls/ecdh.h>
+
+  int setup(mbedtls_ecdh_context *ctx)
+  {
+      return mbedtls_ecdh_setup(ctx, MBEDTLS_ECP_DP_SECP256R1);
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecdh.h"
+    section: "include/mbedtls/ecdh.h: mbedtls_ecdh_setup"
+    read_at: "2026-11-05"
+    quote: "int mbedtls_ecdh_setup(mbedtls_ecdh_context *ctx,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

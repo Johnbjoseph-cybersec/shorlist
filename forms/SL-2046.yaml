@@ -1,0 +1,26 @@
+id: "SL-2046"
+title: "RustCrypto ml-dsa: ML-DSA-65 signing key generation"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto ml-dsa 0.1"
+negative: false
+literal: "let sk = ml_dsa::SigningKey::<ml_dsa::MlDsa65>::generate();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let sk = ml_dsa::SigningKey::<ml_dsa::MlDsa65>::generate();
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ml-dsa/0.1.2/ml_dsa/index.html"
+    section: "Crate ml_dsa > Usage"
+    read_at: "2026-11-05"
+    quote: "let sk = SigningKey::<MlDsa65>::generate();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

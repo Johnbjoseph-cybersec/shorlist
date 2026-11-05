@@ -1,0 +1,33 @@
+id: "SL-2521"
+title: "phpseclib DH::createParameters by group name"
+family: "DH"
+parameter_set: "MODP group 14"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$params = DH::createParameters('diffie-hellman-group14-sha256');"
+context_filename: "dh.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\DH;
+
+  $params = DH::createParameters('diffie-hellman-group14-sha256');
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 2048
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/dh"
+    section: "Diffie-Hellman: Creating Keys, By Name"
+    read_at: "2026-11-05"
+    quote: "$params = DH::createParameters('diffie-hellman-group1-sha1');"
+  - url: "https://phpseclib.com/docs/3.0/publickeys/dh"
+    section: "Diffie-Hellman: The following named primes are supported"
+    read_at: "2026-11-05"
+    quote: "| diffie-hellman-group14-sha256 | RFC3526"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Group 14 is the 2048-bit MODP group of RFC 3526."

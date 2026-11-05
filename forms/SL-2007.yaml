@@ -1,0 +1,27 @@
+id: "SL-2007"
+title: "ring: X25519 ephemeral key agreement"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / ring 0.17"
+negative: false
+literal: "let key = ring::agreement::EphemeralPrivateKey::generate(&ring::agreement::X25519, &rng).unwrap();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let rng = ring::rand::SystemRandom::new();
+      let key = ring::agreement::EphemeralPrivateKey::generate(&ring::agreement::X25519, &rng).unwrap();
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/ring/0.17.14/ring/agreement/index.html"
+    section: "Module agreement > Statics: X25519"
+    read_at: "2026-11-05"
+    quote: "X25519 X25519 (ECDH using Curve25519) as described in RFC 7748."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

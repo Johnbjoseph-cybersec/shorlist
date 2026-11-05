@@ -1,0 +1,34 @@
+id: "SL-2127"
+title: "wolfCrypt: wc_XmssKey_SetParamStr \"XMSS-SHA2_10_256\""
+family: "XMSS"
+parameter_set: "XMSS-SHA2_10_256"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "C / wolfSSL 5.9"
+negative: false
+literal: "return wc_XmssKey_SetParamStr(key, \"XMSS-SHA2_10_256\");"
+context_filename: "xmss.c"
+context_template: |
+  #include <wolfssl/options.h>
+  #include <wolfssl/wolfcrypt/wc_xmss.h>
+
+  int params(XmssKey *key)
+  {
+      return wc_XmssKey_SetParamStr(key, "XMSS-SHA2_10_256");
+  }
+expected:
+  family: "XMSS"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/wolfcrypt/wc_xmss.h"
+    section: "wolfssl/wolfcrypt/wc_xmss.h: wc_XmssKey_SetParamStr"
+    read_at: "2026-11-05"
+    quote: "WOLFSSL_API int wc_XmssKey_SetParamStr(XmssKey* key, const char* str);"
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/wolfcrypt/wc_xmss.h"
+    section: "wolfssl/wolfcrypt/wc_xmss.h: parameter table"
+    read_at: "2026-11-05"
+    quote: "* XMSS: | \"XMSS-SHA2_10_256\" 0x00000001 32 16 67 10 1 |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,27 @@
+id: "SL-2533"
+title: "Ruby OpenSSL::PKey.generate_key(\"ML-DSA-44\")"
+family: "ML-DSA"
+parameter_set: "ML-DSA-44"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: false
+literal: "pkey = OpenSSL::PKey.generate_key(\"ML-DSA-44\")"
+context_filename: "keys.rb"
+context_template: |
+  require "openssl"
+
+  pkey = OpenSSL::PKey.generate_key("ML-DSA-44")
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/ruby/openssl/blob/v4.0.0/test/openssl/test_pkey.rb"
+    section: "test/openssl/test_pkey.rb: test_ml_dsa (ruby/openssl v4.0.0)"
+    read_at: "2026-11-05"
+    quote: "pkey = OpenSSL::PKey.generate_key(\"ML-DSA-44\")"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "ruby/openssl v4.0.0 test; requires OpenSSL 3.5 underneath (the test returns early otherwise)."

@@ -1,0 +1,24 @@
+id: "SL-2105"
+title: "Mbed TLS config: MBEDTLS_ECP_DP_SECP256R1_ENABLED"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "config_key"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "#define MBEDTLS_ECP_DP_SECP256R1_ENABLED"
+context_filename: "mbedtls_config.h"
+context_template: |
+  #define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/mbedtls_config.h"
+    section: "include/mbedtls/mbedtls_config.h: MBEDTLS_ECP_DP_SECP256R1_ENABLED"
+    read_at: "2026-11-05"
+    quote: "#define MBEDTLS_ECP_DP_SECP256R1_ENABLED"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

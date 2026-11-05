@@ -1,0 +1,33 @@
+id: "SL-2096"
+title: "Mbed TLS: mbedtls_ecp_gen_key on secp256r1"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_ecp_gen_key(MBEDTLS_ECP_DP_SECP256R1, key, f_rng, p_rng);"
+context_filename: "ecgen.c"
+context_template: |
+  #include <mbedtls/ecp.h>
+
+  int gen(mbedtls_ecp_keypair *key, int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
+  {
+      return mbedtls_ecp_gen_key(MBEDTLS_ECP_DP_SECP256R1, key, f_rng, p_rng);
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecp.h"
+    section: "include/mbedtls/ecp.h: mbedtls_ecp_gen_key"
+    read_at: "2026-11-05"
+    quote: "int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,"
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecp.h"
+    section: "include/mbedtls/ecp.h: mbedtls_ecp_group_id"
+    read_at: "2026-11-05"
+    quote: "MBEDTLS_ECP_DP_SECP256R1, /*!< Domain parameters for the 256-bit curve defined by FIPS 186-4 and SEC1. */"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

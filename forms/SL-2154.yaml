@@ -1,0 +1,36 @@
+id: "SL-2154"
+title: "Botan: RSA_PrivateKey generation"
+family: "RSA"
+parameter_set: "3072"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::RSA_PrivateKey key(rng, 3072);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/rsa.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::RSA_PrivateKey key(rng, 3072);
+      return 0;
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 3072
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/rsa/rsa.h"
+    section: "src/lib/pubkey/rsa/rsa.h"
+    read_at: "2026-11-05"
+    quote: "RSA_PrivateKey(RandomNumberGenerator& rng, size_t bits, size_t exp = 65537);"
+  - url: "https://botan.randombit.net/handbook/api_ref/pubkey.html"
+    section: "Creating A New RSA Private Key"
+    read_at: "2026-11-05"
+    quote: "RSA_PrivateKey::RSA_PrivateKey(RandomNumberGenerator &rng, size_t bits)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

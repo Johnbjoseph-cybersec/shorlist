@@ -1,0 +1,31 @@
+id: "SL-2506"
+title: "PHP openssl_pkey_new with OPENSSL_KEYTYPE_X448"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "PHP / ext/openssl"
+negative: false
+literal: "$key = openssl_pkey_new([\"private_key_type\" => OPENSSL_KEYTYPE_X448]);"
+context_filename: "keys.php"
+context_template: |
+  <?php
+
+  $key = openssl_pkey_new(["private_key_type" => OPENSSL_KEYTYPE_X448]);
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.openssl-pkey-new.php"
+    section: "openssl_pkey_new(): Parameters (options)"
+    read_at: "2026-11-05"
+    quote: "Among those options only private_key_bits, private_key_type, curve_name, and config are used for key generation."
+  - url: "https://www.php.net/manual/en/openssl.key-types.php"
+    section: "OpenSSL key type constants: OPENSSL_KEYTYPE_X448"
+    read_at: "2026-11-05"
+    quote: "OPENSSL_KEYTYPE_X448 (int) X448 curve key type."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The constant is available only when PHP is compiled with OpenSSL 3.0+ (key-types page)."

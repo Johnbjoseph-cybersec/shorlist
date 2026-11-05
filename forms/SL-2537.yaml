@@ -1,0 +1,31 @@
+id: "SL-2537"
+title: "Ruby SSLContext#ecdh_curves = \"P-256\""
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: false
+literal: "ctx.ecdh_curves = \"P-256\""
+context_filename: "tls.rb"
+context_template: |
+  require "openssl"
+
+  ctx = OpenSSL::SSL::SSLContext.new
+  ctx.ecdh_curves = "P-256"
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/SSL/SSLContext.html"
+    section: "OpenSSL::SSL::SSLContext#ecdh_curves="
+    read_at: "2026-11-05"
+    quote: "Sets the list of “supported elliptic curves” for this context."
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/SSL/SSLContext.html"
+    section: "OpenSSL::SSL::SSLContext#ecdh_curves=: example"
+    read_at: "2026-11-05"
+    quote: "ctx2.ecdh_curves = \"P-256\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,35 @@
+id: "SL-2510"
+title: "PHP sodium_crypto_sign_detached (Ed25519)"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "PHP / ext/sodium"
+negative: false
+literal: "$signature = sodium_crypto_sign_detached($message, $secret_key);"
+context_filename: "sign.php"
+context_template: |
+  <?php
+
+  function sign(string $message, string $secret_key): string
+  {
+      $signature = sodium_crypto_sign_detached($message, $secret_key);
+      return $signature;
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.sodium-crypto-sign-detached.php"
+    section: "sodium_crypto_sign_detached(): Description"
+    read_at: "2026-11-05"
+    quote: "Sign a message with a secret key, that can be verified by the corresponding public key."
+  - url: "https://github.com/jedisct1/libsodium-doc/blob/master/public-key_cryptography/public-key_signatures.md"
+    section: "Public-key signatures: Algorithm details"
+    read_at: "2026-11-05"
+    quote: "Single-part signature: Ed25519"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The PHP page does not name the algorithm; libsodium, which ext/sodium binds, does."

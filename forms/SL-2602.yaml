@@ -1,0 +1,32 @@
+id: "SL-2602"
+title: "Python ssl SSLContext.set_ecdh_curve(\"secp384r1\")"
+family: "ECDH"
+parameter_set: "P-384"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / ssl"
+negative: false
+literal: "ctx.set_ecdh_curve(\"secp384r1\")"
+context_filename: "tls.py"
+context_template: |
+  import ssl
+
+  ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+  ctx.set_ecdh_curve("secp384r1")
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 384
+source:
+  - url: "https://docs.python.org/3.14/library/ssl.html"
+    section: "SSLContext.set_ecdh_curve(curve_name, /) (Python 3.14.10)"
+    read_at: "2026-11-05"
+    quote: "The curve_name parameter should be a string describing a well-known elliptic curve"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "openssl-ciphers (OpenSSL 3.5): CIPHER STRINGS, SUITEB128"
+    read_at: "2026-11-05"
+    quote: "only the elliptic curves P-256 and P-384 can be used"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "secp384r1 is the OpenSSL short name of P-384."

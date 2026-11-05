@@ -1,0 +1,28 @@
+id: "SL-2051"
+title: "Decoy: rustls signature scheme name in a deny list"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Rust / rustls 0.23"
+negative: true
+decoy_class: "ban_list"
+literal: "const REJECTED_SCHEMES: [&str; 1] = [\"RSA_PKCS1_SHA1\"];"
+context_filename: "policy.rs"
+context_template: |
+  const REJECTED_SCHEMES: [&str; 1] = ["RSA_PKCS1_SHA1"];
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rustls/0.23.46/rustls/enum.SignatureScheme.html"
+    section: "Enum SignatureScheme > Variants: RSA_PKCS1_SHA1"
+    read_at: "2026-11-05"
+    quote: "§ RSA_PKCS1_SHA1 §"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

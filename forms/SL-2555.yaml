@@ -1,0 +1,30 @@
+id: "SL-2555"
+title: "Kotlin Signature.getInstance(\"SHA256withRSA/PSS\")"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+literal: "val signature = Signature.getInstance(\"SHA256withRSA/PSS\")"
+context_filename: "Sign.kt"
+context_template: |
+  import java.security.Signature
+
+  fun main() {
+      val signature = Signature.getInstance("SHA256withRSA/PSS")
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Example: RSA key pair for signing/verification using RSA-PSS"
+    read_at: "2026-11-05"
+    quote: "Signature signature = Signature.getInstance(\"SHA256withRSA/PSS\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The Android name for RSASSA-PSS with SHA-256; no JCA row in the catalogue carries it."

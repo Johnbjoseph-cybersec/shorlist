@@ -1,0 +1,29 @@
+id: "SL-2565"
+title: "CryptoKit Curve25519.Signing.PrivateKey()"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let key = Curve25519.Signing.PrivateKey()"
+context_filename: "Keys.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() {
+      let key = Curve25519.Signing.PrivateKey()
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/curve25519/signing/privatekey"
+    section: "CryptoKit Curve25519.Signing.PrivateKey (DocC JSON of the page)"
+    read_at: "2026-11-05"
+    quote: "A Curve25519 private key used to create cryptographic signatures."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Curve25519.Signing signs with Ed25519."

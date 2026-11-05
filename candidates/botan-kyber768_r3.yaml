@@ -1,0 +1,34 @@
+id: "candidate"
+title: "Botan: Kyber_PrivateKey with KyberMode::Kyber768_R3"
+family: "ML-KEM"
+parameter_set: "Kyber768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::Kyber_PrivateKey key(rng, Botan::KyberMode::Kyber768_R3);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/kyber.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::Kyber_PrivateKey key(rng, Botan::KyberMode::Kyber768_R3);
+      return 0;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/kyber/kyber_common/kyber.h"
+    section: "src/lib/pubkey/kyber/kyber_common/kyber.h: KyberMode::Mode"
+    read_at: "2026-11-05"
+    quote: "Kyber768_R3 BOTAN_DEPRECATED(\"Kyber R3 is deprecated - use ML-KEM\") = 1,"
+status: "candidate"
+candidate_reason: "pre-standard parameter set (round-3 Kyber/Dilithium) or a family outside families.yaml; families.yaml has no family for it, so it cannot be a row until the family question is decided"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Round-3 Kyber, deprecated in Botan in favour of ML-KEM."

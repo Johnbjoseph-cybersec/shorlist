@@ -1,0 +1,29 @@
+id: "SL-2574"
+title: "CryptoKit HPKE.Ciphersuite.XWingMLKEM768X25519_SHA256_AES_GCM_256"
+family: "ML-KEM"
+parameter_set: "X-Wing (ML-KEM-768 + X25519)"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let suite = HPKE.Ciphersuite.XWingMLKEM768X25519_SHA256_AES_GCM_256"
+context_filename: "Hpke.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() {
+      let suite = HPKE.Ciphersuite.XWingMLKEM768X25519_SHA256_AES_GCM_256
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/hpke/ciphersuite"
+    section: "CryptoKit HPKE.Ciphersuite: XWingMLKEM768X25519_SHA256_AES_GCM_256 (DocC JSON)"
+    read_at: "2026-11-05"
+    quote: "A cipher suite for HPKE that uses the X-Wing KEM (ML-KEM-768 with X25519)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A hybrid KEM, scored on its post-quantum half (ML-KEM-768) as the catalogue does for X25519+ML-KEM-768 hybrids."

@@ -1,0 +1,29 @@
+id: "SL-2099"
+title: "Mbed TLS: ECP group brainpoolP256r1"
+family: "EC"
+parameter_set: "brainpoolP256r1"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "return mbedtls_ecp_group_load(grp, MBEDTLS_ECP_DP_BP256R1);"
+context_filename: "ecp.c"
+context_template: |
+  #include <mbedtls/ecp.h>
+
+  int load(mbedtls_ecp_group *grp)
+  {
+      return mbedtls_ecp_group_load(grp, MBEDTLS_ECP_DP_BP256R1);
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/mbedtls/ecp.h"
+    section: "include/mbedtls/ecp.h: mbedtls_ecp_group_id"
+    read_at: "2026-11-05"
+    quote: "MBEDTLS_ECP_DP_BP256R1, /*!< Domain parameters for 256-bit Brainpool curve. */"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

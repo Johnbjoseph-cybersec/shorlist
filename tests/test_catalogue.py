@@ -131,7 +131,19 @@ def test_catalogue_hash_is_stable_and_content_sensitive(tmp_path):
     ("httpd.conf", "<VirtualHost *:443>\n  SSLEngine on\n", False),
     ("fortigate.conf", "config vpn ipsec phase1-interface\n", False),
     ("running-config", "crypto ikev2 proposal P\n group 19\n", False),
+    ("a.c", "#include <mbedtls/pk.h>\nint main(void) {\n", False),
+    ("a.c", "int main(void) { return 0 }\n", False),
+    ("mbedtls_config.h", "#define X 1\nint f( {\n", False),
+    ("a.cpp", "#include <botan/rsa.h>\nint main() { return (0; }\n", False),
+    ("a.rs", "fn main() {\n", False),
+    ("keys.php", "<?php\nfunction f() {\n", False),
+    ("keys.rb", "def f(\n", False),
+    ("Keys.kt", "fun main() {\n", False),
+    ("Keys.swift", "func makeKey() {\n    let key = P256.Signing.PrivateKey(\n}\n", False),
+    ("keys.rb", "require \"openssl\"\n\nrsa = OpenSSL::PKey::RSA.new(2048)\n", True),
     ("a.py", "x = 1\n", True),
+    ("a.rs", "use ring::agreement;\n\nfn main() {\n    let alg = &agreement::X25519;\n}\n", True),
+    ("a.c", "#include <mbedtls/pk.h>\n\nint main(void)\n{\n    return 0;\n}\n", True),
 ])
 def test_parsecheck_rejects_broken_templates(name, text, ok):
     assert (check(name, text)[0] != FAIL) is ok

@@ -1,0 +1,36 @@
+id: "SL-2155"
+title: "Botan: Ed25519_PrivateKey generation"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "Botan::Ed25519_PrivateKey key(rng);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/ed25519.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      Botan::Ed25519_PrivateKey key(rng);
+      return 0;
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/curve25519/ed25519/ed25519.h"
+    section: "src/lib/pubkey/curve25519/ed25519/ed25519.h"
+    read_at: "2026-11-05"
+    quote: "explicit Ed25519_PrivateKey(RandomNumberGenerator& rng);"
+  - url: "https://botan.randombit.net/handbook/api_ref/pubkey.html"
+    section: "Creating A New EC Private Key"
+    read_at: "2026-11-05"
+    quote: "Ed25519_PrivateKey::Ed25519_PrivateKey(RandomNumberGenerator &rng)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

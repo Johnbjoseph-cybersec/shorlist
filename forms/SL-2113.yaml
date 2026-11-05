@@ -1,0 +1,30 @@
+id: "SL-2113"
+title: "Mbed TLS PSA: PSA_KEY_TYPE_ECC_KEY_PAIR(PSA_ECC_FAMILY_SECP_R1"
+family: "EC"
+parameter_set: "secp-r1 family"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / Mbed TLS 3.6"
+negative: false
+literal: "psa_set_key_type(attr, PSA_KEY_TYPE_ECC_KEY_PAIR(PSA_ECC_FAMILY_SECP_R1));"
+context_filename: "psa.c"
+context_template: |
+  #include <psa/crypto.h>
+
+  void attrs(psa_key_attributes_t *attr)
+  {
+      psa_set_key_type(attr, PSA_KEY_TYPE_ECC_KEY_PAIR(PSA_ECC_FAMILY_SECP_R1));
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/Mbed-TLS/mbedtls/blob/v3.6.5/include/psa/crypto_values.h"
+    section: "include/psa/crypto_values.h"
+    read_at: "2026-11-05"
+    quote: "#define PSA_ECC_FAMILY_SECP_R1 ((psa_ecc_family_t) 0x12)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The secp-r1 family covers several curves; the curve size is set separately with psa_set_key_bits."

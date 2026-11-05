@@ -1,0 +1,30 @@
+id: "SL-2033"
+title: "RustCrypto rsa: PKCS#1 v1.5 signing key"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto rsa 0.9"
+negative: false
+literal: "let signing_key = rsa::pkcs1v15::SigningKey::<rsa::sha2::Sha256>::new(key);"
+context_filename: "sign.rs"
+context_template: |
+  fn signer(key: rsa::RsaPrivateKey) {
+      let signing_key = rsa::pkcs1v15::SigningKey::<rsa::sha2::Sha256>::new(key);
+  }
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rsa/0.9.8/rsa/index.html"
+    section: "Crate rsa > PKCS#1 v1.5 signatures"
+    read_at: "2026-11-05"
+    quote: "let signing_key = SigningKey::<Sha256>::new(private_key);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Read at rsa 0.9.8 on docs.rs: the page for 0.9.10 (latest) says docs.rs failed to build it."

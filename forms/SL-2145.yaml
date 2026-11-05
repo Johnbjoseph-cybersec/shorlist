@@ -1,0 +1,29 @@
+id: "SL-2145"
+title: "Decoy: libsodium crypto_box call in a log string"
+family: "X25519"
+parameter_set: "X25519"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / libsodium 1.0.22"
+negative: true
+decoy_class: "log_string"
+literal: "fprintf(stderr, \"crypto_box_keypair failed\\n\");"
+context_filename: "log.c"
+context_template: |
+  #include <stdio.h>
+
+  void report(void)
+  {
+      fprintf(stderr, "crypto_box_keypair failed\n");
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/jedisct1/libsodium/blob/1.0.22-RELEASE/src/libsodium/include/sodium/crypto_box.h"
+    section: "src/libsodium/include/sodium/crypto_box.h"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

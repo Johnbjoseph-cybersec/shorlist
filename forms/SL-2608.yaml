@@ -1,0 +1,26 @@
+id: "SL-2608"
+title: "Decoy: commented-out set_ecdh_curve in Python"
+family: "ECDH"
+parameter_set: "P-521"
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / ssl"
+negative: true
+decoy_class: "comment"
+literal: "# ctx.set_ecdh_curve(\"secp521r1\")  # disabled: clients reject P-521"
+context_filename: "tls_notes.py"
+context_template: |
+  # ctx.set_ecdh_curve("secp521r1")  # disabled: clients reject P-521
+  CURVE = None
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 521
+source:
+  - url: "https://docs.python.org/3.14/library/ssl.html"
+    section: "SSLContext.set_ecdh_curve(curve_name, /)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not import ssl."

@@ -1,0 +1,27 @@
+id: "SL-2024"
+title: "aws-lc-rs: ML-DSA-87 through the deprecated unstable module"
+family: "ML-DSA"
+parameter_set: "ML-DSA-87"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / aws-lc-rs 1.19"
+negative: false
+literal: "let alg = &aws_lc_rs::unstable::signature::ML_DSA_87_SIGNING;"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let alg = &aws_lc_rs::unstable::signature::ML_DSA_87_SIGNING;
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/aws-lc-rs/1.19.0/aws_lc_rs/unstable/signature/index.html"
+    section: "Module unstable::signature (deprecated since 1.18.0) > Constants: ML_DSA_87_SIGNING"
+    read_at: "2026-11-05"
+    quote: "ML_DSA_87_SIGNINGDeprecated Signing using ML-DSA-87."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Deprecated alias kept for code written before the ML-DSA API was stabilised; still a use."

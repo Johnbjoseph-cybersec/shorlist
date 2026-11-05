@@ -1,0 +1,27 @@
+id: "SL-2016"
+title: "rustls: SignatureScheme::RSA_PSS_SHA256"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Rust / rustls 0.23"
+negative: false
+literal: "let scheme = rustls::SignatureScheme::RSA_PSS_SHA256;"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let scheme = rustls::SignatureScheme::RSA_PSS_SHA256;
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rustls/0.23.46/rustls/enum.SignatureScheme.html"
+    section: "Enum SignatureScheme > Variants: RSA_PSS_SHA256"
+    read_at: "2026-11-05"
+    quote: "§ RSA_PSS_SHA256 § RSA_PSS_SHA384 §"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

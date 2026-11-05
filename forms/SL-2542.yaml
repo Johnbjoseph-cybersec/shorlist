@@ -1,0 +1,26 @@
+id: "SL-2542"
+title: "Decoy: DSA key generation in a Ruby comment"
+family: "DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Ruby / openssl"
+negative: true
+decoy_class: "comment"
+literal: "# OpenSSL::PKey::DSA.generate(1024) was the old default; keys now come from the HSM"
+context_filename: "legacy.rb"
+context_template: |
+  # OpenSSL::PKey::DSA.generate(1024) was the old default; keys now come from the HSM
+  puts "remote signing"
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 1024
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/PKey/DSA.html"
+    section: "OpenSSL::PKey::DSA.generate"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not require openssl."

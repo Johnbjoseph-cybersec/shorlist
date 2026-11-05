@@ -1,0 +1,30 @@
+id: "SL-2176"
+title: "Crypto++: x25519 key agreement"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::x25519 ecdh(rng);"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/xed25519.h>
+
+  int make(CryptoPP::RandomNumberGenerator& rng)
+  {
+      CryptoPP::x25519 ecdh(rng);
+      return 0;
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/xed25519.h"
+    section: "xed25519.h: class x25519"
+    read_at: "2026-11-05"
+    quote: "x25519(RandomNumberGenerator &rng);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

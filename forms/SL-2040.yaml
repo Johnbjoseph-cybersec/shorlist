@@ -1,0 +1,26 @@
+id: "SL-2040"
+title: "RustCrypto p256: ECDH ephemeral secret"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto p256 0.14"
+negative: false
+literal: "let secret = p256::ecdh::EphemeralSecret::generate();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let secret = p256::ecdh::EphemeralSecret::generate();
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://docs.rs/p256/0.14.0/p256/ecdh/index.html"
+    section: "Module ecdh > Type Aliases: EphemeralSecret"
+    read_at: "2026-11-05"
+    quote: "EphemeralSecret NIST P-256 Ephemeral Diffie-Hellman Secret."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

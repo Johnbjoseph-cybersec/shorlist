@@ -1,0 +1,38 @@
+id: "SL-2546"
+title: "Android Keystore KeyPairGenerator with KeyProperties.KEY_ALGORITHM_EC"
+family: "EC"
+parameter_set: null
+role: "both"
+form_kind: "api_call"
+language_or_product: "Kotlin / Android Keystore"
+negative: false
+literal: "val kpg = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC, \"AndroidKeyStore\")"
+context_filename: "Keys.kt"
+context_template: |
+  import android.security.keystore.KeyProperties
+  import java.security.KeyPairGenerator
+
+  fun main() {
+      val kpg = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore")
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyProperties"
+    section: "KeyProperties.KEY_ALGORITHM_EC"
+    read_at: "2026-11-05"
+    quote: "public static final String KEY_ALGORITHM_EC"
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyProperties"
+    section: "KeyProperties.KEY_ALGORITHM_EC: description"
+    read_at: "2026-11-05"
+    quote: "Elliptic Curve (EC) Cryptography key."
+  - url: "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec"
+    section: "Class overview: examples"
+    read_at: "2026-11-05"
+    quote: "KeyProperties.KEY_ALGORITHM_EC, \"AndroidKeyStore\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The curve is set on the KeyGenParameterSpec, not on this line."

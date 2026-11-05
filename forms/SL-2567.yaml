@@ -1,0 +1,28 @@
+id: "SL-2567"
+title: "CryptoKit SecureEnclave.P256.Signing.PrivateKey()"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let key = try SecureEnclave.P256.Signing.PrivateKey()"
+context_filename: "Keys.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() throws {
+      let key = try SecureEnclave.P256.Signing.PrivateKey()
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/secureenclave/p256/signing/privatekey"
+    section: "CryptoKit SecureEnclave.P256.Signing.PrivateKey (DocC JSON of the page)"
+    read_at: "2026-11-05"
+    quote: "A P-256 private key used for signing."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

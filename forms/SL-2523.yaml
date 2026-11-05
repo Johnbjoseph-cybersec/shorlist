@@ -1,0 +1,27 @@
+id: "SL-2523"
+title: "Decoy: sodium box keypair named in a PHP log string"
+family: "X25519"
+parameter_set: "X25519"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "PHP / ext/sodium"
+negative: true
+decoy_class: "log_string"
+literal: "error_log(\"sodium_crypto_box_keypair() is not available on this build\");"
+context_filename: "probe.php"
+context_template: |
+  <?php
+
+  error_log("sodium_crypto_box_keypair() is not available on this build");
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.sodium-crypto-box-keypair.php"
+    section: "sodium_crypto_box_keypair()"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file calls no sodium_* function."

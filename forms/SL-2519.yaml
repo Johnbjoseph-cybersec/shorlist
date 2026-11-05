@@ -1,0 +1,33 @@
+id: "SL-2519"
+title: "phpseclib EC::createKey('Curve25519')"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$private = EC::createKey('Curve25519');"
+context_filename: "ec.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\EC;
+
+  $private = EC::createKey('Curve25519');
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "EC::createKey() only supports the creation of named curves."
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Supported Curves / Named vs Specified Curves"
+    read_at: "2026-11-05"
+    quote: "| Individual Curves | Curve25519, Curve448 | Ed25519, Ed448 | everything else"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Curve25519 is the Montgomery curve phpseclib lists beside Ed25519; it is used for X25519 key agreement."

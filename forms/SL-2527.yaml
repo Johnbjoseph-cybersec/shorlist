@@ -1,0 +1,27 @@
+id: "SL-2527"
+title: "Ruby OpenSSL::PKey::EC.generate(\"prime256v1\")"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: false
+literal: "ec = OpenSSL::PKey::EC.generate(\"prime256v1\")"
+context_filename: "keys.rb"
+context_template: |
+  require "openssl"
+
+  ec = OpenSSL::PKey::EC.generate("prime256v1")
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/PKey/EC.html"
+    section: "OpenSSL::PKey::EC.generate"
+    read_at: "2026-11-05"
+    quote: "ec1 = OpenSSL::PKey::EC.generate(\"prime256v1\")"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The curve is pinned; the role is not."

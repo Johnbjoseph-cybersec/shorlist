@@ -1,0 +1,31 @@
+id: "SL-2508"
+title: "PHP openssl_pkey_new with the \"ec\" options array (secp384r1)"
+family: "EC"
+parameter_set: "P-384"
+role: "both"
+form_kind: "api_string"
+language_or_product: "PHP / ext/openssl"
+negative: false
+literal: "$key = openssl_pkey_new([\"ec\" => [\"curve_name\" => \"secp384r1\"]]);"
+context_filename: "keys.php"
+context_template: |
+  <?php
+
+  $key = openssl_pkey_new(["ec" => ["curve_name" => "secp384r1"]]);
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 384
+source:
+  - url: "https://www.php.net/manual/en/function.openssl-pkey-new.php"
+    section: "openssl_pkey_new(): Parameters (options), \"ec\" key for Elliptic curve parameters"
+    read_at: "2026-11-05"
+    quote: "\"ec\" key for Elliptic curve parameters"
+  - url: "https://www.php.net/manual/en/function.openssl-get-curve-names.php"
+    section: "openssl_get_curve_names(): Description"
+    read_at: "2026-11-05"
+    quote: "The two most widely standardized/supported curves are prime256v1 (NIST P-256) and secp384r1 (NIST P-384)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The algorithm-specific \"ec\" array form, as opposed to private_key_type."

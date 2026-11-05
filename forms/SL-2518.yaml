@@ -1,0 +1,33 @@
+id: "SL-2518"
+title: "phpseclib EC::createKey('nistp384')"
+family: "EC"
+parameter_set: "P-384"
+role: "both"
+form_kind: "api_string"
+language_or_product: "PHP / phpseclib 3.0"
+negative: false
+literal: "$private = EC::createKey('nistp384');"
+context_filename: "ec.php"
+context_template: |
+  <?php
+
+  use phpseclib3\Crypt\EC;
+
+  $private = EC::createKey('nistp384');
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 384
+source:
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Creating Keys"
+    read_at: "2026-11-05"
+    quote: "EC::createKey() only supports the creation of named curves."
+  - url: "https://phpseclib.com/docs/3.0/publickeys/ec"
+    section: "Elliptic Curves: Supported Curves / Named vs Specified Curves"
+    read_at: "2026-11-05"
+    quote: "nistp384 (alias: secp384r1)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The curve is pinned; the role is not (the key can sign or agree)."

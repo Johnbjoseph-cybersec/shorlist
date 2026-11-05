@@ -1,0 +1,36 @@
+id: "SL-2158"
+title: "Botan: ML_KEM_PrivateKey with ML_KEM_768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C++ / Botan 3.14"
+negative: false
+literal: "const Botan::ML_KEM_PrivateKey priv_key(rng, Botan::ML_KEM_Mode::ML_KEM_768);"
+context_filename: "main.cpp"
+context_template: |
+  #include <botan/ml_kem.h>
+  #include <botan/auto_rng.h>
+
+  int main()
+  {
+      Botan::AutoSeeded_RNG rng;
+      const Botan::ML_KEM_PrivateKey priv_key(rng, Botan::ML_KEM_Mode::ML_KEM_768);
+      return 0;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://botan.randombit.net/handbook/api_ref/pubkey.html"
+    section: "ML-KEM example"
+    read_at: "2026-11-05"
+    quote: "const Botan::ML_KEM_PrivateKey priv_key(rng, Botan::ML_KEM_Mode::ML_KEM_768);"
+  - url: "https://github.com/randombit/botan/blob/3.14.0/src/lib/pubkey/kyber/ml_kem/ml_kem.h"
+    section: "src/lib/pubkey/kyber/ml_kem/ml_kem.h"
+    read_at: "2026-11-05"
+    quote: "using ML_KEM_PrivateKey = Kyber_PrivateKey;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

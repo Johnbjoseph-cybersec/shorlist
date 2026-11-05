@@ -1,0 +1,27 @@
+id: "SL-2043"
+title: "x25519-dalek: static X25519 secret"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / x25519-dalek 3"
+negative: false
+literal: "let secret = x25519_dalek::StaticSecret::random();"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let secret = x25519_dalek::StaticSecret::random();
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/x25519-dalek/3.0.0/x25519_dalek/index.html"
+    section: "Crate x25519_dalek > Structs: StaticSecret"
+    read_at: "2026-11-05"
+    quote: "A Diffie-Hellman secret key that can be used to compute multiple SharedSecrets."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "StaticSecret is behind the crate feature static_secrets; random() needs the getrandom feature."

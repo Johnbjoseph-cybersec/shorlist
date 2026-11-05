@@ -1,0 +1,29 @@
+id: "SL-2573"
+title: "CryptoKit HPKE.Ciphersuite.Curve25519_SHA256_ChachaPoly"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let suite = HPKE.Ciphersuite.Curve25519_SHA256_ChachaPoly"
+context_filename: "Hpke.swift"
+context_template: |
+  import CryptoKit
+
+  func makeKey() {
+      let suite = HPKE.Ciphersuite.Curve25519_SHA256_ChachaPoly
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/hpke/ciphersuite"
+    section: "CryptoKit HPKE.Ciphersuite: Curve25519_SHA256_ChachaPoly (DocC JSON)"
+    read_at: "2026-11-05"
+    quote: "A cipher suite for HPKE that uses X25519 elliptic curve key agreement"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The KEM is DHKEM over Curve25519 (X25519); the rest of the suite is symmetric."

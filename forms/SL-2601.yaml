@@ -1,0 +1,31 @@
+id: "SL-2601"
+title: "Python ssl SSLContext.set_ecdh_curve(\"prime256v1\")"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / ssl"
+negative: false
+literal: "ctx.set_ecdh_curve(\"prime256v1\")"
+context_filename: "tls.py"
+context_template: |
+  import ssl
+
+  ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+  ctx.set_ecdh_curve("prime256v1")
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://docs.python.org/3.14/library/ssl.html"
+    section: "SSLContext.set_ecdh_curve(curve_name, /) (Python 3.14.10)"
+    read_at: "2026-11-05"
+    quote: "Set the curve name for Elliptic Curve-based Diffie-Hellman (ECDH) key exchange."
+  - url: "https://docs.python.org/3.14/library/ssl.html"
+    section: "SSLContext.set_ecdh_curve(curve_name, /)"
+    read_at: "2026-11-05"
+    quote: "for example prime256v1 for a widely supported curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,29 @@
+id: "SL-2056"
+title: "OpenSSL EVP: EVP_PKEY_CTX_set_rsa_keygen_bits"
+family: "RSA"
+parameter_set: "3072"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 3072);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/rsa.h>
+
+  int bits(EVP_PKEY_CTX *ctx)
+  {
+      return EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 3072);
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 3072
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_PKEY_CTX_ctrl/"
+    section: "DESCRIPTION: RSA parameters"
+    read_at: "2026-11-05"
+    quote: "EVP_PKEY_CTX_set_rsa_keygen_bits() sets the RSA key length for RSA key generation to bits. If not specified 2048 bits is used."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

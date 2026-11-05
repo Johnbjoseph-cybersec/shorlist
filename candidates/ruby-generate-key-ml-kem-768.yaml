@@ -1,0 +1,32 @@
+id: "candidate"
+title: "Ruby OpenSSL::PKey.generate_key(\"ML-KEM-768\")"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Ruby / openssl"
+negative: false
+literal: "pkey = OpenSSL::PKey.generate_key(\"ML-KEM-768\")"
+context_filename: "keys.rb"
+context_template: |
+  require "openssl"
+
+  pkey = OpenSSL::PKey.generate_key("ML-KEM-768")
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/PKey.html"
+    section: "OpenSSL::PKey.generate_key"
+    read_at: "2026-11-05"
+    quote: "If a String is given as the first argument, it generates a new random key for the algorithm specified by the name just as ::generate_parameters does."
+  - url: "https://docs.openssl.org/3.5/man1/openssl-genpkey/"
+    section: "EXAMPLES"
+    read_at: "2026-11-05"
+    quote: "openssl genpkey -algorithm ML-KEM-768 -out ml-kem-key.pem"
+status: "candidate"
+candidate_reason: "No ruby/openssl text names ML-KEM: the v4.0.0 History.md and test_pkey.rb show generate_key only for DSA, HMAC and ML-DSA-44. The form is inferred from the name pass-through to OpenSSL; needs a Ruby-side source (or a run) before it can be a row."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Requires OpenSSL 3.5 underneath; the name is the one openssl genpkey takes."

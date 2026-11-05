@@ -1,0 +1,30 @@
+id: "SL-2119"
+title: "wolfCrypt: wc_curve25519_make_key"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / wolfSSL 5.9"
+negative: false
+literal: "return wc_curve25519_make_key(rng, 32, key);"
+context_filename: "keygen.c"
+context_template: |
+  #include <wolfssl/options.h>
+  #include <wolfssl/wolfcrypt/curve25519.h>
+
+  int gen(WC_RNG *rng, curve25519_key *key)
+  {
+      return wc_curve25519_make_key(rng, 32, key);
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/wolfSSL/wolfssl/blob/v5.9.4-stable/wolfssl/wolfcrypt/curve25519.h"
+    section: "wolfssl/wolfcrypt/curve25519.h: wc_curve25519_make_key"
+    read_at: "2026-11-05"
+    quote: "int wc_curve25519_make_key(WC_RNG* rng, int keysize, curve25519_key* key);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

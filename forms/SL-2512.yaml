@@ -1,0 +1,31 @@
+id: "SL-2512"
+title: "PHP sodium_crypto_kx_keypair (X25519 key exchange)"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "PHP / ext/sodium"
+negative: false
+literal: "$keypair = sodium_crypto_kx_keypair();"
+context_filename: "kx.php"
+context_template: |
+  <?php
+
+  $keypair = sodium_crypto_kx_keypair();
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.sodium-crypto-kx-keypair.php"
+    section: "sodium_crypto_kx_keypair(): Description"
+    read_at: "2026-11-05"
+    quote: "Create a new sodium keypair consisting of the secret key (32 bytes) followed by the public key (32 bytes)."
+  - url: "https://github.com/jedisct1/libsodium-doc/blob/master/key_exchange/README.md"
+    section: "Key exchange: Algorithm details"
+    read_at: "2026-11-05"
+    quote: "Let `p.n` be the `crypto_scalarmult_curve25519_BYTES` byte output of the X25519 key exchange operation."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The PHP page does not name the algorithm; libsodium, which ext/sodium binds, does."

@@ -1,0 +1,30 @@
+id: "SL-2177"
+title: "Crypto++: DSA::PrivateKey"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C++ / Crypto++ 8.9"
+negative: false
+literal: "CryptoPP::DSA::PrivateKey key;"
+context_filename: "main.cpp"
+context_template: |
+  #include <cryptopp/dsa.h>
+
+  int main()
+  {
+      CryptoPP::DSA::PrivateKey key;
+      return 0;
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_9_0/gfpcrypt.h"
+    section: "gfpcrypt.h: DSA"
+    read_at: "2026-11-05"
+    quote: "typedef DSA2<SHA1> DSA;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

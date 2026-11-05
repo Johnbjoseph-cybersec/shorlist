@@ -1,0 +1,31 @@
+id: "SL-2036"
+title: "RustCrypto rsa: PKCS#1 v1.5 encryption"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto rsa 0.9"
+negative: false
+literal: "let enc = key.encrypt(&mut rng, rsa::Pkcs1v15Encrypt, data).unwrap();"
+context_filename: "encrypt.rs"
+context_template: |
+  fn seal(key: &rsa::RsaPublicKey, data: &[u8]) {
+      let mut rng = rand::thread_rng();
+      let enc = key.encrypt(&mut rng, rsa::Pkcs1v15Encrypt, data).unwrap();
+  }
+
+  fn main() {}
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.rs/rsa/0.9.8/rsa/index.html"
+    section: "Crate rsa > Example"
+    read_at: "2026-11-05"
+    quote: "let enc_data = pub_key.encrypt(&mut rng, Pkcs1v15Encrypt, &data[..]).expect(\"failed to encrypt\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Read at rsa 0.9.8 on docs.rs: the page for 0.9.10 (latest) says docs.rs failed to build it."

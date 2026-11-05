@@ -1,0 +1,28 @@
+id: "SL-2578"
+title: "Security framework SecKeyAlgorithm .ecdsaSignatureMessageX962SHA256"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Swift / Apple Security framework"
+negative: false
+literal: "let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256"
+context_filename: "Algo.swift"
+context_template: |
+  import Security
+
+  func makeKey() {
+      let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.apple.com/documentation/security/seckeyalgorithm/ecdsasignaturemessagex962sha256"
+    section: "Security: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256 (DocC JSON)"
+    read_at: "2026-11-05"
+    quote: "static let ecdsaSignatureMessageX962SHA256: SecKeyAlgorithm"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

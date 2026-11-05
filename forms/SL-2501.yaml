@@ -1,0 +1,31 @@
+id: "SL-2501"
+title: "PHP openssl_pkey_new with OPENSSL_KEYTYPE_DSA"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "PHP / ext/openssl"
+negative: false
+literal: "$key = openssl_pkey_new([\"private_key_type\" => OPENSSL_KEYTYPE_DSA]);"
+context_filename: "keys.php"
+context_template: |
+  <?php
+
+  $key = openssl_pkey_new(["private_key_type" => OPENSSL_KEYTYPE_DSA]);
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.php.net/manual/en/function.openssl-pkey-new.php"
+    section: "openssl_pkey_new(): Parameters (options)"
+    read_at: "2026-11-05"
+    quote: "Among those options only private_key_bits, private_key_type, curve_name, and config are used for key generation."
+  - url: "https://www.php.net/manual/en/openssl.key-types.php"
+    section: "OpenSSL key type constants: OPENSSL_KEYTYPE_DSA"
+    read_at: "2026-11-05"
+    quote: "OPENSSL_KEYTYPE_DSA (int) DSA key type."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The line pins the key type, not the size; OpenSSL defaults apply."
