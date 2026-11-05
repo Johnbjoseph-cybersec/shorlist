@@ -1,0 +1,28 @@
+id: "SL-3131"
+title: "Decoy: gcloud --default-algorithm=ec-sign-p256-sha256 in a shell comment"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "cli"
+language_or_product: "gcloud CLI / kms keys create"
+negative: true
+decoy_class: "comment"
+literal: "# gcloud kms keys create legacy --purpose=asymmetric-signing --default-algorithm=ec-sign-p256-sha256"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  # gcloud kms keys create legacy --purpose=asymmetric-signing --default-algorithm=ec-sign-p256-sha256
+  gcloud kms keys create data --location=global --keyring=app --purpose=encryption
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://cloud.google.com/sdk/gcloud/reference/kms/keys/create"
+    section: "Flags: --default-algorithm"
+    read_at: "2026-11-05"
+    quote: "ec-sign-p256-sha256, ec-sign-p384-sha384,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The command that runs creates a symmetric encryption key."

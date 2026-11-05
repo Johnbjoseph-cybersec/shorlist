@@ -1,0 +1,27 @@
+id: "SL-3044"
+title: "Decoy: KMS signing algorithms in a Python deny list"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: true
+decoy_class: "ban_list"
+literal: "DENYLIST = [\"RSASSA_PKCS1_V1_5_SHA_256\", \"ECDSA_SHA_256\"]"
+context_filename: "policy.py"
+context_template: |
+  DENYLIST = ["RSASSA_PKCS1_V1_5_SHA_256", "ECDSA_SHA_256"]
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_Sign.html"
+    section: "Request parameters: SigningAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Valid Values: RSASSA_PSS_SHA_256 | RSASSA_PSS_SHA_384"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A list of names the code refuses; no KMS call is made and boto3 is not imported."

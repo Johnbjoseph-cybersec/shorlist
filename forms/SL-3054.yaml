@@ -1,0 +1,31 @@
+id: "SL-3054"
+title: "Terraform aws_kms_key customer_master_key_spec ECC_SECG_P256K1"
+family: "ECDSA"
+parameter_set: "secp256k1"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  customer_master_key_spec = \"ECC_SECG_P256K1\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_kms_key" "asymmetric" {
+    customer_master_key_spec = "ECC_SECG_P256K1"
+    key_usage                = "SIGN_VERIFY"
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/kms_key.html.markdown"
+    section: "Argument Reference: customer_master_key_spec"
+    read_at: "2026-11-05"
+    quote: "Valid values: `SYMMETRIC_DEFAULT`, `RSA_2048`, `RSA_3072`, `RSA_4096`, `HMAC_224`, `HMAC_256`, `HMAC_384`, `HMAC_512`, `ECC_NIST_P256`, `ECC_NIST_P384`, `ECC_NIST_P521`, `ECC_SECG_P256K1`"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Other asymmetric elliptic curve key pairs (signing and verification) ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

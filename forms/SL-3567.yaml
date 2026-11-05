@@ -1,0 +1,26 @@
+id: "SL-3567"
+title: "keytool: RSASSA-PSS key pair"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -keystore ks -storepass changeit -genkeypair -alias signer -keyalg RSASSA-PSS -dname CN=signer"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -keystore ks -storepass changeit -genkeypair -alias signer -keyalg RSASSA-PSS -dname CN=signer
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/man/keytool.html"
+    section: "keytool(1) JDK 24, Supported Named Extensions / Default Values: -keysize, -groupname"
+    read_at: "2026-11-05"
+    quote: "3072 (when using -genkeypair and -keyalg is \"RSA\", \"RSASSA-PSS\", or \"DH\")"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,33 @@
+id: "SL-3022"
+title: "AWS CLI kms create-key --key-spec ML_DSA_87 --key-usage SIGN_VERIFY"
+family: "ML-DSA"
+parameter_set: "ML-DSA-87"
+role: "signature"
+form_kind: "cli"
+language_or_product: "AWS CLI 2.39 / kms create-key"
+negative: false
+literal: "aws kms create-key --key-spec ML_DSA_87 --key-usage SIGN_VERIFY"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  aws kms create-key --key-spec ML_DSA_87 --key-usage SIGN_VERIFY
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Possible values: RSA_2048 RSA_3072 RSA_4096 ECC_NIST_P256 ECC_NIST_P384 ECC_NIST_P521 ECC_SECG_P256K1 SYMMETRIC_DEFAULT HMAC_224 HMAC_256 HMAC_384 HMAC_512 SM2 ML_DSA_44 ML_DSA_65 ML_DSA_87"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-DSA key pairs (signing and verification) ML_DSA_44 ML_DSA_65 ML_DSA_87"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-usage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with ML-DSA key pairs, specify SIGN_VERIFY ."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

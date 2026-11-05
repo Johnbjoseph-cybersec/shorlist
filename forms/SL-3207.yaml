@@ -1,0 +1,39 @@
+id: "SL-3207"
+title: "cert-manager Certificate spec.privateKey.algorithm Ed25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "cert-manager 1.21 / Certificate"
+negative: false
+literal: "    algorithm: Ed25519"
+context_filename: "certificate.yaml"
+context_template: |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: web
+  spec:
+    secretName: web-tls
+    dnsNames:
+      - example.com
+    issuerRef:
+      name: ca-issuer
+    privateKey:
+      algorithm: Ed25519
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/cert-manager/cert-manager/blob/v1.21.3/pkg/apis/certmanager/v1/types_certificate.go"
+    section: "CertificatePrivateKey.Algorithm"
+    read_at: "2026-11-05"
+    quote: "// If provided, allowed values are either `RSA`, `ECDSA` or `Ed25519`."
+  - url: "https://github.com/cert-manager/cert-manager/blob/v1.21.3/pkg/apis/certmanager/v1/types_certificate.go"
+    section: "PrivateKeyAlgorithm constants"
+    read_at: "2026-11-05"
+    quote: "Ed25519KeyAlgorithm PrivateKeyAlgorithm = \"Ed25519\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

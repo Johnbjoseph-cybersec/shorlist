@@ -1,0 +1,33 @@
+id: "SL-3020"
+title: "AWS CLI kms create-key --key-spec ECC_SECG_P256K1 --key-usage SIGN_VERIFY"
+family: "ECDSA"
+parameter_set: "secp256k1"
+role: "signature"
+form_kind: "cli"
+language_or_product: "AWS CLI 2.39 / kms create-key"
+negative: false
+literal: "aws kms create-key --key-spec ECC_SECG_P256K1 --key-usage SIGN_VERIFY"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  aws kms create-key --key-spec ECC_SECG_P256K1 --key-usage SIGN_VERIFY
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Possible values: RSA_2048 RSA_3072 RSA_4096 ECC_NIST_P256 ECC_NIST_P384 ECC_NIST_P521 ECC_SECG_P256K1"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Other asymmetric elliptic curve key pairs (signing and verification) ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies."
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-usage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with ECC_SECG_P256K1 key pairs, specify SIGN_VERIFY ."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

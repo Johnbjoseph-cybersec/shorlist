@@ -1,0 +1,25 @@
+id: "SL-3611"
+title: "JWK document: \"kty\": \"OKP\", \"crv\": \"X25519\""
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "file_format"
+language_or_product: "JOSE JWK (RFC 7517)"
+negative: false
+literal: "\"kty\": \"OKP\", \"crv\": \"X25519\""
+context_filename: "key.jwk.json"
+context_template: |
+  {"kty": "OKP", "crv": "X25519", "x": "AAAA"}
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc8037"
+    section: "RFC 8037, Appendix A.6: ECDH-ES with X25519"
+    read_at: "2026-11-05"
+    quote: "{\"kty\":\"OKP\",\"crv\":\"X25519\",\"kid\":\"Bob\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Key values are placeholders, not key material. The same names as Python dict literals are SL-0xxx registry_id rows (jwk.py); this row is the JWK file itself."

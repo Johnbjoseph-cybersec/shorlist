@@ -1,0 +1,40 @@
+id: "SL-3046"
+title: "Decoy: key policy Deny on kms:Sign when kms:SigningAlgorithm is ECDSA_SHA_256"
+family: "ECDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "AWS IAM policy / kms condition keys"
+negative: true
+decoy_class: "ban_list"
+literal: "          \"kms:SigningAlgorithm\": \"ECDSA_SHA_256\""
+context_filename: "deny-policy.json"
+context_template: |
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Deny",
+        "Action": "kms:Sign",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "kms:SigningAlgorithm": "ECDSA_SHA_256"
+          }
+        }
+      }
+    ]
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html"
+    section: "kms:SigningAlgorithm"
+    read_at: "2026-11-05"
+    quote: "You can use the kms:SigningAlgorithm condition key to control access to the Sign and Verify operations based on the value of the SigningAlgorithm parameter in the request."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The statement forbids the signing algorithm; it signs nothing."

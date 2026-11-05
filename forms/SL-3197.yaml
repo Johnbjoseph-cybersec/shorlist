@@ -1,0 +1,29 @@
+id: "SL-3197"
+title: "Vault PKI generate root key_type=ml-dsa parameter_set=ml-dsa-87"
+family: "ML-DSA"
+parameter_set: "ML-DSA-87"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / pki"
+negative: false
+literal: "vault write pki/root/generate/internal common_name=example.com ttl=87600h key_type=ml-dsa parameter_set=ml-dsa-87"
+context_filename: "pki-root.sh"
+context_template: |
+  #!/bin/sh
+  vault write pki/root/generate/internal common_name=example.com ttl=87600h key_type=ml-dsa parameter_set=ml-dsa-87
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Generate root: Parameters"
+    read_at: "2026-11-05"
+    quote: "key_type (string: \"rsa\") - Specifies the desired key type; must be rsa, ed25519, ec, or ml-dsa."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Generate root: Parameters"
+    read_at: "2026-11-05"
+    quote: "must be \"ml-dsa-44\", \"ml-dsa-65\", or \"ml-dsa-87\"."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

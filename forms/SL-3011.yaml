@@ -1,0 +1,38 @@
+id: "SL-3011"
+title: "CloudFormation AWS::KMS::Key KeySpec ML_KEM_512"
+family: "ML-KEM"
+parameter_set: "ML-KEM-512"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "AWS CloudFormation / AWS::KMS::Key"
+negative: false
+literal: "      KeySpec: ML_KEM_512"
+context_filename: "template.yaml"
+context_template: |
+  AWSTemplateFormatVersion: "2010-09-09"
+  Resources:
+    AsymmetricKey:
+      Type: AWS::KMS::Key
+      Properties:
+        KeySpec: ML_KEM_512
+        KeyUsage: ENCAPSULATE_DECAPSULATE
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-kms-key.html"
+    section: "Properties: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Allowed values: SYMMETRIC_DEFAULT | RSA_2048 | RSA_3072 | RSA_4096 | ECC_NIST_P256 | ECC_NIST_P384 | ECC_NIST_P521 | ECC_SECG_P256K1 | HMAC_224 | HMAC_256 | HMAC_384 | HMAC_512 | SM2 | ML_DSA_44 | ML_DSA_65 | ML_DSA_87 | ECC_NIST_EDWARDS25519 | ML_KEM_512"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-KEM key pairs (establishing shared secrets) ML_KEM_512 ML_KEM_768 ML_KEM_1024"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeyUsage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with ML-KEM key pairs, specify ENCAPSULATE_DECAPSULATE."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

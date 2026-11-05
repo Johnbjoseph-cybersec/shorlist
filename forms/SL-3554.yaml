@@ -1,0 +1,31 @@
+id: "SL-3554"
+title: "Decoy: PKCS #11 CKM_RSA_PKCS_OAEP in an error message"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: true
+decoy_class: "log_string"
+literal: "fprintf(stderr, \"token does not support CKM_RSA_PKCS_OAEP\\n\");"
+context_filename: "token.c"
+context_template: |
+  #include <stdio.h>
+
+  int main(void)
+  {
+      fprintf(stderr, "token does not support CKM_RSA_PKCS_OAEP\n");
+      return 1;
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKM_RSA_PKCS_OAEP"
+    read_at: "2026-11-05"
+    quote: "#define CKM_RSA_PKCS_OAEP 0x00000009UL"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

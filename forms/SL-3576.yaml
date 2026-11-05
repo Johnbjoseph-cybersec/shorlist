@@ -1,0 +1,26 @@
+id: "SL-3576"
+title: "keytool: ML-KEM-768 key pair (-keyalg)"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -keystore ks -storepass changeit -genkeypair -alias mlkem2 -keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -keystore ks -storepass changeit -genkeypair -alias mlkem2 -keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://openjdk.org/jeps/496"
+    section: "JEP 496, Generating ML-KEM key pairs: keytool"
+    read_at: "2026-11-05"
+    quote: "-keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The CA entry named by -signer is assumed to exist in the keystore; its creation is left out so the template contains one form. ML-KEM and ML-DSA in keytool need JDK 24 or newer."

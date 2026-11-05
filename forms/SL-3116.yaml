@@ -1,0 +1,37 @@
+id: "SL-3116"
+title: "Terraform google_kms_crypto_key algorithm KEM_ECDH_P256"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/google 8.10"
+negative: false
+literal: "    algorithm = \"KEM_ECDH_P256\""
+context_filename: "main.tf"
+context_template: |
+  resource "google_kms_crypto_key" "key" {
+    name     = "app-key"
+    key_ring = "projects/example/locations/global/keyRings/app"
+    purpose  = "KEY_ENCAPSULATION"
+
+    version_template {
+      algorithm = "KEM_ECDH_P256"
+    }
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 256
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-google/blob/v8.10.0/website/docs/r/kms_crypto_key.html.markdown"
+    section: "Argument Reference: version_template.algorithm"
+    read_at: "2026-11-05"
+    quote: "The algorithm to use when creating a version based on this template."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "Key encapsulation: Elliptic Curve Diffie-Hellman with NIST P-256 key that returns shared secret."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The KMS 'KEM' wraps an ECDH exchange (the REST reference: \"Elliptic Curve Diffie-Hellman ... that returns shared secret\"); KEY_ENCAPSULATION as its purpose is inferred from the KEM_ prefix and the algorithms page, which does not list KEM_ECDH_* in its key-encapsulation table."

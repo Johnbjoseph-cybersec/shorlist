@@ -1,0 +1,26 @@
+id: "SL-3168"
+title: "Terraform tls_private_key algorithm ED25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/tls 4.4"
+negative: false
+literal: "  algorithm = \"ED25519\""
+context_filename: "main.tf"
+context_template: |
+  resource "tls_private_key" "key" {
+    algorithm = "ED25519"
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-tls/blob/v4.4.2/docs/resources/private_key.md"
+    section: "Schema: Required"
+    read_at: "2026-11-05"
+    quote: "`algorithm` (String) Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,40 @@
+id: "SL-3045"
+title: "Decoy: IAM Deny on kms:CreateKey when kms:KeySpec is RSA_2048"
+family: "RSA"
+parameter_set: "2048"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "AWS IAM policy / kms condition keys"
+negative: true
+decoy_class: "ban_list"
+literal: "          \"kms:KeySpec\": \"RSA_2048\""
+context_filename: "deny-policy.json"
+context_template: |
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Deny",
+        "Action": "kms:CreateKey",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "kms:KeySpec": "RSA_2048"
+          }
+        }
+      }
+    ]
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html"
+    section: "kms:KeySpec"
+    read_at: "2026-11-05"
+    quote: "You can use this condition key in an IAM policy to control access to the CreateKey operation based on the value of the KeySpec parameter in a CreateKey request."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The statement forbids creating the key; it creates nothing."

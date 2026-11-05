@@ -1,0 +1,29 @@
+id: "SL-3178"
+title: "Vault transit key type=ecdsa-p384"
+family: "ECDSA"
+parameter_set: "P-384"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / transit"
+negative: false
+literal: "vault write -f transit/keys/app-key type=ecdsa-p384"
+context_filename: "transit.sh"
+context_template: |
+  #!/bin/sh
+  vault write -f transit/keys/app-key type=ecdsa-p384
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 384
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "type (string: \"aes256-gcm96\") – Specifies the type of key to create."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "ecdsa-p384 – ECDSA using the P-384 elliptic curve (asymmetric)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

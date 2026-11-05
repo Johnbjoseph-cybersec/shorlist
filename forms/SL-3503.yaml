@@ -1,0 +1,39 @@
+id: "SL-3503"
+title: "PKCS #11: key type CKK_ECDSA"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: false
+literal: "CK_KEY_TYPE keyType = CKK_ECDSA;"
+context_filename: "key_template.c"
+context_template: |
+  #define CK_PTR *
+  #define CK_DECLARE_FUNCTION(returnType, name) returnType name
+  #define CK_DECLARE_FUNCTION_POINTER(returnType, name) returnType (* name)
+  #define CK_CALLBACK_FUNCTION(returnType, name) returnType (* name)
+  #ifndef NULL_PTR
+  #define NULL_PTR 0
+  #endif
+  #include "pkcs11.h"
+
+  int main(void)
+  {
+      CK_KEY_TYPE keyType = CKK_ECDSA;
+      (void)keyType;
+      return 0;
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKK_ECDSA"
+    read_at: "2026-11-05"
+    quote: "#define CKK_ECDSA 0x00000003UL /* Deprecated */"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "CKK_ECDSA is the deprecated name of CKK_EC (same value); the literal names ECDSA, so the row is filed as ECDSA. The template includes the OASIS PKCS #11 3.2 header (pkcs11.h, which includes pkcs11t.h); the constant is not re-defined locally, so the literal's line is the only line that names it. The five platform macros before the include are the UNIX definitions pkcs11.h documents as required. Where the header is not installed the syntax check falls back to balanced delimiters; checked locally with gcc -fsyntax-only against the v3.2 OS headers."

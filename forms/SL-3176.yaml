@@ -1,0 +1,29 @@
+id: "SL-3176"
+title: "Vault transit key type=ed25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / transit"
+negative: false
+literal: "vault write -f transit/keys/app-key type=ed25519"
+context_filename: "transit.sh"
+context_template: |
+  #!/bin/sh
+  vault write -f transit/keys/app-key type=ed25519
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "type (string: \"aes256-gcm96\") – Specifies the type of key to create."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "ed25519 – ED25519 (asymmetric, supports derivation)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

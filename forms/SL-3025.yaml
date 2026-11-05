@@ -1,0 +1,41 @@
+id: "SL-3025"
+title: "Boto3 kms.create_key KeySpec RSA_3072, KeyUsage ENCRYPT_DECRYPT"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: "3072"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "key = kms.create_key(KeySpec=\"RSA_3072\", KeyUsage=\"ENCRYPT_DECRYPT\")"
+context_filename: "kms_key.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  key = kms.create_key(KeySpec="RSA_3072", KeyUsage="ENCRYPT_DECRYPT")
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: 3072
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "KeySpec='RSA_2048'|'RSA_3072"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric RSA key pairs (encryption and decryption -or- signing and verification) RSA_2048 RSA_3072 RSA_4096"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeyUsage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with RSA key pairs, specify ENCRYPT_DECRYPT or SIGN_VERIFY."
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html"
+    section: "Response elements: EncryptionAlgorithms"
+    read_at: "2026-11-05"
+    quote: "Valid Values: SYMMETRIC_DEFAULT | RSAES_OAEP_SHA_1 | RSAES_OAEP_SHA_256"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The key usage on the same line (ENCRYPT_DECRYPT) makes it an RSAES-OAEP encryption key."

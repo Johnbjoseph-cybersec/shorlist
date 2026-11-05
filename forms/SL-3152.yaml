@@ -1,0 +1,29 @@
+id: "SL-3152"
+title: "Azure CLI az keyvault key create --kty EC --curve P-256"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "cli"
+language_or_product: "Azure CLI / az keyvault key create"
+negative: false
+literal: "az keyvault key create --vault-name envault --name app-key --kty EC --curve P-256"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  az keyvault key create --vault-name envault --name app-key --kty EC --curve P-256
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://learn.microsoft.com/en-us/cli/azure/keyvault/key?view=azure-cli-latest"
+    section: "az keyvault key create: --kty"
+    read_at: "2026-11-05"
+    quote: "Accepted values: | EC, EC-HSM, RSA, RSA-HSM, oct, oct-HSM"
+  - url: "https://learn.microsoft.com/en-us/cli/azure/keyvault/key?view=azure-cli-latest"
+    section: "az keyvault key create: --curve"
+    read_at: "2026-11-05"
+    quote: "Accepted values: | P-256, P-256K, P-384, P-521"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

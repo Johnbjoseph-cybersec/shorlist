@@ -1,0 +1,27 @@
+id: "SL-3604"
+title: "PEM label \"DH PARAMETERS\""
+family: "DH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN DH PARAMETERS-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN DH PARAMETERS-----
+  VGhpcyBpcyBub3QgYSBrZXku
+  -----END DH PARAMETERS-----
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_DHPARAMS"
+    read_at: "2026-11-05"
+    quote: "# define PEM_STRING_DHPARAMS \"DH PARAMETERS\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The base64 body is a placeholder, not key material."

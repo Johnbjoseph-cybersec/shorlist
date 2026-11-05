@@ -1,0 +1,33 @@
+id: "SL-3128"
+title: "gcloud kms keys create --default-algorithm=ml-kem-768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "gcloud CLI / kms keys create"
+negative: false
+literal: "gcloud kms keys create app-key --location=global --keyring=app --purpose=key-encapsulation --default-algorithm=ml-kem-768"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  gcloud kms keys create app-key --location=global --keyring=app --purpose=key-encapsulation --default-algorithm=ml-kem-768
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://cloud.google.com/sdk/gcloud/reference/kms/keys/create"
+    section: "Flags: --default-algorithm"
+    read_at: "2026-11-05"
+    quote: "ml-kem-768"
+  - url: "https://cloud.google.com/sdk/gcloud/reference/kms/keys/create"
+    section: "gcloud kms keys create: description"
+    read_at: "2026-11-05"
+    quote: "--default-algorithm is required when creating a symmetric signing key, an asymmetric key, or an external key."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "ML_KEM_768 | ML-KEM-768 (FIPS 203)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

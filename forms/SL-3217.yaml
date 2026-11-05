@@ -1,0 +1,38 @@
+id: "SL-3217"
+title: "cert-manager Certificate spec.signatureAlgorithm ECDSAWithSHA512"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "config_value"
+language_or_product: "cert-manager 1.21 / Certificate"
+negative: false
+literal: "  signatureAlgorithm: ECDSAWithSHA512"
+context_filename: "certificate.yaml"
+context_template: |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: web
+  spec:
+    secretName: web-tls
+    dnsNames:
+      - example.com
+    issuerRef:
+      name: ca-issuer
+    signatureAlgorithm: ECDSAWithSHA512
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/cert-manager/cert-manager/blob/v1.21.3/pkg/apis/certmanager/v1/types_certificate.go"
+    section: "CertificateSpec.SignatureAlgorithm"
+    read_at: "2026-11-05"
+    quote: "// Allowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512."
+  - url: "https://github.com/cert-manager/cert-manager/blob/v1.21.3/pkg/apis/certmanager/v1/types_certificate.go"
+    section: "SignatureAlgorithm constants"
+    read_at: "2026-11-05"
+    quote: "SignatureAlgorithm = \"ECDSAWithSHA512\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

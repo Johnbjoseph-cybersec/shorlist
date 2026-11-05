@@ -1,0 +1,28 @@
+id: "SL-3171"
+title: "Terraform tls_private_key ecdsa_curve P384"
+family: "ECDSA"
+parameter_set: "P-384"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/tls 4.4"
+negative: false
+literal: "  ecdsa_curve = \"P384\""
+context_filename: "main.tf"
+context_template: |
+  resource "tls_private_key" "key" {
+    algorithm   = "ECDSA"
+    ecdsa_curve = "P384"
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 384
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-tls/blob/v4.4.2/docs/resources/private_key.md"
+    section: "Schema: Optional"
+    read_at: "2026-11-05"
+    quote: "`ecdsa_curve` (String) When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The literal is the curve line; algorithm = \"ECDSA\" on the line above is required for it to apply."

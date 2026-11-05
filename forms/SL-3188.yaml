@@ -1,0 +1,31 @@
+id: "SL-3188"
+title: "Vault transit create-key API payload type ecdsa-p256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "HashiCorp Vault v2.x / transit"
+negative: false
+literal: "  \"type\": \"ecdsa-p256\","
+context_filename: "payload.json"
+context_template: |
+  {
+    "type": "ecdsa-p256",
+    "derived": false
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Sample payload"
+    read_at: "2026-11-05"
+    quote: "{ \"type\": \"ecdsa-p256\", \"derived\": true }"
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "ecdsa-p256 – ECDSA using the P-256 elliptic curve (asymmetric)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

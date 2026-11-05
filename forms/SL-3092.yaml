@@ -1,0 +1,41 @@
+id: "SL-3092"
+title: "Terraform google_kms_crypto_key algorithm RSA_SIGN_RAW_PKCS1_3072"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: "3072"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/google 8.10"
+negative: false
+literal: "    algorithm = \"RSA_SIGN_RAW_PKCS1_3072\""
+context_filename: "main.tf"
+context_template: |
+  resource "google_kms_crypto_key" "key" {
+    name     = "app-key"
+    key_ring = "projects/example/locations/global/keyRings/app"
+    purpose  = "ASYMMETRIC_SIGN"
+
+    version_template {
+      algorithm = "RSA_SIGN_RAW_PKCS1_3072"
+    }
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: 3072
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-google/blob/v8.10.0/website/docs/r/kms_crypto_key.html.markdown"
+    section: "Argument Reference: version_template.algorithm"
+    read_at: "2026-11-05"
+    quote: "The algorithm to use when creating a version based on this template."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "RSASSA-PKCS1-v1_5 signing without encoding, with a 3072 bit key."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Algorithms beginning with RSA_SIGN_ are usable with CryptoKey.purpose ASYMMETRIC_SIGN."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

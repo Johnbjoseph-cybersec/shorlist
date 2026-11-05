@@ -1,0 +1,34 @@
+id: "SL-3187"
+title: "Vault transit key type=hybrid parameter_set=65 hybrid_key_type_pqc=ml-dsa hybrid_key_type_ec=ecdsa-p256"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65 + ECDSA P-256"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / transit"
+negative: false
+literal: "vault write -f transit/keys/app-key type=hybrid parameter_set=65 hybrid_key_type_pqc=ml-dsa hybrid_key_type_ec=ecdsa-p256"
+context_filename: "transit.sh"
+context_template: |
+  #!/bin/sh
+  vault write -f transit/keys/app-key type=hybrid parameter_set=65 hybrid_key_type_pqc=ml-dsa hybrid_key_type_ec=ecdsa-p256
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "hybrid - hybrid signatures combining a post-quantum algorithm and an elliptic curve algorithm (asymmetric)"
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "Supported key types are ecdsa-p256, ecdsa-p384, ecdsa-p521, and ed25519."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: parameter_set"
+    read_at: "2026-11-05"
+    quote: "parameter_set (string:\"\") - The parameter set to use for ML-DSA or SLH-DSA. Required for ML-DSA, SLH-DSA, and hybrid keys."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Enterprise-only key type in the Vault documentation. Hybrid ML-DSA + ECDSA signature: scored on the post-quantum half (ML-DSA)."

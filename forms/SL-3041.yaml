@@ -1,0 +1,35 @@
+id: "SL-3041"
+title: "Boto3 kms.sign SigningAlgorithm ED25519_SHA_512"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "sig = kms.sign(KeyId=\"alias/signer\", Message=b\"data\", MessageType=\"RAW\", SigningAlgorithm=\"ED25519_SHA_512\")"
+context_filename: "kms_sign.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  sig = kms.sign(KeyId="alias/signer", Message=b"data", MessageType="RAW", SigningAlgorithm="ED25519_SHA_512")
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/sign.html"
+    section: "KMS.Client.sign: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "SigningAlgorithm='RSASSA_PSS_SHA_256'|'RSASSA_PSS_SHA_384'|'RSASSA_PSS_SHA_512'|'RSASSA_PKCS1_V1_5_SHA_256'|'RSASSA_PKCS1_V1_5_SHA_384'|'RSASSA_PKCS1_V1_5_SHA_512'|'ECDSA_SHA_256'|'ECDSA_SHA_384'|'ECDSA_SHA_512'|'SM2DSA'|'ML_DSA_SHAKE_256'|'ED25519_SHA_512"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_Sign.html"
+    section: "Request parameters: SigningAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Valid Values: RSASSA_PSS_SHA_256 | RSASSA_PSS_SHA_384 | RSASSA_PSS_SHA_512 | RSASSA_PKCS1_V1_5_SHA_256 | RSASSA_PKCS1_V1_5_SHA_384 | RSASSA_PKCS1_V1_5_SHA_512 | ECDSA_SHA_256 | ECDSA_SHA_384 | ECDSA_SHA_512 | SM2DSA | ML_DSA_SHAKE_256 | ED25519_SHA_512"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "ED25519_SHA_512 signing algorithm requires MessageType:RAW, while ED25519_PH_SHA_512 requires MessageType:DIGEST."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

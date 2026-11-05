@@ -1,0 +1,32 @@
+id: "SL-3068"
+title: "Terraform aws_acm_certificate key_algorithm RSA_2048"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  key_algorithm     = \"RSA_2048\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_acm_certificate" "site" {
+    domain_name       = "example.com"
+    validation_method = "DNS"
+    key_algorithm     = "RSA_2048"
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/acm_certificate.html.markdown"
+    section: "Argument Reference: key_algorithm"
+    read_at: "2026-11-05"
+    quote: "`key_algorithm` - (Optional) Specifies the algorithm of the public and private key pair that your Amazon issued certificate uses to encrypt data."
+  - url: "https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html"
+    section: "Request parameters: KeyAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Algorithms supported for an ACM certificate request include: RSA_2048 EC_prime256v1 EC_secp384r1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

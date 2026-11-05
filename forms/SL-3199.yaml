@@ -1,0 +1,25 @@
+id: "SL-3199"
+title: "Vault SSH CA generate_signing_key key_type=ecdsa-sha2-nistp256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / ssh"
+negative: false
+literal: "vault write ssh-client-signer/config/ca generate_signing_key=true key_type=ecdsa-sha2-nistp256"
+context_filename: "ssh-ca.sh"
+context_template: |
+  #!/bin/sh
+  vault write ssh-client-signer/config/ca generate_signing_key=true key_type=ecdsa-sha2-nistp256
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/ssh"
+    section: "Submit CA information: Parameters: key_type"
+    read_at: "2026-11-05"
+    quote: "Valid values are OpenSSH key type identifiers (ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, or ssh-ed25519) or an algorithm (rsa, ec, or ed25519)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

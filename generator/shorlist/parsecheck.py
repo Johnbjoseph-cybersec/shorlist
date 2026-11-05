@@ -21,6 +21,13 @@
 | nginx.conf, *.conf   | balanced braces; every statement ends in ';', '{' or '}'  |
 | sshd_config          | each line is 'Keyword value', Keyword alphabetic           |
 | java.security        | each line is a comment or key=value                       |
+| *.yaml, *.yml        | yaml.safe_load; the document must be a mapping            |
+| *.json               | json.loads; the document must be an object or an array    |
+| *.tf, *.hcl          | strings closed on their line; balanced (), [] and {}      |
+| *.pem                | BEGIN/END labels match (RFC 7468); base64 body            |
+| authorized_keys      | each line: [options] keytype base64 [comment]             |
+| known_hosts          | each line: [@marker] hosts keytype base64 [comment]       |
+| *.cnf (OpenSSL)      | each line: '[ section ]' or 'key = value'                 |
 
 Java and Go are checked for syntax only: an import of a package the local toolchain does
 not ship (e.g. crypto/mlkem before Go 1.24) does not fail gofmt; javac does resolve imports,
@@ -29,11 +36,14 @@ so it needs JDK 24 or newer for javax.crypto.KEM ML-KEM names (the class exists 
 from __future__ import annotations
 
 import ast
+import json
 import re
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
+
+import yaml
 
 OK, SKIP, FAIL = "ok", "skipped", "fail"
 
@@ -179,6 +189,98 @@ def _ios(text: str) -> tuple[str, str]:
     return (OK, "") if last == "end" else (FAIL, "does not end with 'end'")
 
 
+def _yaml(text: str) -> tuple[str, str]:
+    try:
+        doc = yaml.safe_load(text)
+    except yaml.YAMLError as e:
+        return FAIL, str(e).replace("\n", " ")[:400]
+    return (OK, "") if isinstance(doc, dict) else (FAIL, "document is not a mapping")
+
+
+def _json(text: str) -> tuple[str, str]:
+    try:
+        doc = json.loads(text)
+    except json.JSONDecodeError as e:
+        return FAIL, f"line {e.lineno}: {e.msg}"
+    return (OK, "") if isinstance(doc, (dict, list)) else (FAIL, "document is not an object or array")
+
+
+def _hcl(text: str) -> tuple[str, str]:
+    """HCL (Terraform, Vault): no parser is run. Strings must close on their line (heredocs are
+    not supported); (), [] and {} must balance outside strings and comments."""
+    code, i, n, line = [], 0, len(text), 1
+    while i < n:
+        ch = text[i]
+        if ch == "\n":
+            line += 1
+        if ch == "#" or text.startswith("//", i):
+            while i < n and text[i] != "\n":
+                i += 1
+            continue
+        if text.startswith("/*", i):
+            j = text.find("*/", i + 2)
+            if j < 0:
+                return FAIL, f"line {line}: unclosed /* comment"
+            line += text.count("\n", i, j)
+            i = j + 2
+            continue
+        if text.startswith("<<", i):
+            return FAIL, f"line {line}: heredoc not supported by this check"
+        if ch == '"':
+            i += 1
+            while i < n and text[i] not in '"\n':
+                i += 2 if text[i] == "\\" else 1
+            if i >= n or text[i] != '"':
+                return FAIL, f"line {line}: unclosed string"
+            i += 1
+            code.append('""')
+            continue
+        code.append(ch)
+        i += 1
+    return _delims("".join(code))
+
+
+# RFC 7468: label = [ labelchar *( ["-" / SP] labelchar ) ], labelchar = %x21-2C / %x2E-7E
+_LABEL = r"((?:[!-,.-~](?:[- ]?[!-,.-~])*)?)"
+_PEM = re.compile(r"-----BEGIN " + _LABEL + r"-----\n([A-Za-z0-9+/=\n]*?)-----END " + _LABEL + r"-----")
+
+
+def _pem(text: str) -> tuple[str, str]:
+    """Each BEGIN line has an END line with the same label and a base64 body between them."""
+    begins = text.count("-----BEGIN ")
+    blocks = _PEM.findall(text)
+    if not begins or len(blocks) != begins or text.count("-----END ") != begins:
+        return FAIL, "BEGIN/END lines unpaired or body not base64"
+    for b, body, e in blocks:
+        if b != e:
+            return FAIL, f"BEGIN {b} closed by END {e}"
+        if not body.strip():
+            return FAIL, f"empty body in {b}"
+    return OK, ""
+
+
+_KT = r"[a-z][a-z0-9@._+-]*"
+_B64 = r"((?:[A-Za-z0-9+/]{4})+(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)"
+_AUTHKEY = re.compile(r'(?:(?:[^\s"]|"(?:\\.|[^"\\])*")+\s+)?' + _KT + r"\s+" + _B64 + r"(\s+.*)?")
+_KNOWNHOST = re.compile(r"(?:@(?:cert-authority|revoked)\s+)?\S+\s+" + _KT + r"\s+" + _B64 + r"(\s+.*)?")
+
+
+def _keylines(text: str, pattern: re.Pattern, what: str) -> tuple[str, str]:
+    for n, raw in _lines(text, "#"):
+        if not pattern.fullmatch(raw.strip()):
+            return FAIL, f"line {n}: not {what}"
+    return OK, ""
+
+
+def _cnf(text: str) -> tuple[str, str]:
+    """OpenSSL config (openssl.cnf, ASN1_generate_nconf input): sections and key = value lines."""
+    for n, raw in _lines(text, "#"):
+        line = raw.strip()
+        if not re.fullmatch(r"\[\s*[A-Za-z0-9_.$ -]+\s*\]|[A-Za-z0-9_.$-]+\s*=.*", line):
+            return FAIL, f"line {n}: not '[ section ]' or 'key = value'"
+    return OK, ""
+
+
 def check(filename: str, text: str) -> tuple[str, str]:
     """Return (status, detail); status is ok, skipped or fail."""
     if filename.endswith(".py"):
@@ -234,4 +336,18 @@ def check(filename: str, text: str) -> tuple[str, str]:
         return _run(tool, text, filename[filename.rindex("."):])
     if filename.endswith((".kt", ".swift")):
         return _csharp(text)
+    if filename.endswith((".yaml", ".yml")):
+        return _yaml(text)
+    if filename.endswith(".json"):
+        return _json(text)
+    if filename.endswith((".tf", ".hcl")):
+        return _hcl(text)
+    if filename.endswith(".pem"):
+        return _pem(text)
+    if filename == "authorized_keys":
+        return _keylines(text, _AUTHKEY, "'[options] keytype base64 [comment]'")
+    if filename == "known_hosts":
+        return _keylines(text, _KNOWNHOST, "'[@marker] hosts keytype base64 [comment]'")
+    if filename.endswith(".cnf"):
+        return _cnf(text)
     return FAIL, f"no syntax check for {filename!r}; add one to parsecheck.py"

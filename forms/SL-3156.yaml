@@ -1,0 +1,27 @@
+id: "SL-3156"
+title: "Decoy: Key Vault key types in a shell echo"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "Azure CLI / az keyvault key create"
+negative: true
+decoy_class: "log_string"
+literal: "echo \"policy: --kty RSA-HSM keys are no longer issued, request EC-HSM\""
+context_filename: "notice.sh"
+context_template: |
+  #!/bin/sh
+  echo "policy: --kty RSA-HSM keys are no longer issued, request EC-HSM"
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://learn.microsoft.com/en-us/cli/azure/keyvault/key?view=azure-cli-latest"
+    section: "az keyvault key create: --kty"
+    read_at: "2026-11-05"
+    quote: "Accepted values: | EC, EC-HSM, RSA, RSA-HSM, oct, oct-HSM"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The script only prints text; no key is created."

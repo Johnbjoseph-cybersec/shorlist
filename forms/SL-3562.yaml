@@ -1,0 +1,25 @@
+id: "SL-3562"
+title: "keytool: RSA key pair, default size"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -genkeypair -keyalg rsa"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -genkeypair -keyalg rsa
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/man/keytool.html"
+    section: "keytool(1) JDK 24, Generate the Key Pair (option defaults accepted)"
+    read_at: "2026-11-05"
+    quote: "keytool -genkeypair -keyalg rsa"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,32 @@
+id: "SL-3051"
+title: "Terraform aws_kms_key customer_master_key_spec ECC_NIST_P256"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  customer_master_key_spec = \"ECC_NIST_P256\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_kms_key" "asymmetric" {
+    customer_master_key_spec = "ECC_NIST_P256"
+    key_usage                = "SIGN_VERIFY"
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/kms_key.html.markdown"
+    section: "Argument Reference: customer_master_key_spec"
+    read_at: "2026-11-05"
+    quote: "Valid values: `SYMMETRIC_DEFAULT`, `RSA_2048`, `RSA_3072`, `RSA_4096`, `HMAC_224`, `HMAC_256`, `HMAC_384`, `HMAC_512`, `ECC_NIST_P256`"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric NIST-standard elliptic curve key pairs (signing and verification -or- deriving shared secrets) ECC_NIST_P256 (secp256r1) ECC_NIST_P384 (secp384r1) ECC_NIST_P521 (secp521r1)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The NIST curve key spec allows SIGN_VERIFY or KEY_AGREEMENT; the KeyUsage line, not this one, decides the role."

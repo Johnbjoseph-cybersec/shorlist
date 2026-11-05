@@ -1,0 +1,32 @@
+id: "SL-3043"
+title: "Boto3 kms.derive_shared_secret KeyAgreementAlgorithm ECDH"
+family: "ECDH"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "secret = kms.derive_shared_secret(KeyId=\"alias/agree\", KeyAgreementAlgorithm=\"ECDH\", PublicKey=peer_der)"
+context_filename: "kms_agree.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  peer_der = b""
+  secret = kms.derive_shared_secret(KeyId="alias/agree", KeyAgreementAlgorithm="ECDH", PublicKey=peer_der)
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/derive_shared_secret.html"
+    section: "KMS.Client.derive_shared_secret: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "KeyAgreementAlgorithm='ECDH',"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_DeriveSharedSecret.html"
+    section: "Request parameters: KeyAgreementAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Valid Values: ECDH"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

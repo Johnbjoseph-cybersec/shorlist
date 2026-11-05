@@ -1,0 +1,39 @@
+id: "SL-3551"
+title: "PKCS #11: parameter set CKP_SLH_DSA_SHAKE_256F"
+family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHAKE-256f"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: false
+literal: "CK_SLH_DSA_PARAMETER_SET_TYPE parameterSet = CKP_SLH_DSA_SHAKE_256F;"
+context_filename: "params.c"
+context_template: |
+  #define CK_PTR *
+  #define CK_DECLARE_FUNCTION(returnType, name) returnType name
+  #define CK_DECLARE_FUNCTION_POINTER(returnType, name) returnType (* name)
+  #define CK_CALLBACK_FUNCTION(returnType, name) returnType (* name)
+  #ifndef NULL_PTR
+  #define NULL_PTR 0
+  #endif
+  #include "pkcs11.h"
+
+  int main(void)
+  {
+      CK_SLH_DSA_PARAMETER_SET_TYPE parameterSet = CKP_SLH_DSA_SHAKE_256F;
+      (void)parameterSet;
+      return 0;
+  }
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKP_SLH_DSA_SHAKE_256F"
+    read_at: "2026-11-05"
+    quote: "#define CKP_SLH_DSA_SHAKE_256F 0x0000000cUL"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The template includes the OASIS PKCS #11 3.2 header (pkcs11.h, which includes pkcs11t.h); the constant is not re-defined locally, so the literal's line is the only line that names it. The five platform macros before the include are the UNIX definitions pkcs11.h documents as required. Where the header is not installed the syntax check falls back to balanced delimiters; checked locally with gcc -fsyntax-only against the v3.2 OS headers. The value is passed as CKA_PARAMETER_SET; SLH-DSA has twelve such constants, two are listed."

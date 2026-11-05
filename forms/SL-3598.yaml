@@ -1,0 +1,27 @@
+id: "SL-3598"
+title: "PEM label \"DSA PRIVATE KEY\""
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN DSA PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN DSA PRIVATE KEY-----
+  VGhpcyBpcyBub3QgYSBrZXku
+  -----END DSA PRIVATE KEY-----
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_DSA"
+    read_at: "2026-11-05"
+    quote: "# define PEM_STRING_DSA \"DSA PRIVATE KEY\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The base64 body is a placeholder, not key material."

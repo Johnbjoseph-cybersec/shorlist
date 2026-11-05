@@ -1,0 +1,28 @@
+id: "SL-3174"
+title: "Terraform tls_private_key rsa_bits 4096"
+family: "RSA"
+parameter_set: "4096"
+role: "both"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/tls 4.4"
+negative: false
+literal: "  rsa_bits  = 4096"
+context_filename: "main.tf"
+context_template: |
+  resource "tls_private_key" "key" {
+    algorithm = "RSA"
+    rsa_bits  = 4096
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 4096
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-tls/blob/v4.4.2/docs/resources/private_key.md"
+    section: "Schema: Optional"
+    read_at: "2026-11-05"
+    quote: "`rsa_bits` (Number) When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The literal is the size line; algorithm = \"RSA\" on the line above is required for it to apply."

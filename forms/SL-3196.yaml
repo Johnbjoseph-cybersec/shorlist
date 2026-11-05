@@ -1,0 +1,30 @@
+id: "SL-3196"
+title: "Vault PKI generate root key_type=ec key_bits=384"
+family: "ECDSA"
+parameter_set: "P-384"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / pki"
+negative: false
+literal: "vault write pki/root/generate/internal common_name=example.com ttl=87600h key_type=ec key_bits=384"
+context_filename: "pki-root.sh"
+context_template: |
+  #!/bin/sh
+  vault write pki/root/generate/internal common_name=example.com ttl=87600h key_type=ec key_bits=384
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 384
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Generate root: Parameters"
+    read_at: "2026-11-05"
+    quote: "key_type (string: \"rsa\") - Specifies the desired key type; must be rsa, ed25519, ec, or ml-dsa."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Generate root: Parameters"
+    read_at: "2026-11-05"
+    quote: "with key_type=rsa, allowed values are: 2048 (default), 3072, 4096 or 8192; with key_type=ec, allowed values are: 224, 256 (default), 384, or 521"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "A root CA key signs certificates and its own CRL; key_bits picks the NIST P-curve."

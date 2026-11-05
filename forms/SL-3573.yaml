@@ -1,0 +1,26 @@
+id: "SL-3573"
+title: "keytool: X448 key pair signed by a CA entry"
+family: "X448"
+parameter_set: "X448"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -keystore ks -storepass changeit -genkeypair -alias kx -keyalg X448 -dname CN=kx -signer ca"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -keystore ks -storepass changeit -genkeypair -alias kx -keyalg X448 -dname CN=kx -signer ca
+expected:
+  family: "X448"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/man/keytool.html"
+    section: "keytool(1) JDK 24, Commands for Creating or Adding Data to the Keystore: -genkeypair"
+    read_at: "2026-11-05"
+    quote: "(i.e. the -keyalg value is XDH, X25519, X448, or DH) as these keys cannot be used for digital signatures"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The CA entry named by -signer is assumed to exist in the keystore; its creation is left out so the template contains one form."

@@ -1,0 +1,26 @@
+id: "candidate"
+title: "pkcs11-tool: generate a GOST R 34.10-2012 256-bit key pair"
+family: "EC"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "OpenSC pkcs11-tool 0.26.1"
+negative: false
+literal: "pkcs11-tool --login --keypairgen --key-type GOSTR3410-2012-256:B"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  pkcs11-tool --login --keypairgen --key-type GOSTR3410-2012-256:B
+expected:
+  family: "EC"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/OpenSC/OpenSC/blob/0.26.1/doc/tools/pkcs11-tool.1.xml"
+    section: "pkcs11-tool(1), Options: --key-type specification"
+    read_at: "2026-11-05"
+    quote: "for example RSA:2048, EC:prime256v1, GOSTR3410-2012-256:B,"
+status: "candidate"
+candidate_reason: "GOST R 34.10-2012 is an elliptic-curve signature outside families.yaml (see std-oid-gost3410-2012-256.yaml); needs a family decision before it can be a row."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

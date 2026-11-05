@@ -1,0 +1,33 @@
+id: "SL-3127"
+title: "gcloud kms keys create --default-algorithm=pq-sign-slh-dsa-sha2-128s"
+family: "SLH-DSA"
+parameter_set: "SLH-DSA-SHA2-128s"
+role: "signature"
+form_kind: "cli"
+language_or_product: "gcloud CLI / kms keys create"
+negative: false
+literal: "gcloud kms keys create app-key --location=global --keyring=app --purpose=asymmetric-signing --default-algorithm=pq-sign-slh-dsa-sha2-128s"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  gcloud kms keys create app-key --location=global --keyring=app --purpose=asymmetric-signing --default-algorithm=pq-sign-slh-dsa-sha2-128s
+expected:
+  family: "SLH-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://cloud.google.com/sdk/gcloud/reference/kms/keys/create"
+    section: "Flags: --default-algorithm"
+    read_at: "2026-11-05"
+    quote: "pq-sign-slh-dsa-sha2-128s"
+  - url: "https://cloud.google.com/sdk/gcloud/reference/kms/keys/create"
+    section: "gcloud kms keys create: description"
+    read_at: "2026-11-05"
+    quote: "--default-algorithm is required when creating a symmetric signing key, an asymmetric key, or an external key."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

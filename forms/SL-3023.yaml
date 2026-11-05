@@ -1,0 +1,33 @@
+id: "SL-3023"
+title: "AWS CLI kms create-key --key-spec ML_KEM_1024 --key-usage ENCAPSULATE_DECAPSULATE"
+family: "ML-KEM"
+parameter_set: "ML-KEM-1024"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "AWS CLI 2.39 / kms create-key"
+negative: false
+literal: "aws kms create-key --key-spec ML_KEM_1024 --key-usage ENCAPSULATE_DECAPSULATE"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  aws kms create-key --key-spec ML_KEM_1024 --key-usage ENCAPSULATE_DECAPSULATE
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Possible values: RSA_2048 RSA_3072 RSA_4096 ECC_NIST_P256 ECC_NIST_P384 ECC_NIST_P521 ECC_SECG_P256K1 SYMMETRIC_DEFAULT HMAC_224 HMAC_256 HMAC_384 HMAC_512 SM2 ML_DSA_44 ML_DSA_65 ML_DSA_87 ECC_NIST_EDWARDS25519 ML_KEM_512 ML_KEM_768 ML_KEM_1024"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-KEM key pairs (establishing shared secrets) ML_KEM_512 ML_KEM_768 ML_KEM_1024"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-usage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with ML-KEM key pairs, specify ENCAPSULATE_DECAPSULATE ."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

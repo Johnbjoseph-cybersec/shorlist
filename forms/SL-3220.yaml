@@ -1,0 +1,37 @@
+id: "SL-3220"
+title: "Decoy: key algorithm in a Kubernetes annotation"
+family: "ECDSA"
+parameter_set: "P-384"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "cert-manager 1.21 / Certificate"
+negative: true
+decoy_class: "log_string"
+literal: "    note.example.com/previous-key: ECDSA P-384"
+context_filename: "certificate.yaml"
+context_template: |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: web
+    annotations:
+      note.example.com/previous-key: ECDSA P-384
+  spec:
+    secretName: web-tls
+    dnsNames:
+      - example.com
+    issuerRef:
+      name: ca-issuer
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 384
+source:
+  - url: "https://github.com/cert-manager/cert-manager/blob/v1.21.3/pkg/apis/certmanager/v1/types_certificate.go"
+    section: "PrivateKeyAlgorithm constants"
+    read_at: "2026-11-05"
+    quote: "ECDSAKeyAlgorithm PrivateKeyAlgorithm = \"ECDSA\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "An annotation is free text read by no controller here."

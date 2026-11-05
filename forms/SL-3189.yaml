@@ -1,0 +1,29 @@
+id: "SL-3189"
+title: "Vault PKI role key_type=rsa key_bits=4096"
+family: "RSA"
+parameter_set: "4096"
+role: "both"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / pki"
+negative: false
+literal: "vault write pki/roles/web allowed_domains=example.com allow_subdomains=true key_type=rsa key_bits=4096"
+context_filename: "pki-role.sh"
+context_template: |
+  #!/bin/sh
+  vault write pki/roles/web allowed_domains=example.com allow_subdomains=true key_type=rsa key_bits=4096
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 4096
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Create/Update role: Parameters"
+    read_at: "2026-11-05"
+    quote: "key_type (string: \"rsa\") - Specifies the type of key to generate for generated private keys and the type of key expected for submitted CSRs."
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Create/Update role: Parameters"
+    read_at: "2026-11-05"
+    quote: "with key_type=rsa, allowed values are: 2048 (default), 3072, 4096 or 8192; with key_type=ec, allowed values are: 224, 256 (default), 384, or 521"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

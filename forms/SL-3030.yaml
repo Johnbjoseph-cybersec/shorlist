@@ -1,0 +1,35 @@
+id: "SL-3030"
+title: "Boto3 kms.create_key KeySpec ML_KEM_768, KeyUsage ENCAPSULATE_DECAPSULATE"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "key = kms.create_key(KeySpec=\"ML_KEM_768\", KeyUsage=\"ENCAPSULATE_DECAPSULATE\")"
+context_filename: "kms_key.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  key = kms.create_key(KeySpec="ML_KEM_768", KeyUsage="ENCAPSULATE_DECAPSULATE")
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "KeySpec='RSA_2048'|'RSA_3072'|'RSA_4096'|'ECC_NIST_P256'|'ECC_NIST_P384'|'ECC_NIST_P521'|'ECC_SECG_P256K1'|'SYMMETRIC_DEFAULT'|'HMAC_224'|'HMAC_256'|'HMAC_384'|'HMAC_512'|'SM2'|'ML_DSA_44'|'ML_DSA_65'|'ML_DSA_87'|'ECC_NIST_EDWARDS25519'|'ML_KEM_512'|'ML_KEM_768"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-KEM key pairs (establishing shared secrets) ML_KEM_512 ML_KEM_768 ML_KEM_1024"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeyUsage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with ML-KEM key pairs, specify ENCAPSULATE_DECAPSULATE."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

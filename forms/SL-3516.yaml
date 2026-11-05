@@ -1,0 +1,40 @@
+id: "SL-3516"
+title: "PKCS #11: mechanism CKM_RSA_PKCS_PSS"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: false
+literal: "CK_MECHANISM mechanism = {CKM_RSA_PKCS_PSS, NULL_PTR, 0};"
+context_filename: "mechanism.c"
+context_template: |
+  #define CK_PTR *
+  #define CK_DECLARE_FUNCTION(returnType, name) returnType name
+  #define CK_DECLARE_FUNCTION_POINTER(returnType, name) returnType (* name)
+  #define CK_CALLBACK_FUNCTION(returnType, name) returnType (* name)
+  #ifndef NULL_PTR
+  #define NULL_PTR 0
+  #endif
+  #include "pkcs11.h"
+
+  int main(void)
+  {
+      CK_MECHANISM mechanism = {CKM_RSA_PKCS_PSS, NULL_PTR, 0};
+      (void)mechanism;
+      return 0;
+  }
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKM_RSA_PKCS_PSS"
+    read_at: "2026-11-05"
+    quote: "#define CKM_RSA_PKCS_PSS 0x0000000dUL"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The template includes the OASIS PKCS #11 3.2 header (pkcs11.h, which includes pkcs11t.h); the constant is not re-defined locally, so the literal's line is the only line that names it. The five platform macros before the include are the UNIX definitions pkcs11.h documents as required. Where the header is not installed the syntax check falls back to balanced delimiters; checked locally with gcc -fsyntax-only against the v3.2 OS headers."

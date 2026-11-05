@@ -1,0 +1,32 @@
+id: "SL-3015"
+title: "Decoy: RSA_4096 in the Description of a SYMMETRIC_DEFAULT KMS key"
+family: "RSA"
+parameter_set: "4096"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "AWS CloudFormation / AWS::KMS::Key"
+negative: true
+decoy_class: "log_string"
+literal: "      Description: Replaces the RSA_4096 signing key retired in 2025"
+context_filename: "template.yaml"
+context_template: |
+  AWSTemplateFormatVersion: "2010-09-09"
+  Resources:
+    DataKey:
+      Type: AWS::KMS::Key
+      Properties:
+        Description: Replaces the RSA_4096 signing key retired in 2025
+        KeySpec: SYMMETRIC_DEFAULT
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 4096
+source:
+  - url: "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-kms-key.html"
+    section: "Properties: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Allowed values: SYMMETRIC_DEFAULT | RSA_2048 | RSA_3072 | RSA_4096"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The key is symmetric (out of scope); RSA_4096 appears only in the free-text Description."

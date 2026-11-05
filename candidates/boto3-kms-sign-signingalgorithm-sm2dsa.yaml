@@ -1,0 +1,32 @@
+id: "candidate"
+title: "Boto3 kms.sign SigningAlgorithm SM2DSA"
+family: "SM2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "sig = kms.sign(KeyId=\"alias/signer\", Message=b\"data\", MessageType=\"RAW\", SigningAlgorithm=\"SM2DSA\")"
+context_filename: "kms_sign.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  sig = kms.sign(KeyId="alias/signer", Message=b"data", MessageType="RAW", SigningAlgorithm="SM2DSA")
+expected:
+  family: "SM2"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/sign.html"
+    section: "KMS.Client.sign: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "SigningAlgorithm='RSASSA_PSS_SHA_256'|'RSASSA_PSS_SHA_384'|'RSASSA_PSS_SHA_512'|'RSASSA_PKCS1_V1_5_SHA_256'|'RSASSA_PKCS1_V1_5_SHA_384'|'RSASSA_PKCS1_V1_5_SHA_512'|'ECDSA_SHA_256'|'ECDSA_SHA_384'|'ECDSA_SHA_512'|'SM2DSA"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_Sign.html"
+    section: "Request parameters: SigningAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Valid Values: RSASSA_PSS_SHA_256 | RSASSA_PSS_SHA_384 | RSASSA_PSS_SHA_512 | RSASSA_PKCS1_V1_5_SHA_256 | RSASSA_PKCS1_V1_5_SHA_384 | RSASSA_PKCS1_V1_5_SHA_512 | ECDSA_SHA_256 | ECDSA_SHA_384 | ECDSA_SHA_512 | SM2DSA"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: SM2 signature (Shor-vulnerable elliptic curve); SM2 is not in families.yaml. Needs a family decision before it can enter forms/."

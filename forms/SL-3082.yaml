@@ -1,0 +1,44 @@
+id: "SL-3082"
+title: "Terraform aws_lb_listener ssl_policy ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09"
+family: "ML-KEM"
+parameter_set: "SecP256r1MLKEM768, SecP384r1MLKEM1024, X25519MLKEM768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  ssl_policy        = \"ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_lb_listener" "https" {
+    load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/web/0123456789abcdef"
+    port              = 443
+    protocol          = "HTTPS"
+    ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09"
+    certificate_arn   = "arn:aws:acm:us-east-1:111122223333:certificate/00000000-0000-0000-0000-000000000000"
+
+    default_action {
+      type             = "forward"
+      target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/web/0123456789abcdef"
+    }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/lb_listener.html.markdown"
+    section: "Argument Reference: ssl_policy"
+    read_at: "2026-11-05"
+    quote: "`ssl_policy` - (Optional) Name of the SSL Policy for the listener."
+  - url: "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html"
+    section: "Security policies for your Application Load Balancer"
+    read_at: "2026-11-05"
+    quote: "Security policies with PQ in their names offer hybrid post-quantum key exchange."
+  - url: "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html"
+    section: "Security policies for your Application Load Balancer"
+    read_at: "2026-11-05"
+    quote: "The hybrid post-quantum policies support SecP256r1MLKEM768, SecP384r1MLKEM1024 and X25519MLKEM768 algorithms."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM), as the README and SL-0011 define. Groups offered: SecP256r1MLKEM768, SecP384r1MLKEM1024, X25519MLKEM768. The ELB guide says the PQ policies also support classical key exchange for compatibility; the policy name fixes that ML-KEM hybrids are offered, not which group a client negotiates."

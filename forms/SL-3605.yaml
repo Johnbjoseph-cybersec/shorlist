@@ -1,0 +1,26 @@
+id: "SL-3605"
+title: "Decoy: PEM label EC PRIVATE KEY in an error message"
+family: "EC"
+parameter_set: null
+role: "n.a."
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: true
+decoy_class: "log_string"
+literal: "echo \"expected -----BEGIN EC PRIVATE KEY----- in key.pem\" >&2"
+context_filename: "check_key.sh"
+context_template: |
+  #!/bin/sh
+  echo "expected -----BEGIN EC PRIVATE KEY----- in key.pem" >&2
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_ECPRIVATEKEY"
+    read_at: "2026-11-05"
+    quote: "# define PEM_STRING_ECPRIVATEKEY \"EC PRIVATE KEY\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

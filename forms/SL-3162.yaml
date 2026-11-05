@@ -1,0 +1,31 @@
+id: "SL-3162"
+title: "Terraform azurerm_key_vault_key curve P-256K"
+family: "EC"
+parameter_set: "secp256k1"
+role: "both"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/azurerm 5.13"
+negative: false
+literal: "  curve        = \"P-256K\""
+context_filename: "main.tf"
+context_template: |
+  resource "azurerm_key_vault_key" "app" {
+    name         = "app-key"
+    key_vault_id = "/subscriptions/0000/resourceGroups/rg/providers/Microsoft.KeyVault/vaults/kv"
+    key_type     = "EC"
+    curve        = "P-256K"
+    key_opts     = ["sign", "verify"]
+  }
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-azurerm/blob/v5.13.0/website/docs/r/key_vault_key.html.markdown"
+    section: "Arguments Reference: curve"
+    read_at: "2026-11-05"
+    quote: "`curve` - (Optional) Specifies the curve to use when creating an `EC` key. Possible values are `P-256`, `P-256K`, `P-384`, and `P-521`."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The literal is the curve line; key_type = \"EC\" on the line above is required for it to apply."

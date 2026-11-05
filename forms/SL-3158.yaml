@@ -1,0 +1,35 @@
+id: "SL-3158"
+title: "Terraform azurerm_key_vault_key key_type RSA-HSM"
+family: "RSA"
+parameter_set: "4096"
+role: "both"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/azurerm 5.13"
+negative: false
+literal: "  key_type     = \"RSA-HSM\""
+context_filename: "main.tf"
+context_template: |
+  resource "azurerm_key_vault_key" "app" {
+    name         = "app-key"
+    key_vault_id = "/subscriptions/0000/resourceGroups/rg/providers/Microsoft.KeyVault/vaults/kv"
+    key_type     = "RSA-HSM"
+    key_size     = 4096
+    key_opts     = ["sign", "verify"]
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 4096
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-azurerm/blob/v5.13.0/website/docs/r/key_vault_key.html.markdown"
+    section: "Arguments Reference: key_type"
+    read_at: "2026-11-05"
+    quote: "`key_type` - (Required) Specifies the Key Type to use for this Key Vault Key. Possible values are `EC` (Elliptic Curve), `EC-HSM`, `RSA` and `RSA-HSM`."
+  - url: "https://github.com/hashicorp/terraform-provider-azurerm/blob/v5.13.0/website/docs/r/key_vault_key.html.markdown"
+    section: "Arguments Reference: key_size"
+    read_at: "2026-11-05"
+    quote: "Note*: This field is required if `key_type` is `RSA` or `RSA-HSM`."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The size is set by key_size = 4096 on the next line, which RSA keys require."

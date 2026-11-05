@@ -1,0 +1,29 @@
+id: "SL-3556"
+title: "Decoy: PKCS #11 CKK_EC_EDWARDS named in a comment"
+family: "EdDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: true
+decoy_class: "comment"
+literal: "// CKK_EC_EDWARDS keys are rejected by this module"
+context_filename: "token.c"
+context_template: |
+  // CKK_EC_EDWARDS keys are rejected by this module
+  int main(void)
+  {
+      return 0;
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKK_EC_EDWARDS"
+    read_at: "2026-11-05"
+    quote: "#define CKK_EC_EDWARDS 0x00000040UL"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

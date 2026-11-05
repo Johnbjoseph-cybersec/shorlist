@@ -1,0 +1,25 @@
+id: "SL-3592"
+title: "ssh-keygen: RSA-3072 key"
+family: "RSA"
+parameter_set: "3072"
+role: "signature"
+form_kind: "cli"
+language_or_product: "OpenSSH 10.2 ssh-keygen"
+negative: false
+literal: "ssh-keygen -t rsa -b 3072 -f id_rsa -N ''"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  ssh-keygen -t rsa -b 3072 -f id_rsa -N ''
+expected:
+  family: "RSA"
+  role: "signature"
+  size: 3072
+source:
+  - url: "https://github.com/openssh/openssh-portable/blob/V_10_2_P1/ssh-keygen.1"
+    section: "ssh-keygen(1) OpenSSH 10.2, -b bits"
+    read_at: "2026-11-05"
+    quote: "For RSA keys, the minimum size is 1024 bits and the default is 3072 bits."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

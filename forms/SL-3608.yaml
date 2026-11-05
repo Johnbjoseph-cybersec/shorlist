@@ -1,0 +1,25 @@
+id: "SL-3608"
+title: "JWK document: \"kty\": \"EC\", \"crv\": \"P-384\""
+family: "EC"
+parameter_set: "P-384"
+role: "both"
+form_kind: "file_format"
+language_or_product: "JOSE JWK (RFC 7517)"
+negative: false
+literal: "\"kty\": \"EC\", \"crv\": \"P-384\""
+context_filename: "key.jwk.json"
+context_template: |
+  {"kty": "EC", "crv": "P-384", "x": "AAAA", "y": "AAAA"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 384
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7518"
+    section: "RFC 7518, Section 7.6.2: JSON Web Key Elliptic Curve, Initial Registry Contents"
+    read_at: "2026-11-05"
+    quote: "Curve Name: \"P-384\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Key values are placeholders, not key material. The same names as Python dict literals are SL-0xxx registry_id rows (jwk.py); this row is the JWK file itself."

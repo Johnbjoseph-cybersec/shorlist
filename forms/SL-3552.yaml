@@ -1,0 +1,39 @@
+id: "SL-3552"
+title: "PKCS #11: CKA_EC_PARAMS as curveName \"edwards25519\""
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "curve_name"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: false
+literal: "CK_BYTE ecParams[] = {0x13, 0x0c, 0x65, 0x64, 0x77, 0x61, 0x72, 0x64, 0x73, 0x32, 0x35, 0x35, 0x31, 0x39};"
+context_filename: "ec_params.c"
+context_template: |
+  #define CK_PTR *
+  #define CK_DECLARE_FUNCTION(returnType, name) returnType name
+  #define CK_DECLARE_FUNCTION_POINTER(returnType, name) returnType (* name)
+  #define CK_CALLBACK_FUNCTION(returnType, name) returnType (* name)
+  #ifndef NULL_PTR
+  #define NULL_PTR 0
+  #endif
+  #include "pkcs11.h"
+
+  int main(void)
+  {
+      CK_BYTE ecParams[] = {0x13, 0x0c, 0x65, 0x64, 0x77, 0x61, 0x72, 0x64, 0x73, 0x32, 0x35, 0x35, 0x31, 0x39};
+      (void)ecParams;
+      return 0;
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/pkcs11-spec-v3.2-os.html"
+    section: "6.3.5 Edwards Elliptic Curve public key objects: sample template with Edwards25519 as curveName"
+    read_at: "2026-11-05"
+    quote: "CK_BYTE ecParams[] = {0x13, 0x0c, 0x65, 0x64, 0x77, 0x61, 0x72, 0x64, 0x73, 0x32, 0x35, 0x35, 0x31, 0x39};"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "DER PrintableString \"edwards25519\", the value of CKA_EC_PARAMS for an Edwards key. The template includes the OASIS PKCS #11 3.2 header (pkcs11.h, which includes pkcs11t.h); the constant is not re-defined locally, so the literal's line is the only line that names it. The five platform macros before the include are the UNIX definitions pkcs11.h documents as required. Where the header is not installed the syntax check falls back to balanced delimiters; checked locally with gcc -fsyntax-only against the v3.2 OS headers."

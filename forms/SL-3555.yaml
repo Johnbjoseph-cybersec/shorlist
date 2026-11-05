@@ -1,0 +1,31 @@
+id: "SL-3555"
+title: "Decoy: PKCS #11 CKM_ML_KEM in a log string"
+family: "ML-KEM"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: true
+decoy_class: "log_string"
+literal: "puts(\"CKM_ML_KEM not listed by C_GetMechanismList\");"
+context_filename: "token.c"
+context_template: |
+  #include <stdio.h>
+
+  int main(void)
+  {
+      puts("CKM_ML_KEM not listed by C_GetMechanismList");
+      return 1;
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKM_ML_KEM"
+    read_at: "2026-11-05"
+    quote: "#define CKM_ML_KEM 0x00000017UL"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

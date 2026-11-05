@@ -1,0 +1,29 @@
+id: "SL-3582"
+title: "JSSE: jdk.tls.namedGroups=\"x25519\""
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Java / JSSE (JDK 21)"
+negative: false
+literal: "java -Djdk.tls.namedGroups=\"x25519\" -jar app.jar"
+context_filename: "run.sh"
+context_template: |
+  #!/bin/sh
+  java -Djdk.tls.namedGroups="x25519" -jar app.jar
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/21/security/java-secure-socket-extension-jsse-reference-guide.html"
+    section: "JSSE Reference Guide (JDK 21), Customizing the Supported Named Groups for TLS/DTLS Key Exchange"
+    read_at: "2026-11-05"
+    quote: "jdk.tls.namedGroups=\"secp521r1,secp256r1,ffdhe2048\""
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Java Security Standard Algorithm Names (JDK 25), Named Groups"
+    read_at: "2026-11-05"
+    quote: "x25519 x448 | The elliptic curves as specified in RFC 8446 and RFC 8442."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

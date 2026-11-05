@@ -1,0 +1,26 @@
+id: "SL-3587"
+title: "Decoy: secp256k1 in the JDK disabled named curves list"
+family: "EC"
+parameter_set: "secp256k1"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Java / java.security (JDK 24)"
+negative: true
+decoy_class: "ban_list"
+literal: "jdk.disabled.namedCurves=secp256k1"
+context_filename: "java.security"
+context_template: |
+  jdk.disabled.namedCurves=secp256k1
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-24-ga/src/java.base/share/conf/security/java.security"
+    section: "conf/security/java.security (jdk-24-ga)"
+    read_at: "2026-11-05"
+    quote: "This property contains a list of disabled EC Named Curves that can be included"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "secp256k1 is a documented ECGenParameterSpec name (Java Security Standard Algorithm Names)."

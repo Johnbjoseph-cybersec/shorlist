@@ -1,0 +1,25 @@
+id: "SL-3194"
+title: "Vault PKI role key_type=ed25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / pki"
+negative: false
+literal: "vault write pki/roles/web allowed_domains=example.com allow_subdomains=true key_type=ed25519"
+context_filename: "pki-role.sh"
+context_template: |
+  #!/bin/sh
+  vault write pki/roles/web allowed_domains=example.com allow_subdomains=true key_type=ed25519
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/pki"
+    section: "Create/Update role: Parameters"
+    read_at: "2026-11-05"
+    quote: "key_type (string: \"rsa\") - Specifies the type of key to generate for generated private keys and the type of key expected for submitted CSRs."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

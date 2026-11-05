@@ -1,0 +1,28 @@
+id: "candidate"
+title: "Terraform aws_kms_key customer_master_key_spec ML_KEM_768"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  customer_master_key_spec = \"ML_KEM_768\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_kms_key" "asymmetric" {
+    customer_master_key_spec = "ML_KEM_768"
+    key_usage                = "ENCAPSULATE_DECAPSULATE"
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-KEM key pairs (establishing shared secrets) ML_KEM_512 ML_KEM_768 ML_KEM_1024"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Not a row: The AWS KMS API accepts ML_KEM_768, but the hashicorp/aws v6.72.0 kms_key page lists no ML_KEM_* value for customer_master_key_spec and no ENCAPSULATE_DECAPSULATE for key_usage (checked by grep over the saved page). Move in when a provider release documents it."

@@ -1,0 +1,25 @@
+id: "SL-3566"
+title: "keytool: DSA key pair"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -keystore ks -storepass changeit -genkeypair -alias signer -keyalg DSA -dname CN=signer"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -keystore ks -storepass changeit -genkeypair -alias signer -keyalg DSA -dname CN=signer
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/man/keytool.html"
+    section: "keytool(1) JDK 24, Supported Named Extensions / Default Values: -keysize, -groupname"
+    read_at: "2026-11-05"
+    quote: "2048 (when using -genkeypair and -keyalg is \"DSA\")"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

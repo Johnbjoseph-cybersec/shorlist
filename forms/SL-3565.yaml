@@ -1,0 +1,29 @@
+id: "SL-3565"
+title: "keytool: EC key pair on secp256r1 (-groupname)"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "cli"
+language_or_product: "Java / keytool (JDK 24)"
+negative: false
+literal: "keytool -keystore ks -storepass changeit -genkeypair -alias server -keyalg EC -groupname secp256r1 -dname CN=server"
+context_filename: "keystore.sh"
+context_template: |
+  #!/bin/sh
+  keytool -keystore ks -storepass changeit -genkeypair -alias server -keyalg EC -groupname secp256r1 -dname CN=server
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/man/keytool.html"
+    section: "keytool(1) JDK 24, Commands for Creating or Adding Data to the Keystore: -genkeypair"
+    read_at: "2026-11-05"
+    quote: "{-groupname name}: Group name. For example, an Elliptic Curve name."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "ParameterSpec Names > ECGenParameterSpec"
+    read_at: "2026-11-05"
+    quote: "secp256k1 secp256r1 secp384r1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,25 @@
+id: "SL-3558"
+title: "pkcs11-tool: generate an EC prime256v1 key pair on a token"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "cli"
+language_or_product: "OpenSC pkcs11-tool 0.26.1"
+negative: false
+literal: "pkcs11-tool --login --keypairgen --key-type EC:prime256v1"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  pkcs11-tool --login --keypairgen --key-type EC:prime256v1
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://github.com/OpenSC/OpenSC/blob/0.26.1/doc/tools/pkcs11-tool.1.xml"
+    section: "pkcs11-tool(1), Options: --key-type specification"
+    read_at: "2026-11-05"
+    quote: "for example RSA:2048, EC:prime256v1, GOSTR3410-2012-256:B,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

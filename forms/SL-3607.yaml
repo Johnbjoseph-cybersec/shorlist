@@ -1,0 +1,25 @@
+id: "SL-3607"
+title: "JWK document: \"kty\": \"EC\", \"crv\": \"P-256\""
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "file_format"
+language_or_product: "JOSE JWK (RFC 7517)"
+negative: false
+literal: "\"kty\": \"EC\", \"crv\": \"P-256\""
+context_filename: "key.jwk.json"
+context_template: |
+  {"kty": "EC", "crv": "P-256", "x": "AAAA", "y": "AAAA"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7517"
+    section: "RFC 7517, Section 3: Example JWK"
+    read_at: "2026-11-05"
+    quote: "{\"kty\":\"EC\", \"crv\":\"P-256\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Key values are placeholders, not key material. The same names as Python dict literals are SL-0xxx registry_id rows (jwk.py); this row is the JWK file itself."

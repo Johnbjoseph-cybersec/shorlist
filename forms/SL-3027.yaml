@@ -1,0 +1,36 @@
+id: "SL-3027"
+title: "Boto3 kms.create_key KeySpec ECC_NIST_P384, KeyUsage KEY_AGREEMENT"
+family: "ECDH"
+parameter_set: "P-384"
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "key = kms.create_key(KeySpec=\"ECC_NIST_P384\", KeyUsage=\"KEY_AGREEMENT\")"
+context_filename: "kms_key.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  key = kms.create_key(KeySpec="ECC_NIST_P384", KeyUsage="KEY_AGREEMENT")
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 384
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "KeySpec='RSA_2048'|'RSA_3072'|'RSA_4096'|'ECC_NIST_P256'|'ECC_NIST_P384"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric NIST-standard elliptic curve key pairs (signing and verification -or- deriving shared secrets) ECC_NIST_P256 (secp256r1) ECC_NIST_P384 (secp384r1) ECC_NIST_P521 (secp521r1)"
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/create_key.html"
+    section: "KMS.Client.create_key: Parameters: KeyUsage"
+    read_at: "2026-11-05"
+    quote: "For asymmetric KMS keys with NIST-standard elliptic curve key pairs, specify SIGN_VERIFY or KEY_AGREEMENT."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The key usage on the same line decides the role of the key pair."

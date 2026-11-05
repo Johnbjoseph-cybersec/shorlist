@@ -1,0 +1,28 @@
+id: "SL-3139"
+title: "Azure Key Vault create key kty EC-HSM, crv P-256K"
+family: "EC"
+parameter_set: "secp256k1"
+role: "both"
+form_kind: "api_string"
+language_or_product: "Azure Key Vault REST 2025-07-01"
+negative: false
+literal: "{\"kty\": \"EC-HSM\", \"crv\": \"P-256K\"}"
+context_filename: "create-key.json"
+context_template: |
+  {"kty": "EC-HSM", "crv": "P-256K"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://learn.microsoft.com/en-us/rest/api/keyvault/keys/create-key/create-key?view=rest-keyvault-keys-2025-07-01"
+    section: "Definitions: JsonWebKeyType"
+    read_at: "2026-11-05"
+    quote: "EC-HSM | Elliptic Curve with a private key which is stored in the HSM."
+  - url: "https://learn.microsoft.com/en-us/rest/api/keyvault/keys/create-key/create-key?view=rest-keyvault-keys-2025-07-01"
+    section: "Definitions: JsonWebKeyCurveName"
+    read_at: "2026-11-05"
+    quote: "P-256K | The SECG SECP256K1 elliptic curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

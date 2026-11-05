@@ -1,0 +1,31 @@
+id: "SL-3057"
+title: "Terraform aws_kms_key customer_master_key_spec ML_DSA_87"
+family: "ML-DSA"
+parameter_set: "ML-DSA-87"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  customer_master_key_spec = \"ML_DSA_87\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_kms_key" "asymmetric" {
+    customer_master_key_spec = "ML_DSA_87"
+    key_usage                = "SIGN_VERIFY"
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/kms_key.html.markdown"
+    section: "Argument Reference: customer_master_key_spec"
+    read_at: "2026-11-05"
+    quote: "Valid values: `SYMMETRIC_DEFAULT`, `RSA_2048`, `RSA_3072`, `RSA_4096`, `HMAC_224`, `HMAC_256`, `HMAC_384`, `HMAC_512`, `ECC_NIST_P256`, `ECC_NIST_P384`, `ECC_NIST_P521`, `ECC_SECG_P256K1`, `ML_DSA_44`, `ML_DSA_65`, `ML_DSA_87`"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "Asymmetric ML-DSA key pairs (signing and verification) ML_DSA_44 ML_DSA_65 ML_DSA_87"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

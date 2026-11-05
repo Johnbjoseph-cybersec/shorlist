@@ -1,0 +1,41 @@
+id: "SL-3100"
+title: "Terraform google_kms_crypto_key algorithm RSA_DECRYPT_OAEP_4096_SHA1"
+family: "RSA"
+cyclonedx_family: "RSAES-OAEP"
+parameter_set: "4096"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/google 8.10"
+negative: false
+literal: "    algorithm = \"RSA_DECRYPT_OAEP_4096_SHA1\""
+context_filename: "main.tf"
+context_template: |
+  resource "google_kms_crypto_key" "key" {
+    name     = "app-key"
+    key_ring = "projects/example/locations/global/keyRings/app"
+    purpose  = "ASYMMETRIC_DECRYPT"
+
+    version_template {
+      algorithm = "RSA_DECRYPT_OAEP_4096_SHA1"
+    }
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: 4096
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-google/blob/v8.10.0/website/docs/r/kms_crypto_key.html.markdown"
+    section: "Argument Reference: version_template.algorithm"
+    read_at: "2026-11-05"
+    quote: "The algorithm to use when creating a version based on this template."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "RSAES-OAEP 4096 bit key with a SHA1 digest."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Algorithms beginning with RSA_DECRYPT_ are usable with CryptoKey.purpose ASYMMETRIC_DECRYPT."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

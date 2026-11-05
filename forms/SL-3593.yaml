@@ -1,0 +1,29 @@
+id: "SL-3593"
+title: "ssh-keygen: FIDO ECDSA (ecdsa-sk) key"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "cli"
+language_or_product: "OpenSSH 10.2 ssh-keygen"
+negative: false
+literal: "ssh-keygen -t ecdsa-sk -f id_ecdsa_sk"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  ssh-keygen -t ecdsa-sk -f id_ecdsa_sk
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://github.com/openssh/openssh-portable/blob/V_10_2_P1/ssh-keygen.1"
+    section: "ssh-keygen(1) OpenSSH 10.2, -t"
+    read_at: "2026-11-05"
+    quote: "Specifies the type of key to create."
+  - url: "https://github.com/openssh/openssh-portable/blob/V_10_2_P1/PROTOCOL.u2f"
+    section: "PROTOCOL.u2f, SSH U2F Key formats"
+    read_at: "2026-11-05"
+    quote: "sk-ecdsa-sha2-nistp256@openssh.com"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

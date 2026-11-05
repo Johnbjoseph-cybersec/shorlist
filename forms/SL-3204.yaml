@@ -1,0 +1,28 @@
+id: "SL-3204"
+title: "Decoy: Vault transit rsa-2048 key in a shell comment"
+family: "RSA"
+parameter_set: "2048"
+role: "n.a."
+form_kind: "cli"
+language_or_product: "HashiCorp Vault v2.x / transit"
+negative: true
+decoy_class: "comment"
+literal: "# vault write -f transit/keys/legacy type=rsa-2048"
+context_filename: "transit.sh"
+context_template: |
+  #!/bin/sh
+  # vault write -f transit/keys/legacy type=rsa-2048
+  vault write -f transit/keys/data type=aes256-gcm96
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://developer.hashicorp.com/vault/api-docs/secret/transit"
+    section: "Create key: Parameters: type"
+    read_at: "2026-11-05"
+    quote: "rsa-2048 - RSA with bit size of 2048 (asymmetric)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The command that runs creates a symmetric AES-256-GCM key."

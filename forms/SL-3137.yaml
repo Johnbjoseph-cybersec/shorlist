@@ -1,0 +1,28 @@
+id: "SL-3137"
+title: "Azure Key Vault create key kty EC, crv P-521"
+family: "EC"
+parameter_set: "P-521"
+role: "both"
+form_kind: "api_string"
+language_or_product: "Azure Key Vault REST 2025-07-01"
+negative: false
+literal: "{\"kty\": \"EC\", \"crv\": \"P-521\"}"
+context_filename: "create-key.json"
+context_template: |
+  {"kty": "EC", "crv": "P-521"}
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 521
+source:
+  - url: "https://learn.microsoft.com/en-us/rest/api/keyvault/keys/create-key/create-key?view=rest-keyvault-keys-2025-07-01"
+    section: "Definitions: JsonWebKeyType"
+    read_at: "2026-11-05"
+    quote: "EC | Elliptic Curve."
+  - url: "https://learn.microsoft.com/en-us/rest/api/keyvault/keys/create-key/create-key?view=rest-keyvault-keys-2025-07-01"
+    section: "Definitions: JsonWebKeyCurveName"
+    read_at: "2026-11-05"
+    quote: "P-521 | The NIST P-521 elliptic curve, AKA SECG curve SECP521R1."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

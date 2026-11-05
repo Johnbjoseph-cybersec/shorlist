@@ -1,0 +1,31 @@
+id: "SL-3596"
+title: "PEM label \"RSA PRIVATE KEY\""
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN RSA PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN RSA PRIVATE KEY-----
+  VGhpcyBpcyBub3QgYSBrZXku
+  -----END RSA PRIVATE KEY-----
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_RSA"
+    read_at: "2026-11-05"
+    quote: "# define PEM_STRING_RSA \"RSA PRIVATE KEY\""
+  - url: "https://www.rfc-editor.org/rfc/rfc8017"
+    section: "RFC 8017, Appendix A.1"
+    read_at: "2026-11-05"
+    quote: "RSAPrivateKey ::= SEQUENCE {"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The base64 body is a placeholder, not key material. PKCS #1 RSAPrivateKey (RFC 8017, Appendix A.1.2) in PEM."

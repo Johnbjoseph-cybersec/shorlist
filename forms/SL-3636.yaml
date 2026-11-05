@@ -1,0 +1,28 @@
+id: "SL-3636"
+title: "Decoy: ASN1_generate_nconf rsaEncryption OID commented out"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "oid"
+language_or_product: "OpenSSL 3.5 ASN1_generate_nconf config"
+negative: true
+decoy_class: "comment"
+literal: "# algorithm=OID:rsaEncryption   (old RSA key, replaced)"
+context_filename: "asn1.cnf"
+context_template: |
+  asn1=SEQUENCE:alg
+  [alg]
+  # algorithm=OID:rsaEncryption   (old RSA key, replaced)
+  parameter=NULL
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.openssl.org/3.5/man3/ASN1_generate_nconf/"
+    section: "ASN1_generate_nconf(3), EXAMPLES: SubjectPublicKeyInfo"
+    read_at: "2026-11-05"
+    quote: "algorithm=OID:rsaEncryption"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

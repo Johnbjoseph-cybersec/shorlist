@@ -1,0 +1,30 @@
+id: "SL-3630"
+title: "ASN1_generate_nconf config: OID:prime256v1"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "curve_name"
+language_or_product: "OpenSSL 3.5 ASN1_generate_nconf config"
+negative: false
+literal: "curve=OID:prime256v1"
+context_filename: "asn1.cnf"
+context_template: |
+  asn1=SEQUENCE:alg
+  [alg]
+  curve=OID:prime256v1
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://docs.openssl.org/3.5/man3/ASN1_generate_nconf/"
+    section: "ASN1_generate_nconf(3) OpenSSL 3.5, Supported Types: OBJECT, OID"
+    read_at: "2026-11-05"
+    quote: "Encodes an ASN1 OBJECT IDENTIFIER, the value string can be a short name, a long name or numerical format."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/crypto/objects/objects.txt"
+    section: "crypto/objects/objects.txt (OpenSSL 3.5.0)"
+    read_at: "2026-11-05"
+    quote: "X9-62_primeCurve 7 : prime256v1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

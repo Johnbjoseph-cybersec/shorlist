@@ -1,0 +1,25 @@
+id: "SL-3142"
+title: "Azure Key Vault sign request alg PS512"
+family: "RSA"
+cyclonedx_family: "RSASSA-PSS"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Azure Key Vault REST 2025-07-01"
+negative: false
+literal: "{\"alg\": \"PS512\", \"value\": \"RnJvbSBzaWduaW5nIGRpZ2VzdA\"}"
+context_filename: "sign.json"
+context_template: |
+  {"alg": "PS512", "value": "RnJvbSBzaWduaW5nIGRpZ2VzdA"}
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://learn.microsoft.com/en-us/rest/api/keyvault/keys/sign/sign?view=rest-keyvault-keys-2025-07-01"
+    section: "Definitions: JsonWebKeySignatureAlgorithm"
+    read_at: "2026-11-05"
+    quote: "PS512 | RSASSA-PSS using SHA-512 and MGF1 with SHA-512"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

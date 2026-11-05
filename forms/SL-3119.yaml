@@ -1,0 +1,29 @@
+id: "SL-3119"
+title: "Decoy: Cloud KMS EC_SIGN_P256_SHA256 in a Terraform comment"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/google 8.10"
+negative: true
+decoy_class: "comment"
+literal: "  # purpose = \"ASYMMETRIC_SIGN\" with algorithm = \"EC_SIGN_P256_SHA256\", moved to the signing project"
+context_filename: "main.tf"
+context_template: |
+  resource "google_kms_crypto_key" "key" {
+    name     = "data-key"
+    key_ring = "projects/example/locations/global/keyRings/app"
+    # purpose = "ASYMMETRIC_SIGN" with algorithm = "EC_SIGN_P256_SHA256", moved to the signing project
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "ECDSA on the NIST P-256 curve with a SHA256 digest."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

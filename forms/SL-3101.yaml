@@ -1,0 +1,40 @@
+id: "SL-3101"
+title: "Terraform google_kms_crypto_key algorithm EC_SIGN_P256_SHA256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/google 8.10"
+negative: false
+literal: "    algorithm = \"EC_SIGN_P256_SHA256\""
+context_filename: "main.tf"
+context_template: |
+  resource "google_kms_crypto_key" "key" {
+    name     = "app-key"
+    key_ring = "projects/example/locations/global/keyRings/app"
+    purpose  = "ASYMMETRIC_SIGN"
+
+    version_template {
+      algorithm = "EC_SIGN_P256_SHA256"
+    }
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-google/blob/v8.10.0/website/docs/r/kms_crypto_key.html.markdown"
+    section: "Argument Reference: version_template.algorithm"
+    read_at: "2026-11-05"
+    quote: "The algorithm to use when creating a version based on this template."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm: Enums"
+    read_at: "2026-11-05"
+    quote: "ECDSA on the NIST P-256 curve with a SHA256 digest."
+  - url: "https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+    section: "CryptoKeyVersionAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Algorithms beginning with EC_SIGN_ are usable with CryptoKey.purpose ASYMMETRIC_SIGN."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

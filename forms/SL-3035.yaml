@@ -1,0 +1,32 @@
+id: "SL-3035"
+title: "Boto3 kms.sign SigningAlgorithm RSASSA_PKCS1_V1_5_SHA_384"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Python / Boto3 1.43 (kms)"
+negative: false
+literal: "sig = kms.sign(KeyId=\"alias/signer\", Message=b\"data\", MessageType=\"RAW\", SigningAlgorithm=\"RSASSA_PKCS1_V1_5_SHA_384\")"
+context_filename: "kms_sign.py"
+context_template: |
+  import boto3
+
+  kms = boto3.client("kms")
+  sig = kms.sign(KeyId="alias/signer", Message=b"data", MessageType="RAW", SigningAlgorithm="RSASSA_PKCS1_V1_5_SHA_384")
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms/client/sign.html"
+    section: "KMS.Client.sign: Request Syntax"
+    read_at: "2026-11-05"
+    quote: "SigningAlgorithm='RSASSA_PSS_SHA_256'|'RSASSA_PSS_SHA_384'|'RSASSA_PSS_SHA_512'|'RSASSA_PKCS1_V1_5_SHA_256'|'RSASSA_PKCS1_V1_5_SHA_384"
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_Sign.html"
+    section: "Request parameters: SigningAlgorithm"
+    read_at: "2026-11-05"
+    quote: "Valid Values: RSASSA_PSS_SHA_256 | RSASSA_PSS_SHA_384 | RSASSA_PSS_SHA_512 | RSASSA_PKCS1_V1_5_SHA_256 | RSASSA_PKCS1_V1_5_SHA_384"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

@@ -1,0 +1,29 @@
+id: "SL-3021"
+title: "AWS CLI kms create-key --key-spec ECC_NIST_EDWARDS25519 --key-usage SIGN_VERIFY"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "cli"
+language_or_product: "AWS CLI 2.39 / kms create-key"
+negative: false
+literal: "aws kms create-key --key-spec ECC_NIST_EDWARDS25519 --key-usage SIGN_VERIFY"
+context_filename: "create-key.sh"
+context_template: |
+  #!/bin/sh
+  aws kms create-key --key-spec ECC_NIST_EDWARDS25519 --key-usage SIGN_VERIFY
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "Possible values: RSA_2048 RSA_3072 RSA_4096 ECC_NIST_P256 ECC_NIST_P384 ECC_NIST_P521 ECC_SECG_P256K1 SYMMETRIC_DEFAULT HMAC_224 HMAC_256 HMAC_384 HMAC_512 SM2 ML_DSA_44 ML_DSA_65 ML_DSA_87 ECC_NIST_EDWARDS25519"
+  - url: "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html"
+    section: "Options: --key-spec"
+    read_at: "2026-11-05"
+    quote: "ECC_NIST_EDWARDS25519 (ed25519) - signing and verification only"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

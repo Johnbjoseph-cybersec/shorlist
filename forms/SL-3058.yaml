@@ -1,0 +1,31 @@
+id: "SL-3058"
+title: "Terraform aws_kms_key customer_master_key_spec ECC_NIST_EDWARDS25519"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Terraform / hashicorp/aws 6.72"
+negative: false
+literal: "  customer_master_key_spec = \"ECC_NIST_EDWARDS25519\""
+context_filename: "main.tf"
+context_template: |
+  resource "aws_kms_key" "asymmetric" {
+    customer_master_key_spec = "ECC_NIST_EDWARDS25519"
+    key_usage                = "SIGN_VERIFY"
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/hashicorp/terraform-provider-aws/blob/v6.72.0/website/docs/r/kms_key.html.markdown"
+    section: "Argument Reference: customer_master_key_spec"
+    read_at: "2026-11-05"
+    quote: "`SM2` (China Regions only), or `ECC_NIST_EDWARDS25519`."
+  - url: "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html"
+    section: "Request parameters: KeySpec"
+    read_at: "2026-11-05"
+    quote: "ECC_NIST_EDWARDS25519 (ed25519) - signing and verification only"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

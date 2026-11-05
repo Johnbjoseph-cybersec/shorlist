@@ -1,0 +1,40 @@
+id: "candidate"
+title: "PKCS #11: CKK_EC_MONTGOMERY"
+family: "X25519"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "C / PKCS #11 3.2 (OASIS)"
+negative: false
+literal: "CK_KEY_TYPE keyType = CKK_EC_MONTGOMERY;"
+context_filename: "montgomery.c"
+context_template: |
+  #define CK_PTR *
+  #define CK_DECLARE_FUNCTION(returnType, name) returnType name
+  #define CK_DECLARE_FUNCTION_POINTER(returnType, name) returnType (* name)
+  #define CK_CALLBACK_FUNCTION(returnType, name) returnType (* name)
+  #ifndef NULL_PTR
+  #define NULL_PTR 0
+  #endif
+  #include "pkcs11.h"
+
+  int main(void)
+  {
+      CK_KEY_TYPE keyType = CKK_EC_MONTGOMERY;
+      (void)keyType;
+      return 0;
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/os/include/pkcs11-v3.2/pkcs11t.h"
+    section: "include/pkcs11-v3.2/pkcs11t.h (PKCS #11 v3.2 OS): CKK_EC_MONTGOMERY"
+    read_at: "2026-11-05"
+    quote: "#define CKK_EC_MONTGOMERY 0x00000041UL"
+status: "candidate"
+candidate_reason: "Montgomery-curve keys in PKCS #11 cover both X25519 and X448; the line pins neither, and the family vocabulary has no XDH entry and no parent for the two other than EC. Needs a decision on the family before it can be a row."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Filed under X25519 only as a placeholder; could be X25519 or X448. The template includes the OASIS PKCS #11 3.2 header (pkcs11.h, which includes pkcs11t.h); the constant is not re-defined locally, so the literal's line is the only line that names it. The five platform macros before the include are the UNIX definitions pkcs11.h documents as required. Where the header is not installed the syntax check falls back to balanced delimiters; checked locally with gcc -fsyntax-only against the v3.2 OS headers."
