@@ -141,9 +141,23 @@ adapter is the only place that knows the scanner's field names; the scorer sees 
 
 ## Results
 
-| scanner | positive forms recognised | decoys reported as a use | fingerprint |
-|---|---|---|---|
-| qrp-mcp 0.44.0 | 20 / 20 | 0 / 10 | see [`results/`](results/) |
+| scanner | positive forms recognised | decoys reported as a use | adapter caveat | fingerprint |
+|---|---|---|---|---|
+| qrp-mcp 0.44.0 | 20 / 20 | 0 / 10 | see the notes below | see [`results/`](results/) |
+| CSNP CryptoScan v1.5.0 | 7 / 20 | 4 / 10 | CBOM output read; size n/a; role from CycloneDX `primitive` only; its name `ECC` (3 ECDSA rows, on the literal's line) and `Hybrid-KEM` (1 row) are outside the family vocabulary and score as misses | see [`results/`](results/) |
+| qscan 1.0.0 ([EthanCratchley/qscan](https://github.com/EthanCratchley/qscan) @8b73799) | 7 / 20 | 2 / 10 | CBOM output read; role n/a (`pke` for RSA and ECDSA alike); size from `parameterSetIdentifier`; no AI triage | see [`results/`](results/) |
+| cdxgen 13.6.0 (`cbom`) | 0 / 20 | 0 / 10 | one fixed command, no `-t`; 0 `cryptographic-asset` components: 27 trees list no package so its evidence step is skipped, and on the 3 with a `cryptography` import its atom slicer exited with status 1 | see [`results/`](results/) |
+| Semgrep 1.183.0 + semgrep-rules @16b9e6d | 0 / 20 | 0 / 10 | 64 rule files from directories whose path contains `crypt`; family from `check_id` tokens; 10 of 30 planted files are in no language those rules cover | see [`results/`](results/) |
+| CBOMkit-theia v1.1.2 | 0 / 20 | 0 / 10 | does not scan source code (its README); 0 components on all 30 trees | see [`results/`](results/) |
+| CipherIQ cbom-generator 1.9.3 | 0 / 20 | 0 / 10 | README basic invocation, without `--discover-services --plugin-dir` (its nginx/OpenSSH config parsers); components without a location in the planted tree are dropped (the same algorithms and libraries appear on an empty directory); none had one | see [`results/`](results/) |
+
+The open-source scanners were run in throwaway containers with no network during the scan;
+images, versions and invocations are recorded in each adapter and result file. Where a
+scanner's output has no role, the scorer takes the family's intrinsic role from
+`families.yaml`, so `role_ok` is not evidence about that scanner; where it has no size,
+`size_ok` reads "no", meaning not reported. Not measured: IBM
+sonar-cryptography (needs a SonarQube server) and CBOMkit (a service that clones a repository
+by URL).
 
 Role is wrong on 2 of the 16 rows where a role is expected: for `TLS_RSA_WITH_AES_128_GCM_SHA256`
 and its OpenSSL name `AES128-GCM-SHA256`, qrp-mcp reports RSA as key establishment only;

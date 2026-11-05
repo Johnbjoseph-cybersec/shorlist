@@ -1,0 +1,709 @@
+{
+ "result_format": "0.1",
+ "catalogue": {
+  "name": "ShorList",
+  "version": "0.1.1",
+  "sha256": "c0e7e6fadeb15885cc4e5a98ab7b7941ffc4e3d29657947b2af88aa2cac1675c",
+  "rows": 30,
+  "positive": 20,
+  "decoys": 10
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "scanner": {
+  "adapter": "qscan",
+  "command": [
+   "docker",
+   "run",
+   "--rm",
+   "--network",
+   "none",
+   "--cap-drop",
+   "ALL",
+   "--security-opt",
+   "no-new-privileges",
+   "--memory",
+   "1500m",
+   "--cpus",
+   "1",
+   "--pids-limit",
+   "512",
+   "--tmpfs",
+   "/tmp:rw,size=1g,exec",
+   "sha256:847f9579df4bd13c13137e1f662cf8f27a6030d7f770a806a0be6ee9e6fa7ac6"
+  ],
+  "version": "qscan 1.0.0"
+ },
+ "summary": {
+  "statement": "Of 20 positive forms in ShorList 0.1.1, qscan 1.0.0 recognises 7; of 10 decoys it reports 2 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.",
+  "positive": {
+   "hit": 7,
+   "parent_only": 0,
+   "wrong_family": 0,
+   "miss": 13,
+   "n": 20
+  },
+  "decoys": {
+   "ok": 8,
+   "false_alarm": 2,
+   "n": 10
+  },
+  "role_ok": {
+   "true": 2,
+   "false": 1
+  },
+  "size_ok": {
+   "true": 2,
+   "false": 0
+  }
+ },
+ "by_form_kind": {
+  "api_call": {
+   "positive": 6,
+   "hit": 3,
+   "decoys": 2,
+   "false_alarm": 1
+  },
+  "api_string": {
+   "positive": 3,
+   "hit": 2,
+   "decoys": 2,
+   "false_alarm": 1
+  },
+  "config_value": {
+   "positive": 5,
+   "hit": 0,
+   "decoys": 5,
+   "false_alarm": 0
+  },
+  "oid": {
+   "positive": 1,
+   "hit": 1,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "registry_id": {
+   "positive": 5,
+   "hit": 1,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "by_family": {
+  "ECDSA": {
+   "positive": 6,
+   "hit": 2,
+   "decoys": 3,
+   "false_alarm": 1
+  },
+  "ML-KEM": {
+   "positive": 6,
+   "hit": 0,
+   "decoys": 3,
+   "false_alarm": 0
+  },
+  "RSA": {
+   "positive": 8,
+   "hit": 5,
+   "decoys": 4,
+   "false_alarm": 1
+  }
+ },
+ "by_language_or_product": {
+  "Go / crypto/tls": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Go / stdlib": {
+   "positive": 3,
+   "hit": 1,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "IANA JOSE": {
+   "positive": 1,
+   "hit": 0,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "IANA TLS": {
+   "positive": 4,
+   "hit": 1,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Java / JCA": {
+   "positive": 3,
+   "hit": 2,
+   "decoys": 2,
+   "false_alarm": 1
+  },
+  "Java / java.security": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "OpenSSH sshd": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "Python / any": {
+   "positive": 1,
+   "hit": 1,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "Python / pyca cryptography": {
+   "positive": 3,
+   "hit": 2,
+   "decoys": 1,
+   "false_alarm": 1
+  },
+  "nginx": {
+   "positive": 2,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "SL-0001",
+   "negative": false,
+   "outcome": "hit",
+   "line": 3,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0002",
+   "negative": false,
+   "outcome": "hit",
+   "line": 6,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0003",
+   "negative": false,
+   "outcome": "miss",
+   "line": 3,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0004",
+   "negative": false,
+   "outcome": "hit",
+   "line": 5,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0005",
+   "negative": false,
+   "outcome": "hit",
+   "line": 5,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0006",
+   "negative": false,
+   "outcome": "miss",
+   "line": 5,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0007",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0008",
+   "negative": false,
+   "outcome": "hit",
+   "line": 9,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0009",
+   "negative": false,
+   "outcome": "miss",
+   "line": 9,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0010",
+   "negative": false,
+   "outcome": "miss",
+   "line": 6,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0011",
+   "negative": false,
+   "outcome": "miss",
+   "line": 8,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0012",
+   "negative": false,
+   "outcome": "miss",
+   "line": 9,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0013",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0014",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0015",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0016",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0017",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": false,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0018",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0019",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0020",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0021",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0022",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0023",
+   "negative": true,
+   "outcome": "false_alarm",
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0024",
+   "negative": true,
+   "outcome": "false_alarm",
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0025",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0026",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0027",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0028",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0029",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0030",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  }
+ ],
+ "fingerprint": "67f8ae250fda49309aa2d3f447b4f8e0dae5bf62b39c320c6158d0de27839a32",
+ "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
+ "run": {
+  "at": "2026-11-05T09:26:30Z",
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39"
+ },
+ "raw_records": {
+  "SL-0001": [
+   {
+    "path": "keys.py",
+    "line": 1,
+    "family": "RSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "keys.py",
+    "line": 3,
+    "family": "RSA",
+    "role": null,
+    "size": 2048,
+    "is_use": true
+   },
+   {
+    "path": "keys.py",
+    "line": 1,
+    "family": "asymmetric",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "keys.py",
+    "line": 1,
+    "family": "cryptography",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0002": [
+   {
+    "path": "sign.py",
+    "line": 6,
+    "family": "ECDSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "sign.py",
+    "line": 6,
+    "family": "SHA-256",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "sign.py",
+    "line": 1,
+    "family": "cryptography",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "sign.py",
+    "line": 2,
+    "family": "cryptography",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0003": [
+   {
+    "path": "kem.py",
+    "line": 1,
+    "family": "cryptography",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "kem.py",
+    "line": 3,
+    "family": "key-material",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0004": [
+   {
+    "path": "Keys.java",
+    "line": 5,
+    "family": "RSA",
+    "role": null,
+    "size": 3072,
+    "is_use": true
+   },
+   {
+    "path": "Keys.java",
+    "line": 1,
+    "family": "java-security",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "Keys.java",
+    "line": 6,
+    "family": "key-size",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0005": [
+   {
+    "path": "Sign.java",
+    "line": 5,
+    "family": "ECDSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "Sign.java",
+    "line": 1,
+    "family": "java-security",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0006": [
+   {
+    "path": "Kem.java",
+    "line": 1,
+    "family": "jca-crypto",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0007": [
+   {
+    "path": "oids.py",
+    "line": 1,
+    "family": "RSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0008": [
+   {
+    "path": "keys.go",
+    "line": 9,
+    "family": "RSA",
+    "role": null,
+    "size": 2048,
+    "is_use": true
+   },
+   {
+    "path": "keys.go",
+    "line": 5,
+    "family": "go-asymmetric",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0009": [
+   {
+    "path": "sign.go",
+    "line": 4,
+    "family": "go-asymmetric",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0010": [],
+  "SL-0011": [],
+  "SL-0012": [],
+  "SL-0013": [],
+  "SL-0014": [],
+  "SL-0015": [],
+  "SL-0016": [],
+  "SL-0017": [
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "RSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0018": [],
+  "SL-0019": [],
+  "SL-0020": [],
+  "SL-0021": [],
+  "SL-0022": [],
+  "SL-0023": [
+   {
+    "path": "keystore.py",
+    "line": 2,
+    "family": "RSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "keystore.py",
+    "line": 2,
+    "family": "SSH-key",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0024": [
+   {
+    "path": "Verifier.java",
+    "line": 3,
+    "family": "RSA",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0025": [],
+  "SL-0026": [],
+  "SL-0027": [],
+  "SL-0028": [],
+  "SL-0029": [],
+  "SL-0030": []
+ }
+}

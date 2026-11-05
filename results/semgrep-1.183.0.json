@@ -1,0 +1,487 @@
+{
+ "result_format": "0.1",
+ "catalogue": {
+  "name": "ShorList",
+  "version": "0.1.1",
+  "sha256": "c0e7e6fadeb15885cc4e5a98ab7b7941ffc4e3d29657947b2af88aa2cac1675c",
+  "rows": 30,
+  "positive": 20,
+  "decoys": 10
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "scanner": {
+  "adapter": "semgrep",
+  "command": [
+   "docker",
+   "run",
+   "--rm",
+   "--network",
+   "none",
+   "--cap-drop",
+   "ALL",
+   "--security-opt",
+   "no-new-privileges",
+   "--memory",
+   "1500m",
+   "--cpus",
+   "1",
+   "--pids-limit",
+   "512",
+   "--tmpfs",
+   "/tmp:rw,size=1g,exec",
+   "sha256:d19cbd713d7368604980b53eb0d119ce5afa07c0150bbd707dcbd2716ef885eb"
+  ],
+  "version": "semgrep 1.183.0 + semgrep-rules@16b9e6d45f10649f6a531ec4838ed9924372c3bc 64 rule files"
+ },
+ "summary": {
+  "statement": "Of 20 positive forms in ShorList 0.1.1, semgrep 1.183.0 + semgrep-rules@16b9e6d45f10649f6a531ec4838ed9924372c3bc 64 rule files recognises 0; of 10 decoys it reports 0 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.",
+  "positive": {
+   "hit": 0,
+   "parent_only": 0,
+   "wrong_family": 0,
+   "miss": 20,
+   "n": 20
+  },
+  "decoys": {
+   "ok": 10,
+   "false_alarm": 0,
+   "n": 10
+  },
+  "role_ok": {
+   "true": 0,
+   "false": 0
+  },
+  "size_ok": {
+   "true": 0,
+   "false": 0
+  }
+ },
+ "by_form_kind": {
+  "api_call": {
+   "positive": 6,
+   "hit": 0,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "api_string": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "config_value": {
+   "positive": 5,
+   "hit": 0,
+   "decoys": 5,
+   "false_alarm": 0
+  },
+  "oid": {
+   "positive": 1,
+   "hit": 0,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "registry_id": {
+   "positive": 5,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "by_family": {
+  "ECDSA": {
+   "positive": 6,
+   "hit": 0,
+   "decoys": 3,
+   "false_alarm": 0
+  },
+  "ML-KEM": {
+   "positive": 6,
+   "hit": 0,
+   "decoys": 3,
+   "false_alarm": 0
+  },
+  "RSA": {
+   "positive": 8,
+   "hit": 0,
+   "decoys": 4,
+   "false_alarm": 0
+  }
+ },
+ "by_language_or_product": {
+  "Go / crypto/tls": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Go / stdlib": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "IANA JOSE": {
+   "positive": 1,
+   "hit": 0,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "IANA TLS": {
+   "positive": 4,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Java / JCA": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "Java / java.security": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "OpenSSH sshd": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "Python / any": {
+   "positive": 1,
+   "hit": 0,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "Python / pyca cryptography": {
+   "positive": 3,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "nginx": {
+   "positive": 2,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "SL-0001",
+   "negative": false,
+   "outcome": "miss",
+   "line": 3,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0002",
+   "negative": false,
+   "outcome": "miss",
+   "line": 6,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0003",
+   "negative": false,
+   "outcome": "miss",
+   "line": 3,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0004",
+   "negative": false,
+   "outcome": "miss",
+   "line": 5,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0005",
+   "negative": false,
+   "outcome": "miss",
+   "line": 5,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0006",
+   "negative": false,
+   "outcome": "miss",
+   "line": 5,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0007",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0008",
+   "negative": false,
+   "outcome": "miss",
+   "line": 9,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0009",
+   "negative": false,
+   "outcome": "miss",
+   "line": 9,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0010",
+   "negative": false,
+   "outcome": "miss",
+   "line": 6,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0011",
+   "negative": false,
+   "outcome": "miss",
+   "line": 8,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0012",
+   "negative": false,
+   "outcome": "miss",
+   "line": 9,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0013",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0014",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0015",
+   "negative": false,
+   "outcome": "miss",
+   "line": 2,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0016",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0017",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0018",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0019",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0020",
+   "negative": false,
+   "outcome": "miss",
+   "line": 1,
+   "reported_as_use": [],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0021",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0022",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0023",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0024",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0025",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0026",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0027",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0028",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0029",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0030",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  }
+ ],
+ "fingerprint": "418d4e21d41b19c2460265d04cd2c828550367f21473e6a542b9ce1d405ff91a",
+ "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
+ "run": {
+  "at": "2026-11-05T09:35:51Z",
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39"
+ },
+ "raw_records": {
+  "SL-0001": [],
+  "SL-0002": [],
+  "SL-0003": [],
+  "SL-0004": [],
+  "SL-0005": [],
+  "SL-0006": [],
+  "SL-0007": [],
+  "SL-0008": [],
+  "SL-0009": [],
+  "SL-0010": [],
+  "SL-0011": [],
+  "SL-0012": [],
+  "SL-0013": [],
+  "SL-0014": [],
+  "SL-0015": [],
+  "SL-0016": [],
+  "SL-0017": [],
+  "SL-0018": [],
+  "SL-0019": [],
+  "SL-0020": [],
+  "SL-0021": [],
+  "SL-0022": [],
+  "SL-0023": [],
+  "SL-0024": [],
+  "SL-0025": [],
+  "SL-0026": [],
+  "SL-0027": [],
+  "SL-0028": [],
+  "SL-0029": [],
+  "SL-0030": []
+ }
+}
