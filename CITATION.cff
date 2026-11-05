@@ -9,14 +9,13 @@ abstract: >-
   expected detection and a primary source; decoy rows measure false alarms. A generator
   plants each row and scores a scanner's output against it, repeatably.
 type: dataset
-version: 0.1.0
+version: 0.1.1
 authors:
   - family-names: Tenev
     given-names: Stanimir
     affiliation: Elkan Electronic
-license:
-  - CC-BY-4.0
-  - Apache-2.0
+license: CC-BY-4.0
+date-released: 2026-11-05
 keywords:
   - cryptography
   - post-quantum cryptography

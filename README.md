@@ -10,7 +10,7 @@ it. A generator plants every row into its own minimal tree, runs a scanner on it
 the output, so any cryptographic-inventory tool can be measured against the same public
 denominator, repeatably.
 
-Version **0.1.0** · data **CC BY 4.0** · generator **Apache-2.0** · status: pre-release,
+Version **0.1.1** · data **CC BY 4.0** · generator **Apache-2.0** · status: pre-release,
 not yet deposited (no DOI).
 
 ## Why
@@ -180,7 +180,7 @@ from people with no tie to Elkan Electronic are explicitly sought.
 
 See [`CITATION.cff`](CITATION.cff). Until a DOI is minted:
 
-> Tenev, S. *ShorList: an open catalogue of cryptographic forms*, version 0.1.0, 2026.
+> Tenev, S. *ShorList: an open catalogue of cryptographic forms*, version 0.1.1, 2026.
 
 ## Licences
 
