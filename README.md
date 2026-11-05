@@ -147,7 +147,14 @@ adapter is the only place that knows the scanner's field names; the scorer sees 
 
 Role is wrong on 2 of the 16 rows where a role is expected: for `TLS_RSA_WITH_AES_128_GCM_SHA256`
 and its OpenSSL name `AES128-GCM-SHA256`, qrp-mcp reports RSA as key establishment only;
-the suite uses RSA for both key transport and authentication. Measurements of other
+the suite uses RSA for both key transport and authentication.
+
+Read the 20 / 20 with its limits. The five IANA-identifier rows (SL-0016 to SL-0020) are
+not independent evidence for qrp-mcp, because it builds its name tables from the same
+registries. v0.1 holds only the common forms of three families. Known gaps in qrp-mcp lie
+outside this slice: OIDs, NIST `P-224`/`B-*`/`K-*` curve names, and some PyCryptodome and
+pyca calls. They are the next rows to add, and the score is expected to fall when they go
+in. Measurements of other
 scanners are welcome as pull requests to `results/`, produced by the generator.
 
 ## Contributing rows

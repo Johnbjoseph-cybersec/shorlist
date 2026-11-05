@@ -34,4 +34,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "Hybrid: scored on the post-quantum half (ML-KEM). The value is the IANA group name passed through to the TLS library. The certificate file names are placeholders and carry no algorithm."
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). The value is the IANA group name passed through to the TLS library; nginx's documentation does not list it, and it is accepted when the linked OpenSSL supports the group (3.5 or later). The certificate file names are placeholders and carry no algorithm."

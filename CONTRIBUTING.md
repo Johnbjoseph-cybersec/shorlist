@@ -29,7 +29,7 @@ is as welcome as any other and is reviewed by the same rules.
 8. Run locally:
 
    ```sh
-   pip install -r requirements.txt
+   pip install -r requirements.txt -r requirements-dev.txt
    cd generator && python -m shorlist validate && cd .. && python -m pytest -q tests
    ```
 

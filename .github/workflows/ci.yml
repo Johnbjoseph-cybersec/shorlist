@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.25"
-      - run: pip install -r requirements.txt pytest
+      - run: pip install -r requirements.txt -r requirements-dev.txt
       - name: Validate every row and its template
         working-directory: generator
         run: python -m shorlist validate

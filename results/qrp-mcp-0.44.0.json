@@ -3,7 +3,7 @@
  "catalogue": {
   "name": "ShorList",
   "version": "0.1.0",
-  "sha256": "7ed22c2f1943680f50ebe571110c0da3dc433265ae1b18183b6b834f44656879",
+  "sha256": "c0e7e6fadeb15885cc4e5a98ab7b7941ffc4e3d29657947b2af88aa2cac1675c",
   "rows": 30,
   "positive": 20,
   "decoys": 10
@@ -490,10 +490,10 @@
    ]
   }
  ],
- "fingerprint": "6e0beab7f5a80f82518054736553f5e93459768d1755f290ecc9e11535ad5548",
+ "fingerprint": "0be55a6eb394690b6716fded391e281ee804e239b843bd33910d60025bcd7f7c",
  "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
  "run": {
-  "at": "2026-11-05T08:20:16Z",
+  "at": "2026-11-05T08:23:56Z",
   "python": "3.12.3",
   "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
  },

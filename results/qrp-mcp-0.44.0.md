@@ -1,6 +1,6 @@
 **Of 20 positive forms in ShorList 0.1.0, qrp-mcp 0.44.0 recognises 20; of 10 decoys it reports 0 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.**
 
-catalogue 0.1.0 sha256 `7ed22c2f1943680f…` · generator 0.1.0 · fingerprint `6e0beab7f5a80f82…`
+catalogue 0.1.0 sha256 `c0e7e6fadeb15885…` · generator 0.1.0 · fingerprint `0be55a6eb394690b…`
 
 | positive forms | hit | parent only | wrong family | miss | decoys | ok | false alarm |
 |---|---|---|---|---|---|---|---|
