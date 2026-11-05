@@ -10,8 +10,8 @@ it. A generator plants every row into its own minimal tree, runs a scanner on it
 the output, so any cryptographic-inventory tool can be measured against the same public
 denominator, repeatably.
 
-Version **0.1.1** · data **CC BY 4.0** · generator **Apache-2.0** · status: pre-release,
-not yet deposited (no DOI).
+Version **0.1.1** · data **CC BY 4.0** · generator **Apache-2.0** · DOI [10.5281/zenodo.23974515](https://doi.org/10.5281/zenodo.23974515)
+(all versions).
 
 ## Why
 
@@ -178,9 +178,10 @@ from people with no tie to Elkan Electronic are explicitly sought.
 
 ## Citing
 
-See [`CITATION.cff`](CITATION.cff). Until a DOI is minted:
+See [`CITATION.cff`](CITATION.cff).
 
 > Tenev, S. *ShorList: an open catalogue of cryptographic forms*, version 0.1.1, 2026.
+> Zenodo. https://doi.org/10.5281/zenodo.23974515
 
 ## Licences
 

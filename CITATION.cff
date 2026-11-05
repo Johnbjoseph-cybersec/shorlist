@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use ShorList, please cite it as below."
 title: "ShorList: an open catalogue of cryptographic forms"
+doi: "10.5281/zenodo.23974515"
 repository-code: "https://github.com/shorlist/shorlist"
 abstract: >-
   The open catalogue of the cryptographic forms Shor's algorithm breaks, and the
