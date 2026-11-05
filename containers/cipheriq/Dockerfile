@@ -1,5 +1,7 @@
 # CipherIQ cbom-generator: release v1.9.4 asset cbom-generator-1.9.3-linux-amd64.tar.gz (the v1.9.4 release ships this file),
 # sha256 from the release's checksums.txt. Install per README "Quick Install from Release".
+# The tarball ships 28 of 60 plugins/ubuntu files (and 2 registry files) as 0600; the README
+# installs and runs as root, this image runs as 65534, so they are made world-readable.
 FROM ubuntu@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852
 RUN apt-get update -qq && apt-get install -y -qq curl ca-certificates libssl3t64 libjson-c5 libyaml-0-2 libjansson4 libcurl4t64 libncursesw6 libncurses6 >/dev/null \
  && cd /tmp && curl -sSLO https://github.com/CipherIQ/cbom-generator/releases/download/v1.9.4/cbom-generator-1.9.3-linux-amd64.tar.gz \
@@ -7,6 +9,7 @@ RUN apt-get update -qq && apt-get install -y -qq curl ca-certificates libssl3t64
  && mkdir x && tar -xzf cbom-generator-1.9.3-linux-amd64.tar.gz -C x && ls -R x | head -20 \
  && install -m 755 $(find x -name 'cbom-generator-1.9.3-linux-amd64' -type f) /usr/local/bin/cbom-generator \
  && mkdir -p /usr/local/share/cbom-generator && cp -r $(find x -maxdepth 2 -name plugins -type d) $(find x -maxdepth 2 -name registry -type d) /usr/local/share/cbom-generator/ \
+ && chmod -R a+rX /usr/local/share/cbom-generator \
  && rm -rf /tmp/x /tmp/*.tar.gz && apt-get purge -y -qq curl >/dev/null && rm -rf /var/lib/apt/lists/*
 USER 65534:65534
 ENV HOME=/tmp

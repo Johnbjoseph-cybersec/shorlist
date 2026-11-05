@@ -37,12 +37,12 @@
   "version": "cryptoscan v1.5.0"
  },
  "summary": {
-  "statement": "Of 20 positive forms in ShorList 0.1.1, cryptoscan v1.5.0 recognises 7; of 10 decoys it reports 4 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.",
+  "statement": "Of 20 positive forms in ShorList 0.1.1, cryptoscan v1.5.0 recognises 8; of 10 decoys it reports 4 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.",
   "positive": {
-   "hit": 7,
-   "parent_only": 0,
+   "hit": 8,
+   "parent_only": 3,
    "wrong_family": 0,
-   "miss": 13,
+   "miss": 9,
    "n": 20
   },
   "decoys": {
@@ -51,7 +51,7 @@
    "n": 10
   },
   "role_ok": {
-   "true": 3,
+   "true": 4,
    "false": 1
   },
   "size_ok": {
@@ -74,7 +74,7 @@
   },
   "config_value": {
    "positive": 5,
-   "hit": 1,
+   "hit": 2,
    "decoys": 5,
    "false_alarm": 2
   },
@@ -100,7 +100,7 @@
   },
   "ML-KEM": {
    "positive": 6,
-   "hit": 3,
+   "hit": 4,
    "decoys": 3,
    "false_alarm": 1
   },
@@ -168,7 +168,7 @@
   },
   "nginx": {
    "positive": 2,
-   "hit": 0,
+   "hit": 1,
    "decoys": 1,
    "false_alarm": 0
   }
@@ -189,9 +189,11 @@
   {
    "id": "SL-0002",
    "negative": false,
-   "outcome": "miss",
+   "outcome": "parent_only",
    "line": 6,
-   "reported_as_use": [],
+   "reported_as_use": [
+    "EC"
+   ],
    "reported_not_use": [],
    "role_ok": null,
    "size_ok": null
@@ -265,9 +267,11 @@
   {
    "id": "SL-0009",
    "negative": false,
-   "outcome": "miss",
+   "outcome": "parent_only",
    "line": 9,
-   "reported_as_use": [],
+   "reported_as_use": [
+    "EC"
+   ],
    "reported_not_use": [],
    "role_ok": null,
    "size_ok": null
@@ -287,11 +291,13 @@
   {
    "id": "SL-0011",
    "negative": false,
-   "outcome": "miss",
+   "outcome": "hit",
    "line": 8,
-   "reported_as_use": [],
+   "reported_as_use": [
+    "ML-KEM"
+   ],
    "reported_not_use": [],
-   "role_ok": null,
+   "role_ok": true,
    "size_ok": null
   },
   {
@@ -319,9 +325,11 @@
   {
    "id": "SL-0014",
    "negative": false,
-   "outcome": "miss",
+   "outcome": "parent_only",
    "line": 2,
-   "reported_as_use": [],
+   "reported_as_use": [
+    "EC"
+   ],
    "reported_not_use": [],
    "role_ok": null,
    "size_ok": null
@@ -467,10 +475,10 @@
    "reported_not_use": []
   }
  ],
- "fingerprint": "875d3936a7a9e7fe0ae543c359788ab4c50e5eb6637af847d1f2e6565075699f",
+ "fingerprint": "efb9a14c15c51f92cf7512c0e7e7591220519544f29b813bd8e66a73cc06d74f",
  "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
  "run": {
-  "at": "2026-11-05T09:25:15Z",
+  "at": "2026-11-05T09:51:57Z",
   "python": "3.12.3",
   "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39"
  },
@@ -505,7 +513,7 @@
    {
     "path": "sign.py",
     "line": 6,
-    "family": "ECC",
+    "family": "EC",
     "role": null,
     "size": null,
     "is_use": true
@@ -565,7 +573,7 @@
    {
     "path": "sign.go",
     "line": 8,
-    "family": "ECC",
+    "family": "EC",
     "role": null,
     "size": null,
     "is_use": true
@@ -573,7 +581,7 @@
    {
     "path": "sign.go",
     "line": 9,
-    "family": "ECC",
+    "family": "EC",
     "role": null,
     "size": null,
     "is_use": true
@@ -581,7 +589,7 @@
    {
     "path": "sign.go",
     "line": 4,
-    "family": "ECC",
+    "family": "EC",
     "role": null,
     "size": null,
     "is_use": true
@@ -609,7 +617,7 @@
    {
     "path": "nginx.conf",
     "line": 8,
-    "family": "Hybrid-KEM",
+    "family": "ML-KEM",
     "role": null,
     "size": null,
     "is_use": true
@@ -647,7 +655,7 @@
    {
     "path": "sshd_config",
     "line": 2,
-    "family": "ECC",
+    "family": "EC",
     "role": null,
     "size": null,
     "is_use": true

@@ -11,15 +11,15 @@ from shorlist.adapters._container import ContainerAdapter, rel_path  # noqa: E40
 from shorlist.adapters._cyclonedx import family  # noqa: E402
 from shorlist.adapters.base import Record  # noqa: E402
 from shorlist.adapters.cdxgen import CdxgenAdapter  # noqa: E402
-from shorlist.adapters.cipheriq import CipherIQAdapter  # noqa: E402
+from shorlist.adapters.cipheriq import CipherIQAdapter, CipherIQServicesAdapter  # noqa: E402
 from shorlist.adapters.cryptoscan import CryptoScanAdapter  # noqa: E402
 from shorlist.adapters.qscan import QscanAdapter  # noqa: E402
 from shorlist.adapters.semgrep import SemgrepAdapter, family_from_check_id  # noqa: E402
 
 
 def test_all_adapters_registered():
-    assert {"qrp-mcp", "cryptoscan", "cbomkit-theia", "cipheriq-cbom-generator", "cdxgen", "qscan",
-            "semgrep"} <= set(ADAPTERS)
+    assert {"qrp-mcp", "cryptoscan", "cbomkit-theia", "cipheriq-cbom-generator",
+            "cipheriq-cbom-generator-services", "cdxgen", "qscan", "semgrep"} <= set(ADAPTERS)
 
 
 def test_family_uses_only_the_families_yaml_vocabulary():
@@ -70,11 +70,32 @@ def test_cryptoscan_parse():
     assert len(recs) == 3
 
 
+# PATTERNS.md (csnp/cryptoscan v1.5.0) L139 ECC-001 "Elliptic Curve", L117 HYBRID-KEM-001
+# "X25519+ML-KEM Hybrid Key Exchange", L118-119 composite signatures with ML-DSA
+def test_cryptoscan_maps_its_documented_names():
+    bom = {"components": [
+        {"type": "cryptographic-asset", "name": n,
+         "cryptoProperties": {"assetType": "algorithm", "algorithmProperties": {"primitive": p}},
+         "evidence": {"occurrences": [{"location": "a.py", "line": i}]}}
+        for i, (n, p) in enumerate([("ECC", "other"), ("Hybrid-KEM", "combiner"),
+                                    ("Composite-Signature", "signature"), ("Hybrid-TLS", "other")], 1)]}
+    fams = [r.family for r in CryptoScanAdapter.parse(bom)]
+    assert fams == ["EC", "ML-KEM", "ML-DSA", "Hybrid-TLS"]  # Hybrid-TLS: not in the pattern table
+
+
 def test_cipheriq_component_without_location_gives_no_record():
     bom = {"components": [{"type": "cryptographic-asset", "name": "RSA",
                            "cryptoProperties": {"algorithmProperties": {"primitive": "signature"}}},
                           {"type": "library", "name": "libssl3t64"}]}
     assert CipherIQAdapter.parse(bom) == []
+    assert CipherIQServicesAdapter.parse(bom) == []
+
+
+def test_cipheriq_services_uses_the_readme_invocation():
+    a = CipherIQServicesAdapter()
+    assert a.ARGS == ["--discover-services", "--plugin-dir", "/usr/local/share/cbom-generator/plugins/ubuntu",
+                      "--cyclonedx-spec=1.7"]
+    assert a.image == CipherIQAdapter.image
 
 
 # docs/ADVANCED.md (cdxgen v13.6.0), "The shape of a cryptographic-asset component"

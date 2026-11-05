@@ -11,6 +11,16 @@ lists algorithms and libraries from the container's own installed packages (RSA,
 libssl3t64, …) with no location; those describe the scanner's environment, not the planted
 row, and are dropped. Family from name via schema/families.yaml; role from primitive; size from
 relatedCryptoMaterialProperties.size; is_use True.
+
+Two invocations, two adapter names, two result files:
+- `cipheriq-cbom-generator`: README "Usage", `cbom-generator --output cbom.json <dirs>`;
+- `cipheriq-cbom-generator-services`: README "Service Discovery with YAML Plugins", the
+  invocation it documents for service configuration files:
+  `--discover-services --plugin-dir /usr/local/share/cbom-generator/plugins/ubuntu
+  --cyclonedx-spec=1.7 --output ... <dirs>`. The plugins find a service by absolute paths in the
+  scanned system (plugins/ubuntu/nginx.yaml: binary /usr/sbin/nginx `required: true`, config
+  /etc/nginx/nginx.conf), not under the directory given on the command line. The planted tree
+  is not moved to those paths: that would be setting the tool up for the catalogue.
 """
 from __future__ import annotations
 
@@ -40,3 +50,22 @@ class CipherIQAdapter(ContainerAdapter):
     @staticmethod
     def parse(bom: dict) -> list[Record]:
         return _cyclonedx.records(bom)
+
+
+class CipherIQServicesAdapter(CipherIQAdapter):
+    name = "cipheriq-cbom-generator-services"
+    ARGS = ["--discover-services", "--plugin-dir", "/usr/local/share/cbom-generator/plugins/ubuntu",
+            "--cyclonedx-spec=1.7"]
+
+    def version(self) -> str:
+        return f"{super().version()} (--discover-services, plugins/ubuntu)"
+
+    def scan(self, tree: Path, workdir: Path) -> list[Record]:
+        out = self.outdir(tree, workdir)
+        p = self.run_scan(tree, out, self.ARGS + ["--output", f"{OUT}/cbom.json", SCAN])
+        f = out / "cbom.json"
+        if not f.exists():
+            raise RuntimeError(f"cbom-generator wrote no CBOM (exit {p.returncode}): {p.stderr.strip()[-500:]}")
+        if "Cannot open YAML file" in (p.stderr or "") + (p.stdout or ""):
+            raise RuntimeError("cbom-generator could not read some of its plugins; check the image's file modes")
+        return self.parse(json.loads(f.read_text()))

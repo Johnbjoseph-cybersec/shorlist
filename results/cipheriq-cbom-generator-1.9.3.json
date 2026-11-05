@@ -32,7 +32,7 @@
    "512",
    "--tmpfs",
    "/tmp:rw,size=1g,exec",
-   "sha256:e9b7a259276790a320efd872d79adb65ef227e8e20e290d41a7423daa6304ca8"
+   "sha256:3390cefb35c16f50e278d0c3fab753ef816b24ae697a1bcde0a18dc651262081"
   ],
   "version": "CBOM Generator 1.9.3"
  },
@@ -448,7 +448,7 @@
  "fingerprint": "7f111f4e569e231c6f87bbc3c6704935cdaefe9aec6b8a0efb796ed4794ce69d",
  "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
  "run": {
-  "at": "2026-11-05T09:26:00Z",
+  "at": "2026-11-05T09:52:25Z",
   "python": "3.12.3",
   "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39"
  },

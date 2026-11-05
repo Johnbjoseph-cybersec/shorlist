@@ -9,8 +9,10 @@ https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptogr
 Family: the names of schema/families.yaml are the vocabulary. A name (algorithmFamily first,
 then the component name) maps to a family when, case-insensitively, it or one of its leading
 "-"-separated prefixes is a family key or appears in a family's `cyclonedx` list there
-(RSASSA-PKCS1 -> RSA, FFDH -> DH). Nothing else is mapped: a scanner's own spellings outside
-that vocabulary ("ECC", "SHA256withECDSA") stay as they are and the scorer ignores them.
+(RSASSA-PKCS1 -> RSA, FFDH -> DH). A scanner's own names outside that vocabulary are mapped only
+by that scanner's adapter (`aliases`), each with the line of the scanner's documentation that
+defines the name (CryptoScan: "ECC" -> EC). Names no documentation ties to a family
+("SHA256withECDSA", library or category labels) stay as they are and the scorer ignores them.
 
 Role: from algorithmProperties.primitive: signature -> signature; kem, key-agree ->
 key_establishment; any other value (pke, other, …) -> None, because CycloneDX's `pke` is used
@@ -54,9 +56,12 @@ def family(name: str | None) -> str | None:
     return None
 
 
-def component_family(c: dict) -> str:
+def component_family(c: dict, aliases: dict[str, str] | None = None) -> str:
     ap = (c.get("cryptoProperties") or {}).get("algorithmProperties") or {}
-    return family(ap.get("algorithmFamily")) or family(c.get("name")) or str(c.get("name", ""))
+    name = c.get("name")
+    if aliases and name in aliases:
+        return aliases[name]
+    return family(ap.get("algorithmFamily")) or family(name) or str(name or "")
 
 
 def component_role(c: dict) -> str | None:
@@ -90,13 +95,14 @@ def crypto_components(bom: dict) -> list[dict]:
     return [c for c in bom.get("components") or [] if c.get("type") == "cryptographic-asset"]
 
 
-def records(bom: dict, *, size_from_parameter_set: bool = False, locations=occurrences) -> list[Record]:
+def records(bom: dict, *, size_from_parameter_set: bool = False, locations=occurrences,
+            aliases: dict[str, str] | None = None) -> list[Record]:
     """One Record per (cryptographic-asset component, occurrence in the planted tree).
     A component with no occurrence in the tree gives no Record. CBOMs have no not-a-use marker,
     so is_use is True."""
     recs = []
     for c in crypto_components(bom):
-        fam, role, size = component_family(c), component_role(c), component_size(c, size_from_parameter_set)
+        fam, role, size = component_family(c, aliases), component_role(c), component_size(c, size_from_parameter_set)
         for path, line in locations(c):
             recs.append(Record(path=path, line=line, family=fam, role=role, size=size, is_use=True))
     return recs
