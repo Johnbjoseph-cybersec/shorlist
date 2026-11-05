@@ -1,0 +1,29 @@
+id: "SL-0029"
+title: "Decoy: hybrid ML-KEM removed from sshd key exchange"
+family: "ML-KEM"
+parameter_set: "mlkem768x25519-sha256"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: true
+decoy_class: "removal_list"
+literal: "KexAlgorithms -mlkem768x25519-sha256"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms -mlkem768x25519-sha256
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+    quote: "If the specified list begins with a '-' character, then the specified algorithms (including wildcards) will be removed from the default set instead of replacing them."
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

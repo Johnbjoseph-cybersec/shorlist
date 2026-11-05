@@ -1,0 +1,29 @@
+id: "SL-0024"
+title: "Decoy: ECDSA Signature.getInstance in a Java comment"
+family: "ECDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: true
+decoy_class: "comment"
+literal: "        // Removed in v4: Signature.getInstance(\"SHA256withECDSA\")"
+context_filename: "Verifier.java"
+context_template: |
+  public class Verifier {
+      public static void main(String[] args) {
+          // Removed in v4: Signature.getInstance("SHA256withECDSA")
+          System.out.println("verification is done by the gateway");
+      }
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Signature Algorithms: SHA256withECDSA"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

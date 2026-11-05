@@ -1,0 +1,32 @@
+id: "SL-0025"
+title: "Decoy: ecdsa.SignASN1 in a Go comment"
+family: "ECDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: true
+decoy_class: "comment"
+literal: "\t// ecdsa.SignASN1 is no longer called here; signing moved to the HSM."
+context_filename: "signer.go"
+context_template: |
+  package main
+
+  import "fmt"
+
+  func main() {
+  	// ecdsa.SignASN1 is no longer called here; signing moved to the HSM.
+  	fmt.Println("signing is remote")
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://pkg.go.dev/crypto/ecdsa"
+    section: "func SignASN1(r io.Reader, priv *PrivateKey, hash []byte) ([]byte, error)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file does not import crypto/ecdsa."

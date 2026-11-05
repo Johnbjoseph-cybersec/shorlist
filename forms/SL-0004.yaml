@@ -1,0 +1,33 @@
+id: "SL-0004"
+title: "JCA: RSA KeyPairGenerator"
+family: "RSA"
+parameter_set: null
+role: "both"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");"
+context_filename: "Keys.java"
+context_template: |
+  import java.security.KeyPairGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+          kpg.initialize(3072);
+          kpg.generateKeyPair();
+      }
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "KeyPairGenerator Algorithms: RSA"
+    read_at: "2026-11-05"
+    quote: "RSA — Generates keypairs for the RSA algorithm (Signature/Cipher)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The key size is set on the next line (3072); the literal's own line does not pin it."

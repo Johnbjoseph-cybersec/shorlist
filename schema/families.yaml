@@ -1,0 +1,35 @@
+# ShorList — closed family vocabulary, scope v1.
+#
+# The scoring key of a row is `expected.family`, taken from this list. It is coarser than
+# CycloneDX `cryptography-defs.json`, on purpose: CycloneDX splits RSA into RSASSA-PKCS1,
+# RSASSA-PSS, RSAES-PKCS1, RSAES-OAEP and RSA-X931, and a form such as
+# `rsa.generate_private_key(...)` pins none of them. A row that does pin one names it in the
+# optional `cyclonedx_family` field.
+#
+# `parent` is used by the scorer: a scanner that reports the parent family (EC) for an
+# expected child (ECDSA, ECDH) is scored `parent_only`, not `hit`.
+#
+# `role` is the role the family has by definition. When a scanner names the family but
+# reports no role, the scorer takes this role as the reported one (ECDSA is a signature
+# algorithm whether or not the scanner says so). RSA and EC have no intrinsic role.
+#
+# Reference: CycloneDX cryptography-defs.json, lastUpdated 2026-02-24,
+# https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json
+
+quantum_vulnerable:   # broken by Shor's algorithm
+  RSA:     {cyclonedx: [RSASSA-PKCS1, RSASSA-PSS, RSAES-PKCS1, RSAES-OAEP, RSA-X931]}
+  DSA:     {cyclonedx: [DSA], role: signature}
+  DH:      {cyclonedx: [FFDH], role: key_establishment}
+  EC:      {cyclonedx: [], note: "elliptic-curve key or curve, role not pinned by the form"}
+  ECDSA:   {cyclonedx: [ECDSA], parent: EC, role: signature}
+  ECDH:    {cyclonedx: [ECDH], parent: EC, role: key_establishment}
+  EdDSA:   {cyclonedx: [EdDSA], parent: EC, role: signature}
+  X25519:  {cyclonedx: [ECDH], parent: EC, role: key_establishment}
+  X448:    {cyclonedx: [ECDH], parent: EC, role: key_establishment}
+
+post_quantum:          # NIST FIPS 203 / 204 / 205, SP 800-208
+  ML-KEM:  {cyclonedx: [ML-KEM], role: key_establishment}
+  ML-DSA:  {cyclonedx: [ML-DSA], role: signature}
+  SLH-DSA: {cyclonedx: [SLH-DSA], role: signature}
+  LMS:     {cyclonedx: [LMS], role: signature}
+  XMSS:    {cyclonedx: [XMSS], role: signature}

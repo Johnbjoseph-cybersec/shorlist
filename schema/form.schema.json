@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shorlist:schema:form:0.1",
+  "title": "ShorList form",
+  "description": "One form: one way in which a cryptographic algorithm appears in source code or configuration text. A row is either a positive form (the text is a use of the algorithm) or a decoy (negative: true — the text names the algorithm but is not a use of it).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "title", "family", "parameter_set", "role", "form_kind", "language_or_product",
+    "literal", "context_filename", "context_template", "expected", "negative", "source",
+    "status", "added_by", "added_at"
+  ],
+  "properties": {
+    "id": {
+      "description": "Stable identifier. Never reused, never renumbered.",
+      "type": "string",
+      "pattern": "^SL-[0-9]{4}$"
+    },
+    "title": {"type": "string", "minLength": 5, "maxLength": 120},
+    "family": {
+      "description": "Algorithm family the literal names. Closed vocabulary, see schema/families.yaml.",
+      "$ref": "#/$defs/family"
+    },
+    "cyclonedx_family": {
+      "description": "CycloneDX cryptography-defs family, only when the form pins one (e.g. SHA256withRSA -> RSASSA-PKCS1).",
+      "type": "string"
+    },
+    "parameter_set": {
+      "description": "Parameter set, curve or key size the literal pins, or null.",
+      "type": ["string", "null"]
+    },
+    "role": {
+      "description": "Role of the algorithm as pinned by the form.",
+      "enum": ["signature", "key_establishment", "both", "n.a."]
+    },
+    "form_kind": {
+      "enum": [
+        "api_call", "api_string", "config_key", "config_value", "registry_id",
+        "oid", "curve_name", "cli", "file_format"
+      ]
+    },
+    "language_or_product": {
+      "description": "Language and library, or product, e.g. 'Python / pyca cryptography', 'Java / JCA', 'Go / stdlib', 'nginx', 'OpenSSH sshd', 'IANA TLS'.",
+      "type": "string",
+      "minLength": 2
+    },
+    "literal": {
+      "description": "The exact text of the form. Must occur verbatim, on one line, in context_template.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\n]+$"
+    },
+    "context_filename": {
+      "description": "File name the template is planted under. The name is part of the context (sshd_config, nginx.conf, Main.java).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "context_template": {
+      "description": "A minimal, syntactically valid file in which the literal stands. A decoy's template contains no positive form.",
+      "type": "string",
+      "minLength": 1
+    },
+    "expected": {
+      "description": "What a scanner should report for the literal's line. For a decoy: the family a scanner would wrongly report as a use.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "role", "size"],
+      "properties": {
+        "family": {"$ref": "#/$defs/family"},
+        "role": {"enum": ["signature", "key_establishment", "both", "undetermined"]},
+        "size": {
+          "description": "Key size in bits, or 'undetermined' when the form does not pin it.",
+          "oneOf": [
+            {"type": "integer", "minimum": 1},
+            {"const": "undetermined"}
+          ]
+        }
+      }
+    },
+    "negative": {
+      "description": "true for a decoy: text that names the algorithm but is not a use of it.",
+      "type": "boolean"
+    },
+    "decoy_class": {
+      "description": "Required when negative is true.",
+      "enum": ["ban_list", "comment", "log_string", "switch_off", "removal_list"]
+    },
+    "source": {
+      "description": "Primary sources only: the specification, registry or vendor documentation that defines the form. At least one.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "section", "read_at"],
+        "properties": {
+          "url": {"type": "string", "pattern": "^https://"},
+          "section": {"type": "string", "minLength": 2},
+          "read_at": {"type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+          "quote": {"type": "string"}
+        }
+      }
+    },
+    "status": {
+      "description": "verified-source: checked against the primary source. verified-run: checked by running the product or library. Unverified rows live in candidates/, not here. withdrawn: kept, never deleted.",
+      "enum": ["verified-source", "verified-run", "withdrawn"]
+    },
+    "withdrawn_reason": {"type": "string", "minLength": 5},
+    "withdrawn_at": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "added_by": {"type": "string", "minLength": 2},
+    "added_at": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "reviewed_by": {
+      "description": "Reviewers. Two are required before a row is merged (enforced in review, not by the schema).",
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"negative": {"const": true}}},
+      "then": {"required": ["decoy_class"]},
+      "else": {"not": {"required": ["decoy_class"]}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "withdrawn"}}},
+      "then": {"required": ["withdrawn_reason", "withdrawn_at"]},
+      "else": {"not": {"anyOf": [{"required": ["withdrawn_reason"]}, {"required": ["withdrawn_at"]}]}}
+    }
+  ],
+  "$defs": {
+    "family": {
+      "enum": [
+        "RSA", "DSA", "DH", "EC", "ECDSA", "ECDH", "EdDSA", "X25519", "X448",
+        "ML-KEM", "ML-DSA", "SLH-DSA", "LMS", "XMSS"
+      ]
+    }
+  }
+}

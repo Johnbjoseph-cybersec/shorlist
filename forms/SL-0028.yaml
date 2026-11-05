@@ -1,0 +1,31 @@
+id: "SL-0028"
+title: "Decoy: Go hybrid ML-KEM switched off by GODEBUG"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Go / crypto/tls"
+negative: true
+decoy_class: "switch_off"
+literal: "export GODEBUG=tlsmlkem=0"
+context_filename: "run.sh"
+context_template: |
+  #!/bin/sh
+  export GODEBUG=tlsmlkem=0
+  exec ./server
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://pkg.go.dev/crypto/tls"
+    section: "type Config: CurvePreferences"
+    read_at: "2026-11-05"
+    quote: "To disable it, set CurvePreferences explicitly or use the GODEBUG=tlsmlkem=0 environment variable."
+  - url: "https://go.dev/doc/godebug"
+    section: "GODEBUG History > Go 1.24"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Turns ML-KEM off. Whatever key exchange remains is not named in the file."

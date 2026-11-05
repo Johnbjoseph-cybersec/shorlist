@@ -1,0 +1,26 @@
+id: "SL-0027"
+title: "Decoy: TLS signature scheme in a Python log message"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: true
+decoy_class: "log_string"
+literal: "logging.warning(\"peer offered ecdsa_secp256r1_sha256; rejected by policy\")"
+context_filename: "handshake_log.py"
+context_template: |
+  import logging
+
+  logging.warning("peer offered ecdsa_secp256r1_sha256; rejected by policy")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

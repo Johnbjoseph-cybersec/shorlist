@@ -1,0 +1,37 @@
+id: "SL-0011"
+title: "nginx: hybrid X25519MLKEM768 group"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: false
+literal: "ssl_ecdh_curve X25519MLKEM768;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_ecdh_curve X25519MLKEM768;
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ecdh_curve"
+    read_at: "2026-11-05"
+    quote: "Specifies a curve for ECDHE ciphers."
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). The value is the IANA group name passed through to the TLS library. The certificate file names are placeholders and carry no algorithm."

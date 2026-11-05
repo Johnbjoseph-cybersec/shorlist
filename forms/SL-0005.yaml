@@ -1,0 +1,32 @@
+id: "SL-0005"
+title: "JCA: SHA256withECDSA Signature"
+family: "ECDSA"
+cyclonedx_family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Signature sig = Signature.getInstance(\"SHA256withECDSA\");"
+context_filename: "Sign.java"
+context_template: |
+  import java.security.Signature;
+
+  public class Sign {
+      public static void main(String[] args) throws Exception {
+          Signature sig = Signature.getInstance("SHA256withECDSA");
+          System.out.println(sig.getAlgorithm());
+      }
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Signature Algorithms: SHA256withECDSA"
+    read_at: "2026-11-05"
+    quote: "The ECDSA signature algorithms as defined in ANSI X9.62."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

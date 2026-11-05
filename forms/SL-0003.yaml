@@ -1,0 +1,25 @@
+id: "SL-0003"
+title: "pyca: ML-KEM-768 key generation"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+literal: "private_key = MLKEM768PrivateKey.generate()"
+context_filename: "kem.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PrivateKey
+
+  private_key = MLKEM768PrivateKey.generate()
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/mlkem/"
+    section: "ML-KEM key encapsulation: MLKEM768PrivateKey.generate() (added in 47.0.0)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"

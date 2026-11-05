@@ -1,0 +1,28 @@
+id: "SL-0023"
+title: "Decoy: RSA key generation in a Python comment"
+family: "RSA"
+parameter_set: "2048"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: true
+decoy_class: "comment"
+literal: "    # Removed in v3: rsa.generate_private_key(public_exponent=65537, key_size=2048)"
+context_filename: "keystore.py"
+context_template: |
+  def load_key(path):
+      # Removed in v3: rsa.generate_private_key(public_exponent=65537, key_size=2048)
+      with open(path, "rb") as fh:
+          return fh.read()
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/"
+    section: "RSA > Generation: rsa.generate_private_key(public_exponent, key_size)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The file imports no cryptographic module."

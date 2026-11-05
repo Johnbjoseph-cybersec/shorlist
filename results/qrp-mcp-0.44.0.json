@@ -1,0 +1,839 @@
+{
+ "result_format": "0.1",
+ "catalogue": {
+  "name": "ShorList",
+  "version": "0.1.0",
+  "sha256": "7ed22c2f1943680f50ebe571110c0da3dc433265ae1b18183b6b834f44656879",
+  "rows": 30,
+  "positive": 20,
+  "decoys": 10
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "scanner": {
+  "adapter": "qrp-mcp",
+  "command": [
+   "uvx",
+   "qrp-mcp@0.44.0"
+  ],
+  "version": "qrp-mcp 0.44.0"
+ },
+ "summary": {
+  "statement": "Of 20 positive forms in ShorList 0.1.0, qrp-mcp 0.44.0 recognises 20; of 10 decoys it reports 0 as a use. This measures recognition of a form in a minimal context; it is not recall and not finding in a real tree.",
+  "positive": {
+   "hit": 20,
+   "parent_only": 0,
+   "wrong_family": 0,
+   "miss": 0,
+   "n": 20
+  },
+  "decoys": {
+   "ok": 10,
+   "false_alarm": 0,
+   "n": 10
+  },
+  "role_ok": {
+   "true": 14,
+   "false": 2
+  },
+  "size_ok": {
+   "true": 5,
+   "false": 0
+  }
+ },
+ "by_form_kind": {
+  "api_call": {
+   "positive": 6,
+   "hit": 6,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "api_string": {
+   "positive": 3,
+   "hit": 3,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "config_value": {
+   "positive": 5,
+   "hit": 5,
+   "decoys": 5,
+   "false_alarm": 0
+  },
+  "oid": {
+   "positive": 1,
+   "hit": 1,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "registry_id": {
+   "positive": 5,
+   "hit": 5,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "by_family": {
+  "ECDSA": {
+   "positive": 6,
+   "hit": 6,
+   "decoys": 3,
+   "false_alarm": 0
+  },
+  "ML-KEM": {
+   "positive": 6,
+   "hit": 6,
+   "decoys": 3,
+   "false_alarm": 0
+  },
+  "RSA": {
+   "positive": 8,
+   "hit": 8,
+   "decoys": 4,
+   "false_alarm": 0
+  }
+ },
+ "by_language_or_product": {
+  "Go / crypto/tls": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Go / stdlib": {
+   "positive": 3,
+   "hit": 3,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "IANA JOSE": {
+   "positive": 1,
+   "hit": 1,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "IANA TLS": {
+   "positive": 4,
+   "hit": 4,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "Java / JCA": {
+   "positive": 3,
+   "hit": 3,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "Java / java.security": {
+   "positive": 0,
+   "hit": 0,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "OpenSSH sshd": {
+   "positive": 3,
+   "hit": 3,
+   "decoys": 2,
+   "false_alarm": 0
+  },
+  "Python / any": {
+   "positive": 1,
+   "hit": 1,
+   "decoys": 0,
+   "false_alarm": 0
+  },
+  "Python / pyca cryptography": {
+   "positive": 3,
+   "hit": 3,
+   "decoys": 1,
+   "false_alarm": 0
+  },
+  "nginx": {
+   "positive": 2,
+   "hit": 2,
+   "decoys": 1,
+   "false_alarm": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "SL-0001",
+   "negative": false,
+   "outcome": "hit",
+   "line": 3,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0002",
+   "negative": false,
+   "outcome": "hit",
+   "line": 6,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0003",
+   "negative": false,
+   "outcome": "hit",
+   "line": 3,
+   "reported_as_use": [
+    "ML-KEM"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0004",
+   "negative": false,
+   "outcome": "hit",
+   "line": 5,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0005",
+   "negative": false,
+   "outcome": "hit",
+   "line": 5,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0006",
+   "negative": false,
+   "outcome": "hit",
+   "line": 5,
+   "reported_as_use": [
+    "ML-KEM"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0007",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0008",
+   "negative": false,
+   "outcome": "hit",
+   "line": 9,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": null,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0009",
+   "negative": false,
+   "outcome": "hit",
+   "line": 9,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0010",
+   "negative": false,
+   "outcome": "hit",
+   "line": 6,
+   "reported_as_use": [
+    "ML-KEM"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0011",
+   "negative": false,
+   "outcome": "hit",
+   "line": 8,
+   "reported_as_use": [
+    "ECDH",
+    "ML-KEM",
+    "X25519"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0012",
+   "negative": false,
+   "outcome": "hit",
+   "line": 9,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": false,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0013",
+   "negative": false,
+   "outcome": "hit",
+   "line": 2,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0014",
+   "negative": false,
+   "outcome": "hit",
+   "line": 2,
+   "reported_as_use": [
+    "EC",
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0015",
+   "negative": false,
+   "outcome": "hit",
+   "line": 2,
+   "reported_as_use": [
+    "ML-KEM",
+    "X25519"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0016",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "EC",
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0017",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0018",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "ML-KEM"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0019",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "RSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": false,
+   "size_ok": null
+  },
+  {
+   "id": "SL-0020",
+   "negative": false,
+   "outcome": "hit",
+   "line": 1,
+   "reported_as_use": [
+    "ECDSA"
+   ],
+   "reported_not_use": [],
+   "role_ok": true,
+   "size_ok": true
+  },
+  {
+   "id": "SL-0021",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0022",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0023",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "RSA"
+   ]
+  },
+  {
+   "id": "SL-0024",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "ECDSA"
+   ]
+  },
+  {
+   "id": "SL-0025",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "ECDSA"
+   ]
+  },
+  {
+   "id": "SL-0026",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "ML-KEM"
+   ]
+  },
+  {
+   "id": "SL-0027",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "EC",
+    "ECDSA"
+   ]
+  },
+  {
+   "id": "SL-0028",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": []
+  },
+  {
+   "id": "SL-0029",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "ML-KEM",
+    "X25519"
+   ]
+  },
+  {
+   "id": "SL-0030",
+   "negative": true,
+   "outcome": "ok",
+   "reported_as_use": [],
+   "reported_not_use": [
+    "RSA"
+   ]
+  }
+ ],
+ "fingerprint": "6e0beab7f5a80f82518054736553f5e93459768d1755f290ecc9e11535ad5548",
+ "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
+ "run": {
+  "at": "2026-11-05T08:20:16Z",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
+ },
+ "raw_records": {
+  "SL-0001": [
+   {
+    "path": "keys.py",
+    "line": 3,
+    "family": "RSA",
+    "role": "undetermined",
+    "size": 2048,
+    "is_use": true
+   }
+  ],
+  "SL-0002": [
+   {
+    "path": "sign.py",
+    "line": 2,
+    "family": "EC",
+    "role": "undetermined",
+    "size": "undetermined",
+    "is_use": true
+   },
+   {
+    "path": "sign.py",
+    "line": 6,
+    "family": "ECDSA",
+    "role": null,
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0003": [
+   {
+    "path": "kem.py",
+    "line": 3,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0004": [
+   {
+    "path": "Keys.java",
+    "line": 5,
+    "family": "RSA",
+    "role": "undetermined",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0005": [
+   {
+    "path": "Sign.java",
+    "line": 5,
+    "family": "ECDSA",
+    "role": null,
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0006": [
+   {
+    "path": "Kem.java",
+    "line": 5,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0007": [
+   {
+    "path": "oids.py",
+    "line": 1,
+    "family": "RSA",
+    "role": "key_establishment",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0008": [
+   {
+    "path": "keys.go",
+    "line": 9,
+    "family": "RSA",
+    "role": "undetermined",
+    "size": 2048,
+    "is_use": true
+   }
+  ],
+  "SL-0009": [
+   {
+    "path": "sign.go",
+    "line": 9,
+    "family": "ECDSA",
+    "role": null,
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0010": [
+   {
+    "path": "kem.go",
+    "line": 6,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0011": [
+   {
+    "path": "nginx.conf",
+    "line": 8,
+    "family": "X25519",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "nginx.conf",
+    "line": 8,
+    "family": "ECDH",
+    "role": null,
+    "size": "undetermined",
+    "is_use": true
+   },
+   {
+    "path": "nginx.conf",
+    "line": 8,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0012": [
+   {
+    "path": "nginx.conf",
+    "line": 9,
+    "family": "RSA",
+    "role": "key_establishment",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0013": [
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "RSA",
+    "role": "signature",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0014": [
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "ECDSA",
+    "role": null,
+    "size": 256,
+    "is_use": true
+   },
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "EC",
+    "role": "signature",
+    "size": 256,
+    "is_use": true
+   }
+  ],
+  "SL-0015": [
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "X25519",
+    "role": null,
+    "size": null,
+    "is_use": true
+   },
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0016": [
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "ECDSA",
+    "role": null,
+    "size": 256,
+    "is_use": true
+   },
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "EC",
+    "role": "signature",
+    "size": 256,
+    "is_use": true
+   }
+  ],
+  "SL-0017": [
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "RSA",
+    "role": "signature",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0018": [
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": true
+   }
+  ],
+  "SL-0019": [
+   {
+    "path": "tls_policy.py",
+    "line": 1,
+    "family": "RSA",
+    "role": "key_establishment",
+    "size": "undetermined",
+    "is_use": true
+   }
+  ],
+  "SL-0020": [
+   {
+    "path": "jwt_header.py",
+    "line": 1,
+    "family": "ECDSA",
+    "role": null,
+    "size": 256,
+    "is_use": true
+   }
+  ],
+  "SL-0021": [],
+  "SL-0022": [],
+  "SL-0023": [
+   {
+    "path": "keystore.py",
+    "line": 2,
+    "family": "RSA",
+    "role": "undetermined",
+    "size": 2048,
+    "is_use": false
+   }
+  ],
+  "SL-0024": [
+   {
+    "path": "Verifier.java",
+    "line": 3,
+    "family": "ECDSA",
+    "role": null,
+    "size": "undetermined",
+    "is_use": false
+   }
+  ],
+  "SL-0025": [
+   {
+    "path": "signer.go",
+    "line": 6,
+    "family": "ECDSA",
+    "role": null,
+    "size": "undetermined",
+    "is_use": false
+   }
+  ],
+  "SL-0026": [
+   {
+    "path": "Probe.java",
+    "line": 7,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": false
+   }
+  ],
+  "SL-0027": [
+   {
+    "path": "handshake_log.py",
+    "line": 3,
+    "family": "ECDSA",
+    "role": null,
+    "size": 256,
+    "is_use": false
+   },
+   {
+    "path": "handshake_log.py",
+    "line": 3,
+    "family": "EC",
+    "role": "signature",
+    "size": 256,
+    "is_use": false
+   }
+  ],
+  "SL-0028": [],
+  "SL-0029": [
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "X25519",
+    "role": null,
+    "size": null,
+    "is_use": false
+   },
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "ML-KEM",
+    "role": null,
+    "size": null,
+    "is_use": false
+   }
+  ],
+  "SL-0030": [
+   {
+    "path": "sshd_config",
+    "line": 2,
+    "family": "RSA",
+    "role": "signature",
+    "size": "undetermined",
+    "is_use": false
+   }
+  ]
+ }
+}

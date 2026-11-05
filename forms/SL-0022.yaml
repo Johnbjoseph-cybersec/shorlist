@@ -1,0 +1,38 @@
+id: "SL-0022"
+title: "Decoy: RSA key exchange excluded in nginx cipher string"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: true
+decoy_class: "ban_list"
+literal: "ssl_ciphers HIGH:!kRSA:!aNULL;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_ciphers HIGH:!kRSA:!aNULL;
+      }
+  }
+expected:
+  family: "RSA"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ciphers"
+    read_at: "2026-11-05"
+  - url: "https://docs.openssl.org/3.0/man1/openssl-ciphers/"
+    section: "CIPHER LIST FORMAT ('!') and CIPHER STRINGS (kRSA)"
+    read_at: "2026-11-05"
+    quote: "If ! is used then the ciphers are permanently deleted from the list."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "kRSA is named only after '!', i.e. removed. HIGH is a class, not a named algorithm; what it expands to depends on the OpenSSL build and is out of scope for the row."

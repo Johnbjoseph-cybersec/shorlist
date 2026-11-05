@@ -1,0 +1,39 @@
+id: "SL-0012"
+title: "nginx: static-RSA cipher suite by OpenSSL name"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "both"
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: false
+literal: "ssl_ciphers AES128-GCM-SHA256;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_protocols TLSv1.2;
+          ssl_ciphers AES128-GCM-SHA256;
+      }
+  }
+expected:
+  family: "RSA"
+  role: "both"
+  size: "undetermined"
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ciphers"
+    read_at: "2026-11-05"
+    quote: "The ciphers are specified in the format understood by the OpenSSL library"
+  - url: "https://docs.openssl.org/3.0/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES (TLS v1.2 cipher suites): TLS_RSA_WITH_AES_128_GCM_SHA256 = AES128-GCM-SHA256"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
+notes: "The OpenSSL name carries no 'RSA' text: AES128-GCM-SHA256 is TLS_RSA_WITH_AES_128_GCM_SHA256 (RSA key transport and RSA authentication)."

@@ -1,0 +1,28 @@
+id: "SL-0013"
+title: "OpenSSH: RSA host key algorithm"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: null
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms rsa-sha2-512"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms rsa-sha2-512
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "HostKeyAlgorithms: default list includes rsa-sha2-512 (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-05"
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-05"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-05"
