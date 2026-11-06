@@ -75,17 +75,22 @@ def fingerprint(cat_sha: str, gen_version: str, scanner_version: str, scored: li
     return hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def run(adapter: Adapter, root: Path = ROOT, keep: Path | None = None) -> dict:
+def run(adapter: Adapter, root: Path = ROOT, keep: Path | None = None,
+        shard: tuple[int, int] | None = None) -> dict:
+    """Scan every row; with shard=(i, n), only the rows whose catalogue index is i mod n.
+
+    A shard result is not a measurement on its own: `merge` joins all n shards into the
+    result an unsharded run gives (same rows, same fingerprint)."""
     from .score import score_fix, score_row
 
     rows = load(root)
     families = load_families(root)
-    rows_by_id = {r["id"]: r for r in rows}
     scanner_version = adapter.version()
+    todo = rows if shard is None else [r for k, r in enumerate(rows) if k % shard[1] == shard[0]]
     base = Path(tempfile.mkdtemp(prefix="shorlist-"))
     scored, raw = [], {}
     try:
-        for row in rows:
+        for row in todo:
             tree = plant(row, base)
             work = base / row["id"] / "work"
             work.mkdir()
@@ -107,6 +112,47 @@ def run(adapter: Adapter, root: Path = ROOT, keep: Path | None = None) -> dict:
             shutil.copytree(base, keep)
         shutil.rmtree(base, ignore_errors=True)
 
+    scanner = {"adapter": adapter.name, "command": adapter.command, "version": scanner_version}
+    run_meta = {  # not part of the fingerprint
+        "at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "python": platform.python_version(), "platform": platform.platform(),
+    }
+    if shard is not None:
+        return {"result_format": RESULT_FORMAT, "shard": {"index": shard[0], "of": shard[1]},
+                "catalogue": {"version": catalogue_version(root), "sha256": catalogue_sha256(root)},
+                "generator": {"name": "shorlist", "version": __version__}, "scanner": scanner,
+                "rows": scored, "run": run_meta, "raw_records": raw}
+    return assemble(root, scanner, scored, raw, run_meta)
+
+
+def merge(shards: list[dict], root: Path = ROOT) -> dict:
+    """Join the n shard results of one scanner into the result of an unsharded run."""
+    if not shards:
+        raise ValueError("no shards")
+    n = shards[0]["shard"]["of"]
+    if sorted(s["shard"]["index"] for s in shards) != list(range(n)) or any(s["shard"]["of"] != n for s in shards):
+        raise ValueError(f"need shards 0..{n - 1} of {n}, each once")
+    for key in ("catalogue", "generator", "scanner"):
+        if any(s[key] != shards[0][key] for s in shards):
+            raise ValueError(f"shards differ in {key}")
+    if shards[0]["generator"]["version"] != __version__:
+        raise ValueError("shards were made by another generator version")
+    if shards[0]["catalogue"]["sha256"] != catalogue_sha256(root):
+        raise ValueError("shards were measured on another catalogue than root")
+    by_id = {r["id"]: r for s in shards for r in s["rows"]}
+    rows = load(root)
+    if set(by_id) != {r["id"] for r in rows}:
+        raise ValueError("shard rows do not cover the catalogue")
+    raw = {k: v for s in shards for k, v in s["raw_records"].items()}
+    run_meta = {"shards": [s["run"] for s in sorted(shards, key=lambda s: s["shard"]["index"])]}
+    return assemble(root, shards[0]["scanner"], [by_id[r["id"]] for r in rows], raw, run_meta)
+
+
+def assemble(root: Path, scanner: dict, scored: list[dict], raw: dict, run_meta: dict) -> dict:
+    rows = load(root)
+    rows_by_id = {r["id"]: r for r in rows}
+    scanner_version = scanner["version"]
+
     # The headline summary and the by_* tables are the quantum axis only, so adding weak or
     # defect rows never moves them. The other axes are reported apart under "axes".
     quantum = [s for s in scored if s["axis"] == "quantum"]
@@ -122,7 +168,7 @@ def run(adapter: Adapter, root: Path = ROOT, keep: Path | None = None) -> dict:
                       "rows": len(rows), "positive": len(pos), "decoys": len(neg),
                       "by_axis": {a: sum(s["axis"] == a for s in scored) for a in ("quantum", "weak", "defect")}},
         "generator": {"name": "shorlist", "version": __version__},
-        "scanner": {"adapter": adapter.name, "command": adapter.command, "version": scanner_version},
+        "scanner": scanner,
         "summary": {
             "statement": (f"Of {len(pos)} positive forms in ShorList {version}, {scanner_version} recognises "
                           f"{m}; of {len(neg)} decoys it reports {la} as a use. This measures recognition of "
@@ -139,10 +185,7 @@ def run(adapter: Adapter, root: Path = ROOT, keep: Path | None = None) -> dict:
         "rows": scored,
         "fingerprint": fingerprint(cat_sha, __version__, scanner_version, scored),
         "fingerprint_rule": "sha256(canonical JSON {catalogue_sha256, generator_version, scanner_version, rows:[[id,outcome,role_ok,size_ok]...]})",
-        "run": {  # not part of the fingerprint
-            "at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "python": platform.python_version(), "platform": platform.platform(),
-        },
+        "run": run_meta,  # not part of the fingerprint
         "raw_records": raw,
     }
 

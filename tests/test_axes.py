@@ -149,3 +149,37 @@ def test_run_end_to_end_with_a_defect_row(tmp_path):
     assert d["fixed_files"] == {"ok": 1, "false_alarm": 0, "n": 1}
     assert "SL-9001/fix" in res["raw_records"]
     assert "fixed file: ok" in markdown(res)
+
+
+def test_shards_merge_into_the_unsharded_result(tmp_path):
+    import shutil
+
+    import pytest
+    from shorlist.adapters.base import Adapter
+    from shorlist.run import merge, run
+
+    shutil.copytree(ROOT / "schema", tmp_path / "schema")
+    shutil.copy(ROOT / "VERSION", tmp_path / "VERSION")
+    (tmp_path / "forms").mkdir()
+    for i in (1, 2, 3, 4, 5, 6, 7):
+        shutil.copy(ROOT / "forms" / f"SL-000{i}.yaml", tmp_path / "forms")
+
+    class FlagsRsa(Adapter):
+        name = "flags-rsa"
+
+        def version(self):
+            return "flags-rsa 1"
+
+        def scan(self, tree, workdir):
+            (f,) = list(tree.iterdir())
+            return [Record(f.name, n, "RSA") for n, line in enumerate(f.read_text().split("\n"), 1) if "rsa" in line.lower()]
+
+    full = run(FlagsRsa(), tmp_path)
+    shards = [run(FlagsRsa(), tmp_path, shard=(i, 3)) for i in (2, 0, 1)]
+    assert sorted(len(s["rows"]) for s in shards) == [2, 2, 3]
+    merged = merge(shards, tmp_path)
+    assert merged["fingerprint"] == full["fingerprint"]
+    assert merged["rows"] == full["rows"] and merged["summary"] == full["summary"]
+    assert merged["raw_records"] == full["raw_records"]
+    with pytest.raises(ValueError, match="0..2"):
+        merge(shards[:2], tmp_path)
