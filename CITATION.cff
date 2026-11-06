@@ -10,7 +10,7 @@ abstract: >-
   expected detection and a primary source; decoy rows measure false alarms. A generator
   plants each row and scores a scanner's output against it, repeatably.
 type: dataset
-version: 0.1.1
+version: 0.2.0
 authors:
   - family-names: Tenev
     given-names: Stanimir

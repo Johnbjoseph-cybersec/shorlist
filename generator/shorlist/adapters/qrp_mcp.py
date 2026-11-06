@@ -6,7 +6,11 @@ Mapping:
 - `is_use` is False when `evidence_kind` is one of {comment, ban, named_but_not_used,
   identifier}: the set qrp-mcp itself treats as "not a use" (src/qrp_mcp/mandates.py,
   `_NOT_USE`, at 0.44.0);
-- family spellings: Ed25519/Ed448 -> EdDSA, FFDH -> DH; others pass through;
+- family spellings: Ed25519/Ed448 -> EdDSA, FFDH -> DH; SHA1 -> SHA-1, as its rule table defines
+  the name (src/qrp_mcp/detectors.py L450 at 0.44.0: `("SHA1", "SHA-1 usage", re.compile(`);
+  others pass through (MD5, MD4, DES, 3DES, RC4, RC2 are already the families.yaml names);
+- cwe: None. qrp-mcp 0.44.0 writes no CWE: no evidence item has a CWE field, and the string
+  "cwe" occurs nowhere in its package (checked with grep over the installed qrp_mcp/ tree);
 - an item with no `role` in a category qrp-mcp treats as key establishment by what it is
   (tls_groups, ssh_kex, static_rsa_kex; mandates.py `_KEY_ESTABLISHMENT`) gets that role.
 
@@ -23,7 +27,7 @@ from pathlib import Path
 from .base import Adapter, Record
 
 NOT_USE = {"comment", "ban", "named_but_not_used", "identifier"}
-FAMILY_MAP = {"Ed25519": "EdDSA", "Ed448": "EdDSA", "FFDH": "DH"}
+FAMILY_MAP = {"Ed25519": "EdDSA", "Ed448": "EdDSA", "FFDH": "DH", "SHA1": "SHA-1"}  # SHA1: detectors.py L450
 KEY_ESTABLISHMENT_CATEGORIES = {"tls_groups", "ssh_kex", "static_rsa_kex"}
 
 

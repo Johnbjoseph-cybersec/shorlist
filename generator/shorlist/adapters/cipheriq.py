@@ -10,7 +10,9 @@ in the tree give no Record. This matters here: run on an empty directory, cbom-g
 lists algorithms and libraries from the container's own installed packages (RSA, ECDSA,
 libssl3t64, …) with no location; those describe the scanner's environment, not the planted
 row, and are dropped. Family from name via schema/families.yaml; role from primitive; size from
-relatedCryptoMaterialProperties.size; is_use True.
+relatedCryptoMaterialProperties.size; is_use True. cwe: None; cbom-generator writes no CWE (none
+in its README, no "cwe" string in the 1.9.3 binary or its plugins, none in its CBOMs of the
+weak and defect rows of v0.2).
 
 Two invocations, two adapter names, two result files:
 - `cipheriq-cbom-generator`: README "Usage", `cbom-generator --output cbom.json <dirs>`;

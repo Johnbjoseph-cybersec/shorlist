@@ -12,7 +12,8 @@ At scan time two mounts are inserted right after `run`, and nothing else:
     <outdir> -> /out   read-write  (the scanner's output files)
 
 so the command recorded in a result carries no host path. `outdir` is
-$SHORLIST_OUT_DIR/<row id> when that variable is set, else the generator's private workdir.
+$SHORLIST_OUT_DIR/<row id> when that variable is set (<row id>-fix for the fixed file of a
+defect row, which run.plant() writes to <row id>/fix), else the generator's private workdir.
 """
 from __future__ import annotations
 
@@ -52,7 +53,8 @@ class ContainerAdapter(Adapter):
 
     def outdir(self, tree: Path, workdir: Path) -> Path:
         base = os.environ.get("SHORLIST_OUT_DIR")
-        d = Path(base) / tree.parent.name if base else workdir / "out"
+        name = tree.parent.name + ("-fix" if tree.name == "fix" else "")
+        d = Path(base) / name if base else workdir / "out"
         d.mkdir(parents=True, exist_ok=True)
         d.chmod(0o777)  # the scanners run as a non-root user
         return d

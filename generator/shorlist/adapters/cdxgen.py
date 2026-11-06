@@ -12,7 +12,11 @@ give no Record.
 
 Mapping (shared CycloneDX rules in _cyclonedx.py): family from algorithmProperties.
 algorithmFamily, then name, via schema/families.yaml; role from primitive; size None; is_use
-True.
+True. algorithmFamily is the CycloneDX enum (ADVANCED.md, "`algorithmFamily` (CycloneDX 1.7)"),
+whose SHA-1, MD5, MD4, DES, 3DES, RC4, RC2 are the families.yaml names, so no alias is needed.
+cwe: None. ADVANCED.md at v13.6.0 names no CWE field for a cryptographic-asset (no "CWE" in
+the file); not checked on output, because the image does not start on a CPU without
+x86-64-v3 ("Fatal glibc error: CPU does not support x86-64-v3").
 
 Invocation: one fixed command for every row, `cbom -o /out/bom.json /scan`, project type
 auto-detected (no per-row -t).

@@ -19,8 +19,19 @@ Mapping (shared CycloneDX rules in _cyclonedx.py):
     "hybrid key exchange"; the documentation names only ML-KEM hybrids, and that is followed.
   - "Composite-Signature" -> ML-DSA. L118-119: HYBRID-SIG-001 "ECDSA+ML-DSA Composite
     Signatures", HYBRID-SIG-002 "RSA+ML-DSA Composite Signatures".
+  - "HMAC-MD5" -> MD5 and "HMAC-SHA1" -> SHA-1 (weak axis; the catalogue files `hmac-md5`,
+    `hmac-sha1` under MD5 and SHA-1). pkg/patterns/matcher.go at v1.5.0, L1317-1324:
+    `ID: "MAC-HMAC-MD5-001"`, `Algorithm: "HMAC-MD5"`, `Description: "HMAC-MD5 detected. MD5 is
+    cryptographically broken. Not NIST-approved."`; L1302-1310: `ID: "MAC-HMAC-SHA1-001"`,
+    `Algorithm: "HMAC-SHA1"`, `Description: "HMAC-SHA1 detected. SHA-1 is deprecated for new
+    applications."`. Without them the shared prefix rule gives HMAC (defect_only), out of scope.
   "Hybrid-TLS" is not in the pattern table and "RSA, ECDSA" names two families; both stay
-  unmapped;
+  unmapped. "Weak Certificate Signature (SHA-1)" (CERT-SIGALG-WEAK-001) stays unmapped too: its
+  rule matches `sha1WithRSA` and `md5WithRSA` alike (PATTERNS.md L261; matcher.go L801 "SHA-1 or
+  MD5"), so the name does not say which. "Weak Cipher Suite" (CIPHER-001) names no algorithm;
+- cwe: None. CryptoScan writes no CWE: none in the CBOM, the SARIF or the JSON output of a scan
+  of all 187 defect rows of v0.2 (grep -i cwe on each, 0 lines), and none in the docs
+  (PATTERNS.md, docs/commands.md, docs/cbom-fields.md at v1.5.0);
 - role: from algorithmProperties.primitive (signature / kem / key-agree), else None;
 - size: None. The CBOM's classicalSecurityLevel is a security strength, not a key size, and
   relatedCryptoMaterialProperties.size is documented as never written;
@@ -39,7 +50,8 @@ from . import _cyclonedx
 from ._container import OUT, SCAN, ContainerAdapter
 from .base import Record
 
-ALIASES = {"ECC": "EC", "Hybrid-KEM": "ML-KEM", "Composite-Signature": "ML-DSA"}  # PATTERNS.md L117-119, L139
+ALIASES = {"ECC": "EC", "Hybrid-KEM": "ML-KEM", "Composite-Signature": "ML-DSA",  # PATTERNS.md L117-119, L139
+           "HMAC-MD5": "MD5", "HMAC-SHA1": "SHA-1"}  # matcher.go L1317-1324, L1302-1310
 
 
 class CryptoScanAdapter(ContainerAdapter):

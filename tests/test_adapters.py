@@ -137,3 +137,83 @@ def test_semgrep_parse():
     assert recs[0] == Record("keys.py", 3, "RSA")
     assert recs[1].family == "MD5"  # classically_weak since v0.2; scored on the weak axis only
     assert family_from_check_id("go.lang.security.audit.crypto.use_of_weak_rsa_key.use-of-weak-rsa-key") == "RSA"
+
+
+# v0.2 weak axis: each scanner's own spellings of the classically weak families, mapped only as the
+# scanner's own rule table defines them (the line is cited in the adapter).
+
+# qrp-mcp 0.44.0 src/qrp_mcp/detectors.py L450: ("SHA1", "SHA-1 usage", ...)
+def test_qrp_mcp_maps_sha1_and_writes_no_cwe():
+    from shorlist.adapters.qrp_mcp import QrpMcpAdapter
+    res = {"evidence": {"source_code": [
+        {"path": "fp.py", "line": 5, "algorithm": "SHA1", "evidence_kind": "call"},
+        {"path": "fp.py", "line": 6, "algorithm": "3DES", "evidence_kind": "call"},
+        {"path": "enc.py", "line": 3, "algorithm": "AES-ECB", "evidence_kind": "call"}]}}
+    recs = QrpMcpAdapter.parse(res)
+    assert [r.family for r in recs] == ["SHA-1", "3DES", "AES-ECB"]
+    assert all(r.cwe is None for r in recs)  # qrp-mcp 0.44.0 has no CWE field
+
+
+# CryptoScan v1.5.0 pkg/patterns/matcher.go L1302-1310 MAC-HMAC-SHA1-001, L1317-1324 MAC-HMAC-MD5-001
+def test_cryptoscan_maps_hmac_md5_and_hmac_sha1_but_not_ambiguous_names():
+    bom = {"components": [
+        {"type": "cryptographic-asset", "name": n, "cryptoProperties": {"assetType": "algorithm"},
+         "evidence": {"occurrences": [{"location": "sshd_config", "line": i}]}}
+        for i, n in enumerate(["HMAC-MD5", "HMAC-SHA1", "SHA-1", "3DES", "Weak Certificate Signature (SHA-1)",
+                               "Weak Cipher Suite"], 1)]}
+    assert [r.family for r in CryptoScanAdapter.parse(bom)] == [
+        "MD5", "SHA-1", "SHA-1", "3DES", "Weak Certificate Signature (SHA-1)", "Weak Cipher Suite"]
+
+
+# qscan @8b737992 src/qscan/detectors/algo_risk.py L22 "SHA1", L26 "TRIPLEDES"; java_detector.py L34 "DESede"
+def test_qscan_maps_its_documented_weak_names_only():
+    bom = {"components": [
+        {"type": "cryptographic-asset", "name": n, "cryptoProperties": {"assetType": "algorithm"},
+         "properties": [{"name": "qscan:filePath", "value": "/scan/a.py"}, {"name": "qscan:lineNumber", "value": str(i)}]}
+        for i, n in enumerate(["SHA1", "TRIPLEDES", "TripleDES", "DESede", "ARCFOUR", "ARC4", "SHA", "SHA1withECDSA",
+                               "RC4", "MD4"], 1)]}
+    assert [r.family for r in QscanAdapter.parse(bom)] == [
+        "SHA-1", "3DES", "3DES", "3DES", "ARCFOUR", "ARC4", "SHA", "SHA1withECDSA", "RC4", "MD4"]
+
+
+# The shared prefix rule reads "DES-EDE3-CBC" as DES; no adapter here maps it to 3DES, because no
+# scanner measured documents that name. Pinned so that a change to the rule is a decision.
+def test_shared_prefix_rule_on_des_names():
+    assert family("DES-EDE3-CBC") == "DES" and family("3DES-EDE") == "3DES"
+    assert family("HMAC-MD5") == "HMAC"  # hence the CryptoScan alias above
+
+
+# semgrep-rules @16b9e6d4 metadata-schema.yaml.schm L54-61: cwe is a string or a list, pattern ^CWE-\d+.*
+def test_semgrep_reads_cwe_from_rule_metadata():
+    from shorlist.adapters.semgrep import cwes
+    res = {"results": [
+        {"check_id": "python.cryptography.security.insecure-cipher-mode-ecb.insecure-cipher-mode-ecb",
+         "path": "/scan/enc.py", "start": {"line": 5},
+         "extra": {"metadata": {"cwe": ["CWE-327: Use of a Broken or Risky Cryptographic Algorithm"]}}},
+        {"check_id": "x.y.two-cwes", "path": "/scan/enc.py", "start": {"line": 6},
+         "extra": {"metadata": {"cwe": ["CWE-326: Inadequate Encryption Strength", "CWE-0327: x"]}}},
+        {"check_id": "x.y.string-cwe", "path": "/scan/enc.py", "start": {"line": 7},
+         "extra": {"metadata": {"cwe": "CWE-295: Improper Certificate Validation"}}},
+        {"check_id": "x.y.no-cwe", "path": "/scan/enc.py", "start": {"line": 8}, "extra": {"metadata": {}}}]}
+    recs = SemgrepAdapter.parse(res)
+    assert [(r.line, r.cwe) for r in recs] == [(5, "CWE-327"), (6, "CWE-326"), (6, "CWE-327"), (7, "CWE-295"), (8, None)]
+    assert cwes({"cwe": "not a cwe"}) == [] and cwes({}) == []
+
+
+# semgrep-rules @16b9e6d4: use-of-sha1.yaml L2-4, insecure-cipher-algorithms-arc4.yaml L2-4,
+# desede-is-deprecated.yaml L2-4 (cited in the adapter)
+def test_semgrep_maps_the_weak_tokens_its_rules_define():
+    assert family_from_check_id("rules.java.lang.security.audit.crypto.use-of-sha1") == "SHA-1"
+    assert family_from_check_id("rules.python.cryptography.security.insecure-hash-algorithm-sha1") == "SHA-1"
+    assert family_from_check_id("rules.python.cryptography.security.insecure-cipher-algorithm-arc4") == "RC4"
+    assert family_from_check_id("rules.java.lang.security.audit.crypto.desede-is-deprecated") == "3DES"
+    assert family_from_check_id("rules.python.pycryptodome.security.insecure-cipher-algorithm-des") == "DES"
+    assert family_from_check_id("rules.java.lang.security.audit.crypto.ecb-cipher") == \
+        "rules.java.lang.security.audit.crypto.ecb-cipher"
+
+
+def test_out_dir_keeps_the_fixed_file_apart(tmp_path, monkeypatch):
+    monkeypatch.setenv("SHORLIST_OUT_DIR", str(tmp_path / "raw"))
+    a = CryptoScanAdapter()
+    assert a.outdir(tmp_path / "SL-5000" / "tree", tmp_path).name == "SL-5000"
+    assert a.outdir(tmp_path / "SL-5000" / "fix", tmp_path).name == "SL-5000-fix"

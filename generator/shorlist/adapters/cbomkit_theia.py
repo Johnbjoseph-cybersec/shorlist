@@ -7,7 +7,9 @@ with --bom, java.security. It writes a CycloneDX 1.6 CBOM to stdout (README, "Ru
 Mapping (shared CycloneDX rules in _cyclonedx.py): one Record per
 components[].evidence.occurrences[] inside the planted tree; family from algorithmFamily/name
 via schema/families.yaml; role from primitive; size from relatedCryptoMaterialProperties.size;
-is_use True. Components with no occurrence in the tree give no Record.
+is_use True. Components with no occurrence in the tree give no Record. cwe: None; theia writes
+no CWE (none in its README at v1.1.2, no "CWE-<n>" string in the binary, 0 components on the
+weak and defect rows of v0.2).
 
 Invocation: default plugins, no --bom (there is no input CBOM to verify). Version: the module
 version recorded in the binary at build time (`go version -m`), written to /VERSION in the

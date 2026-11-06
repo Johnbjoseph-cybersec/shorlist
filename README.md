@@ -16,7 +16,7 @@ parameters, anchored on NIST SP 800-131A Rev. 2 and similar) and *defect* (misus
 ECB, a constant IV or disabled certificate validation, scored on the CWE). A scanner gains
 or loses nothing on the quantum axis for a weak or a defect row.
 
-Version **0.1.1** · data **CC BY 4.0** · generator **Apache-2.0** · DOI [10.5281/zenodo.23974515](https://doi.org/10.5281/zenodo.23974515)
+Version **0.2.0** · data **CC BY 4.0** · generator **Apache-2.0** · DOI [10.5281/zenodo.23974515](https://doi.org/10.5281/zenodo.23974515)
 (all versions).
 
 ## Why
@@ -240,7 +240,7 @@ from people with no tie to Elkan Electronic are explicitly sought.
 
 See [`CITATION.cff`](CITATION.cff).
 
-> Tenev, S. *ShorList: an open catalogue of cryptographic forms*, version 0.1.1, 2026.
+> Tenev, S. *ShorList: an open catalogue of cryptographic forms*, version 0.2.0, 2026.
 > Zenodo. https://doi.org/10.5281/zenodo.23974515
 
 ## Licences

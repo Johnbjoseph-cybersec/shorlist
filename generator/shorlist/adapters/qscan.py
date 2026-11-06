@@ -10,12 +10,29 @@ The JSON format has no field reference, so it is not used.
 Mapping:
 - one Record per `cryptographic-asset` component; path and line from the properties
   `qscan:filePath` and `qscan:lineNumber` ("Custom Properties");
-- family from algorithmFamily/name via schema/families.yaml (shared rules in _cyclonedx.py);
+- family from algorithmFamily/name via schema/families.yaml (shared rules in _cyclonedx.py),
+  after qscan's own names below, each as qscan's tables at 8b737992 define it
+  (src/qscan/detectors/algo_risk.py, `ALGO_RISK`, "algorithm name fragment (upper-case)"; the
+  lookup is on the upper-cased name, `classify(algorithm_upper)` L95):
+  - "SHA1" -> SHA-1. algo_risk.py L22: `"SHA1": ("high", "grover", "deprecated-2030",
+    "SHA-256 or SHA-3", "hash"),`, the same entry as `"SHA-1"` on L21;
+  - "TRIPLEDES", "TripleDES" -> 3DES. algo_risk.py L26: `"TRIPLEDES": ("high", "grover",
+    "deprecated-2030", "AES-256-GCM", "DES"),`, the same entry as `"3DES"` on L24;
+  - "DESede" -> 3DES. detectors/java_detector.py L34: `"DESede": ("3DES", "DES"),` (Java
+    transformation -> algorithm). qscan's own risk lookup gives a component named "DESede" the
+    DES entry (prefix match on "DES"); the Java table names the algorithm, and it is followed.
+  Names qscan echoes from the code with no entry of their own stay unmapped: "ARCFOUR", "ARC4"
+  (no RC4 classification in the output, no table entry), "SHA" (Java's alias of SHA-1, no
+  entry), "SHA1withECDSA"/"SHA1withDSA" (classified by the "SHA1" prefix only; not in the
+  signature table, java_detector.py `_JAVA_SIG_ALGO`), "FILE_DIGEST";
 - role from primitive (signature / kem / key-agree), else None. qscan writes `pke` for RSA,
   ECC and ECDSA alike ("CryptoPrimitive" table), so those carry no role;
 - size: algorithmProperties.parameterSetIdentifier, documented as the finding's key_size
   ("Parameter Set Identifier");
-- is_use: True; the CBOM has no not-a-use marker.
+- is_use: True; the CBOM has no not-a-use marker;
+- cwe: None. qscan writes no CWE: none in the CBOM of a scan of all 187 defect rows of v0.2
+  (grep -i cwe, 0 lines), the string occurs nowhere in the installed qscan package, and
+  docs/cbom-format.md lists no such property.
 
 Invocation: default settings; no --triage (that needs an OpenRouter key and the network).
 """
@@ -39,6 +56,10 @@ def _locations(c: dict) -> list[tuple[str, int | None]]:
     return [(path, int(line) if line is not None and str(line).isdigit() else None)]
 
 
+# algo_risk.py L22, L26; java_detector.py L34 (8b737992)
+ALIASES = {"SHA1": "SHA-1", "TRIPLEDES": "3DES", "TripleDES": "3DES", "DESede": "3DES"}
+
+
 class QscanAdapter(ContainerAdapter):
     name = "qscan"
     image = "shorlist-qscan:1.0.0"
@@ -57,4 +78,4 @@ class QscanAdapter(ContainerAdapter):
 
     @staticmethod
     def parse(bom: dict) -> list[Record]:
-        return _cyclonedx.records(bom, size_from_parameter_set=True, locations=_locations)
+        return _cyclonedx.records(bom, size_from_parameter_set=True, locations=_locations, aliases=ALIASES)
