@@ -180,11 +180,11 @@ A 0 here means the tool reported none of these forms in this setup; it is not a 
 
 | scanner | positive forms recognised | decoys reported as a use | adapter caveat | fingerprint |
 |---|---|---|---|---|
-| qrp-mcp 0.44.0 | 20 / 20 | 0 / 10 | see the notes below | see [`results/`](results/) |
-| CSNP CryptoScan v1.5.0 | 8 / 20 (+ 3 parent `EC`) | 4 / 10 | CBOM output read; size n/a; role from CycloneDX `primitive` only; its names mapped as its PATTERNS.md defines them: `ECC` (ECC-001 "Elliptic Curve") -> `EC`, so the 3 ECDSA rows score `parent_only`; `Hybrid-KEM` (HYBRID-KEM-001 "X25519+ML-KEM") -> `ML-KEM` | see [`results/`](results/) |
-| qscan 1.0.0 ([EthanCratchley/qscan](https://github.com/EthanCratchley/qscan) @8b73799) | 7 / 20 | 2 / 10 | CBOM output read; role n/a (`pke` for RSA and ECDSA alike); size from `parameterSetIdentifier`; no AI triage | see [`results/`](results/) |
-| cdxgen 13.6.0 (`cbom`) | 0 / 20 | 0 / 10 | one fixed command, no `-t`; 0 `cryptographic-asset` components: 27 trees list no package so its evidence step is skipped, and on the 3 with a `cryptography` import its atom slicer exited with status 1 | see [`results/`](results/) |
-| Semgrep 1.183.0 + semgrep-rules @16b9e6d | 0 / 20 | 0 / 10 | 64 rule files from directories whose path contains `crypt`; family from `check_id` tokens; 10 of 30 planted files are in no language those rules cover | see [`results/`](results/) |
+| qrp-mcp 0.44.0 | 20 / 20 | 0 / 10 | see the notes below | see [`results/v0.1.1/`](results/v0.1.1/) |
+| CSNP CryptoScan v1.5.0 | 8 / 20 (+ 3 parent `EC`) | 4 / 10 | CBOM output read; size n/a; role from CycloneDX `primitive` only; its names mapped as its PATTERNS.md defines them: `ECC` (ECC-001 "Elliptic Curve") -> `EC`, so the 3 ECDSA rows score `parent_only`; `Hybrid-KEM` (HYBRID-KEM-001 "X25519+ML-KEM") -> `ML-KEM` | see [`results/v0.1.1/`](results/v0.1.1/) |
+| qscan 1.0.0 ([EthanCratchley/qscan](https://github.com/EthanCratchley/qscan) @8b73799) | 7 / 20 | 2 / 10 | CBOM output read; role n/a (`pke` for RSA and ECDSA alike); size from `parameterSetIdentifier`; no AI triage | see [`results/v0.1.1/`](results/v0.1.1/) |
+| cdxgen 13.6.0 (`cbom`) | 0 / 20 | 0 / 10 | one fixed command, no `-t`; 0 `cryptographic-asset` components: 27 trees list no package so its evidence step is skipped, and on the 3 with a `cryptography` import its atom slicer exited with status 1 | see [`results/v0.1.1/`](results/v0.1.1/) |
+| Semgrep 1.183.0 + semgrep-rules @16b9e6d | 0 / 20 | 0 / 10 | 64 rule files from directories whose path contains `crypt`; family from `check_id` tokens; 10 of 30 planted files are in no language those rules cover | see [`results/v0.1.1/`](results/v0.1.1/) |
 
 ### Tools not designed for source trees
 
@@ -193,9 +193,9 @@ code, by its own README.
 
 | scanner | positive forms recognised | decoys reported as a use | adapter caveat | fingerprint |
 |---|---|---|---|---|
-| CBOMkit-theia v1.1.2 | 0 / 20 | 0 / 10 | does not scan source code (its README); 0 components on all 30 trees | see [`results/`](results/) |
-| CipherIQ cbom-generator 1.9.3, default | 0 / 20 | 0 / 10 | scans Linux systems for certificates, keys, algorithms and cryptographic libraries (its README); README basic invocation `--output cbom.json <dirs>`; components without a location in the planted tree are dropped (the same 9 algorithms and 6 libraries appear on an empty directory); none had one | see [`results/`](results/) |
-| CipherIQ cbom-generator 1.9.3, `--discover-services` | 0 / 20 | 0 / 10 | README service-discovery invocation (`--discover-services --plugin-dir …/plugins/ubuntu --cyclonedx-spec=1.7`); all 60 plugins loaded; the plugins look for a service at absolute system paths (`/usr/sbin/nginx`, `/etc/nginx/nginx.conf`), not in the scanned directory, and the trees were not moved there; it found 7 checksum tools of its own container, with no location in the tree | see [`results/`](results/) |
+| CBOMkit-theia v1.1.2 | 0 / 20 | 0 / 10 | does not scan source code (its README); 0 components on all 30 trees | see [`results/v0.1.1/`](results/v0.1.1/) |
+| CipherIQ cbom-generator 1.9.3, default | 0 / 20 | 0 / 10 | scans Linux systems for certificates, keys, algorithms and cryptographic libraries (its README); README basic invocation `--output cbom.json <dirs>`; components without a location in the planted tree are dropped (the same 9 algorithms and 6 libraries appear on an empty directory); none had one | see [`results/v0.1.1/`](results/v0.1.1/) |
+| CipherIQ cbom-generator 1.9.3, `--discover-services` | 0 / 20 | 0 / 10 | README service-discovery invocation (`--discover-services --plugin-dir …/plugins/ubuntu --cyclonedx-spec=1.7`); all 60 plugins loaded; the plugins look for a service at absolute system paths (`/usr/sbin/nginx`, `/etc/nginx/nginx.conf`), not in the scanned directory, and the trees were not moved there; it found 7 checksum tools of its own container, with no location in the tree | see [`results/v0.1.1/`](results/v0.1.1/) |
 
 The open-source scanners were run in throwaway containers with no network during the scan;
 images, versions and invocations are recorded in each adapter and result file. Where a
