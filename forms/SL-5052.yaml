@@ -1,0 +1,57 @@
+id: "SL-5052"
+title: "Node: createCipheriv('aes-256-gcm') with a zero nonce"
+family: "AES"
+parameter_set: "AES-256"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+row_kind: "defect"
+literal: "const cipher = crypto.createCipheriv('aes-256-gcm', key, Buffer.alloc(12));"
+context_filename: "enc.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, Buffer.alloc(12));
+    return Buffer.concat([cipher.update(data), cipher.final(), cipher.getAuthTag()]);
+  }
+
+  module.exports = { encrypt };
+right_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const iv = crypto.randomBytes(12);
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+    return Buffer.concat([iv, cipher.update(data), cipher.final(), cipher.getAuthTag()]);
+  }
+
+  module.exports = { encrypt };
+expected:
+  family: "AES"
+  role: "encryption"
+  size: 256
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv(algorithm, key, iv[, options])"
+    read_at: "2026-11-06"
+    quote: "Creates and returns a Cipheriv object, with the given algorithm, key and initialization vector (iv)."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv: iv"
+    read_at: "2026-11-06"
+    quote: "For some algorithms, an IV must be unpredictable and unique; for others, uniqueness alone is sufficient, a fixed value is required, or no IV is used."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"
+    section: "NIST SP 800-38D, Section 8 Uniqueness Requirement on IVs and Keys"
+    read_at: "2026-11-06"
+    quote: "The probability that the authenticated encryption function ever will be invoked with the same IV and the same key on two (or more) distinct sets of input data shall be no greater than 2-32."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

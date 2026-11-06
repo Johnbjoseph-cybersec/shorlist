@@ -1,0 +1,37 @@
+id: "SL-5535"
+title: "curl -k"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "curl"
+row_kind: "defect"
+negative: false
+literal: "curl -k -fsS -o data.json https://api.example.com/data.json"
+context_filename: "fetch.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+  curl -k -fsS -o data.json https://api.example.com/data.json
+right_template: |
+  #!/bin/sh
+  set -e
+  curl -fsS -o data.json https://api.example.com/data.json
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://curl.se/docs/manpage.html"
+    section: "curl(1), -k, --insecure"
+    read_at: "2026-11-06"
+    quote: "(TLS SFTP SCP) By default, every secure connection curl makes is verified to be secure before the transfer takes place. This option makes curl skip the verification step and proceed without checking."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

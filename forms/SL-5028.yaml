@@ -1,0 +1,65 @@
+id: "SL-5028"
+title: "JCA: AES/GCM with GCMParameterSpec(128, new byte[12])"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, new byte[12]));"
+context_filename: "Enc.java"
+context_template: |
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.GCMParameterSpec;
+
+  public class Enc {
+      static byte[] encrypt(SecretKey key, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
+          c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, new byte[12]));
+          return c.doFinal(data);
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.GCMParameterSpec;
+
+  public class Enc {
+      static byte[][] encrypt(SecretKey key, byte[] data) throws Exception {
+          byte[] iv = new byte[12];
+          new SecureRandom().nextBytes(iv);
+          Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
+          c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));
+          return new byte[][] {iv, c.doFinal(data)};
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/GCMParameterSpec.html"
+    section: "Constructor GCMParameterSpec(int tLen, byte[] src)"
+    read_at: "2026-11-06"
+    quote: "Constructs a GCMParameterSpec using the specified authentication tag bit-length and IV buffer."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/Cipher.html"
+    section: "Class Cipher: GCM IV uniqueness"
+    read_at: "2026-11-06"
+    quote: "Note that GCM mode has a uniqueness requirement on IVs used in encryption with a given key. When IVs are repeated for GCM encryption, such usages are subject to forgery attacks."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"
+    section: "NIST SP 800-38D, Section 8 Uniqueness Requirement on IVs and Keys"
+    read_at: "2026-11-06"
+    quote: "The probability that the authenticated encryption function ever will be invoked with the same IV and the same key on two (or more) distinct sets of input data shall be no greater than 2-32."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

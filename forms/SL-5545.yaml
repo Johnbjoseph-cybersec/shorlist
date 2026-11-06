@@ -1,0 +1,55 @@
+id: "SL-5545"
+title: "nginx: proxy_ssl_verify off for an HTTPS upstream"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "nginx"
+row_kind: "defect"
+negative: false
+literal: "proxy_ssl_verify off;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 8080;
+          location / {
+              proxy_pass https://backend.example.com;
+              proxy_ssl_verify off;
+          }
+      }
+  }
+right_template: |
+  events {}
+
+  http {
+      server {
+          listen 8080;
+          location / {
+              proxy_pass https://backend.example.com;
+              proxy_ssl_verify on;
+              proxy_ssl_trusted_certificate /etc/nginx/upstream-ca.pem;
+          }
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://nginx.org/en/docs/http/ngx_http_proxy_module.html"
+    section: "ngx_http_proxy_module, proxy_ssl_verify"
+    read_at: "2026-11-06"
+    quote: "Enables or disables verification of the proxied HTTPS server certificate."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The documented default is 'proxy_ssl_verify off;' (Default: line of the directive), so a server block that omits the directive is equally unverified; this row is the explicit form only. ssl_verify_client (client certificates) is a different directive and not a defect."

@@ -1,0 +1,48 @@
+id: "SL-5015"
+title: "random.seed() from the system time"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / stdlib"
+negative: false
+row_kind: "defect"
+literal: "random.seed(int(time.time()))"
+context_filename: "tokens.py"
+context_template: |
+  import random
+  import time
+
+
+  def new_token():
+      random.seed(int(time.time()))
+      return random.randbytes(16).hex()
+right_template: |
+  import secrets
+
+
+  def new_token():
+      return secrets.token_hex(16)
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-337"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/337.html"
+    section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "A Pseudo-Random Number Generator (PRNG) is initialized from a predictable seed, such as the process ID or system time."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "Bookkeeping functions: random.seed"
+    read_at: "2026-11-06"
+    quote: "random.seed(a=None, version=2)"
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "random: module warning"
+    read_at: "2026-11-06"
+    quote: "The pseudo-random generators of this module should not be used for security purposes. For security or cryptographic uses, see the secrets module."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The PRNG on the next lines is also non-cryptographic (CWE-338, a separate row); this row scores the seeding line only. The fixed file replaces seed and generator with the OS CSPRNG."

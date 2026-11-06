@@ -1,0 +1,53 @@
+id: "SL-5022"
+title: "PyCryptodome: PBKDF2 with a constant salt"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+row_kind: "defect"
+literal: "return PBKDF2(password, b\"static-salt-1234\", 32, count=600_000, hmac_hash_module=SHA256)"
+context_filename: "kdf.py"
+context_template: |
+  from Crypto.Hash import SHA256
+  from Crypto.Protocol.KDF import PBKDF2
+
+
+  def derive(password):
+      return PBKDF2(password, b"static-salt-1234", 32, count=600_000, hmac_hash_module=SHA256)
+right_template: |
+  from Crypto.Hash import SHA256
+  from Crypto.Protocol.KDF import PBKDF2
+  from Crypto.Random import get_random_bytes
+
+
+  def derive(password):
+      salt = get_random_bytes(16)
+      return salt, PBKDF2(password, salt, 32, count=600_000, hmac_hash_module=SHA256)
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-760"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/760.html"
+    section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a one-way cryptographic hash against an input that should not be reversible, such as a password, but the product uses a predictable salt as part of the input."
+  - url: "https://www.pycryptodome.org/src/protocol/kdf"
+    section: "PBKDF2: Crypto.Protocol.KDF.PBKDF2"
+    read_at: "2026-11-06"
+    quote: "Crypto.Protocol.KDF.PBKDF2(password, salt, dkLen=16, count=None, prf=None, hmac_hash_module=None)"
+  - url: "https://www.pycryptodome.org/src/protocol/kdf"
+    section: "PBKDF2: salt"
+    read_at: "2026-11-06"
+    quote: "it should be randomly chosen for each derivation."
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: Salting"
+    read_at: "2026-11-06"
+    quote: "A salt is a unique, randomly generated string that is added to each password as part of the hashing process."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

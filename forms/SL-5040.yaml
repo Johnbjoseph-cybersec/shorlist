@@ -1,0 +1,79 @@
+id: "SL-5040"
+title: "Go: GCM Seal with an all-zero nonce"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+row_kind: "defect"
+literal: "return gcm.Seal(nil, make([]byte, gcm.NonceSize()), data, nil), nil"
+context_filename: "enc.go"
+context_template: |
+  package crypt
+
+  import (
+  	"crypto/aes"
+  	"crypto/cipher"
+  )
+
+  func Encrypt(key, data []byte) ([]byte, error) {
+  	block, err := aes.NewCipher(key)
+  	if err != nil {
+  		return nil, err
+  	}
+  	gcm, err := cipher.NewGCM(block)
+  	if err != nil {
+  		return nil, err
+  	}
+  	return gcm.Seal(nil, make([]byte, gcm.NonceSize()), data, nil), nil
+  }
+right_template: |
+  package crypt
+
+  import (
+  	"crypto/aes"
+  	"crypto/cipher"
+  	"crypto/rand"
+  )
+
+  func Encrypt(key, data []byte) ([]byte, error) {
+  	block, err := aes.NewCipher(key)
+  	if err != nil {
+  		return nil, err
+  	}
+  	gcm, err := cipher.NewGCM(block)
+  	if err != nil {
+  		return nil, err
+  	}
+  	nonce := make([]byte, gcm.NonceSize())
+  	rand.Read(nonce)
+  	return gcm.Seal(nonce, nonce, data, nil), nil
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/cipher/gcm.go"
+    section: "crypto/cipher: NewGCM"
+    read_at: "2026-11-06"
+    quote: "NewGCM returns the given 128-bit, block cipher wrapped in Galois Counter Mode"
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/cipher/cipher.go"
+    section: "crypto/cipher: AEAD.Seal"
+    read_at: "2026-11-06"
+    quote: "The nonce must be NonceSize() bytes long and unique for all // time, for a given key."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"
+    section: "NIST SP 800-38D, Section 8 Uniqueness Requirement on IVs and Keys"
+    read_at: "2026-11-06"
+    quote: "The probability that the authenticated encryption function ever will be invoked with the same IV and the same key on two (or more) distinct sets of input data shall be no greater than 2-32."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

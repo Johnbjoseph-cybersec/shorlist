@@ -1,0 +1,64 @@
+id: "SL-5041"
+title: "Go x/crypto: chacha20poly1305 Seal with an all-zero nonce"
+family: "ChaCha20"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Go / golang.org/x/crypto"
+negative: false
+row_kind: "defect"
+literal: "return aead.Seal(nil, make([]byte, chacha20poly1305.NonceSize), data, nil), nil"
+context_filename: "enc.go"
+context_template: |
+  package crypt
+
+  import "golang.org/x/crypto/chacha20poly1305"
+
+  func Encrypt(key, data []byte) ([]byte, error) {
+  	aead, err := chacha20poly1305.New(key)
+  	if err != nil {
+  		return nil, err
+  	}
+  	return aead.Seal(nil, make([]byte, chacha20poly1305.NonceSize), data, nil), nil
+  }
+right_template: |
+  package crypt
+
+  import (
+  	"crypto/rand"
+
+  	"golang.org/x/crypto/chacha20poly1305"
+  )
+
+  func Encrypt(key, data []byte) ([]byte, error) {
+  	aead, err := chacha20poly1305.New(key)
+  	if err != nil {
+  		return nil, err
+  	}
+  	nonce := make([]byte, chacha20poly1305.NonceSize)
+  	rand.Read(nonce)
+  	return aead.Seal(nonce, nonce, data, nil), nil
+  }
+expected:
+  family: "ChaCha20"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://github.com/golang/crypto/blob/v0.43.0/chacha20poly1305/chacha20poly1305.go"
+    section: "chacha20poly1305: New"
+    read_at: "2026-11-06"
+    quote: "New returns a ChaCha20-Poly1305 AEAD that uses the given 256-bit key."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/cipher/cipher.go"
+    section: "crypto/cipher: AEAD.Seal"
+    read_at: "2026-11-06"
+    quote: "The nonce must be NonceSize() bytes long and unique for all // time, for a given key."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up. The Seal quote is from the cipher.AEAD interface, which chacha20poly1305.New returns."

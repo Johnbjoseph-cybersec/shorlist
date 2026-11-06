@@ -1,0 +1,45 @@
+id: "SL-5011"
+title: "hmac.new with a hard-coded key"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "Python / stdlib"
+negative: false
+row_kind: "defect"
+literal: "return hmac.new(b\"hardcoded-mac-key\", msg, hashlib.sha256).digest()"
+context_filename: "mac.py"
+context_template: |
+  import hashlib
+  import hmac
+
+
+  def sign(msg):
+      return hmac.new(b"hardcoded-mac-key", msg, hashlib.sha256).digest()
+right_template: |
+  import hashlib
+  import hmac
+  import os
+
+
+  def sign(msg):
+      return hmac.new(bytes.fromhex(os.environ["MAC_KEY"]), msg, hashlib.sha256).digest()
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://docs.python.org/3.14/library/hmac.html"
+    section: "hmac.new"
+    read_at: "2026-11-06"
+    quote: "hmac.new(key, msg=None, digestmod)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The fixed file reads the key from the environment; any key-management source that is not in the code would do."

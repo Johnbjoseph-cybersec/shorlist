@@ -1,0 +1,50 @@
+id: "SL-5518"
+title: "OpenSSL: RSA_generate_key(2048, 3, ...)"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+row_kind: "defect"
+negative: false
+literal: "RSA *rsa = RSA_generate_key(2048, 3, NULL, NULL);"
+context_filename: "keygen.c"
+context_template: |
+  #include <openssl/rsa.h>
+
+  RSA *make_key(void)
+  {
+      RSA *rsa = RSA_generate_key(2048, 3, NULL, NULL);
+      return rsa;
+  }
+right_template: |
+  #include <openssl/rsa.h>
+
+  RSA *make_key(void)
+  {
+      RSA *rsa = RSA_generate_key(2048, RSA_F4, NULL, NULL);
+      return rsa;
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+defect:
+  cwe: "CWE-326"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326, Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"
+    section: "FIPS 186-5, Appendix A.1.1, criterion 1(b)"
+    read_at: "2026-11-06"
+    quote: "(b) The exponent e shall be an odd positive integer such that:"
+  - url: "https://docs.openssl.org/3.5/man3/RSA_generate_key/"
+    section: "RSA_generate_key(3), DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "The modulus size will be of length bits, the number of primes to form the modulus will be primes, and the public exponent will be e. Key sizes with num < 1024 should be considered insecure. The exponent is an odd number, typically 3, 17 or 65537."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-326 is the closest MITRE entry; its Description is generic (encryption not strong enough for the protection required) and names no exponent. The requirement itself is FIPS 186-5 A.1.1: 2^16 < e < 2^256. RSA_generate_key is deprecated since 0.9.8 and still declared; RSA_F4 is 0x10001 in <openssl/rsa.h>."

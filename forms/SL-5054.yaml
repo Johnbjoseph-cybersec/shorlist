@@ -1,0 +1,54 @@
+id: "SL-5054"
+title: "Node: AES key as a hex literal in the source"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+row_kind: "defect"
+literal: "const key = Buffer.from('000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f', 'hex');"
+context_filename: "enc.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  const key = Buffer.from('000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f', 'hex');
+
+  function encrypt(data) {
+    const iv = crypto.randomBytes(12);
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+    return Buffer.concat([iv, cipher.update(data), cipher.final(), cipher.getAuthTag()]);
+  }
+
+  module.exports = { encrypt };
+right_template: |
+  const crypto = require('node:crypto');
+
+  const key = Buffer.from(process.env.DATA_KEY, 'hex');
+
+  function encrypt(data) {
+    const iv = crypto.randomBytes(12);
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+    return Buffer.concat([iv, cipher.update(data), cipher.final(), cipher.getAuthTag()]);
+  }
+
+  module.exports = { encrypt };
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv(algorithm, key, iv[, options])"
+    read_at: "2026-11-06"
+    quote: "Creates and returns a Cipheriv object, with the given algorithm, key and initialization vector (iv)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The fixed file reads the key from the environment; any key-management source that is not in the code would do."

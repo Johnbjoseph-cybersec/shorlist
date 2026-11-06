@@ -1,0 +1,66 @@
+id: "SL-5062"
+title: ".NET: SymmetricAlgorithm.IV = new byte[16] (CBC)"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "aes.IV = new byte[16];"
+context_filename: "Enc.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          using Aes aes = Aes.Create();
+          aes.Key = key;
+          aes.IV = new byte[16];
+          using ICryptoTransform enc = aes.CreateEncryptor();
+          return enc.TransformFinalBlock(data, 0, data.Length);
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          using Aes aes = Aes.Create();
+          aes.Key = key;
+          aes.IV = RandomNumberGenerator.GetBytes(16);
+          using ICryptoTransform enc = aes.CreateEncryptor();
+          return [.. aes.IV, .. enc.TransformFinalBlock(data, 0, data.Length)];
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-329"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.symmetricalgorithm.iv?view=net-10.0"
+    section: "SymmetricAlgorithm.IV"
+    read_at: "2026-11-06"
+    quote: "public virtual byte[] IV { get; set; }"
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.symmetricalgorithm.mode?view=net-10.0"
+    section: "SymmetricAlgorithm.Mode: Property Value"
+    read_at: "2026-11-06"
+    quote: "The mode for operation of the symmetric algorithm. The default is CBC."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.2 The Cipher Block Chaining Mode"
+    read_at: "2026-11-06"
+    quote: "The IV need not be secret, but it must be unpredictable; the generation of such IVs is discussed in Appendix C."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The template sets no Mode and relies on the documented default, CBC."

@@ -1,0 +1,63 @@
+id: "SL-5024"
+title: "JCA: Cipher.getInstance(\"AES/ECB/PKCS5Padding\")"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "Cipher c = Cipher.getInstance(\"AES/ECB/PKCS5Padding\");"
+context_filename: "Enc.java"
+context_template: |
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+
+  public class Enc {
+      static byte[] encrypt(SecretKey key, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+          c.init(Cipher.ENCRYPT_MODE, key);
+          return c.doFinal(data);
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.GCMParameterSpec;
+
+  public class Enc {
+      static byte[][] encrypt(SecretKey key, byte[] data) throws Exception {
+          byte[] iv = new byte[12];
+          new SecureRandom().nextBytes(iv);
+          Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
+          c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));
+          return new byte[][] {iv, c.doFinal(data)};
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/Cipher.html"
+    section: "Class Cipher: standard transformations"
+    read_at: "2026-11-06"
+    quote: "AES/ECB/PKCS5Padding (128)"
+  - url: "https://docs.oracle.com/en/java/javase/25/security/oracle-providers.html"
+    section: "Cipher Transformations: note on ECB"
+    read_at: "2026-11-06"
+    quote: "ECB works well for single blocks of data and can be parallelized but generally should not be used for encrypting multiple data blocks due to characteristics of the mode."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.1 The Electronic Codebook Mode"
+    read_at: "2026-11-06"
+    quote: "If this property is undesirable in a particular application, the ECB mode should not be used."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

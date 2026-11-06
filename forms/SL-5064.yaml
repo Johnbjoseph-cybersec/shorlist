@@ -1,0 +1,67 @@
+id: "SL-5064"
+title: ".NET: AesGcm.Encrypt with an all-zero nonce"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "gcm.Encrypt(new byte[12], data, ciphertext, tag);"
+context_filename: "Enc.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          byte[] ciphertext = new byte[data.Length];
+          byte[] tag = new byte[16];
+          using AesGcm gcm = new AesGcm(key, 16);
+          gcm.Encrypt(new byte[12], data, ciphertext, tag);
+          return [.. ciphertext, .. tag];
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          byte[] nonce = RandomNumberGenerator.GetBytes(12);
+          byte[] ciphertext = new byte[data.Length];
+          byte[] tag = new byte[16];
+          using AesGcm gcm = new AesGcm(key, 16);
+          gcm.Encrypt(nonce, data, ciphertext, tag);
+          return [.. nonce, .. ciphertext, .. tag];
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm.encrypt?view=net-10.0"
+    section: "AesGcm.Encrypt(byte[], byte[], byte[], byte[], byte[])"
+    read_at: "2026-11-06"
+    quote: "public void Encrypt(byte[] nonce, byte[] plaintext, byte[] ciphertext, byte[] tag, byte[]? associatedData = default);"
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm.encrypt?view=net-10.0"
+    section: "AesGcm.Encrypt: Remarks"
+    read_at: "2026-11-06"
+    quote: "The security guarantees of the AES-GCM algorithm mode require that the same nonce value is never used twice with the same key."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"
+    section: "NIST SP 800-38D, Section 8 Uniqueness Requirement on IVs and Keys"
+    read_at: "2026-11-06"
+    quote: "The probability that the authenticated encryption function ever will be invoked with the same IV and the same key on two (or more) distinct sets of input data shall be no greater than 2-32."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

@@ -1,0 +1,61 @@
+id: "SL-5500"
+title: "Java JCA: RSA encryption with Cipher.getInstance(\"RSA/ECB/PKCS1Padding\") (no OAEP)"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+row_kind: "defect"
+negative: false
+literal: "Cipher cipher = Cipher.getInstance(\"RSA/ECB/PKCS1Padding\");"
+context_filename: "Main.java"
+context_template: |
+  import javax.crypto.Cipher;
+  import java.security.PublicKey;
+
+  public class Main {
+      static byte[] wrap(PublicKey pub, byte[] data) throws Exception {
+          Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+          cipher.init(Cipher.ENCRYPT_MODE, pub);
+          return cipher.doFinal(data);
+      }
+  }
+right_template: |
+  import javax.crypto.Cipher;
+  import java.security.PublicKey;
+
+  public class Main {
+      static byte[] wrap(PublicKey pub, byte[] data) throws Exception {
+          Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+          cipher.init(Cipher.ENCRYPT_MODE, pub);
+          return cipher.doFinal(data);
+      }
+  }
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/security/standard-names.html"
+    section: "Java Security Standard Algorithm Names, Cipher Algorithm Paddings: PKCS1Padding"
+    read_at: "2026-11-06"
+    quote: "PKCS1Padding | The padding scheme described in PKCS #1 v2.2, used with the RSA algorithm."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/crypto/Cipher.html"
+    section: "javax.crypto.Cipher (JDK 24): transformations every implementation supports"
+    read_at: "2026-11-06"
+    quote: "RSA/ECB/PKCS1Padding (1024, 2048) RSA/ECB/OAEPWithSHA-1AndMGF1Padding (1024, 2048) RSA/ECB/OAEPWithSHA-256AndMGF1Padding (1024, 2048)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Fixed file: the same cipher with OAEP (RSA/ECB/OAEPWithSHA-256AndMGF1Padding)."

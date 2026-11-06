@@ -1,0 +1,62 @@
+id: "SL-5541"
+title: "libcurl: curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L)"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / libcurl"
+row_kind: "defect"
+negative: false
+literal: "curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);"
+context_filename: "fetch.c"
+context_template: |
+  #include <curl/curl.h>
+
+  CURLcode fetch(const char *url)
+  {
+      CURL *curl = curl_easy_init();
+      CURLcode rc;
+      if (curl == NULL)
+          return CURLE_FAILED_INIT;
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+      rc = curl_easy_perform(curl);
+      curl_easy_cleanup(curl);
+      return rc;
+  }
+right_template: |
+  #include <curl/curl.h>
+
+  CURLcode fetch(const char *url)
+  {
+      CURL *curl = curl_easy_init();
+      CURLcode rc;
+      if (curl == NULL)
+          return CURLE_FAILED_INIT;
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      rc = curl_easy_perform(curl);
+      curl_easy_cleanup(curl);
+      return rc;
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYPEER.html"
+    section: "CURLOPT_SSL_VERIFYPEER(3), DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "This option determines whether curl verifies the authenticity of the peer's certificate. A value of 1 means curl verifies; 0 (zero) means it does not."
+  - url: "https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYPEER.html"
+    section: "CURLOPT_SSL_VERIFYPEER(3), DESCRIPTION (warning)"
+    read_at: "2026-11-06"
+    quote: "WARNING: disabling verification of the certificate allows bad guys to man-in-the-middle the communication without you knowing it."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

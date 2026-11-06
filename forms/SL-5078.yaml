@@ -1,0 +1,52 @@
+id: "SL-5078"
+title: "OpenSSL: HMAC() with a hard-coded key"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL EVP"
+negative: false
+row_kind: "defect"
+literal: "return HMAC(EVP_sha256(), \"hardcoded-mac-key\", 17, data, len, md, md_len) != NULL;"
+context_filename: "mac.c"
+context_template: |
+  #include <openssl/evp.h>
+  #include <openssl/hmac.h>
+
+  int sign(const unsigned char *data, size_t len, unsigned char *md, unsigned int *md_len)
+  {
+      return HMAC(EVP_sha256(), "hardcoded-mac-key", 17, data, len, md, md_len) != NULL;
+  }
+right_template: |
+  #include <stdlib.h>
+  #include <string.h>
+  #include <openssl/evp.h>
+  #include <openssl/hmac.h>
+
+  int sign(const unsigned char *data, size_t len, unsigned char *md, unsigned int *md_len)
+  {
+      const char *key = getenv("MAC_KEY");
+
+      if (key == NULL)
+          return 0;
+      return HMAC(EVP_sha256(), key, (int)strlen(key), data, len, md, md_len) != NULL;
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://docs.openssl.org/3.5/man3/HMAC/"
+    section: "HMAC: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "unsigned char *HMAC(const EVP_MD *evp_md, const void *key, int key_len, const unsigned char *data, size_t data_len, unsigned char *md, unsigned int *md_len);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The fixed file reads the key from the environment; any key-management source that is not in the code would do."

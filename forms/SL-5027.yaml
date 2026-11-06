@@ -1,0 +1,62 @@
+id: "SL-5027"
+title: "JCA: AES/CTR with a constant counter block"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(\"fixed-counter-01\".getBytes(StandardCharsets.US_ASCII)));"
+context_filename: "Enc.java"
+context_template: |
+  import java.nio.charset.StandardCharsets;
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.IvParameterSpec;
+
+  public class Enc {
+      static byte[] encrypt(SecretKey key, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("AES/CTR/NoPadding");
+          c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec("fixed-counter-01".getBytes(StandardCharsets.US_ASCII)));
+          return c.doFinal(data);
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.IvParameterSpec;
+
+  public class Enc {
+      static byte[][] encrypt(SecretKey key, byte[] data) throws Exception {
+          byte[] iv = new byte[16];
+          new SecureRandom().nextBytes(iv);
+          Cipher c = Cipher.getInstance("AES/CTR/NoPadding");
+          c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
+          return new byte[][] {iv, c.doFinal(data)};
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-1204"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/1204.html"
+    section: "CWE-1204 Generation of Weak Initialization Vector (IV): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a cryptographic primitive that uses an Initialization Vector (IV), but the product does not generate IVs that are sufficiently unpredictable or unique according to the expected cryptographic requirements for that primitive."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/IvParameterSpec.html"
+    section: "Constructor IvParameterSpec(byte[] iv)"
+    read_at: "2026-11-06"
+    quote: "Creates an IvParameterSpec object using the bytes in iv as the IV."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.5 The Counter Mode"
+    read_at: "2026-11-06"
+    quote: "across all of the messages that are encrypted under the given key, all of the counters must be distinct."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CTR counter block constant: CWE-1204 (IV not unique as the primitive requires) is taken; CWE-323 (nonce reuse) would be the runner-up."

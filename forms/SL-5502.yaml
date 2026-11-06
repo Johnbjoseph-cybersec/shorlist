@@ -1,0 +1,52 @@
+id: "SL-5502"
+title: "pyca cryptography: RSA public_key.encrypt with padding.PKCS1v15()"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+row_kind: "defect"
+negative: false
+literal: "ciphertext = public_key.encrypt(message, padding.PKCS1v15())"
+context_filename: "wrap.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric import padding
+
+
+  def wrap(public_key, message):
+      ciphertext = public_key.encrypt(message, padding.PKCS1v15())
+      return ciphertext
+right_template: |
+  from cryptography.hazmat.primitives import hashes
+  from cryptography.hazmat.primitives.asymmetric import padding
+
+
+  def wrap(public_key, message):
+      ciphertext = public_key.encrypt(
+          message,
+          padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None),
+      )
+      return ciphertext
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/"
+    section: "RSA, Encryption"
+    read_at: "2026-11-06"
+    quote: "Valid paddings for encryption are OAEP and PKCS1v15. OAEP is the recommended choice for any new protocols or applications, PKCS1v15 should only be used to support legacy protocols."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

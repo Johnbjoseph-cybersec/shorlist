@@ -1,0 +1,56 @@
+id: "SL-5507"
+title: ".NET: RSA.Encrypt with RSAEncryptionPadding.Pkcs1"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+row_kind: "defect"
+negative: false
+literal: "byte[] ct = rsa.Encrypt(data, RSAEncryptionPadding.Pkcs1);"
+context_filename: "Wrap.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  public static class Wrap
+  {
+      public static byte[] Encrypt(RSA rsa, byte[] data)
+      {
+          byte[] ct = rsa.Encrypt(data, RSAEncryptionPadding.Pkcs1);
+          return ct;
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  public static class Wrap
+  {
+      public static byte[] Encrypt(RSA rsa, byte[] data)
+      {
+          byte[] ct = rsa.Encrypt(data, RSAEncryptionPadding.OaepSHA256);
+          return ct;
+      }
+  }
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsaencryptionpadding.pkcs1"
+    section: "RSAEncryptionPadding.Pkcs1 Property"
+    read_at: "2026-11-06"
+    quote: "Gets an object that represents the PKCS #1 encryption standard."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

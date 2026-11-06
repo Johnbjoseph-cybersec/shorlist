@@ -1,0 +1,78 @@
+id: "SL-5073"
+title: "OpenSSL: EVP_aes_256_cbc() with a constant IV"
+family: "AES"
+parameter_set: "AES-256"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL EVP"
+negative: false
+row_kind: "defect"
+literal: "EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, (const unsigned char *)\"0123456789abcdef\");"
+context_filename: "enc.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int encrypt(const unsigned char *key, const unsigned char *in, int inlen, unsigned char *out)
+  {
+      EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+      int len = 0, total = 0;
+
+      if (ctx == NULL)
+          return -1;
+      EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, (const unsigned char *)"0123456789abcdef");
+      EVP_EncryptUpdate(ctx, out + total, &len, in, inlen);
+      total += len;
+      EVP_EncryptFinal_ex(ctx, out + total, &len);
+      total += len;
+      EVP_CIPHER_CTX_free(ctx);
+      return total;
+  }
+right_template: |
+  #include <openssl/evp.h>
+  #include <openssl/rand.h>
+
+  int encrypt(const unsigned char *key, const unsigned char *in, int inlen, unsigned char *out)
+  {
+      EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+      int len = 0, total = 16;
+
+      if (ctx == NULL)
+          return -1;
+      if (RAND_bytes(out, 16) != 1) {
+          EVP_CIPHER_CTX_free(ctx);
+          return -1;
+      }
+      EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, out);
+      EVP_EncryptUpdate(ctx, out + total, &len, in, inlen);
+      total += len;
+      EVP_EncryptFinal_ex(ctx, out + total, &len);
+      total += len;
+      EVP_CIPHER_CTX_free(ctx);
+      return total;
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: 256
+defect:
+  cwe: "CWE-329"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://docs.openssl.org/3.5/man3/EVP_aes_128_gcm/"
+    section: "EVP_aes_128_gcm: DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "EVP_aes_128_cbc(), EVP_aes_192_cbc(), EVP_aes_256_cbc()"
+  - url: "https://docs.openssl.org/3.5/man3/EVP_EncryptInit/"
+    section: "EVP_EncryptInit_ex: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "int EVP_EncryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type, ENGINE *impl, const unsigned char *key, const unsigned char *iv);"
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.2 The Cipher Block Chaining Mode"
+    read_at: "2026-11-06"
+    quote: "The IV need not be secret, but it must be unpredictable; the generation of such IVs is discussed in Appendix C."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

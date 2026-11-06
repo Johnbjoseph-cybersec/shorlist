@@ -1,0 +1,44 @@
+id: "SL-5525"
+title: "Node.js crypto: ecdh.setPrivateKey with a key in the source"
+family: "ECDH"
+parameter_set: "P-256"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+row_kind: "defect"
+negative: false
+literal: "ecdh.setPrivateKey('1b6e8a5c03f74d9e1b2a5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d2', 'hex');"
+context_filename: "kex.js"
+context_template: |
+  const crypto = require('crypto');
+
+  const ecdh = crypto.createECDH('prime256v1');
+  ecdh.setPrivateKey('1b6e8a5c03f74d9e1b2a5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d2', 'hex');
+
+  module.exports = { ecdh };
+right_template: |
+  const crypto = require('crypto');
+
+  const ecdh = crypto.createECDH('prime256v1');
+  ecdh.setPrivateKey(require('fs').readFileSync(process.env.ECDH_KEY_FILE));
+
+  module.exports = { ecdh };
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "ecdh.setPrivateKey(privateKey[, encoding])"
+    read_at: "2026-11-06"
+    quote: "Sets the EC Diffie-Hellman private key. If encoding is provided, privateKey is expected to be a string; otherwise privateKey is expected to be a Buffer, TypedArray, or DataView."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The scalar is arbitrary, written for this row. Fixed file: the raw key is read from a file named outside the source."

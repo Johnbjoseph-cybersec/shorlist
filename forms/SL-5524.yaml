@@ -1,0 +1,57 @@
+id: "SL-5524"
+title: "Go crypto/ecdh: X25519().NewPrivateKey with key bytes in the source"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+row_kind: "defect"
+negative: false
+literal: "priv, err := ecdh.X25519().NewPrivateKey([]byte{0x5f, 0x3a, 0x9c, 0x0e, 0x7b, 0x21, 0x4d, 0x86, 0xa1, 0xc4, 0xe9, 0x3f, 0x0b, 0x72, 0xd5, 0x16, 0x8e, 0x4a, 0x07, 0xc3, 0xf9, 0xd2, 0x1b, 0x6e, 0x8a, 0x5c, 0x03, 0xf7, 0x4d, 0x9e, 0x1b, 0x2a})"
+context_filename: "kex.go"
+context_template: |
+  package kex
+
+  import (
+  	"crypto/ecdh"
+  )
+
+  func Key() (*ecdh.PrivateKey, error) {
+  	priv, err := ecdh.X25519().NewPrivateKey([]byte{0x5f, 0x3a, 0x9c, 0x0e, 0x7b, 0x21, 0x4d, 0x86, 0xa1, 0xc4, 0xe9, 0x3f, 0x0b, 0x72, 0xd5, 0x16, 0x8e, 0x4a, 0x07, 0xc3, 0xf9, 0xd2, 0x1b, 0x6e, 0x8a, 0x5c, 0x03, 0xf7, 0x4d, 0x9e, 0x1b, 0x2a})
+  	return priv, err
+  }
+right_template: |
+  package kex
+
+  import (
+  	"crypto/ecdh"
+  	"os"
+  )
+
+  func Key() (*ecdh.PrivateKey, error) {
+  	raw, err := os.ReadFile(os.Getenv("X25519_KEY_FILE"))
+  	if err != nil {
+  		return nil, err
+  	}
+  	priv, err := ecdh.X25519().NewPrivateKey(raw)
+  	return priv, err
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://pkg.go.dev/crypto/ecdh@go1.25.0"
+    section: "crypto/ecdh (go1.25.0), type Curve: NewPrivateKey"
+    read_at: "2026-11-06"
+    quote: "// For X25519, this only checks the scalar length. NewPrivateKey(key []byte) (*PrivateKey, error)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The 32 key bytes are arbitrary, written for this row. Fixed file: read from a file named outside the source."

@@ -1,0 +1,61 @@
+id: "SL-5032"
+title: "JCA: PBEKeySpec with a constant salt"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "PBEKeySpec spec = new PBEKeySpec(password, \"static-salt-1234\".getBytes(StandardCharsets.UTF_8), 600000, 256);"
+context_filename: "Kdf.java"
+context_template: |
+  import java.nio.charset.StandardCharsets;
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(char[] password) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec(password, "static-salt-1234".getBytes(StandardCharsets.UTF_8), 600000, 256);
+          return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[][] derive(char[] password) throws Exception {
+          byte[] salt = new byte[16];
+          new SecureRandom().nextBytes(salt);
+          PBEKeySpec spec = new PBEKeySpec(password, salt, 600000, 256);
+          return new byte[][] {salt, SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded()};
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-760"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/760.html"
+    section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a one-way cryptographic hash against an input that should not be reversible, such as a password, but the product uses a predictable salt as part of the input."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/PBEKeySpec.html"
+    section: "Constructor PBEKeySpec(char[], byte[], int, int)"
+    read_at: "2026-11-06"
+    quote: "public PBEKeySpec(char[] password, byte[] salt, int iterationCount, int keyLength)"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "SecretKeyFactory Algorithms: PBKDF2With<prf>"
+    read_at: "2026-11-06"
+    quote: "| PBKDF2With<prf> | Password-based key-derivation algorithm defined in PKCS #5"
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: Salting"
+    read_at: "2026-11-06"
+    quote: "A salt is a unique, randomly generated string that is added to each password as part of the hashing process."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

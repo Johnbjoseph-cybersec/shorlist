@@ -1,0 +1,41 @@
+id: "SL-5521"
+title: "pyca cryptography: X25519PrivateKey.from_private_bytes with a key in the source"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+row_kind: "defect"
+negative: false
+literal: "private_key = X25519PrivateKey.from_private_bytes(bytes.fromhex(\"5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d21b6e8a5c03f74d9e1b2a\"))"
+context_filename: "kex.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+
+  private_key = X25519PrivateKey.from_private_bytes(bytes.fromhex("5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d21b6e8a5c03f74d9e1b2a"))
+right_template: |
+  import os
+  from pathlib import Path
+
+  from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+
+  private_key = X25519PrivateKey.from_private_bytes(Path(os.environ["X25519_KEY_FILE"]).read_bytes())
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/x25519/"
+    section: "X25519PrivateKey.from_private_bytes(data)"
+    read_at: "2026-11-06"
+    quote: "Added in version 2.5. A class method for loading an X25519 key encoded as Raw. Parameters: data (bytes) – 32 byte private key."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The 32 key bytes are arbitrary, written for this row. Fixed file: the raw key is read from a file named outside the source."

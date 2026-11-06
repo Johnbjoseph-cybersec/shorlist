@@ -53,3 +53,4 @@ defect_only:           # sound primitives; allowed only in rows with row_kind: d
   SHA-2:    {cyclonedx: [], role: hash}
   PBKDF2:   {cyclonedx: []}
   RNG:      {cyclonedx: [], note: "random number generation; a predictable source is the defect"}
+  TLS:      {cyclonedx: [], note: "the TLS/X.509 layer as a whole: certificate or hostname validation switched off, an old minimum protocol version"}

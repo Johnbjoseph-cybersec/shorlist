@@ -1,0 +1,56 @@
+id: "SL-5050"
+title: "Node: createCipheriv('aes-256-cbc') with Buffer.alloc(16)"
+family: "AES"
+parameter_set: "AES-256"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+row_kind: "defect"
+literal: "const cipher = crypto.createCipheriv('aes-256-cbc', key, Buffer.alloc(16));"
+context_filename: "enc.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, Buffer.alloc(16));
+    return Buffer.concat([cipher.update(data), cipher.final()]);
+  }
+
+  module.exports = { encrypt };
+right_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+    return Buffer.concat([iv, cipher.update(data), cipher.final()]);
+  }
+
+  module.exports = { encrypt };
+expected:
+  family: "AES"
+  role: "encryption"
+  size: 256
+defect:
+  cwe: "CWE-329"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv(algorithm, key, iv[, options])"
+    read_at: "2026-11-06"
+    quote: "Creates and returns a Cipheriv object, with the given algorithm, key and initialization vector (iv)."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv: iv"
+    read_at: "2026-11-06"
+    quote: "For some algorithms, an IV must be unpredictable and unique; for others, uniqueness alone is sufficient, a fixed value is required, or no IV is used."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.2 The Cipher Block Chaining Mode"
+    read_at: "2026-11-06"
+    quote: "The IV need not be secret, but it must be unpredictable; the generation of such IVs is discussed in Appendix C."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

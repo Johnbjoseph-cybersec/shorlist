@@ -1,0 +1,57 @@
+id: "SL-5071"
+title: ".NET: System.Random.NextBytes for a key"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "new Random().NextBytes(key);"
+context_filename: "Keys.cs"
+context_template: |
+  using System;
+
+  static class Keys
+  {
+      public static byte[] NewKey()
+      {
+          byte[] key = new byte[32];
+          new Random().NextBytes(key);
+          return key;
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Keys
+  {
+      public static byte[] NewKey()
+      {
+          byte[] key = new byte[32];
+          RandomNumberGenerator.Fill(key);
+          return key;
+      }
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.random.nextbytes?view=net-10.0"
+    section: "Random.NextBytes(byte[] buffer)"
+    read_at: "2026-11-06"
+    quote: "public virtual void NextBytes(byte[] buffer);"
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.random?view=net-10.0"
+    section: "Random class: Remarks"
+    read_at: "2026-11-06"
+    quote: "To generate a cryptographically secure random number, such as one that's suitable for creating a random password, use one of the static methods in the RandomNumberGenerator class."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

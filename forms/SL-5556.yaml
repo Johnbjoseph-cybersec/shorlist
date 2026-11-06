@@ -1,0 +1,38 @@
+id: "SL-5556"
+title: "Shell: export NODE_TLS_REJECT_UNAUTHORIZED=0"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "config_key"
+language_or_product: "Node.js (environment)"
+row_kind: "defect"
+negative: false
+literal: "export NODE_TLS_REJECT_UNAUTHORIZED=0"
+context_filename: "run.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+  export NODE_TLS_REJECT_UNAUTHORIZED=0
+  node client.js
+right_template: |
+  #!/bin/sh
+  set -e
+  node client.js
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://nodejs.org/api/cli.html"
+    section: "Environment variables: NODE_TLS_REJECT_UNAUTHORIZED=value"
+    read_at: "2026-11-06"
+    quote: "If value equals '0', certificate validation is disabled for TLS connections."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

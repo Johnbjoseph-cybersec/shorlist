@@ -1,0 +1,42 @@
+id: "SL-5514"
+title: "pyca cryptography: rsa.generate_private_key(public_exponent=3)"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+row_kind: "defect"
+negative: false
+literal: "private_key = rsa.generate_private_key(public_exponent=3, key_size=2048)"
+context_filename: "keygen.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric import rsa
+
+  private_key = rsa.generate_private_key(public_exponent=3, key_size=2048)
+right_template: |
+  from cryptography.hazmat.primitives.asymmetric import rsa
+
+  private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+defect:
+  cwe: "CWE-326"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326, Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"
+    section: "FIPS 186-5, Appendix A.1.1, criterion 1(b)"
+    read_at: "2026-11-06"
+    quote: "(b) The exponent e shall be an odd positive integer such that:"
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/"
+    section: "RSA, Generation: generate_private_key"
+    read_at: "2026-11-06"
+    quote: "public_exponent (int) – The public exponent of the new key. Either 65537 or 3 (for legacy purposes). Almost everyone should use 65537."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-326 is the closest MITRE entry; its Description is generic (encryption not strong enough for the protection required) and names no exponent. The requirement itself is FIPS 186-5 A.1.1: 2^16 < e < 2^256."

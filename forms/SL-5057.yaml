@@ -1,0 +1,58 @@
+id: "SL-5057"
+title: "Node: pbkdf2Sync with 100 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+row_kind: "defect"
+literal: "return crypto.pbkdf2Sync(password, salt, 100, 32, 'sha256');"
+context_filename: "kdf.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function derive(password, salt) {
+    return crypto.pbkdf2Sync(password, salt, 100, 32, 'sha256');
+  }
+
+  module.exports = { derive };
+right_template: |
+  const crypto = require('node:crypto');
+
+  function derive(password, salt) {
+    return crypto.pbkdf2Sync(password, salt, 600000, 32, 'sha256');
+  }
+
+  module.exports = { derive };
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.pbkdf2Sync(password, salt, iterations, keylen, digest)"
+    read_at: "2026-11-06"
+    quote: "crypto.pbkdf2Sync(password, salt, iterations, keylen, digest)"
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.pbkdf2Sync: iterations"
+    read_at: "2026-11-06"
+    quote: "The iterations argument must be a number set as high as possible."
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: PBKDF2"
+    read_at: "2026-11-06"
+    quote: "PBKDF2-HMAC-SHA256: 600,000 iterations (recommended)"
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf"
+    section: "NIST SP 800-132, Section 5.2 The Iteration Count"
+    read_at: "2026-11-06"
+    quote: "A minimum iteration count of 1,000 is recommended."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Threshold: OWASP Password Storage Cheat Sheet recommends 600,000 iterations for PBKDF2-HMAC-SHA256; NIST SP 800-132 (2010) recommends a minimum of 1,000. The defective count (100) is under both, so the row does not depend on which threshold a scanner applies; the fixed file uses 600,000."

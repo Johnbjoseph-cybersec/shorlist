@@ -1,0 +1,52 @@
+id: "SL-5503"
+title: "PyCryptodome: RSA encryption with PKCS1_v1_5.new(rsa_key)"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+row_kind: "defect"
+negative: false
+literal: "cipher = PKCS1_v1_5.new(rsa_key)"
+context_filename: "wrap.py"
+context_template: |
+  from Crypto.Cipher import PKCS1_v1_5
+  from Crypto.PublicKey import RSA
+
+
+  def wrap(pubkey_der, session_key):
+      rsa_key = RSA.import_key(pubkey_der)
+      cipher = PKCS1_v1_5.new(rsa_key)
+      return cipher.encrypt(session_key)
+right_template: |
+  from Crypto.Cipher import PKCS1_OAEP
+  from Crypto.PublicKey import RSA
+
+
+  def wrap(pubkey_der, session_key):
+      rsa_key = RSA.import_key(pubkey_der)
+      cipher = PKCS1_OAEP.new(rsa_key)
+      return cipher.encrypt(session_key)
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://www.pycryptodome.org/src/cipher/pkcs1_v1_5.html"
+    section: "PKCS#1 v1.5 encryption (RSA)"
+    read_at: "2026-11-06"
+    quote: "Warning Use PKCS#1 OAEP (RSA) instead. This module is provided only for legacy purposes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

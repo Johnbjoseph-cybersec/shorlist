@@ -178,7 +178,7 @@
         "RSA", "DSA", "DH", "EC", "ECDSA", "ECDH", "EdDSA", "X25519", "X448",
         "ML-KEM", "ML-DSA", "SLH-DSA", "LMS", "XMSS",
         "SHA-1", "MD5", "MD4", "DES", "3DES", "RC4", "RC2",
-        "AES", "ChaCha20", "HMAC", "SHA-2", "PBKDF2", "RNG"
+        "AES", "ChaCha20", "HMAC", "SHA-2", "PBKDF2", "RNG", "TLS"
       ]
     }
   }

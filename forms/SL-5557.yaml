@@ -1,0 +1,37 @@
+id: "SL-5557"
+title: "wget --no-check-certificate"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "GNU Wget"
+row_kind: "defect"
+negative: false
+literal: "wget --no-check-certificate -O data.json https://api.example.com/data.json"
+context_filename: "fetch.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+  wget --no-check-certificate -O data.json https://api.example.com/data.json
+right_template: |
+  #!/bin/sh
+  set -e
+  wget -O data.json https://api.example.com/data.json
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://www.gnu.org/software/wget/manual/wget.html"
+    section: "GNU Wget manual, HTTPS (SSL/TLS) Options: --no-check-certificate"
+    read_at: "2026-11-06"
+    quote: "Don’t check the server certificate against the available certificate authorities. Also don’t require the URL host name to match the common name presented by the certificate."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

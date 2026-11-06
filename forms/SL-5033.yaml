@@ -1,0 +1,58 @@
+id: "SL-5033"
+title: "JCA: PBEKeySpec with 100 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "PBEKeySpec spec = new PBEKeySpec(password, salt, 100, 256);"
+context_filename: "Kdf.java"
+context_template: |
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(char[] password, byte[] salt) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec(password, salt, 100, 256);
+          return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+      }
+  }
+right_template: |
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(char[] password, byte[] salt) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec(password, salt, 600000, 256);
+          return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/PBEKeySpec.html"
+    section: "Constructor PBEKeySpec(char[], byte[], int, int)"
+    read_at: "2026-11-06"
+    quote: "public PBEKeySpec(char[] password, byte[] salt, int iterationCount, int keyLength)"
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: PBKDF2"
+    read_at: "2026-11-06"
+    quote: "PBKDF2-HMAC-SHA256: 600,000 iterations (recommended)"
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf"
+    section: "NIST SP 800-132, Section 5.2 The Iteration Count"
+    read_at: "2026-11-06"
+    quote: "A minimum iteration count of 1,000 is recommended."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Threshold: OWASP Password Storage Cheat Sheet recommends 600,000 iterations for PBKDF2-HMAC-SHA256; NIST SP 800-132 (2010) recommends a minimum of 1,000. The defective count (100) is under both, so the row does not depend on which threshold a scanner applies; the fixed file uses 600,000."

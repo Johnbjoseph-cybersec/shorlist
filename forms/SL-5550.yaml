@@ -1,0 +1,53 @@
+id: "SL-5550"
+title: "OpenSSL: SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL) on a client"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+row_kind: "defect"
+negative: false
+literal: "SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL);"
+context_filename: "client.c"
+context_template: |
+  #include <openssl/ssl.h>
+
+  SSL_CTX *client_ctx(void)
+  {
+      SSL_CTX *ctx = SSL_CTX_new(TLS_client_method());
+      if (ctx == NULL)
+          return NULL;
+      SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL);
+      return ctx;
+  }
+right_template: |
+  #include <openssl/ssl.h>
+
+  SSL_CTX *client_ctx(void)
+  {
+      SSL_CTX *ctx = SSL_CTX_new(TLS_client_method());
+      if (ctx == NULL)
+          return NULL;
+      SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL);
+      SSL_CTX_set_default_verify_paths(ctx);
+      return ctx;
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CTX_set_verify/"
+    section: "SSL_CTX_set_verify(3), NOTES: SSL_VERIFY_NONE"
+    read_at: "2026-11-06"
+    quote: "Client mode: if not using an anonymous cipher (by default disabled), the server will send a certificate which will be checked. The result of the certificate verification process can be checked after the TLS/SSL handshake using the SSL_get_verify_result(3) function. The handshake will be continued regardless of the verification result."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The template never calls SSL_get_verify_result, so the handshake result is not checked. Host-name checking (SSL_set1_host) is a separate defect, not in this row."

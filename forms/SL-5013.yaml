@@ -1,0 +1,51 @@
+id: "SL-5013"
+title: "random.choice() for a token"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / stdlib"
+negative: false
+row_kind: "defect"
+literal: "return \"\".join(random.choice(ALPHABET) for _ in range(32))"
+context_filename: "tokens.py"
+context_template: |
+  import random
+  import string
+
+  ALPHABET = string.ascii_letters + string.digits
+
+
+  def new_token():
+      return "".join(random.choice(ALPHABET) for _ in range(32))
+right_template: |
+  import secrets
+  import string
+
+  ALPHABET = string.ascii_letters + string.digits
+
+
+  def new_token():
+      return "".join(secrets.choice(ALPHABET) for _ in range(32))
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "Functions for sequences: random.choice"
+    read_at: "2026-11-06"
+    quote: "random.choice(seq)"
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "random: module warning"
+    read_at: "2026-11-06"
+    quote: "The pseudo-random generators of this module should not be used for security purposes. For security or cryptographic uses, see the secrets module."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

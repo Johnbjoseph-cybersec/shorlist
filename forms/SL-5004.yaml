@@ -1,0 +1,49 @@
+id: "SL-5004"
+title: "pyca: ChaCha20Poly1305.encrypt with a constant nonce"
+family: "ChaCha20"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+row_kind: "defect"
+literal: "return ChaCha20Poly1305(key).encrypt(b\"\\x00\" * 12, data, None)"
+context_filename: "enc.py"
+context_template: |
+  from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
+
+
+  def encrypt(key, data):
+      return ChaCha20Poly1305(key).encrypt(b"\x00" * 12, data, None)
+right_template: |
+  import os
+
+  from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
+
+
+  def encrypt(key, data):
+      nonce = os.urandom(12)
+      return nonce + ChaCha20Poly1305(key).encrypt(nonce, data, None)
+expected:
+  family: "ChaCha20"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://cryptography.io/en/46.0.3/hazmat/primitives/aead/"
+    section: "class ChaCha20Poly1305"
+    read_at: "2026-11-06"
+    quote: "class cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305(key)"
+  - url: "https://cryptography.io/en/46.0.3/hazmat/primitives/aead/"
+    section: "encrypt(nonce, data, associated_data): nonce"
+    read_at: "2026-11-06"
+    quote: "A 12 byte value. NEVER REUSE A NONCE with a key."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

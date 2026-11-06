@@ -1,0 +1,59 @@
+id: "SL-5070"
+title: ".NET: SHA256.HashData of the password used as a key"
+family: "SHA-2"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "return SHA256.HashData(Encoding.UTF8.GetBytes(password));"
+context_filename: "Kdf.cs"
+context_template: |
+  using System.Security.Cryptography;
+  using System.Text;
+
+  static class Kdf
+  {
+      public static byte[] DeriveKey(string password)
+      {
+          return SHA256.HashData(Encoding.UTF8.GetBytes(password));
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Kdf
+  {
+      public static byte[] DeriveKey(string password, byte[] salt)
+      {
+          return Rfc2898DeriveBytes.Pbkdf2(password, salt, 600000, HashAlgorithmName.SHA256, 32);
+      }
+  }
+expected:
+  family: "SHA-2"
+  role: "hash"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916: Extended Description"
+    read_at: "2026-11-06"
+    quote: "Many hash algorithms are designed to execute quickly with minimal overhead, even cryptographic hashes."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.sha256.hashdata?view=net-10.0"
+    section: "SHA256.HashData(byte[] source)"
+    read_at: "2026-11-06"
+    quote: "public static byte[] HashData(byte[] source);"
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: Background"
+    read_at: "2026-11-06"
+    quote: "are not suitable for password storage because they allow attackers to perform large numbers of guesses quickly."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-759 (one-way hash without a salt) also describes this line; CWE-916 is taken because its Description names the missing work factor, which a salt alone would not fix. The fixed file derives the key with PBKDF2-HMAC-SHA256, 600,000 iterations, salt from the caller."

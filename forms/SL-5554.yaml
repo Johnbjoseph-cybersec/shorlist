@@ -1,0 +1,40 @@
+id: "SL-5554"
+title: "Python ssl: ctx.verify_mode = ssl.CERT_NONE"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / ssl"
+row_kind: "defect"
+negative: false
+literal: "ctx.verify_mode = ssl.CERT_NONE"
+context_filename: "client.py"
+context_template: |
+  import ssl
+
+  ctx = ssl.create_default_context()
+  ctx.check_hostname = False
+  ctx.verify_mode = ssl.CERT_NONE
+right_template: |
+  import ssl
+
+  ctx = ssl.create_default_context()
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://docs.python.org/3/library/ssl.html"
+    section: "ssl.CERT_NONE"
+    read_at: "2026-11-06"
+    quote: "With client-side sockets, just about any cert is accepted. Validation errors, such as untrusted or expired cert, are ignored and do not abort the TLS/SSL handshake."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Python refuses CERT_NONE while check_hostname is on, so the defective file needs both lines; the fixed file drops both. A scanner may also report CWE-297 on line 4."

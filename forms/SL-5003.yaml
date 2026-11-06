@@ -1,0 +1,53 @@
+id: "SL-5003"
+title: "pyca: AESGCM.encrypt with a constant nonce"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+row_kind: "defect"
+literal: "return AESGCM(key).encrypt(b\"\\x00\" * 12, data, None)"
+context_filename: "enc.py"
+context_template: |
+  from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+
+  def encrypt(key, data):
+      return AESGCM(key).encrypt(b"\x00" * 12, data, None)
+right_template: |
+  import os
+
+  from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+
+  def encrypt(key, data):
+      nonce = os.urandom(12)
+      return nonce + AESGCM(key).encrypt(nonce, data, None)
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://cryptography.io/en/46.0.3/hazmat/primitives/aead/"
+    section: "class AESGCM"
+    read_at: "2026-11-06"
+    quote: "class cryptography.hazmat.primitives.ciphers.aead.AESGCM(key)"
+  - url: "https://cryptography.io/en/46.0.3/hazmat/primitives/aead/"
+    section: "encrypt(nonce, data, associated_data): nonce"
+    read_at: "2026-11-06"
+    quote: "A 12 byte value. NEVER REUSE A NONCE with a key."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"
+    section: "NIST SP 800-38D, Section 8 Uniqueness Requirement on IVs and Keys"
+    read_at: "2026-11-06"
+    quote: "The probability that the authenticated encryption function ever will be invoked with the same IV and the same key on two (or more) distinct sets of input data shall be no greater than 2-32."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

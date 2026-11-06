@@ -1,0 +1,45 @@
+id: "SL-5012"
+title: "random.randbytes() for a key"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / stdlib"
+negative: false
+row_kind: "defect"
+literal: "return random.randbytes(32)"
+context_filename: "keys.py"
+context_template: |
+  import random
+
+
+  def new_key():
+      return random.randbytes(32)
+right_template: |
+  import secrets
+
+
+  def new_key():
+      return secrets.token_bytes(32)
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "Functions for bytes: random.randbytes"
+    read_at: "2026-11-06"
+    quote: "This method should not be used for generating security tokens. Use secrets.token_bytes() instead."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "random: module warning"
+    read_at: "2026-11-06"
+    quote: "The pseudo-random generators of this module should not be used for security purposes. For security or cryptographic uses, see the secrets module."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

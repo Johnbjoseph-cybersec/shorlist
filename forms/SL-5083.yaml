@@ -1,0 +1,47 @@
+id: "SL-5083"
+title: "C: srand(time(NULL)) seeding key generation"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / libc"
+negative: false
+row_kind: "defect"
+literal: "srand((unsigned)time(NULL));"
+context_filename: "keys.c"
+context_template: |
+  #include <stdlib.h>
+  #include <time.h>
+
+  void new_key(unsigned char key[32])
+  {
+      srand((unsigned)time(NULL));
+      for (int i = 0; i < 32; i++)
+          key[i] = (unsigned char)rand();
+  }
+right_template: |
+  #include <openssl/rand.h>
+
+  int new_key(unsigned char key[32])
+  {
+      return RAND_bytes(key, 32);
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-337"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/337.html"
+    section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "A Pseudo-Random Number Generator (PRNG) is initialized from a predictable seed, such as the process ID or system time."
+  - url: "https://pubs.opengroup.org/onlinepubs/9799919799/functions/rand.html"
+    section: "rand, srand: DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "If srand() is then called with the same seed value, the sequence of pseudo-random numbers shall be repeated."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The PRNG on the next lines is also non-cryptographic (CWE-338, a separate row); this row scores the seeding line only. The fixed file replaces seed and generator with the OS CSPRNG."

@@ -1,0 +1,41 @@
+id: "SL-5528"
+title: "Decoy: Java log message rejecting RSA/ECB/PKCS1Padding"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+row_kind: "defect"
+negative: true
+decoy_class: "log_string"
+literal: "LOG.warning(\"refusing transformation RSA/ECB/PKCS1Padding; use OAEP\");"
+context_filename: "Main.java"
+context_template: |
+  import java.util.logging.Logger;
+
+  public class Main {
+      private static final Logger LOG = Logger.getLogger("crypto");
+
+      static void refuse() {
+          LOG.warning("refusing transformation RSA/ECB/PKCS1Padding; use OAEP");
+      }
+  }
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/security/standard-names.html"
+    section: "Java Security Standard Algorithm Names, Cipher Algorithm Paddings: PKCS1Padding"
+    read_at: "2026-11-06"
+    quote: "PKCS1Padding | The padding scheme described in PKCS #1 v2.2, used with the RSA algorithm."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A log message; no Cipher is created."

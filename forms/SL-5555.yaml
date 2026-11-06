@@ -1,0 +1,46 @@
+id: "SL-5555"
+title: "Python ssl: ssl._create_unverified_context()"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / ssl"
+row_kind: "defect"
+negative: false
+literal: "ctx = ssl._create_unverified_context()"
+context_filename: "fetch.py"
+context_template: |
+  import ssl
+  import urllib.request
+
+
+  def fetch(url):
+      ctx = ssl._create_unverified_context()
+      return urllib.request.urlopen(url, context=ctx).read()
+right_template: |
+  import ssl
+  import urllib.request
+
+
+  def fetch(url):
+      ctx = ssl.create_default_context()
+      return urllib.request.urlopen(url, context=ctx).read()
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://peps.python.org/pep-0476/"
+    section: "PEP 476, Opting out"
+    read_at: "2026-11-06"
+    quote: "# This restores the same behavior as before. context = ssl._create_unverified_context()"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The ssl module documentation does not document _create_unverified_context (checked: absent from the saved docs.python.org/3/library/ssl.html text, grep for the name); PEP 476 defines it."

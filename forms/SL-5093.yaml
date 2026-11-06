@@ -1,0 +1,40 @@
+id: "SL-5093"
+title: "Decoy: C# log string naming CipherMode.ECB"
+family: "AES"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "C# / .NET"
+negative: true
+decoy_class: "log_string"
+row_kind: "defect"
+literal: "Console.Error.WriteLine(\"CipherMode.ECB is not supported; use AesGcm\");"
+context_filename: "Policy.cs"
+context_template: |
+  using System;
+
+  static class Policy
+  {
+      public static void Reject()
+      {
+          Console.Error.WriteLine("CipherMode.ECB is not supported; use AesGcm");
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.ciphermode?view=net-10.0"
+    section: "CipherMode enum: ECB"
+    read_at: "2026-11-06"
+    quote: "The Electronic Codebook (ECB) mode encrypts each block individually. Any blocks of plain text that are identical and in the same message, or that are in a different message encrypted with the same key, will be transformed into identical cipher text blocks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

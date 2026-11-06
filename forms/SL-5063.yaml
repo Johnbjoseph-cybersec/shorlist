@@ -1,0 +1,58 @@
+id: "SL-5063"
+title: ".NET: EncryptCbc with an all-zero IV"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "return aes.EncryptCbc(data, new byte[16], PaddingMode.PKCS7);"
+context_filename: "Enc.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          using Aes aes = Aes.Create();
+          aes.Key = key;
+          return aes.EncryptCbc(data, new byte[16], PaddingMode.PKCS7);
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Enc
+  {
+      public static byte[] Encrypt(byte[] key, byte[] data)
+      {
+          using Aes aes = Aes.Create();
+          aes.Key = key;
+          byte[] iv = RandomNumberGenerator.GetBytes(16);
+          return [.. iv, .. aes.EncryptCbc(data, iv, PaddingMode.PKCS7)];
+      }
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-329"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.symmetricalgorithm.encryptcbc?view=net-10.0"
+    section: "SymmetricAlgorithm.EncryptCbc"
+    read_at: "2026-11-06"
+    quote: "Encrypts data using CBC mode with the specified padding mode."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.2 The Cipher Block Chaining Mode"
+    read_at: "2026-11-06"
+    quote: "The IV need not be secret, but it must be unpredictable; the generation of such IVs is discussed in Appendix C."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

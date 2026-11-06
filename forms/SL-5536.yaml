@@ -1,0 +1,57 @@
+id: "SL-5536"
+title: "Go crypto/tls: tls.Config{InsecureSkipVerify: true}"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+row_kind: "defect"
+negative: false
+literal: "TLSClientConfig: &tls.Config{InsecureSkipVerify: true},"
+context_filename: "client.go"
+context_template: |
+  package client
+
+  import (
+  	"crypto/tls"
+  	"net/http"
+  )
+
+  func Client() *http.Client {
+  	tr := &http.Transport{
+  		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+  	}
+  	return &http.Client{Transport: tr}
+  }
+right_template: |
+  package client
+
+  import (
+  	"crypto/tls"
+  	"net/http"
+  )
+
+  func Client() *http.Client {
+  	tr := &http.Transport{
+  		TLSClientConfig: &tls.Config{MinVersion: tls.VersionTLS12},
+  	}
+  	return &http.Client{Transport: tr}
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://pkg.go.dev/crypto/tls@go1.25.0"
+    section: "crypto/tls (go1.25.0), type Config: InsecureSkipVerify"
+    read_at: "2026-11-06"
+    quote: "If InsecureSkipVerify is true, crypto/tls // accepts any certificate presented by the server and any host name in that // certificate. In this mode, TLS is susceptible to machine-in-the-middle // attacks unless custom verification is used. This should be used only for // testing or in combination with VerifyConnection or VerifyPeerCertificate."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

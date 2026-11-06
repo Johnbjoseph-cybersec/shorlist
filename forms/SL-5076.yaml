@@ -1,0 +1,79 @@
+id: "SL-5076"
+title: "OpenSSL: EVP_chacha20_poly1305() with a constant nonce"
+family: "ChaCha20"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL EVP"
+negative: false
+row_kind: "defect"
+literal: "EVP_EncryptInit_ex(ctx, EVP_chacha20_poly1305(), NULL, key, (const unsigned char *)\"fixed-nonce!\");"
+context_filename: "enc.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int encrypt(const unsigned char *key, const unsigned char *in, int inlen, unsigned char *out)
+  {
+      EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+      int len = 0, total = 0;
+
+      if (ctx == NULL)
+          return -1;
+      EVP_EncryptInit_ex(ctx, EVP_chacha20_poly1305(), NULL, key, (const unsigned char *)"fixed-nonce!");
+      EVP_EncryptUpdate(ctx, out + total, &len, in, inlen);
+      total += len;
+      EVP_EncryptFinal_ex(ctx, out + total, &len);
+      total += len;
+      EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_GET_TAG, 16, out + total);
+      total += 16;
+      EVP_CIPHER_CTX_free(ctx);
+      return total;
+  }
+right_template: |
+  #include <openssl/evp.h>
+  #include <openssl/rand.h>
+
+  int encrypt(const unsigned char *key, const unsigned char *in, int inlen, unsigned char *out)
+  {
+      EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+      int len = 0, total = 12;
+
+      if (ctx == NULL)
+          return -1;
+      if (RAND_bytes(out, 12) != 1) {
+          EVP_CIPHER_CTX_free(ctx);
+          return -1;
+      }
+      EVP_EncryptInit_ex(ctx, EVP_chacha20_poly1305(), NULL, key, out);
+      EVP_EncryptUpdate(ctx, out + total, &len, in, inlen);
+      total += len;
+      EVP_EncryptFinal_ex(ctx, out + total, &len);
+      total += len;
+      EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_GET_TAG, 16, out + total);
+      total += 16;
+      EVP_CIPHER_CTX_free(ctx);
+      return total;
+  }
+expected:
+  family: "ChaCha20"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://docs.openssl.org/3.5/man3/EVP_EncryptInit/"
+    section: "EVP_EncryptInit: list of ciphers"
+    read_at: "2026-11-06"
+    quote: "EVP_chacha20_poly1305"
+  - url: "https://docs.openssl.org/3.5/man3/EVP_EncryptInit/"
+    section: "EVP_EncryptInit_ex: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "int EVP_EncryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type, ENGINE *impl, const unsigned char *key, const unsigned char *iv);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

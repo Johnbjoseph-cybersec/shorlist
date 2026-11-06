@@ -1,0 +1,63 @@
+id: "SL-5511"
+title: "OpenSSL EVP: EVP_PKEY_CTX_set_rsa_padding(RSA_NO_PADDING) in an encrypt context"
+family: "RSA"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+row_kind: "defect"
+negative: false
+literal: "&& EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_NO_PADDING) > 0"
+context_filename: "wrap.c"
+context_template: |
+  #include <openssl/evp.h>
+  #include <openssl/rsa.h>
+
+  int wrap(EVP_PKEY *pkey, const unsigned char *in, size_t inlen, unsigned char *out, size_t *outlen)
+  {
+      EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new(pkey, NULL);
+      int ok = ctx != NULL && EVP_PKEY_encrypt_init(ctx) > 0
+               && EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_NO_PADDING) > 0
+               && EVP_PKEY_encrypt(ctx, out, outlen, in, inlen) > 0;
+      EVP_PKEY_CTX_free(ctx);
+      return ok;
+  }
+right_template: |
+  #include <openssl/evp.h>
+  #include <openssl/rsa.h>
+
+  int wrap(EVP_PKEY *pkey, const unsigned char *in, size_t inlen, unsigned char *out, size_t *outlen)
+  {
+      EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new(pkey, NULL);
+      int ok = ctx != NULL && EVP_PKEY_encrypt_init(ctx) > 0
+               && EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) > 0
+               && EVP_PKEY_encrypt(ctx, out, outlen, in, inlen) > 0;
+      EVP_PKEY_CTX_free(ctx);
+      return ok;
+  }
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://docs.openssl.org/3.5/man3/EVP_PKEY_CTX_ctrl/"
+    section: "EVP_PKEY_CTX_ctrl(3), RSA parameters: EVP_PKEY_CTX_set_rsa_padding()"
+    read_at: "2026-11-06"
+    quote: "EVP_PKEY_CTX_set_rsa_padding() sets the RSA padding mode for ctx. The pad parameter can take the value RSA_PKCS1_PADDING for PKCS#1 padding, RSA_NO_PADDING for no padding, RSA_PKCS1_OAEP_PADDING for OAEP padding (encrypt and decrypt only)"
+  - url: "https://docs.openssl.org/3.5/man3/RSA_public_encrypt/"
+    section: "RSA_public_encrypt(3), DESCRIPTION: padding modes"
+    read_at: "2026-11-06"
+    quote: "RSA_NO_PADDING Raw RSA encryption. This mode should only be used to implement cryptographically sound padding modes in the application code. Encrypting user data directly with RSA is insecure."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

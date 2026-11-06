@@ -1,0 +1,65 @@
+id: "SL-5029"
+title: "JCA: ChaCha20-Poly1305 with an all-zero nonce"
+family: "ChaCha20"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[12]));"
+context_filename: "Enc.java"
+context_template: |
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.IvParameterSpec;
+
+  public class Enc {
+      static byte[] encrypt(SecretKey key, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("ChaCha20-Poly1305");
+          c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[12]));
+          return c.doFinal(data);
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.IvParameterSpec;
+
+  public class Enc {
+      static byte[][] encrypt(SecretKey key, byte[] data) throws Exception {
+          byte[] iv = new byte[12];
+          new SecureRandom().nextBytes(iv);
+          Cipher c = Cipher.getInstance("ChaCha20-Poly1305");
+          c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
+          return new byte[][] {iv, c.doFinal(data)};
+      }
+  }
+expected:
+  family: "ChaCha20"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-323"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/323.html"
+    section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"
+    read_at: "2026-11-06"
+    quote: "Nonces should be used for the present occasion and only once."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/IvParameterSpec.html"
+    section: "Constructor IvParameterSpec(byte[] iv)"
+    read_at: "2026-11-06"
+    quote: "Creates an IvParameterSpec object using the bytes in iv as the IV."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/Cipher.html"
+    section: "Class Cipher: ChaCha20-Poly1305 nonce uniqueness"
+    read_at: "2026-11-06"
+    quote: "The ChaCha20 and ChaCha20-Poly1305 algorithms have a similar requirement for unique nonces with a given key."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Cipher Algorithms: ChaCha20-Poly1305"
+    read_at: "2026-11-06"
+    quote: "The ChaCha20 cipher in AEAD mode using the Poly1305 authenticator, as defined in RFC 7539."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Constant AEAD nonce: CWE-323 is taken; CWE-1204 would be the runner-up."

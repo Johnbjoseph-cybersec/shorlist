@@ -1,0 +1,35 @@
+id: "SL-5089"
+title: "Decoy: Go comment naming a zero CBC IV"
+family: "AES"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: true
+decoy_class: "comment"
+row_kind: "defect"
+literal: "// The zero IV from cipher.NewCBCEncrypter(block, make([]byte, aes.BlockSize)) was removed in v2."
+context_filename: "doc.go"
+context_template: |
+  package crypt
+
+  // The zero IV from cipher.NewCBCEncrypter(block, make([]byte, aes.BlockSize)) was removed in v2.
+  const Version = 2
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-329"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/cipher/cbc.go"
+    section: "crypto/cipher: NewCBCEncrypter"
+    read_at: "2026-11-06"
+    quote: "NewCBCEncrypter returns a BlockMode which encrypts in cipher block chaining"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

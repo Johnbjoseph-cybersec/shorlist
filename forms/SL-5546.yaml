@@ -1,0 +1,38 @@
+id: "SL-5546"
+title: "Node.js: process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js"
+row_kind: "defect"
+negative: false
+literal: "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';"
+context_filename: "client.js"
+context_template: |
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+  const https = require('https');
+
+  https.get('https://api.example.com/', (res) => res.resume());
+right_template: |
+  const https = require('https');
+
+  https.get('https://api.example.com/', (res) => res.resume());
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://nodejs.org/api/cli.html"
+    section: "Environment variables: NODE_TLS_REJECT_UNAUTHORIZED=value"
+    read_at: "2026-11-06"
+    quote: "If value equals '0', certificate validation is disabled for TLS connections. This makes TLS, and HTTPS by extension, insecure. The use of this environment variable is strongly discouraged."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

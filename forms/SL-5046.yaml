@@ -1,0 +1,58 @@
+id: "SL-5046"
+title: "Go: sha256.Sum256 of the password used as a key"
+family: "SHA-2"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+row_kind: "defect"
+literal: "key := sha256.Sum256([]byte(password))"
+context_filename: "kdf.go"
+context_template: |
+  package crypt
+
+  import "crypto/sha256"
+
+  func DeriveKey(password string) []byte {
+  	key := sha256.Sum256([]byte(password))
+  	return key[:]
+  }
+right_template: |
+  package crypt
+
+  import (
+  	"crypto/pbkdf2"
+  	"crypto/sha256"
+  )
+
+  func DeriveKey(password string, salt []byte) ([]byte, error) {
+  	return pbkdf2.Key(sha256.New, password, salt, 600000, 32)
+  }
+expected:
+  family: "SHA-2"
+  role: "hash"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916: Extended Description"
+    read_at: "2026-11-06"
+    quote: "Many hash algorithms are designed to execute quickly with minimal overhead, even cryptographic hashes."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/sha256/sha256.go"
+    section: "crypto/sha256: Sum256"
+    read_at: "2026-11-06"
+    quote: "Sum256 returns the SHA256 checksum of the data."
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: Background"
+    read_at: "2026-11-06"
+    quote: "are not suitable for password storage because they allow attackers to perform large numbers of guesses quickly."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-759 (one-way hash without a salt) also describes this line; CWE-916 is taken because its Description names the missing work factor, which a salt alone would not fix. The fixed file derives the key with PBKDF2-HMAC-SHA256, 600,000 iterations, salt from the caller."

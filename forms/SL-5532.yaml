@@ -1,0 +1,36 @@
+id: "SL-5532"
+title: "Decoy: shell comment on the deprecated openssl genrsa -3"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "OpenSSL CLI 3.5"
+row_kind: "defect"
+negative: true
+decoy_class: "comment"
+literal: "# openssl genrsa -3 is deprecated; keep the default exponent 65537"
+context_filename: "keygen.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+  # openssl genrsa -3 is deprecated; keep the default exponent 65537
+  openssl genrsa -out key.pem 2048
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-326"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326, Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://docs.openssl.org/3.5/man1/openssl-genrsa/"
+    section: "openssl-genrsa(1), OPTIONS: -F4, -f4, -3"
+    read_at: "2026-11-06"
+    quote: "The public exponent to use, either 65537 or 3. The default is 65537. The -3 option has been deprecated."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A comment; the command on the next line uses the default exponent 65537 and is not a defect."

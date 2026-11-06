@@ -1,0 +1,55 @@
+id: "SL-5547"
+title: "Node.js tls: tls.connect({ minVersion: 'TLSv1' })"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js tls"
+row_kind: "defect"
+negative: false
+literal: "minVersion: 'TLSv1',"
+context_filename: "client.js"
+context_template: |
+  const tls = require('tls');
+
+  const socket = tls.connect({
+    host: 'api.example.com',
+    port: 443,
+    servername: 'api.example.com',
+    minVersion: 'TLSv1',
+  });
+
+  module.exports = { socket };
+right_template: |
+  const tls = require('tls');
+
+  const socket = tls.connect({
+    host: 'api.example.com',
+    port: 443,
+    servername: 'api.example.com',
+    minVersion: 'TLSv1.2',
+  });
+
+  module.exports = { socket };
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://www.rfc-editor.org/rfc/rfc8996.txt"
+    section: "RFC 8996, Section 2"
+    read_at: "2026-11-06"
+    quote: "TLS 1.0 MUST NOT be used. Negotiation of TLS 1.0 from any version of TLS MUST NOT be permitted."
+  - url: "https://nodejs.org/api/tls.html"
+    section: "tls.createSecureContext([options]): minVersion"
+    read_at: "2026-11-06"
+    quote: "minVersion <string> Optionally set the minimum TLS version to allow. One of 'TLSv1.3', 'TLSv1.2', 'TLSv1.1', or 'TLSv1'. Cannot be specified along with the secureProtocol option; use one or the other. Avoid setting to less than TLSv1.2, but it may be required for interoperability."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

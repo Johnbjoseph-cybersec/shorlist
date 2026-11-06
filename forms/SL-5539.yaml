@@ -1,0 +1,60 @@
+id: "SL-5539"
+title: "Java JSSE: X509TrustManager whose checkServerTrusted accepts every chain"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JSSE"
+row_kind: "defect"
+negative: false
+literal: "public void checkServerTrusted(X509Certificate[] chain, String authType) {}"
+context_filename: "Main.java"
+context_template: |
+  import java.security.cert.X509Certificate;
+  import javax.net.ssl.SSLContext;
+  import javax.net.ssl.TrustManager;
+  import javax.net.ssl.X509TrustManager;
+
+  public class Main {
+      static SSLContext context() throws Exception {
+          TrustManager[] trustAll = new TrustManager[] {
+              new X509TrustManager() {
+                  public void checkClientTrusted(X509Certificate[] chain, String authType) {}
+                  public void checkServerTrusted(X509Certificate[] chain, String authType) {}
+                  public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+              }
+          };
+          SSLContext ctx = SSLContext.getInstance("TLS");
+          ctx.init(null, trustAll, null);
+          return ctx;
+      }
+  }
+right_template: |
+  import javax.net.ssl.SSLContext;
+
+  public class Main {
+      static SSLContext context() throws Exception {
+          SSLContext ctx = SSLContext.getInstance("TLS");
+          ctx.init(null, null, null);
+          return ctx;
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/net/ssl/X509TrustManager.html"
+    section: "javax.net.ssl.X509TrustManager (JDK 24), checkServerTrusted"
+    read_at: "2026-11-06"
+    quote: "Given the partial or complete certificate chain provided by the peer, build a certificate path to a trusted root and return if it can be validated and is trusted for server SSL authentication based on the authentication type."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The empty body returns without building a path, so every chain is trusted. Fixed file: ctx.init with null trust managers uses the platform default."

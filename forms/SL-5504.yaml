@@ -1,0 +1,59 @@
+id: "SL-5504"
+title: "Go crypto/rsa: rsa.EncryptPKCS1v15"
+family: "RSA"
+cyclonedx_family: "RSAES-PKCS1"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+row_kind: "defect"
+negative: false
+literal: "ciphertext, err := rsa.EncryptPKCS1v15(rand.Reader, pub, msg)"
+context_filename: "wrap.go"
+context_template: |
+  package wrap
+
+  import (
+  	"crypto/rand"
+  	"crypto/rsa"
+  )
+
+  func Wrap(pub *rsa.PublicKey, msg []byte) ([]byte, error) {
+  	ciphertext, err := rsa.EncryptPKCS1v15(rand.Reader, pub, msg)
+  	return ciphertext, err
+  }
+right_template: |
+  package wrap
+
+  import (
+  	"crypto/sha256"
+  	"crypto/rand"
+  	"crypto/rsa"
+  )
+
+  func Wrap(pub *rsa.PublicKey, msg []byte) ([]byte, error) {
+  	ciphertext, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, pub, msg, nil)
+  	return ciphertext, err
+  }
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017.txt"
+    section: "RFC 8017, Section 7 (Encryption Schemes)"
+    read_at: "2026-11-06"
+    quote: "RSAES-OAEP is REQUIRED to be supported for new applications; RSAES-PKCS1-v1_5 is included only for compatibility with existing applications."
+  - url: "https://pkg.go.dev/crypto/rsa@go1.25.0"
+    section: "crypto/rsa (go1.25.0), func EncryptPKCS1v15"
+    read_at: "2026-11-06"
+    quote: "WARNING: use of this function to encrypt plaintexts other than session keys is dangerous. Use RSA OAEP in new protocols."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

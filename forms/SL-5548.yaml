@@ -1,0 +1,51 @@
+id: "SL-5548"
+title: "Node.js tls: tls.connect({ rejectUnauthorized: false })"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js tls"
+row_kind: "defect"
+negative: false
+literal: "rejectUnauthorized: false,"
+context_filename: "client.js"
+context_template: |
+  const tls = require('tls');
+
+  const socket = tls.connect({
+    host: 'api.example.com',
+    port: 443,
+    servername: 'api.example.com',
+    rejectUnauthorized: false,
+  });
+
+  module.exports = { socket };
+right_template: |
+  const tls = require('tls');
+
+  const socket = tls.connect({
+    host: 'api.example.com',
+    port: 443,
+    servername: 'api.example.com',
+    rejectUnauthorized: true,
+  });
+
+  module.exports = { socket };
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://nodejs.org/api/tls.html"
+    section: "tls.connect(options[, callback]): rejectUnauthorized"
+    read_at: "2026-11-06"
+    quote: "rejectUnauthorized <boolean> If not false, the server certificate is verified against the list of supplied CAs. An 'error' event is emitted if verification fails; err.code contains the OpenSSL error code. Default: true."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

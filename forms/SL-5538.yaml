@@ -1,0 +1,52 @@
+id: "SL-5538"
+title: "Java JSSE: setDefaultHostnameVerifier((hostname, session) -> true)"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JSSE"
+row_kind: "defect"
+negative: false
+literal: "HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);"
+context_filename: "Main.java"
+context_template: |
+  import java.net.URL;
+  import javax.net.ssl.HttpsURLConnection;
+
+  public class Main {
+      static HttpsURLConnection open(String url) throws Exception {
+          HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
+          return (HttpsURLConnection) new URL(url).openConnection();
+      }
+  }
+right_template: |
+  import java.net.URL;
+  import javax.net.ssl.HttpsURLConnection;
+
+  public class Main {
+      static HttpsURLConnection open(String url) throws Exception {
+          return (HttpsURLConnection) new URL(url).openConnection();
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-297"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/297.html"
+    section: "CWE-297, Description"
+    read_at: "2026-11-06"
+    quote: "The product communicates with a host that provides a certificate, but the product does not properly ensure that the certificate is actually associated with that host."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/net/ssl/HostnameVerifier.html"
+    section: "javax.net.ssl.HostnameVerifier (JDK 24), verify"
+    read_at: "2026-11-06"
+    quote: "Verify that the host name is an acceptable match with the server's authentication scheme."
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/net/ssl/HttpsURLConnection.html"
+    section: "javax.net.ssl.HttpsURLConnection (JDK 24), setDefaultHostnameVerifier"
+    read_at: "2026-11-06"
+    quote: "Sets the default HostnameVerifier inherited by a new instance of this class."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

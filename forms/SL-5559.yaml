@@ -1,0 +1,39 @@
+id: "SL-5559"
+title: "Decoy: Go log message rejecting InsecureSkipVerify"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+row_kind: "defect"
+negative: true
+decoy_class: "log_string"
+literal: "log.Println(\"rejecting TLS config with InsecureSkipVerify\")"
+context_filename: "policy.go"
+context_template: |
+  package policy
+
+  import "log"
+
+  func Refuse() {
+  	log.Println("rejecting TLS config with InsecureSkipVerify")
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://pkg.go.dev/crypto/tls@go1.25.0"
+    section: "crypto/tls (go1.25.0), type Config: InsecureSkipVerify"
+    read_at: "2026-11-06"
+    quote: "This should be used only for // testing or in combination with VerifyConnection or VerifyPeerCertificate."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A log message; crypto/tls is not imported."

@@ -1,0 +1,46 @@
+id: "SL-5517"
+title: "Node.js crypto: generateKeyPairSync('rsa', { publicExponent: 3 })"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+row_kind: "defect"
+negative: false
+literal: "const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048, publicExponent: 3 });"
+context_filename: "keygen.js"
+context_template: |
+  const { generateKeyPairSync } = require('crypto');
+
+  const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048, publicExponent: 3 });
+
+  module.exports = { publicKey, privateKey };
+right_template: |
+  const { generateKeyPairSync } = require('crypto');
+
+  const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048, publicExponent: 0x10001 });
+
+  module.exports = { publicKey, privateKey };
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+defect:
+  cwe: "CWE-326"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326, Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"
+    section: "FIPS 186-5, Appendix A.1.1, criterion 1(b)"
+    read_at: "2026-11-06"
+    quote: "(b) The exponent e shall be an odd positive integer such that:"
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.generateKeyPairSync(type, options)"
+    read_at: "2026-11-06"
+    quote: "publicExponent <number> Public exponent (RSA). Default: 0x10001."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-326 is the closest MITRE entry; its Description is generic (encryption not strong enough for the protection required) and names no exponent. The requirement itself is FIPS 186-5 A.1.1: 2^16 < e < 2^256."

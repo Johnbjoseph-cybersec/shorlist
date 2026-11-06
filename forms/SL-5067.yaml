@@ -1,0 +1,52 @@
+id: "SL-5067"
+title: ".NET: HMACSHA256.HashData with a hard-coded key"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "return HMACSHA256.HashData(Encoding.UTF8.GetBytes(\"hardcoded-mac-key\"), data);"
+context_filename: "Mac.cs"
+context_template: |
+  using System.Security.Cryptography;
+  using System.Text;
+
+  static class Mac
+  {
+      public static byte[] Sign(byte[] data)
+      {
+          return HMACSHA256.HashData(Encoding.UTF8.GetBytes("hardcoded-mac-key"), data);
+      }
+  }
+right_template: |
+  using System;
+  using System.Security.Cryptography;
+
+  static class Mac
+  {
+      public static byte[] Sign(byte[] data)
+      {
+          return HMACSHA256.HashData(Convert.FromBase64String(Environment.GetEnvironmentVariable("MAC_KEY")!), data);
+      }
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.hmacsha256.hashdata?view=net-10.0"
+    section: "HMACSHA256.HashData(byte[] key, byte[] source)"
+    read_at: "2026-11-06"
+    quote: "public static byte[] HashData(byte[] key, byte[] source);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The fixed file reads the key from the environment; any key-management source that is not in the code would do."

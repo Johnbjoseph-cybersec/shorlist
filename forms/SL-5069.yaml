@@ -1,0 +1,58 @@
+id: "SL-5069"
+title: ".NET: Rfc2898DeriveBytes.Pbkdf2 with 100 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C# / .NET"
+negative: false
+row_kind: "defect"
+literal: "return Rfc2898DeriveBytes.Pbkdf2(password, salt, 100, HashAlgorithmName.SHA256, 32);"
+context_filename: "Kdf.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  static class Kdf
+  {
+      public static byte[] Derive(string password, byte[] salt)
+      {
+          return Rfc2898DeriveBytes.Pbkdf2(password, salt, 100, HashAlgorithmName.SHA256, 32);
+      }
+  }
+right_template: |
+  using System.Security.Cryptography;
+
+  static class Kdf
+  {
+      public static byte[] Derive(string password, byte[] salt)
+      {
+          return Rfc2898DeriveBytes.Pbkdf2(password, salt, 600000, HashAlgorithmName.SHA256, 32);
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rfc2898derivebytes.pbkdf2?view=net-10.0"
+    section: "Rfc2898DeriveBytes.Pbkdf2(string, byte[], int, HashAlgorithmName, int)"
+    read_at: "2026-11-06"
+    quote: "public static byte[] Pbkdf2(string password, byte[] salt, int iterations, System.Security.Cryptography.HashAlgorithmName hashAlgorithm, int outputLength);"
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: PBKDF2"
+    read_at: "2026-11-06"
+    quote: "PBKDF2-HMAC-SHA256: 600,000 iterations (recommended)"
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf"
+    section: "NIST SP 800-132, Section 5.2 The Iteration Count"
+    read_at: "2026-11-06"
+    quote: "A minimum iteration count of 1,000 is recommended."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Threshold: OWASP Password Storage Cheat Sheet recommends 600,000 iterations for PBKDF2-HMAC-SHA256; NIST SP 800-132 (2010) recommends a minimum of 1,000. The defective count (100) is under both, so the row does not depend on which threshold a scanner applies; the fixed file uses 600,000."

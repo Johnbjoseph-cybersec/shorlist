@@ -1,0 +1,48 @@
+id: "SL-5059"
+title: "JavaScript: Math.random() for a token"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "JavaScript / ECMAScript (Node.js)"
+negative: false
+row_kind: "defect"
+literal: "return Math.random().toString(36).slice(2);"
+context_filename: "tokens.js"
+context_template: |
+  function newToken() {
+    return Math.random().toString(36).slice(2);
+  }
+
+  module.exports = { newToken };
+right_template: |
+  const crypto = require('node:crypto');
+
+  function newToken() {
+    return crypto.randomBytes(16).toString('hex');
+  }
+
+  module.exports = { newToken };
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random"
+    section: "Math.random(): note"
+    read_at: "2026-11-06"
+    quote: "Math.random() does not provide cryptographically secure random numbers. Do not use them for anything related to security."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.randomBytes(size[, callback])"
+    read_at: "2026-11-06"
+    quote: "Generates cryptographically strong pseudorandom data."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Math.random is defined by ECMA-262; the security note is MDN's (Mozilla's reference for the language)."

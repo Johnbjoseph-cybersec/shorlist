@@ -1,0 +1,57 @@
+id: "SL-5051"
+title: "Node: createCipheriv('aes-256-ctr') with a zero counter"
+family: "AES"
+parameter_set: "AES-256"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+row_kind: "defect"
+literal: "const cipher = crypto.createCipheriv('aes-256-ctr', key, Buffer.alloc(16));"
+context_filename: "enc.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const cipher = crypto.createCipheriv('aes-256-ctr', key, Buffer.alloc(16));
+    return Buffer.concat([cipher.update(data), cipher.final()]);
+  }
+
+  module.exports = { encrypt };
+right_template: |
+  const crypto = require('node:crypto');
+
+  function encrypt(key, data) {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-ctr', key, iv);
+    return Buffer.concat([iv, cipher.update(data), cipher.final()]);
+  }
+
+  module.exports = { encrypt };
+expected:
+  family: "AES"
+  role: "encryption"
+  size: 256
+defect:
+  cwe: "CWE-1204"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/1204.html"
+    section: "CWE-1204 Generation of Weak Initialization Vector (IV): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a cryptographic primitive that uses an Initialization Vector (IV), but the product does not generate IVs that are sufficiently unpredictable or unique according to the expected cryptographic requirements for that primitive."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv(algorithm, key, iv[, options])"
+    read_at: "2026-11-06"
+    quote: "Creates and returns a Cipheriv object, with the given algorithm, key and initialization vector (iv)."
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv: iv"
+    read_at: "2026-11-06"
+    quote: "For some algorithms, an IV must be unpredictable and unique; for others, uniqueness alone is sufficient, a fixed value is required, or no IV is used."
+  - url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf"
+    section: "NIST SP 800-38A, Section 6.5 The Counter Mode"
+    read_at: "2026-11-06"
+    quote: "across all of the messages that are encrypted under the given key, all of the counters must be distinct."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CTR counter block constant: CWE-1204 (IV not unique as the primitive requires) is taken; CWE-323 (nonce reuse) would be the runner-up."

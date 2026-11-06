@@ -1,0 +1,35 @@
+id: "SL-5558"
+title: "Decoy: CI shell check that fails on curl --insecure"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "curl"
+row_kind: "defect"
+negative: true
+decoy_class: "ban_list"
+literal: "if grep -rn -- '--insecure' scripts/; then exit 1; fi"
+context_filename: "check.sh"
+context_template: |
+  #!/bin/sh
+  # fail the build if any script turns off curl certificate checks
+  if grep -rn -- '--insecure' scripts/; then exit 1; fi
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295, Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://curl.se/docs/manpage.html"
+    section: "curl(1), -k, --insecure"
+    read_at: "2026-11-06"
+    quote: "WARNING: using this option makes the transfer insecure."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A ban list in a CI check; curl is never run."

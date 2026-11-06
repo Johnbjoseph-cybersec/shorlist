@@ -1,0 +1,58 @@
+id: "SL-5540"
+title: "libcurl: curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L)"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / libcurl"
+row_kind: "defect"
+negative: false
+literal: "curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);"
+context_filename: "fetch.c"
+context_template: |
+  #include <curl/curl.h>
+
+  CURLcode fetch(const char *url)
+  {
+      CURL *curl = curl_easy_init();
+      CURLcode rc;
+      if (curl == NULL)
+          return CURLE_FAILED_INIT;
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+      rc = curl_easy_perform(curl);
+      curl_easy_cleanup(curl);
+      return rc;
+  }
+right_template: |
+  #include <curl/curl.h>
+
+  CURLcode fetch(const char *url)
+  {
+      CURL *curl = curl_easy_init();
+      CURLcode rc;
+      if (curl == NULL)
+          return CURLE_FAILED_INIT;
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      rc = curl_easy_perform(curl);
+      curl_easy_cleanup(curl);
+      return rc;
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-297"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/297.html"
+    section: "CWE-297, Description"
+    read_at: "2026-11-06"
+    quote: "The product communicates with a host that provides a certificate, but the product does not properly ensure that the certificate is actually associated with that host."
+  - url: "https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html"
+    section: "CURLOPT_SSL_VERIFYHOST(3), DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "When the verify value is 0, the connection succeeds regardless of the names in the certificate. Use that ability with caution."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

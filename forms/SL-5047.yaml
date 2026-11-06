@@ -1,0 +1,59 @@
+id: "SL-5047"
+title: "Go: math/rand.Intn for key bytes"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+row_kind: "defect"
+literal: "key[i] = byte(rand.Intn(256))"
+context_filename: "keys.go"
+context_template: |
+  package crypt
+
+  import "math/rand"
+
+  func NewKey() []byte {
+  	key := make([]byte, 32)
+  	for i := range key {
+  		key[i] = byte(rand.Intn(256))
+  	}
+  	return key
+  }
+right_template: |
+  package crypt
+
+  import "crypto/rand"
+
+  func NewKey() []byte {
+  	key := make([]byte, 32)
+  	rand.Read(key)
+  	return key
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/math/rand/rand.go"
+    section: "math/rand: Intn"
+    read_at: "2026-11-06"
+    quote: "Intn returns, as an int, a non-negative pseudo-random number in the half-open interval [0,n)."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/math/rand/rand.go"
+    section: "math/rand: package doc"
+    read_at: "2026-11-06"
+    quote: "it should not be used for security-sensitive work."
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/rand/rand.go"
+    section: "crypto/rand: Read"
+    read_at: "2026-11-06"
+    quote: "Read fills b with cryptographically secure random bytes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

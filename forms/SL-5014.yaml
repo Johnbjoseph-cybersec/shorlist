@@ -1,0 +1,45 @@
+id: "SL-5014"
+title: "random.getrandbits() for an IV"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / stdlib"
+negative: false
+row_kind: "defect"
+literal: "return random.getrandbits(128).to_bytes(16, \"big\")"
+context_filename: "iv.py"
+context_template: |
+  import random
+
+
+  def new_iv():
+      return random.getrandbits(128).to_bytes(16, "big")
+right_template: |
+  import secrets
+
+
+  def new_iv():
+      return secrets.token_bytes(16)
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "Functions for integers: random.getrandbits"
+    read_at: "2026-11-06"
+    quote: "Returns a non-negative Python integer with k random bits."
+  - url: "https://docs.python.org/3.14/library/random.html"
+    section: "random: module warning"
+    read_at: "2026-11-06"
+    quote: "The pseudo-random generators of this module should not be used for security purposes. For security or cryptographic uses, see the secrets module."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,36 @@
+id: "SL-5530"
+title: "Decoy: Go comment forbidding rsa.EncryptPKCS1v15"
+family: "RSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+row_kind: "defect"
+negative: true
+decoy_class: "comment"
+literal: "// Do not use rsa.EncryptPKCS1v15 here: OAEP only."
+context_filename: "policy.go"
+context_template: |
+  package policy
+
+  // Do not use rsa.EncryptPKCS1v15 here: OAEP only.
+  const Padding = "OAEP"
+expected:
+  family: "RSA"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-780"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/780.html"
+    section: "CWE-780, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses the RSA algorithm but does not incorporate Optimal Asymmetric Encryption Padding (OAEP)."
+  - url: "https://pkg.go.dev/crypto/rsa@go1.25.0"
+    section: "crypto/rsa (go1.25.0), func EncryptPKCS1v15"
+    read_at: "2026-11-06"
+    quote: "EncryptPKCS1v15 encrypts the given message with RSA and the padding scheme from PKCS #1 v1.5."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A comment; the package imports no crypto."

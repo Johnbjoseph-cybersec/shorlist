@@ -1,0 +1,42 @@
+id: "SL-5520"
+title: "openssl genpkey -pkeyopt rsa_keygen_pubexp:3"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI 3.5"
+row_kind: "defect"
+negative: false
+literal: "-pkeyopt rsa_keygen_pubexp:3"
+context_filename: "keygen.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+  openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out key.pem
+right_template: |
+  #!/bin/sh
+  set -e
+  openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out key.pem
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+defect:
+  cwe: "CWE-326"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326, Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"
+    section: "FIPS 186-5, Appendix A.1.1, criterion 1(b)"
+    read_at: "2026-11-06"
+    quote: "(b) The exponent e shall be an odd positive integer such that:"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-genpkey/"
+    section: "openssl-genpkey(1), RSA Key Generation Options: rsa_keygen_pubexp:value"
+    read_at: "2026-11-06"
+    quote: "rsa_keygen_pubexp:value The RSA public exponent value. This can be a large decimal or hexadecimal value if preceded by 0x. Default value is 65537."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-326 is the closest MITRE entry; its Description is generic (encryption not strong enough for the protection required) and names no exponent. The requirement itself is FIPS 186-5 A.1.1: 2^16 < e < 2^256."

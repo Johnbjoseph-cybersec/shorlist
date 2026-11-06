@@ -1,0 +1,41 @@
+id: "SL-5523"
+title: "pyca cryptography: ec.derive_private_key with a scalar in the source"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+row_kind: "defect"
+negative: false
+literal: "private_key = ec.derive_private_key(0x1b6e8a5c03f74d9e1b2a5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d2, ec.SECP256R1())"
+context_filename: "key.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric import ec
+
+  private_key = ec.derive_private_key(0x1b6e8a5c03f74d9e1b2a5f3a9c0e7b214d86a1c4e93f0b72d5168e4a07c3f9d2, ec.SECP256R1())
+right_template: |
+  import os
+
+  from cryptography.hazmat.primitives import serialization
+
+  with open(os.environ["EC_KEY_FILE"], "rb") as f:
+      private_key = serialization.load_pem_private_key(f.read(), password=None)
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321, Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ec/"
+    section: "Elliptic Curve: derive_private_key(private_value, curve)"
+    read_at: "2026-11-06"
+    quote: "Derive a private key from private_value on curve. Parameters: private_value (int) – The secret scalar value."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The scalar is arbitrary (below the P-256 group order), written for this row. Fixed file: the key is loaded from a PEM file named outside the source."

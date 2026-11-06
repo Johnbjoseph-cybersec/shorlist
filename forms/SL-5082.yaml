@@ -1,0 +1,45 @@
+id: "SL-5082"
+title: "C: rand() for key bytes"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / libc"
+negative: false
+row_kind: "defect"
+literal: "key[i] = (unsigned char)rand();"
+context_filename: "keys.c"
+context_template: |
+  #include <stdlib.h>
+
+  void new_key(unsigned char key[32])
+  {
+      for (int i = 0; i < 32; i++)
+          key[i] = (unsigned char)rand();
+  }
+right_template: |
+  #include <openssl/rand.h>
+
+  int new_key(unsigned char key[32])
+  {
+      return RAND_bytes(key, 32);
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-338"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/338.html"
+    section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+  - url: "https://pubs.opengroup.org/onlinepubs/9799919799/functions/rand.html"
+    section: "rand, srand: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "rand, srand — pseudo-random number generator"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The fixed file uses OpenSSL RAND_bytes."

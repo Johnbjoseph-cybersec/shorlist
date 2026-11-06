@@ -1,0 +1,50 @@
+id: "SL-5079"
+title: "OpenSSL: PKCS5_PBKDF2_HMAC with a constant salt"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C / OpenSSL EVP"
+negative: false
+row_kind: "defect"
+literal: "return PKCS5_PBKDF2_HMAC(pass, -1, (const unsigned char *)\"static-salt-1234\", 16, 600000, EVP_sha256(), 32, out);"
+context_filename: "kdf.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int derive(const char *pass, unsigned char *out)
+  {
+      return PKCS5_PBKDF2_HMAC(pass, -1, (const unsigned char *)"static-salt-1234", 16, 600000, EVP_sha256(), 32, out);
+  }
+right_template: |
+  #include <openssl/evp.h>
+  #include <openssl/rand.h>
+
+  int derive(const char *pass, unsigned char salt[16], unsigned char *out)
+  {
+      if (RAND_bytes(salt, 16) != 1)
+          return 0;
+      return PKCS5_PBKDF2_HMAC(pass, -1, salt, 16, 600000, EVP_sha256(), 32, out);
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-760"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/760.html"
+    section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a one-way cryptographic hash against an input that should not be reversible, such as a password, but the product uses a predictable salt as part of the input."
+  - url: "https://docs.openssl.org/3.5/man3/PKCS5_PBKDF2_HMAC/"
+    section: "PKCS5_PBKDF2_HMAC: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "int PKCS5_PBKDF2_HMAC(const char *pass, int passlen, const unsigned char *salt, int saltlen, int iter, const EVP_MD *digest, int keylen, unsigned char *out);"
+  - url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    section: "OWASP Password Storage Cheat Sheet: Salting"
+    read_at: "2026-11-06"
+    quote: "A salt is a unique, randomly generated string that is added to each password as part of the hashing process."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
