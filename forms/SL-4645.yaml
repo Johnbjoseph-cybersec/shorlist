@@ -1,0 +1,36 @@
+id: "SL-4645"
+title: ".NET: RSA.Create(1024)"
+family: "RSA"
+parameter_set: "1024"
+role: "both"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using RSA rsa = RSA.Create(1024);"
+context_filename: "Keys.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Keys
+  {
+      static void Main()
+      {
+          using RSA rsa = RSA.Create(1024);
+      }
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 3 (Table 2), digital signature generation"
+  quote: "RSA: The length of the modulus n shall be 2048 bits or more to meet the minimum security-strength requirement of 112 bits for Federal Government use."
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsa.create"
+    section: "RSA.Create(Int32)"
+    read_at: "2026-11-06"
+    quote: "public static System.Security.Cryptography.RSA Create(int keySizeInBits);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

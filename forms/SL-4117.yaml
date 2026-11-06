@@ -1,0 +1,35 @@
+id: "SL-4117"
+title: "RustCrypto rc4: Rc4::new"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto"
+negative: false
+literal: "let mut rc4 = Rc4::new(b\"Key\".into());"
+context_filename: "main.rs"
+context_template: |
+  use rc4::{consts::*, KeyInit, StreamCipher};
+  use rc4::{Key, Rc4};
+
+  fn main() {
+      let mut rc4 = Rc4::new(b"Key".into());
+      let mut data = b"Plaintext".to_vec();
+      rc4.apply_keystream(&mut data);
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: RC4 (D)"
+  quote: "| RC4 | | D |"
+source:
+  - url: "https://docs.rs/rc4/0.1.0/rc4/"
+    section: "Crate docs: Usage"
+    read_at: "2026-11-06"
+    quote: "let mut rc4 = Rc4::new(b\"Key\".into());"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,30 @@
+id: "SL-4610"
+title: "ssh-keygen: DSA key (always 1024 bits)"
+family: "DSA"
+parameter_set: "1024"
+role: "signature"
+form_kind: "cli"
+language_or_product: "OpenSSH ssh-keygen (OpenBSD 7.4)"
+negative: false
+literal: "ssh-keygen -t dsa -f id_dsa -N ''"
+context_filename: "keygen.sh"
+context_template: |
+  #!/bin/sh
+  ssh-keygen -t dsa -f id_dsa -N ''
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "FIPS 186-5, Appendix E (Revisions)"
+  quote: "DSA is no longer approved for digital signature generation."
+source:
+  - url: "https://man.openbsd.org/OpenBSD-7.4/ssh-keygen"
+    section: "-b bits and -t (OpenBSD-7.4)"
+    read_at: "2026-11-06"
+    quote: "DSA keys must be exactly 1024 bits as specified by FIPS 186-2."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "OpenSSH 10.0 removed DSA; the form is valid for the OpenBSD 7.4 ssh-keygen."

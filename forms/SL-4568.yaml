@@ -1,0 +1,43 @@
+id: "SL-4568"
+title: "nginx: ssl_ciphers ECDHE-RSA-RC4-SHA (RC4)"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: false
+literal: "ssl_ciphers ECDHE-RSA-RC4-SHA;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_protocols TLSv1.2;
+          ssl_ciphers ECDHE-RSA-RC4-SHA;
+      }
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 7465, Section 2"
+  quote: "TLS servers MUST NOT select an RC4 cipher suite when a TLS client sends such a cipher suite in the ClientHello message."
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ciphers"
+    read_at: "2026-11-06"
+    quote: "The ciphers are specified in the format understood by the OpenSSL library"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-06"
+    quote: "TLS_ECDHE_RSA_WITH_RC4_128_SHA ECDHE-RSA-RC4-SHA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The OpenSSL name ECDHE-RSA-RC4-SHA is TLS_ECDHE_RSA_WITH_RC4_128_SHA; its key exchange and authentication are on the quantum axis, this row is scored on RC4. OpenSSL 3.x builds RC4 suites only with enable-weak-ssl-ciphers; the configuration text is the form either way. The certificate file names are placeholders and carry no algorithm."

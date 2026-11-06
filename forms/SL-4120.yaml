@@ -1,0 +1,35 @@
+id: "SL-4120"
+title: "CryptoKit Insecure.MD5() incremental"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "var hasher = Insecure.MD5()"
+context_filename: "Hash.swift"
+context_template: |
+  import CryptoKit
+  import Foundation
+
+  func run(_ data: Data) {
+      var hasher = Insecure.MD5()
+      hasher.update(data: data)
+      print(hasher.finalize())
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/insecure/md5"
+    section: "Insecure.MD5 (DocC JSON of the page)"
+    read_at: "2026-11-06"
+    quote: "An implementation of MD5 hashing."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

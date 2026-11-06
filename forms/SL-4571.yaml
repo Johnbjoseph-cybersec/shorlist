@@ -1,0 +1,39 @@
+id: "SL-4571"
+title: "Apache mod_ssl: SSLCipherSuite DES-CBC3-SHA (3DES)"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "Apache httpd mod_ssl"
+negative: false
+literal: "SSLCipherSuite DES-CBC3-SHA"
+context_filename: "httpd.conf"
+context_template: |
+  Listen 443
+  <VirtualHost *:443>
+      SSLEngine on
+      SSLCertificateFile cert.pem
+      SSLCertificateKeyFile key.pem
+      SSLCipherSuite DES-CBC3-SHA
+  </VirtualHost>
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-52 Rev. 2, Section 3.3.1.1"
+  quote: "Cipher suites that use the Triple Data Encryption Aglorithm (TDEA, also written as 3DES) are no longer allowed due to the limited amounts of data that can be processed under a single key."
+source:
+  - url: "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
+    section: "SSLCipherSuite Directive"
+    read_at: "2026-11-06"
+    quote: "Syntax: | SSLCipherSuite [protocol] cipher-spec"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-06"
+    quote: "TLS_RSA_WITH_3DES_EDE_CBC_SHA DES-CBC3-SHA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The OpenSSL name DES-CBC3-SHA is TLS_RSA_WITH_3DES_EDE_CBC_SHA; its key exchange and authentication are on the quantum axis, this row is scored on 3DES. OpenSSL 3.x leaves 3DES suites out of DEFAULT; naming one explicitly enables it. The certificate file names are placeholders and carry no algorithm."

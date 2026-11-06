@@ -1,0 +1,30 @@
+id: "SL-4609"
+title: "ssh-keygen: RSA key, 1024 bits"
+family: "RSA"
+parameter_set: "1024"
+role: "both"
+form_kind: "cli"
+language_or_product: "OpenSSH 10.2 ssh-keygen"
+negative: false
+literal: "ssh-keygen -t rsa -b 1024 -f id_rsa -N ''"
+context_filename: "keygen.sh"
+context_template: |
+  #!/bin/sh
+  ssh-keygen -t rsa -b 1024 -f id_rsa -N ''
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 3 (Table 2), digital signature generation"
+  quote: "RSA: The length of the modulus n shall be 2048 bits or more to meet the minimum security-strength requirement of 112 bits for Federal Government use."
+source:
+  - url: "https://man.openbsd.org/ssh-keygen"
+    section: "-b bits (OpenBSD-current)"
+    read_at: "2026-11-06"
+    quote: "minimum size is 1024 bits and the default is 3072 bits."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "1024 is the smallest size ssh-keygen accepts for RSA."

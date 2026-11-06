@@ -1,0 +1,39 @@
+id: "SL-4121"
+title: "CryptoKit Insecure.SHA1.hash(data:)"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Swift / Apple CryptoKit"
+negative: false
+literal: "let digest = Insecure.SHA1.hash(data: data)"
+context_filename: "Hash.swift"
+context_template: |
+  import CryptoKit
+  import Foundation
+
+  func run(_ data: Data) {
+      let digest = Insecure.SHA1.hash(data: data)
+      print(digest)
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://developer.apple.com/documentation/cryptokit/insecure/sha1"
+    section: "Insecure.SHA1 (DocC JSON of the page)"
+    read_at: "2026-11-06"
+    quote: "An implementation of SHA1 hashing."
+  - url: "https://developer.apple.com/documentation/cryptokit/hashfunction/hash(data:)"
+    section: "HashFunction.hash(data:) (DocC JSON of the page)"
+    read_at: "2026-11-06"
+    quote: "Computes the digest of the bytes in the given data instance and"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

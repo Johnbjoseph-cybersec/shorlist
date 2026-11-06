@@ -1,0 +1,37 @@
+id: "SL-4646"
+title: ".NET: ECDsa.Create on ECCurve.NamedCurves.brainpoolP160r1"
+family: "ECDSA"
+parameter_set: "brainpoolP160r1"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using ECDsa ecdsa = ECDsa.Create(ECCurve.NamedCurves.brainpoolP160r1);"
+context_filename: "Keys.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Keys
+  {
+      static void Main()
+      {
+          using ECDsa ecdsa = ECDsa.Create(ECCurve.NamedCurves.brainpoolP160r1);
+      }
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 160
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 3 (Table 2), ECDSA and EdDSA"
+  quote: "Therefore, the length of n shall be at least 224 bits to meet the minimum security-strength requirement of 112 bits for Federal Government use."
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.eccurve.namedcurves"
+    section: "ECCurve.NamedCurves Class: properties"
+    read_at: "2026-11-06"
+    quote: "Gets a brainpoolP160r1 named curve."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Whether the curve is available depends on the platform's crypto library."

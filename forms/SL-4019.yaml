@@ -1,0 +1,33 @@
+id: "SL-4019"
+title: "PyCryptodome: ARC4.new()"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "cipher = ARC4.new(key)"
+context_filename: "enc.py"
+context_template: |
+  from Crypto.Cipher import ARC4
+
+
+  def run(key, data):
+      cipher = ARC4.new(key)
+      return cipher.encrypt(data)
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: ARC4 (D)"
+  quote: "| ARC4 | | D |"
+source:
+  - url: "https://www.pycryptodome.org/src/cipher/arc4"
+    section: "ARC4: new()"
+    read_at: "2026-11-06"
+    quote: "cipher = ARC4.new(tempkey)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

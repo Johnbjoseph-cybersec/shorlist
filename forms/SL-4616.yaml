@@ -1,0 +1,29 @@
+id: "SL-4616"
+title: "OpenSSL CLI: dsaparam -genkey, 1024-bit DSA"
+family: "DSA"
+parameter_set: "1024"
+role: "signature"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI"
+negative: false
+literal: "openssl dsaparam -genkey -out dsakey.pem 1024"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  openssl dsaparam -genkey -out dsakey.pem 1024
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "FIPS 186-5, Appendix E (Revisions)"
+  quote: "DSA is no longer approved for digital signature generation."
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-dsaparam/"
+    section: "OPTIONS: numbits"
+    read_at: "2026-11-06"
+    quote: "This optional argument specifies that a parameter set should be generated of size numbits."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

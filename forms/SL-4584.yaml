@@ -1,0 +1,30 @@
+id: "SL-4584"
+title: "OpenSSH sshd: MACs hmac-md5-etm@openssh.com"
+family: "MD5"
+parameter_set: null
+role: "mac"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "MACs hmac-md5-etm@openssh.com"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  MACs hmac-md5-etm@openssh.com
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "RFC 6151, Section 2"
+  quote: "since MD5 must not be used for digital signatures, new protocol designs should not employ HMAC-MD5."
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "MACs: the supported MACs (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-06"
+    quote: "umac-128@openssh.com hmac-md5-etm@openssh.com hmac-md5-96-etm@openssh.com hmac-sha1-etm@openssh.com hmac-sha1-96-etm@openssh.com"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "HMAC construction: the weak primitive is the hash inside the MAC, so the row is scored on MD5 with role mac. RFC 6151 does not call HMAC-MD5 broken; it says new designs should not use it."

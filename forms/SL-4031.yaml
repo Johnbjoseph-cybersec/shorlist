@@ -1,0 +1,36 @@
+id: "SL-4031"
+title: "JCA Cipher RC2/CBC/PKCS5Padding"
+family: "RC2"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Cipher c = Cipher.getInstance(\"RC2/CBC/PKCS5Padding\");"
+context_filename: "Enc.java"
+context_template: |
+  import javax.crypto.Cipher;
+
+  public class Enc {
+      public static void main(String[] args) throws Exception {
+          Cipher c = Cipher.getInstance("RC2/CBC/PKCS5Padding");
+          System.out.println(c.getAlgorithm());
+      }
+  }
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "IETF RFC 8551 (S/MIME 4.0), Section 2.7.2 Choosing Weak Encryption"
+  quote: "Algorithms such as RC2 are considered to be weak encryption algorithms."
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Cipher Algorithm Names: RC2"
+    read_at: "2026-11-06"
+    quote: "RC2 | Variable-key-size encryption algorithms developed by Ron Rivest for RSA Data Security, Inc."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RC2 is named in none of SP 800-131A Rev. 2, ASVS 5.0 Appendix C or BSI TR-02102-1 (2026-01) (grep of the saved texts for 'RC2'); RFC 8551 calls it weak and never recommended but does not use the word 'disallowed', hence 'deprecated'."

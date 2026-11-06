@@ -1,0 +1,43 @@
+id: "SL-4563"
+title: "nginx: ssl_ciphers ECDHE-RSA-DES-CBC3-SHA (3DES)"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: false
+literal: "ssl_ciphers ECDHE-RSA-DES-CBC3-SHA;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_protocols TLSv1.2;
+          ssl_ciphers ECDHE-RSA-DES-CBC3-SHA;
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-52 Rev. 2, Section 3.3.1.1"
+  quote: "Cipher suites that use the Triple Data Encryption Aglorithm (TDEA, also written as 3DES) are no longer allowed due to the limited amounts of data that can be processed under a single key."
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ciphers"
+    read_at: "2026-11-06"
+    quote: "The ciphers are specified in the format understood by the OpenSSL library"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-06"
+    quote: "TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA ECDHE-RSA-DES-CBC3-SHA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The OpenSSL name ECDHE-RSA-DES-CBC3-SHA is TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA; its key exchange and authentication are on the quantum axis, this row is scored on 3DES. OpenSSL 3.x leaves 3DES suites out of DEFAULT; naming one explicitly enables it. The certificate file names are placeholders and carry no algorithm."

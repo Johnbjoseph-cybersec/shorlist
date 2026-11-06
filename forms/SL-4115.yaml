@@ -1,0 +1,37 @@
+id: "SL-4115"
+title: "RustCrypto des: TdesEde2"
+family: "3DES"
+parameter_set: "two-key"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto"
+negative: false
+literal: "let cipher = des::TdesEde2::new_from_slice(key).unwrap();"
+context_filename: "main.rs"
+context_template: |
+  use des::cipher::KeyInit;
+
+  fn run(key: &[u8]) {
+      let cipher = des::TdesEde2::new_from_slice(key).unwrap();
+      let _ = cipher;
+  }
+
+  fn main() {
+      run(&[0u8; 24]);
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: two-key TDEA encryption"
+  quote: "Encryption using two-key TDEA is disallowed."
+source:
+  - url: "https://docs.rs/des/0.8.1/des/"
+    section: "Structs: TdesEde2"
+    read_at: "2026-11-06"
+    quote: "TdesEde2 Triple DES (3DES) block cipher."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

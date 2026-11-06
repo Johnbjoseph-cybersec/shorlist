@@ -1,0 +1,32 @@
+id: "candidate"
+title: "JCA MessageDigest MD2"
+family: "MD2"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "MessageDigest md = MessageDigest.getInstance(\"MD2\");"
+context_filename: "Digest.java"
+context_template: |
+  import java.security.MessageDigest;
+
+  public class Digest {
+      public static void main(String[] args) throws Exception {
+          MessageDigest md = MessageDigest.getInstance("MD2");
+          System.out.println(md.getAlgorithm());
+      }
+  }
+expected:
+  family: "MD2"
+  role: "hash"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "MessageDigest Algorithms: MD2"
+    read_at: "2026-11-06"
+    quote: "MD2 | The MD2 message digest algorithm as defined in RFC 1319."
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "MD2 is not in the family vocabulary (schema/families.yaml lists MD5 and MD4, not MD2)."

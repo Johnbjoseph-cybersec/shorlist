@@ -1,0 +1,32 @@
+id: "candidate"
+title: "JCA Mac HmacMD5"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Mac m = Mac.getInstance(\"HmacMD5\");"
+context_filename: "MacProbe.java"
+context_template: |
+  import javax.crypto.Mac;
+
+  public class MacProbe {
+      public static void main(String[] args) throws Exception {
+          Mac m = Mac.getInstance("HmacMD5");
+          System.out.println(m.getAlgorithm());
+      }
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Mac Algorithms: HmacMD5"
+    read_at: "2026-11-06"
+    quote: "HmacMD5 | The HMAC-MD5 keyed-hashing algorithm as defined in RFC 2104"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "HMAC with weak hash: not a classically_weak form by SP 800-131A"

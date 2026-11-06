@@ -1,0 +1,34 @@
+id: "SL-4018"
+title: "PyCryptodome: ARC2.new()"
+family: "RC2"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "cipher = ARC2.new(key, ARC2.MODE_CBC)"
+context_filename: "enc.py"
+context_template: |
+  from Crypto.Cipher import ARC2
+
+
+  def run(key, data):
+      cipher = ARC2.new(key, ARC2.MODE_CBC)
+      return cipher.encrypt(data)
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "IETF RFC 8551 (S/MIME 4.0), Section 2.7.2 Choosing Weak Encryption"
+  quote: "Algorithms such as RC2 are considered to be weak encryption algorithms."
+source:
+  - url: "https://www.pycryptodome.org/src/cipher/arc2"
+    section: "ARC2: new()"
+    read_at: "2026-11-06"
+    quote: "Crypto.Cipher.ARC2.new(key, mode, *args, **kwargs)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RC2 is named in none of SP 800-131A Rev. 2, ASVS 5.0 Appendix C or BSI TR-02102-1 (2026-01) (grep of the saved texts for 'RC2'); RFC 8551 calls it weak and never recommended but does not use the word 'disallowed', hence 'deprecated'."

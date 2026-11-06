@@ -1,0 +1,37 @@
+id: "SL-4064"
+title: ".NET RC2CryptoServiceProvider"
+family: "RC2"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using var c = new RC2CryptoServiceProvider();"
+context_filename: "Crypto.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Crypto
+  {
+      static void Main()
+      {
+          using var c = new RC2CryptoServiceProvider();
+      }
+  }
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "IETF RFC 8551 (S/MIME 4.0), Section 2.7.2 Choosing Weak Encryption"
+  quote: "Algorithms such as RC2 are considered to be weak encryption algorithms."
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rc2cryptoserviceprovider?view=net-10.0"
+    section: "RC2CryptoServiceProvider"
+    read_at: "2026-11-06"
+    quote: "public sealed class RC2CryptoServiceProvider : System."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RC2 is named in none of SP 800-131A Rev. 2, ASVS 5.0 Appendix C or BSI TR-02102-1 (2026-01) (grep of the saved texts for 'RC2'); RFC 8551 calls it weak and never recommended but does not use the word 'disallowed', hence 'deprecated'."

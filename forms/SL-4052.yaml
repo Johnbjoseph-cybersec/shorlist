@@ -1,0 +1,36 @@
+id: "SL-4052"
+title: ".NET MD5.Create()"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: false
+literal: "using MD5 h = MD5.Create();"
+context_filename: "Crypto.cs"
+context_template: |
+  using System.Security.Cryptography;
+
+  class Crypto
+  {
+      static void Main()
+      {
+          using MD5 h = MD5.Create();
+      }
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.md5.create?view=net-10.0"
+    section: "MD5.Create()"
+    read_at: "2026-11-06"
+    quote: "public static System.Security.Cryptography.MD5 Create();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,41 @@
+id: "SL-4659"
+title: "strongSwan: ESP proposal with md5 integrity"
+family: "MD5"
+parameter_set: null
+role: "mac"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "esp_proposals = aes128-md5"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          children {
+              net {
+                  esp_proposals = aes128-md5
+              }
+          }
+      }
+  }
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-77 Rev. 1, Section 7.2.3"
+  quote: "HMAC-MD5 has never been a NIST-approved algorithm and shall not be used."
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "md5 | MD5 HMAC (96 bit) | 1 | s x w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The other keywords on the line (aes128) are outside the weak families; a proposal needs them to be complete."

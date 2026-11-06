@@ -1,0 +1,29 @@
+id: "SL-4667"
+title: "IANA IKEv2 transform type 3 id 3 (AUTH_DES_MAC)"
+family: "DES"
+parameter_set: null
+role: "mac"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_INTEG = {3: \"AUTH_DES_MAC\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_INTEG = {3: "AUTH_DES_MAC"}
+expected:
+  family: "DES"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8247, Section 2.3"
+  quote: "| AUTH_DES_MAC | MUST NOT | |"
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-7"
+    section: "Transform Type 3 - Integrity Algorithm Transform IDs registry (CSV ikev2-parameters-7.csv): 3"
+    read_at: "2026-11-06"
+    quote: "3,AUTH_DES_MAC,DEPRECATED [RFC 8247],[UNSPECIFIED]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The registry identifies this entry by number; the name is kept beside it so the line names the algorithm."

@@ -1,0 +1,33 @@
+id: "SL-4625"
+title: "openssl.cnf [ CA_default ]: default_md = md5"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "config_value"
+language_or_product: "OpenSSL 3.5 openssl.cnf"
+negative: false
+literal: "default_md     = md5"
+context_filename: "openssl.cnf"
+context_template: |
+  [ ca ]
+  default_ca = CA_default
+
+  [ CA_default ]
+  default_md     = md5
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 6151, Section 2"
+  quote: "MD5 is no longer acceptable where collision resistance is required such as digital signatures."
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ca/"
+    section: "CONFIGURATION FILE OPTIONS: default_md"
+    read_at: "2026-11-06"
+    quote: "The same as the -md option."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The digest ca uses to sign issued certificates. Role hash: the setting names a digest, the signature algorithm comes from the key."

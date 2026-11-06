@@ -1,0 +1,35 @@
+id: "candidate"
+title: "OpenSSH sshd: HostKeyAlgorithms ssh-dss"
+family: "DSA"
+parameter_set: null
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms ssh-dss"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms ssh-dss
+expected:
+  family: "DSA"
+  role: "signature"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "FIPS 186-5, Appendix E (Revisions)"
+  quote: "DSA is no longer approved for digital signature generation."
+source:
+  - url: "https://man.openbsd.org/OpenBSD-7.4/sshd_config"
+    section: "HostKeyAlgorithms (OpenBSD-7.4)"
+    read_at: "2026-11-06"
+    quote: "Specifies the host key signature algorithms that the server offers."
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-06"
+    quote: "ssh-dss,ssh-dss,[RFC 4253],Section 6.6"
+status: "candidate"
+candidate_reason: "no OpenSSH sshd_config(5) read names ssh-dss as a value: grep of the saved text for OpenBSD 6.0, 6.8, 7.0, 7.4 and -current returned 0 hits; the value is attested only by the IANA registry. Needs an OpenSSH release note or 'ssh -Q HostKeyAlgorithms' output from a DSA-enabled build."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "OpenSSH 10.0 removed DSA."

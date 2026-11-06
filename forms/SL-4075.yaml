@@ -1,0 +1,40 @@
+id: "SL-4075"
+title: "Node createCipheriv('rc2-cbc')"
+family: "RC2"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+literal: "const c = crypto.createCipheriv('rc2-cbc', key, iv);"
+context_filename: "enc.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function run(key, iv, data) {
+    const c = crypto.createCipheriv('rc2-cbc', key, iv);
+    return Buffer.concat([c.update(data), c.final()]);
+  }
+
+  module.exports = { run };
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "IETF RFC 8551 (S/MIME 4.0), Section 2.7.2 Choosing Weak Encryption"
+  quote: "Algorithms such as RC2 are considered to be weak encryption algorithms."
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createCipheriv(algorithm, key, iv[, options])"
+    read_at: "2026-11-06"
+    quote: "The available algorithms depend on OpenSSL. crypto.getCiphers() lists the algorithms exposed by Node.js."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_RC2_CBC \"RC2-CBC:RC2:RC2-128:1.2.840.113549.3.2\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RC2 is named in none of SP 800-131A Rev. 2, ASVS 5.0 Appendix C or BSI TR-02102-1 (2026-01) (grep of the saved texts for 'RC2'); RFC 8551 calls it weak and never recommended but does not use the word 'disallowed', hence 'deprecated'. OpenSSL algorithm names are matched case-insensitively. In OpenSSL 3 this algorithm lives in the legacy provider, which is not loaded by default; the line is still the form a developer writes."

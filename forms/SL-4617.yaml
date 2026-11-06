@@ -1,0 +1,33 @@
+id: "SL-4617"
+title: "OpenSSL CLI: ecparam -genkey on secp160r1"
+family: "EC"
+parameter_set: "secp160r1"
+role: "both"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI"
+negative: false
+literal: "openssl ecparam -name secp160r1 -genkey -noout -out key.pem"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  openssl ecparam -name secp160r1 -genkey -noout -out key.pem
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 160
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 3 (Table 2), ECDSA and EdDSA"
+  quote: "Therefore, the length of n shall be at least 224 bits to meet the minimum security-strength requirement of 112 bits for Federal Government use."
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ecparam/"
+    section: "OPTIONS: -name arg"
+    read_at: "2026-11-06"
+    quote: "Use the EC parameters with the specified 'short' name."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/crypto/objects/objects.txt"
+    section: "crypto/objects/objects.txt (openssl-3.5.0)"
+    read_at: "2026-11-06"
+    quote: "secg-ellipticCurve 8 : secp160r1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

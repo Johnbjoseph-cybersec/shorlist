@@ -1,0 +1,34 @@
+id: "SL-4014"
+title: "PyCryptodome: Crypto.Hash.SHA1.new()"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "h = SHA1.new(data)"
+context_filename: "fp.py"
+context_template: |
+  from Crypto.Hash import SHA1
+
+
+  def run(data):
+      h = SHA1.new(data)
+      return h.hexdigest()
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://www.pycryptodome.org/src/hash/sha1"
+    section: "SHA1: new()"
+    read_at: "2026-11-06"
+    quote: "SHA-1 produces the 160 bit digest of a message."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

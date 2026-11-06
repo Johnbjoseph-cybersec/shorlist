@@ -1,0 +1,31 @@
+id: "SL-4595"
+title: "Decoy: diffie-hellman-group1-sha1 removed from the sshd key exchanges"
+family: "DH"
+parameter_set: "1024"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: true
+decoy_class: "removal_list"
+literal: "KexAlgorithms -diffie-hellman-group1-sha1"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms -diffie-hellman-group1-sha1
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 1024
+weakness:
+  status: "deprecated"
+  anchor: "RFC 9142, Section 3.4 (Table 12: SHOULD NOT)"
+  quote: "This group1 MODP group with approximately 80 bits of security is too weak to be retained."
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-06"
+    quote: "curve25519-sha256@libssh.org diffie-hellman-group1-sha1 diffie-hellman-group14-sha1 diffie-hellman-group14-sha256"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A leading '-' removes the method from the default set; the line enables nothing."

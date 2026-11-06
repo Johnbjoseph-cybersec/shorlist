@@ -1,0 +1,35 @@
+id: "SL-4027"
+title: "JCA Cipher DES/CBC/PKCS5Padding"
+family: "DES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Cipher c = Cipher.getInstance(\"DES/CBC/PKCS5Padding\");"
+context_filename: "Enc.java"
+context_template: |
+  import javax.crypto.Cipher;
+
+  public class Enc {
+      public static void main(String[] args) throws Exception {
+          Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
+          System.out.println(c.getAlgorithm());
+      }
+  }
+expected:
+  family: "DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: DES (D)"
+  quote: "| DES | | D |"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Cipher Algorithm Names: DES"
+    read_at: "2026-11-06"
+    quote: "DES | The Digital Encryption Standard as described in FIPS PUB 46-3."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

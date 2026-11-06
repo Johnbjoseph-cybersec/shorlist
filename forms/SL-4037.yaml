@@ -1,0 +1,39 @@
+id: "SL-4037"
+title: "JCA Signature SHA1withRSA (signing)"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Signature sig = Signature.getInstance(\"SHA1withRSA\");"
+context_filename: "Signer.java"
+context_template: |
+  import java.security.PrivateKey;
+  import java.security.Signature;
+
+  public class Signer {
+      static byte[] sign(PrivateKey key, byte[] data) throws Exception {
+          Signature sig = Signature.getInstance("SHA1withRSA");
+          sig.initSign(key);
+          sig.update(data);
+          return sig.sign();
+      }
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 9, Table 8: SHA-1, digital signature generation"
+  quote: "Digital signature generation Disallowed, except where specifically allowed by NIST protocol-specific guidance."
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Signature Algorithms: SHA1withRSA"
+    read_at: "2026-11-06"
+    quote: "MD2withRSA, MD5withRSA, SHA1withRSA, SHA224withRSA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The template signs (initSign), so the SP 800-131A Rev. 2 signature-generation row applies; verification would be legacy use. The quantum half (RSA/ECDSA/DSA) of the name is not scored by this row."

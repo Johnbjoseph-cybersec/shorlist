@@ -1,0 +1,32 @@
+id: "SL-4123"
+title: "Decoy: hashlib.md5 in a comment"
+family: "MD5"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / hashlib"
+negative: true
+decoy_class: "comment"
+literal: "# Was: hashlib.md5(data); fingerprints are computed by the build server now."
+context_filename: "fp.py"
+context_template: |
+  def run(data):
+      # Was: hashlib.md5(data); fingerprints are computed by the build server now.
+      return data
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Hash algorithms: named constructors"
+    read_at: "2026-11-06"
+    quote: "hashlib.md5([data, ]*, usedforsecurity=True)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The file imports no cryptographic module."

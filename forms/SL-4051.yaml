@@ -1,0 +1,36 @@
+id: "SL-4051"
+title: "Go crypto/rc4 NewCipher"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "c, err := rc4.NewCipher(key)"
+context_filename: "enc.go"
+context_template: |
+  package main
+
+  import "crypto/rc4"
+
+  func main() {
+  	key := make([]byte, 16)
+  	c, err := rc4.NewCipher(key)
+  	_, _ = c, err
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: RC4 (D)"
+  quote: "| RC4 | | D |"
+source:
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/rc4/rc4.go"
+    section: "func NewCipher"
+    read_at: "2026-11-06"
+    quote: "func NewCipher(key []byte) (*Cipher, error) {"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

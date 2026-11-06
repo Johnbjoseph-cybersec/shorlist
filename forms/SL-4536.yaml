@@ -1,0 +1,29 @@
+id: "SL-4536"
+title: "IANA TLS cipher suite TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5: RC2 (Recommended: D)"
+family: "RC2"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5"
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 9325 (BCP 195), Section 4.1"
+  quote: "Implementations MUST NOT negotiate cipher suites offering less than 112 bits of security, including so-called \"export-level\" encryption (which provides 40 or 56 bits of security)."
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x2A"
+    read_at: "2026-11-06"
+    quote: "\"0x00,0x2A\",TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5,Y,D,[RFC 2712]; [RFC 9847],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Weak axis: the family is the weak primitive in the suite, not its key exchange. The suite's MAC is HMAC-MD5; the row is scored on the bulk cipher only. Export-grade: 40-bit effective key."

@@ -1,0 +1,35 @@
+id: "SL-4112"
+title: "RustCrypto sha1: Sha1::new()"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Rust / RustCrypto"
+negative: false
+literal: "let mut hasher = Sha1::new();"
+context_filename: "main.rs"
+context_template: |
+  use sha1::{Digest, Sha1};
+
+  fn main() {
+      let mut hasher = Sha1::new();
+      hasher.update(b"data");
+      let _ = hasher.finalize();
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://docs.rs/sha1/0.10.6/sha1/"
+    section: "Crate docs: Usage"
+    read_at: "2026-11-06"
+    quote: "use sha1::{Sha1, Digest};"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

@@ -1,0 +1,35 @@
+id: "SL-4009"
+title: "pyca decrepit: TripleDES"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+literal: "cipher = Cipher(TripleDES(key), modes.CBC(iv))"
+context_filename: "enc.py"
+context_template: |
+  from cryptography.hazmat.primitives.ciphers import Cipher, modes
+  from cryptography.hazmat.decrepit.ciphers.algorithms import TripleDES
+
+
+  def run(key, iv):
+      cipher = Cipher(TripleDES(key), modes.CBC(iv))
+      return cipher.encryptor()
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://cryptography.io/en/46.0.3/hazmat/decrepit/ciphers/"
+    section: "Decrepit symmetric algorithms: class TripleDES"
+    read_at: "2026-11-06"
+    quote: "class cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES(key)[source]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

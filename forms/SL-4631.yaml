@@ -1,0 +1,38 @@
+id: "SL-4631"
+title: "JCA: KeyPairGenerator DSA initialised to 1024 bits"
+family: "DSA"
+parameter_set: "1024"
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"DSA\"); kpg.initialize(1024);"
+context_filename: "Keys.java"
+context_template: |
+  import java.security.KeyPair;
+  import java.security.KeyPairGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA"); kpg.initialize(1024);
+          KeyPair kp = kpg.generateKeyPair();
+          System.out.println(kp.getPublic().getAlgorithm());
+      }
+  }
+expected:
+  family: "DSA"
+  role: "signature"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "FIPS 186-5, Appendix E (Revisions)"
+  quote: "DSA is no longer approved for digital signature generation."
+source:
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/security/KeyPairGenerator.html"
+    section: "KeyPairGenerator: initialize(int keysize)"
+    read_at: "2026-11-06"
+    quote: "Initializes the key pair generator for a certain keysize using"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "getInstance and initialize stand on one line so that the line pins both the algorithm and the size."

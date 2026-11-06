@@ -1,0 +1,38 @@
+id: "SL-4086"
+title: "OpenSSL EVP_des_ede3_cbc() for decryption"
+family: "3DES"
+parameter_set: "three-key"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, key, iv);"
+context_filename: "dec.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int init(EVP_CIPHER_CTX *ctx, const unsigned char *key, const unsigned char *iv)
+  {
+      return EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, key, iv);
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA decryption"
+  quote: "Decryption using three-key TDEA is allowed for legacy use."
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_des_cbc/"
+    section: "EVP_des_ede3_cbc: DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "EVP_des_ede3(), EVP_des_ede3_cbc(), EVP_des_ede3_cfb()"
+  - url: "https://docs.openssl.org/3.5/man3/EVP_EncryptInit/"
+    section: "EVP_DecryptInit_ex: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "int EVP_DecryptInit_ex(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type, ENGINE *impl, const unsigned char *key, const unsigned char *iv);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Decryption only: SP 800-131A Rev. 2 allows three-key TDEA decryption for legacy use."

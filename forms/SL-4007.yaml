@@ -1,0 +1,35 @@
+id: "SL-4007"
+title: "pyca: hashes.SHA1()"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+literal: "h = hashes.Hash(hashes.SHA1())"
+context_filename: "fp.py"
+context_template: |
+  from cryptography.hazmat.primitives import hashes
+
+
+  def run(data):
+      h = hashes.Hash(hashes.SHA1())
+      h.update(data)
+      return h.finalize()
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://cryptography.io/en/46.0.3/hazmat/primitives/cryptographic-hashes/"
+    section: "SHA-1: class SHA1"
+    read_at: "2026-11-06"
+    quote: "class cryptography.hazmat.primitives.hashes.SHA1[source]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

@@ -1,0 +1,34 @@
+id: "SL-4581"
+title: "OpenSSH sshd: Ciphers 3des-cbc"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "Ciphers 3des-cbc"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  Ciphers 3des-cbc
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2 (Table 1), three-key TDEA"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "Ciphers: the supported ciphers (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-06"
+    quote: "The supported ciphers are: 3des-cbc aes128-cbc"
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-17"
+    section: "Encryption Algorithm Names registry (CSV ssh-parameters-17.csv)"
+    read_at: "2026-11-06"
+    quote: "3des-cbc,[RFC 4253],Section 6.3"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Three-key TDEA in CBC mode (RFC 4253, Section 6.3)."

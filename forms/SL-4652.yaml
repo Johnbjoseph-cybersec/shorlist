@@ -1,0 +1,37 @@
+id: "SL-4652"
+title: "strongSwan: IKE proposal with modp1536"
+family: "DH"
+parameter_set: "modp1536"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128-sha256-modp1536"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128-sha256-modp1536
+      }
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 1536
+weakness:
+  status: "deprecated"
+  anchor: "RFC 8247, Section 2.4"
+  quote: "Group 5 or the 1536-bit MODP Group has been downgraded from MAY in RFC 4307 to SHOULD NOT."
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "modp1536 | 1536 bits | 5 | s x b w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The other keywords on the line (aes128, sha256) are outside the weak families; a proposal needs them to be complete."

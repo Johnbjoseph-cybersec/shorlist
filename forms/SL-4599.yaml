@@ -1,0 +1,28 @@
+id: "SL-4599"
+title: "IANA SSH encryption algorithm arcfour"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "SSH_CIPHER = \"arcfour\""
+context_filename: "ssh_policy.py"
+context_template: |
+  SSH_CIPHER = "arcfour"
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8758, Section 2 (Table 2)"
+  quote: "| arcfour | MUST NOT | the ARCFOUR stream cipher |"
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-17"
+    section: "Encryption Algorithm Names registry (CSV ssh-parameters-17.csv)"
+    read_at: "2026-11-06"
+    quote: "arcfour,[RFC 8758],HISTORIC"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

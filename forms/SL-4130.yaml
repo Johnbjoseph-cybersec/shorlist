@@ -1,0 +1,36 @@
+id: "SL-4130"
+title: "Decoy: Node deny list of 3DES cipher names"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: true
+decoy_class: "ban_list"
+literal: "const DENIED_CIPHERS = new Set(['des-ede3-cbc', 'des-ede3']);"
+context_filename: "policy.js"
+context_template: |
+  const DENIED_CIPHERS = new Set(['des-ede3-cbc', 'des-ede3']);
+
+  function allowed(name) {
+    return !DENIED_CIPHERS.has(name.toLowerCase());
+  }
+
+  module.exports = { allowed };
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_DES_EDE3_CBC \"DES-EDE3-CBC:DES3:1.2.840.113549.3.7\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

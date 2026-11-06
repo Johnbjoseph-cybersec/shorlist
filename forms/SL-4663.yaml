@@ -1,0 +1,29 @@
+id: "SL-4663"
+title: "IANA IKEv2 transform type 1 id 3 (ENCR_3DES)"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_ENCR = {3: \"ENCR_3DES\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_ENCR = {3: "ENCR_3DES"}
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2 (Table 1), three-key TDEA"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-5"
+    section: "Transform Type 1 - Encryption Algorithm Transform IDs registry (CSV ikev2-parameters-5.csv): 3"
+    read_at: "2026-11-06"
+    quote: "3,ENCR_3DES,,[RFC 2451],[RFC 7296]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The registry identifies this entry by number; the name is kept beside it so the line names the algorithm."

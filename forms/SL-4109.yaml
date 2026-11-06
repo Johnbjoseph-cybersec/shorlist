@@ -1,0 +1,39 @@
+id: "SL-4109"
+title: "Ruby OpenSSL::Cipher.new('des-ede3-cbc')"
+family: "3DES"
+parameter_set: "three-key"
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Ruby / openssl"
+negative: false
+literal: "cipher = OpenSSL::Cipher.new('des-ede3-cbc')"
+context_filename: "enc.rb"
+context_template: |
+  require "openssl"
+
+  def run
+    cipher = OpenSSL::Cipher.new('des-ede3-cbc')
+    cipher.encrypt
+    cipher
+  end
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://docs.ruby-lang.org/en/3.4/OpenSSL/Cipher.html"
+    section: "OpenSSL::Cipher: Creating a Cipher"
+    read_at: "2026-11-06"
+    quote: "Either all uppercase or all lowercase strings may be used"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_DES_EDE3_CBC \"DES-EDE3-CBC:DES3:1.2.840.113549.3.7\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

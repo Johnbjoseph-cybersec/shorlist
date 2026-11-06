@@ -1,0 +1,39 @@
+id: "SL-4102"
+title: "PHP openssl_encrypt 'des-ede3-cbc'"
+family: "3DES"
+parameter_set: "three-key"
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "PHP / ext/openssl"
+negative: false
+literal: "$ct = openssl_encrypt($data, 'des-ede3-cbc', $key, OPENSSL_RAW_DATA, $iv);"
+context_filename: "enc.php"
+context_template: |
+  <?php
+
+  function run($data, $key, $iv)
+  {
+      $ct = openssl_encrypt($data, 'des-ede3-cbc', $key, OPENSSL_RAW_DATA, $iv);
+      return $ct;
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://www.php.net/manual/en/function.openssl-encrypt.php"
+    section: "openssl_encrypt(): Parameters (cipher_algo)"
+    read_at: "2026-11-06"
+    quote: "cipher_algo The cipher method. For a list of available cipher methods, use openssl_get_cipher_methods()."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_DES_EDE3_CBC \"DES-EDE3-CBC:DES3:1.2.840.113549.3.7\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects. OpenSSL algorithm names are matched case-insensitively."

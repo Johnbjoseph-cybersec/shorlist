@@ -1,0 +1,31 @@
+id: "SL-4635"
+title: "Decoy: 3DES_EDE_CBC in the JDK TLS ban list"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Java / java.security (JDK 24)"
+negative: true
+decoy_class: "ban_list"
+literal: "jdk.tls.disabledAlgorithms=3DES_EDE_CBC"
+context_filename: "java.security"
+context_template: |
+  # Site override of the JDK security properties.
+  jdk.tls.disabledAlgorithms=3DES_EDE_CBC
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-52 Rev. 2, Section 3.3.1.1"
+  quote: "Cipher suites that use the Triple Data Encryption Aglorithm (TDEA, also written as 3DES) are no longer allowed due to the limited amounts of data that can be processed under a single key."
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-24-ga/src/java.base/share/conf/security/java.security"
+    section: "conf/security/java.security (jdk-24-ga), default value"
+    read_at: "2026-11-06"
+    quote: "MD5withRSA, DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A deny list: names 3DES only to forbid it. The value is part of the JDK 24 default, set on one line."

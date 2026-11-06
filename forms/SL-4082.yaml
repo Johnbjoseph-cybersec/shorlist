@@ -1,0 +1,33 @@
+id: "SL-4082"
+title: "OpenSSL EVP_des_ede_cbc() for encryption"
+family: "3DES"
+parameter_set: "two-key"
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "return EVP_EncryptInit_ex(ctx, EVP_des_ede_cbc(), NULL, key, iv);"
+context_filename: "enc.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int init(EVP_CIPHER_CTX *ctx, const unsigned char *key, const unsigned char *iv)
+  {
+      return EVP_EncryptInit_ex(ctx, EVP_des_ede_cbc(), NULL, key, iv);
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: two-key TDEA encryption"
+  quote: "Encryption using two-key TDEA is disallowed."
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_des_cbc/"
+    section: "EVP_des_ede_cbc: SYNOPSIS/DESCRIPTION"
+    read_at: "2026-11-06"
+    quote: "Two key triple DES in ECB, CBC, CFB with 64-bit shift and OFB modes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

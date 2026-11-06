@@ -1,0 +1,31 @@
+id: "SL-4128"
+title: "Decoy: Kotlin log string naming ARC4"
+family: "RC4"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: true
+decoy_class: "log_string"
+literal: "println(\"ARC4 is no longer offered\")"
+context_filename: "Probe.kt"
+context_template: |
+  fun main() {
+      println("ARC4 is no longer offered")
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: ARC4 (D)"
+  quote: "| ARC4 | | D |"
+source:
+  - url: "https://developer.android.com/reference/javax/crypto/Cipher"
+    section: "Cipher: algorithm table, ARC4"
+    read_at: "2026-11-06"
+    quote: "| ARC4 | ECB | NoPadding | 10+ |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

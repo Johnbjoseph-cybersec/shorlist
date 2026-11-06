@@ -1,0 +1,36 @@
+id: "SL-4036"
+title: "JCA KeyGenerator alias TripleDES"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "KeyGenerator g = KeyGenerator.getInstance(\"TripleDES\");"
+context_filename: "Keys.java"
+context_template: |
+  import javax.crypto.KeyGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyGenerator g = KeyGenerator.getInstance("TripleDES");
+          System.out.println(g.getAlgorithm());
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/sun/security/util/SecurityProviderConstants.java"
+    section: "SecurityProviderConstants: alias table"
+    read_at: "2026-11-06"
+    quote: "store(\"DESede\", null, \"TripleDES\");"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects. \"TripleDES\" is a JDK alias of DESede."

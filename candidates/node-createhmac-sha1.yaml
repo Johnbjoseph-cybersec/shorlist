@@ -1,0 +1,32 @@
+id: "candidate"
+title: "Node createHmac('sha1')"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_string"
+language_or_product: "JavaScript / Node.js crypto"
+negative: false
+literal: "const tag = crypto.createHmac('sha1', key).update(data).digest();"
+context_filename: "mac.js"
+context_template: |
+  const crypto = require('node:crypto');
+
+  function run(key, data) {
+    const tag = crypto.createHmac('sha1', key).update(data).digest();
+    return tag;
+  }
+
+  module.exports = { run };
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+source:
+  - url: "https://nodejs.org/api/crypto.html"
+    section: "crypto.createHmac(algorithm, key[, options])"
+    read_at: "2026-11-06"
+    quote: "The available algorithms depend on the version and configuration of OpenSSL on the platform."
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "HMAC with weak hash: not a classically_weak form by SP 800-131A"

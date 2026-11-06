@@ -1,0 +1,33 @@
+id: "SL-4125"
+title: "Decoy: Python deny list of digest names"
+family: "MD5"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / hashlib"
+negative: true
+decoy_class: "ban_list"
+literal: "FORBIDDEN_DIGESTS = frozenset({\"md5\"})"
+context_filename: "policy.py"
+context_template: |
+  FORBIDDEN_DIGESTS = frozenset({"md5"})
+
+
+  def allowed(name):
+      return name.lower() not in FORBIDDEN_DIGESTS
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Constructors: hashlib.new"
+    read_at: "2026-11-06"
+    quote: "hashlib.new(name, [data, ]*, usedforsecurity=True)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

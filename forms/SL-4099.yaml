@@ -1,0 +1,38 @@
+id: "SL-4099"
+title: "PHP hash('md5')"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "PHP / ext/hash"
+negative: false
+literal: "$digest = hash('md5', $data);"
+context_filename: "fp.php"
+context_template: |
+  <?php
+
+  function run($data)
+  {
+      $digest = hash('md5', $data);
+      return $digest;
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://www.php.net/manual/en/function.hash.php"
+    section: "hash(): Parameters (algo)"
+    read_at: "2026-11-06"
+    quote: "For a list of supported algorithms see hash_algos()."
+  - url: "https://www.php.net/manual/en/function.hash-algos.php"
+    section: "hash_algos(): Example output"
+    read_at: "2026-11-06"
+    quote: "[2] => md5"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,35 @@
+id: "SL-4045"
+title: "Go crypto/md5 Sum"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "sum := md5.Sum([]byte(\"data\"))"
+context_filename: "fp.go"
+context_template: |
+  package main
+
+  import "crypto/md5"
+
+  func main() {
+  	sum := md5.Sum([]byte("data"))
+  	_ = sum
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://github.com/golang/go/blob/go1.25.0/src/crypto/md5/md5.go"
+    section: "func Sum"
+    read_at: "2026-11-06"
+    quote: "func Sum(data []byte) [Size]byte {"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

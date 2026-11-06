@@ -1,0 +1,36 @@
+id: "SL-4035"
+title: "JCA SecretKeyFactory DESede"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "SecretKeyFactory g = SecretKeyFactory.getInstance(\"DESede\");"
+context_filename: "Keys.java"
+context_template: |
+  import javax.crypto.SecretKeyFactory;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          SecretKeyFactory g = SecretKeyFactory.getInstance("DESede");
+          System.out.println(g.getAlgorithm());
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "SecretKeyFactory Algorithms: DESede"
+    read_at: "2026-11-06"
+    quote: "DESede | Constructs secret keys for use with the DESede (Triple-DES) algorithm."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

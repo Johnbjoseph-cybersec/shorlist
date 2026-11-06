@@ -1,0 +1,32 @@
+id: "candidate"
+title: "JCA Cipher PBEWithMD5AndDES"
+family: "DES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "Cipher c = Cipher.getInstance(\"PBEWithMD5AndDES\");"
+context_filename: "Pbe.java"
+context_template: |
+  import javax.crypto.Cipher;
+
+  public class Pbe {
+      public static void main(String[] args) throws Exception {
+          Cipher c = Cipher.getInstance("PBEWithMD5AndDES");
+          System.out.println(c.getAlgorithm());
+      }
+  }
+expected:
+  family: "DES"
+  role: "encryption"
+  size: "undetermined"
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/sun/security/util/SecurityProviderConstants.java"
+    section: "SecurityProviderConstants: alias table"
+    read_at: "2026-11-06"
+    quote: "store(\"PBEWithMD5AndDES\", KnownOIDs.PBEWithMD5AndDES, \"PBE\");"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "One name pins two weak families (MD5 in PBKDF1 and DES); a row scores one family, and the KDF half (PBKDF1) has no family."

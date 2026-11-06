@@ -1,0 +1,29 @@
+id: "SL-4607"
+title: "IANA SSH key exchange method diffie-hellman-group14-sha1: SHA-1"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "registry_id"
+language_or_product: "IANA SSH"
+negative: false
+literal: "KEX_ALGORITHM = \"diffie-hellman-group14-sha1\""
+context_filename: "ssh_policy.py"
+context_template: |
+  KEX_ALGORITHM = "diffie-hellman-group14-sha1"
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "RFC 9142, Section 5"
+  quote: "All key exchange methods using the SHA-1 hash are to be considered as deprecated."
+source:
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16"
+    section: "Key Exchange Method Names registry (CSV ssh-parameters-16.csv)"
+    read_at: "2026-11-06"
+    quote: "diffie-hellman-group14-sha1,[RFC 4253],Section 8.2,MAY"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Weak axis: scored on SHA-1, the exchange hash. Same literal under another family: SL-0510 (DH)."

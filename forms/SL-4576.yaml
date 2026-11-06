@@ -1,0 +1,39 @@
+id: "SL-4576"
+title: "Apache mod_ssl: documented cipher-spec that puts RC4-SHA first (RC4)"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "Apache httpd mod_ssl"
+negative: false
+literal: "SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5"
+context_filename: "httpd.conf"
+context_template: |
+  Listen 443
+  <VirtualHost *:443>
+      SSLEngine on
+      SSLCertificateFile cert.pem
+      SSLCertificateKeyFile key.pem
+      SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5
+  </VirtualHost>
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 7465, Section 2"
+  quote: "TLS servers MUST NOT select an RC4 cipher suite when a TLS client sends such a cipher suite in the ClientHello message."
+source:
+  - url: "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
+    section: "SSLCipherSuite Directive (example cipher-spec)"
+    read_at: "2026-11-06"
+    quote: "``RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5'' which"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-06"
+    quote: "TLS_RSA_WITH_RC4_128_SHA RC4-SHA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Not a decoy: the string excludes MD5 and anonymous suites but enables RC4-SHA explicitly. AES128-SHA (static RSA) on the same line is a quantum-axis form; the row is scored on RC4. The certificate file names are placeholders and carry no algorithm."

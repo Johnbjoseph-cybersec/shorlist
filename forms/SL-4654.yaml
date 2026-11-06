@@ -1,0 +1,37 @@
+id: "SL-4654"
+title: "strongSwan: IKE proposal with ecp192"
+family: "ECDH"
+parameter_set: "ecp192"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128-sha256-ecp192"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128-sha256-ecp192
+      }
+  }
+expected:
+  family: "ECDH"
+  role: "key_establishment"
+  size: 192
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 5 (Table 4), DH and MQV schemes using elliptic curves"
+  quote: "The use of elliptic curve schemes that support a security strength less than 112 bits is disallowed , i.e., when len(n) < 224."
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "ecp192 | 192 bits | 25 | s w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The other keywords on the line (aes128, sha256) are outside the weak families; a proposal needs them to be complete."

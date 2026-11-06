@@ -1,0 +1,33 @@
+id: "SL-4013"
+title: "PyCryptodome: Crypto.Hash.MD5.new()"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "h = MD5.new(data)"
+context_filename: "fp.py"
+context_template: |
+  from Crypto.Hash import MD5
+
+
+  def run(data):
+      h = MD5.new(data)
+      return h.hexdigest()
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://www.pycryptodome.org/src/hash/md5"
+    section: "MD5: new()"
+    read_at: "2026-11-06"
+    quote: "MD5 is specified in RFC1321 and produces the 128 bit digest of a message."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

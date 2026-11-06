@@ -1,0 +1,44 @@
+id: "SL-4577"
+title: "Decoy: MD5 excluded in nginx's default cipher string"
+family: "MD5"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: true
+decoy_class: "ban_list"
+literal: "ssl_ciphers HIGH:!aNULL:!MD5;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_protocols TLSv1.2;
+          ssl_ciphers HIGH:!aNULL:!MD5;
+      }
+  }
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "RFC 6151, Section 2"
+  quote: "since MD5 must not be used for digital signatures, new protocol designs should not employ HMAC-MD5."
+source:
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ciphers (Default)"
+    read_at: "2026-11-06"
+    quote: "ssl_ciphers HIGH:!aNULL:!MD5;"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER LIST FORMAT ('!') and CIPHER STRINGS (MD5)"
+    read_at: "2026-11-06"
+    quote: "If ! is used then the ciphers are permanently deleted from the list."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "nginx's own default. MD5 is named only after '!', i.e. removed; HIGH is a class, not a named algorithm."

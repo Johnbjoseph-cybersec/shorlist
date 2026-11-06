@@ -1,0 +1,29 @@
+id: "SL-4560"
+title: "IANA TLS SignatureScheme ecdsa_sha1: SHA-1"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "SIGNATURE_SCHEME = \"ecdsa_sha1\""
+context_filename: "tls_policy.py"
+context_template: |
+  SIGNATURE_SCHEME = "ecdsa_sha1"
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 9 (Table 8), SHA-1 for digital signature generation"
+  quote: "For all other applications, SHA-1 is disallowed for digital signature generation."
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme"
+    section: "TLS SignatureScheme registry (CSV tls-signaturescheme.csv)"
+    read_at: "2026-11-06"
+    quote: "0x0203,ecdsa_sha1,N,[RFC 9846]; [RFC 9155],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Weak axis: scored on the hash SHA-1 that the scheme signs with. Same literal under another family: SL-0101 (ECDSA)."

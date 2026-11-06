@@ -1,0 +1,29 @@
+id: "SL-4661"
+title: "IANA IKEv2 transform type 1 id 1 (ENCR_DES_IV64)"
+family: "DES"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_ENCR = {1: \"ENCR_DES_IV64\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_ENCR = {1: "ENCR_DES_IV64"}
+expected:
+  family: "DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "RFC 9395, Section 5"
+  quote: "Encryption Algorithms: RC5, IDEA, CAST, Blowfish, and the unspecified 3IDEA, ENCR_DES_IV64, and ENCR_DES_IV32"
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-5"
+    section: "Transform Type 1 - Encryption Algorithm Transform IDs registry (CSV ikev2-parameters-5.csv): 1"
+    read_at: "2026-11-06"
+    quote: "1,ENCR_DES_IV64,DEPRECATED [RFC 9395],UNSPECIFIED,-"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The registry identifies this entry by number; the name is kept beside it so the line names the algorithm."

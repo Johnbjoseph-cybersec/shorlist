@@ -1,0 +1,37 @@
+id: "SL-4653"
+title: "strongSwan: IKE proposal with modp1024s160"
+family: "DH"
+parameter_set: "modp1024s160"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128-sha256-modp1024s160"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128-sha256-modp1024s160
+      }
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8247, Section 2.4"
+  quote: "| 22 | 1024-bit MODP Group with 160-bit Prime | MUST NOT |"
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "modp1024s160 | 1024 bits | 160 bits | 22 | s x b w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The other keywords on the line (aes128, sha256) are outside the weak families; a proposal needs them to be complete."

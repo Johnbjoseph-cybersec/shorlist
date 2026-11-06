@@ -1,0 +1,30 @@
+id: "SL-4615"
+title: "OpenSSL CLI: dhparam, 1024-bit DH parameters"
+family: "DH"
+parameter_set: "1024"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "OpenSSL CLI"
+negative: false
+literal: "openssl dhparam -out dhparam.pem 1024"
+context_filename: "genkey.sh"
+context_template: |
+  #!/bin/sh
+  openssl dhparam -out dhparam.pem 1024
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 5 (Table 4), non-compliant DH and MQV schemes using finite fields"
+  quote: "The use of schemes that support a security strength less than 112 bits is disallowed, i.e., when using FIPS 186-type domain parameters where len(p) < 2048 or len(q) < 224."
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-dhparam/"
+    section: "OPTIONS: numbits"
+    read_at: "2026-11-06"
+    quote: "This option specifies that a parameter set should be generated of size numbits."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Generated safe-prime parameters; at 1024 bits they give well under 112 bits of security, which is what SP 800-131A Rev. 2 disallows."

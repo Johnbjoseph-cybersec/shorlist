@@ -1,0 +1,36 @@
+id: "SL-4090"
+title: "OpenSSL low-level MD5_Init()"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "MD5_Init(&c);"
+context_filename: "fp.c"
+context_template: |
+  #include <openssl/md5.h>
+
+  int main(void)
+  {
+      MD5_CTX c;
+      MD5_Init(&c);
+      return 0;
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://docs.openssl.org/3.5/man3/MD5/"
+    section: "SYNOPSIS (deprecated since OpenSSL 3.0)"
+    read_at: "2026-11-06"
+    quote: "int MD5_Init(MD5_CTX *c);"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Deprecated low-level API; it still compiles against OpenSSL 3.5 headers with a deprecation warning."

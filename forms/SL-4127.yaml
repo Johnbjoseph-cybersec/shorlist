@@ -1,0 +1,34 @@
+id: "SL-4127"
+title: "Decoy: DESede named in a Java log string"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: true
+decoy_class: "log_string"
+literal: "System.out.println(\"Cipher DESede is disabled on this host\");"
+context_filename: "Probe.java"
+context_template: |
+  public class Probe {
+      public static void main(String[] args) {
+          System.out.println("Cipher DESede is disabled on this host");
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Cipher Algorithm Names: DESede"
+    read_at: "2026-11-06"
+    quote: "DESede | Triple DES Encryption (also known as DES-EDE, 3DES, or Triple-DES)."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

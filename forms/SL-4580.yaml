@@ -1,0 +1,40 @@
+id: "SL-4580"
+title: "Decoy: commented-out Apache SSLCipherSuite DES-CBC3-SHA"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Apache httpd mod_ssl"
+negative: true
+decoy_class: "comment"
+literal: "    #SSLCipherSuite DES-CBC3-SHA"
+context_filename: "httpd.conf"
+context_template: |
+  Listen 443
+  <VirtualHost *:443>
+      SSLEngine on
+      SSLCertificateFile cert.pem
+      SSLCertificateKeyFile key.pem
+      #SSLCipherSuite DES-CBC3-SHA
+  </VirtualHost>
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-52 Rev. 2, Section 3.3.1.1"
+  quote: "Cipher suites that use the Triple Data Encryption Aglorithm (TDEA, also written as 3DES) are no longer allowed due to the limited amounts of data that can be processed under a single key."
+source:
+  - url: "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
+    section: "SSLCipherSuite Directive"
+    read_at: "2026-11-06"
+    quote: "Syntax: | SSLCipherSuite [protocol] cipher-spec"
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ciphers/"
+    section: "CIPHER SUITE NAMES"
+    read_at: "2026-11-06"
+    quote: "TLS_RSA_WITH_3DES_EDE_CBC_SHA DES-CBC3-SHA"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The directive is commented out; the file sets no cipher suite."

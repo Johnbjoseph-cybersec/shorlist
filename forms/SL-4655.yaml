@@ -1,0 +1,37 @@
+id: "SL-4655"
+title: "strongSwan: IKE proposal with 3des"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = 3des-sha256-modp2048"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = 3des-sha256-modp2048
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2 (Table 1), three-key TDEA"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "3des | 168 bit 3DES-EDE-CBC | 3 | s x w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RFC 8247 keeps ENCR_3DES at MAY for IKEv2; the anchor is NIST. The other keywords on the line (sha256, modp2048) are outside the weak families; a proposal needs them to be complete. modp2048 is a quantum-axis form (DH, 2048 bits); the IKE proposal syntax requires a key exchange method."

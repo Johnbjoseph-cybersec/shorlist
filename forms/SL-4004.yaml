@@ -1,0 +1,37 @@
+id: "SL-4004"
+title: "hashlib.new(\"md4\") through OpenSSL"
+family: "MD4"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "Python / hashlib"
+negative: false
+literal: "return hashlib.new(\"md4\", data).digest()"
+context_filename: "fp.py"
+context_template: |
+  import hashlib
+
+
+  def run(data):
+      return hashlib.new("md4", data).digest()
+expected:
+  family: "MD4"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD4 (D)"
+  quote: "| MD4 | [RFC 1320](https://www.rfc-editor.org/info/rfc1320) | D | |"
+source:
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Constructors: hashlib.new"
+    read_at: "2026-11-06"
+    quote: "It also exists to allow access to the above listed hashes as well as any other algorithms that your OpenSSL library may offer."
+  - url: "https://docs.openssl.org/3.5/man7/OSSL_PROVIDER-legacy/"
+    section: "OSSL_PROVIDER-legacy: Hashing Algorithms / Message Digests"
+    read_at: "2026-11-06"
+    quote: "MD4, see EVP_MD-MD4(7)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "In OpenSSL 3 this algorithm lives in the legacy provider, which is not loaded by default; the line is still the form a developer writes."

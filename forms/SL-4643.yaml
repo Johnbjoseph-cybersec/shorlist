@@ -1,0 +1,39 @@
+id: "SL-4643"
+title: "Go: rsa.GenerateKey, 1024 bits"
+family: "RSA"
+parameter_set: "1024"
+role: "both"
+form_kind: "api_call"
+language_or_product: "Go / stdlib"
+negative: false
+literal: "priv, err := rsa.GenerateKey(rand.Reader, 1024)"
+context_filename: "keys.go"
+context_template: |
+  package main
+
+  import (
+  	"crypto/rand"
+  	"crypto/rsa"
+  )
+
+  func main() {
+  	priv, err := rsa.GenerateKey(rand.Reader, 1024)
+  	_, _ = priv, err
+  }
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 3 (Table 2), digital signature generation"
+  quote: "RSA: The length of the modulus n shall be 2048 bits or more to meet the minimum security-strength requirement of 112 bits for Federal Government use."
+source:
+  - url: "https://pkg.go.dev/crypto/rsa@go1.25.0"
+    section: "crypto/rsa (go1.25.0): Minimum key size"
+    read_at: "2026-11-06"
+    quote: "GenerateKey returns an error if a key of less than 1024 bits is requested,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "1024 is the smallest size GenerateKey accepts without the rsa1024min=0 GODEBUG setting."

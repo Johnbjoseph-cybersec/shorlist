@@ -1,0 +1,40 @@
+id: "SL-4089"
+title: "OpenSSL EVP_CIPHER_fetch \"DES-EDE3-CBC\""
+family: "3DES"
+parameter_set: "three-key"
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "C / OpenSSL 3.5"
+negative: false
+literal: "EVP_CIPHER *c = EVP_CIPHER_fetch(NULL, \"DES-EDE3-CBC\", NULL);"
+context_filename: "enc.c"
+context_template: |
+  #include <openssl/evp.h>
+
+  int main(void)
+  {
+      EVP_CIPHER *c = EVP_CIPHER_fetch(NULL, "DES-EDE3-CBC", NULL);
+      EVP_CIPHER_free(c);
+      return 0;
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://docs.openssl.org/3.5/man3/EVP_EncryptInit/"
+    section: "EVP_CIPHER_fetch: SYNOPSIS"
+    read_at: "2026-11-06"
+    quote: "EVP_CIPHER *EVP_CIPHER_fetch(OSSL_LIB_CTX *ctx, const char *algorithm, const char *properties);"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_DES_EDE3_CBC \"DES-EDE3-CBC:DES3:1.2.840.113549.3.7\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

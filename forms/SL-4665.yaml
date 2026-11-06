@@ -1,0 +1,29 @@
+id: "SL-4665"
+title: "IANA IKEv2 transform type 2 id 1 (PRF_HMAC_MD5)"
+family: "MD5"
+parameter_set: null
+role: "mac"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_PRF = {1: \"PRF_HMAC_MD5\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_PRF = {1: "PRF_HMAC_MD5"}
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8247, Section 2.2"
+  quote: "| PRF_HMAC_MD5 | MUST NOT | |"
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-6"
+    section: "Transform Type 2 - Pseudorandom Function Transform IDs registry (CSV ikev2-parameters-6.csv): 1"
+    read_at: "2026-11-06"
+    quote: "1,PRF_HMAC_MD5,DEPRECATED [RFC 8247],[RFC 2104]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The registry identifies this entry by number; the name is kept beside it so the line names the algorithm."

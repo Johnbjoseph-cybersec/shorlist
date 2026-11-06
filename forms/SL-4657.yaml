@@ -1,0 +1,37 @@
+id: "SL-4657"
+title: "strongSwan: IKE proposal with prfmd5"
+family: "MD5"
+parameter_set: null
+role: "mac"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128-sha256-prfmd5-modp2048"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128-sha256-prfmd5-modp2048
+      }
+  }
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8247, Section 2.2"
+  quote: "| PRF_HMAC_MD5 | MUST NOT | |"
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "prfmd5 | MD5 PRF | 1 | s x w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The PRF is HMAC-MD5 (IANA PRF transform 1). The other keywords on the line (aes128, sha256, modp2048) are outside the weak families; a proposal needs them to be complete. modp2048 is a quantum-axis form (DH, 2048 bits); the IKE proposal syntax requires a key exchange method."

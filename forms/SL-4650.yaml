@@ -1,0 +1,37 @@
+id: "SL-4650"
+title: "strongSwan: IKE proposal with modp768"
+family: "DH"
+parameter_set: "modp768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "strongSwan swanctl"
+negative: false
+literal: "proposals = aes128-sha256-modp768"
+context_filename: "swanctl.conf"
+context_template: |
+  connections {
+      gw {
+          proposals = aes128-sha256-modp768
+      }
+  }
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 768
+weakness:
+  status: "disallowed"
+  anchor: "RFC 8247, Section 2.4"
+  quote: "It provides no security whatsoever. It has, therefore, been downgraded to MUST NOT."
+source:
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: algorithm keyword tables"
+    read_at: "2026-11-06"
+    quote: "modp768 | 768 bits | 1 | s x b w o"
+  - url: "https://docs.strongswan.org/docs/latest/config/proposals.html"
+    section: "Proposals: the s flag"
+    read_at: "2026-11-06"
+    quote: "Algorithms designated by s are strongly deprecated because they have become cryptographically weak and thus prone to attacks."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The other keywords on the line (aes128, sha256) are outside the weak families; a proposal needs them to be complete."

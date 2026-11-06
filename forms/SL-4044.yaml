@@ -1,0 +1,33 @@
+id: "SL-4044"
+title: "Android Cipher ARC4 (Kotlin)"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+literal: "val x = Cipher.getInstance(\"ARC4\")"
+context_filename: "Crypto.kt"
+context_template: |
+  import javax.crypto.Cipher
+
+  fun main() {
+      val x = Cipher.getInstance("ARC4")
+      println(x.algorithm)
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: ARC4 (D)"
+  quote: "| ARC4 | | D |"
+source:
+  - url: "https://developer.android.com/reference/javax/crypto/Cipher"
+    section: "Cipher: algorithm table, ARC4"
+    read_at: "2026-11-06"
+    quote: "| ARC4 | ECB | NoPadding | 10+ |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

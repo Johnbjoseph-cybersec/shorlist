@@ -1,0 +1,33 @@
+id: "SL-4015"
+title: "PyCryptodome: Crypto.Hash.MD4.new()"
+family: "MD4"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Python / PyCryptodome"
+negative: false
+literal: "h = MD4.new(data)"
+context_filename: "fp.py"
+context_template: |
+  from Crypto.Hash import MD4
+
+
+  def run(data):
+      h = MD4.new(data)
+      return h.hexdigest()
+expected:
+  family: "MD4"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD4 (D)"
+  quote: "| MD4 | [RFC 1320](https://www.rfc-editor.org/info/rfc1320) | D | |"
+source:
+  - url: "https://www.pycryptodome.org/src/hash/md4"
+    section: "MD4: new()"
+    read_at: "2026-11-06"
+    quote: "Crypto.Hash.MD4.new(data=None)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

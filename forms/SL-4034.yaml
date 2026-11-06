@@ -1,0 +1,35 @@
+id: "SL-4034"
+title: "JCA KeyGenerator ARCFOUR"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "KeyGenerator g = KeyGenerator.getInstance(\"ARCFOUR\");"
+context_filename: "Keys.java"
+context_template: |
+  import javax.crypto.KeyGenerator;
+
+  public class Keys {
+      public static void main(String[] args) throws Exception {
+          KeyGenerator g = KeyGenerator.getInstance("ARCFOUR");
+          System.out.println(g.getAlgorithm());
+      }
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: ARC4 (D)"
+  quote: "| ARC4 | | D |"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "KeyGenerator Algorithms: ARCFOUR"
+    read_at: "2026-11-06"
+    quote: "ARCFOUR | The ARCFOUR (RC4) algorithm."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

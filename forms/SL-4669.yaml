@@ -1,0 +1,29 @@
+id: "SL-4669"
+title: "IANA IKEv2 transform type 3 id 6 (AUTH_HMAC_MD5_128)"
+family: "MD5"
+parameter_set: null
+role: "mac"
+form_kind: "registry_id"
+language_or_product: "IANA IKEv2"
+negative: false
+literal: "IKEV2_INTEG = {6: \"AUTH_HMAC_MD5_128\"}"
+context_filename: "ike_policy.py"
+context_template: |
+  IKEV2_INTEG = {6: "AUTH_HMAC_MD5_128"}
+expected:
+  family: "MD5"
+  role: "mac"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "RFC 9395, Section 5"
+  quote: "Integrity Algorithms: HMAC-MD5-128"
+source:
+  - url: "https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-7"
+    section: "Transform Type 3 - Integrity Algorithm Transform IDs registry (CSV ikev2-parameters-7.csv): 6"
+    read_at: "2026-11-06"
+    quote: "6,AUTH_HMAC_MD5_128,DEPRECATED [RFC 9395],[RFC 4595]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The registry identifies this entry by number; the name is kept beside it so the line names the algorithm."

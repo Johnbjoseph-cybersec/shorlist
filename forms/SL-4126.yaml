@@ -1,0 +1,35 @@
+id: "SL-4126"
+title: "Decoy: Java MessageDigest SHA-1 in a comment"
+family: "SHA-1"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: true
+decoy_class: "comment"
+literal: "// Removed in 2.0: MessageDigest.getInstance(\"SHA-1\")"
+context_filename: "Probe.java"
+context_template: |
+  public class Probe {
+      public static void main(String[] args) {
+          // Removed in 2.0: MessageDigest.getInstance("SHA-1")
+          System.out.println("ok");
+      }
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "MessageDigest Algorithms: SHA-1"
+    read_at: "2026-11-06"
+    quote: "Name | SHA-1 | Type | MessageDigest |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

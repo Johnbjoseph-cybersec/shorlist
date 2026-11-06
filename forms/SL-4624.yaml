@@ -1,0 +1,33 @@
+id: "SL-4624"
+title: "openssl.cnf [ CA_default ]: default_md = sha1"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "config_value"
+language_or_product: "OpenSSL 3.5 openssl.cnf"
+negative: false
+literal: "default_md     = sha1"
+context_filename: "openssl.cnf"
+context_template: |
+  [ ca ]
+  default_ca = CA_default
+
+  [ CA_default ]
+  default_md     = sha1
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 9 (Table 8), SHA-1 for digital signature generation"
+  quote: "For all other applications, SHA-1 is disallowed for digital signature generation."
+source:
+  - url: "https://docs.openssl.org/3.5/man1/openssl-ca/"
+    section: "CONFIGURATION FILE OPTIONS: default_md"
+    read_at: "2026-11-06"
+    quote: "The same as the -md option."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The digest ca uses to sign issued certificates. Role hash: the setting names a digest, the signature algorithm comes from the key."

@@ -1,0 +1,31 @@
+id: "SL-4641"
+title: "pyca: DH parameter generation, 1024 bits"
+family: "DH"
+parameter_set: "1024"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Python / pyca cryptography"
+negative: false
+literal: "parameters = dh.generate_parameters(generator=2, key_size=1024)"
+context_filename: "keys.py"
+context_template: |
+  from cryptography.hazmat.primitives.asymmetric import dh
+
+  parameters = dh.generate_parameters(generator=2, key_size=1024)
+expected:
+  family: "DH"
+  role: "key_establishment"
+  size: 1024
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 5 (Table 4), non-compliant DH and MQV schemes using finite fields"
+  quote: "The use of schemes that support a security strength less than 112 bits is disallowed, i.e., when using FIPS 186-type domain parameters where len(p) < 2048 or len(q) < 224."
+source:
+  - url: "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/dh/"
+    section: "dh.generate_parameters(generator, key_size)"
+    read_at: "2026-11-06"
+    quote: "ValueError – If key_size is not at least 512."
+notes: "The quoted sentence speaks of FIPS 186-type domain parameters; these are generated safe-prime parameters. The same section accepts safe-prime groups only when they are the groups listed in Appendix D of SP 800-56A, and a freshly generated 1024-bit group is not one of them."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,32 @@
+id: "SL-4118"
+title: "ring SHA1_FOR_LEGACY_USE_ONLY"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "api_call"
+language_or_product: "Rust / ring 0.17"
+negative: false
+literal: "let d = ring::digest::digest(&ring::digest::SHA1_FOR_LEGACY_USE_ONLY, b\"data\");"
+context_filename: "main.rs"
+context_template: |
+  fn main() {
+      let d = ring::digest::digest(&ring::digest::SHA1_FOR_LEGACY_USE_ONLY, b"data");
+      let _ = d;
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://docs.rs/ring/0.17.14/ring/digest/static.SHA1_FOR_LEGACY_USE_ONLY.html"
+    section: "Static SHA1_FOR_LEGACY_USE_ONLY"
+    read_at: "2026-11-06"
+    quote: "pub static SHA1_FOR_LEGACY_USE_ONLY: Algorithm"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SHA-1 status: the form does not pin the use. SP 800-131A Rev. 2 Table 8 rates SHA-1 by use (signature generation disallowed, verification legacy use, non-signature applications acceptable) and has no general statement; ASVS 5.0 Appendix C rates SHA-1 as a whole L (legacy), which is the status taken here."

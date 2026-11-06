@@ -1,0 +1,36 @@
+id: "SL-4002"
+title: "hashlib.new(\"md5\")"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "Python / hashlib"
+negative: false
+literal: "return hashlib.new(\"md5\", data).digest()"
+context_filename: "fp.py"
+context_template: |
+  import hashlib
+
+
+  def run(data):
+      return hashlib.new("md5", data).digest()
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Constructors: hashlib.new"
+    read_at: "2026-11-06"
+    quote: "hashlib.new(name, [data, ]*, usedforsecurity=True)"
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Hash algorithms: named constructors"
+    read_at: "2026-11-06"
+    quote: "hashlib.md5([data, ]*, usedforsecurity=True)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

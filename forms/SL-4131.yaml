@@ -1,0 +1,36 @@
+id: "SL-4131"
+title: "Decoy: .NET TripleDES.Create() in a comment"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "C# / .NET System.Security.Cryptography"
+negative: true
+decoy_class: "comment"
+literal: "// TripleDES.Create() was removed in 3.0; payloads are sent in clear to the HSM."
+context_filename: "Crypto.cs"
+context_template: |
+  class Crypto
+  {
+      static void Main()
+      {
+          // TripleDES.Create() was removed in 3.0; payloads are sent in clear to the HSM.
+      }
+  }
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2, Table 1: three-key TDEA encryption"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.tripledes.create?view=net-10.0"
+    section: "TripleDES.Create()"
+    read_at: "2026-11-06"
+    quote: "public static System.Security.Cryptography.TripleDES Create();"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SP 800-131A Rev. 2 Table 1's encryption status is taken (decryption alone would be legacy use). Two-key TDEA encryption is disallowed as well, so the status holds whichever keying option the key length selects."

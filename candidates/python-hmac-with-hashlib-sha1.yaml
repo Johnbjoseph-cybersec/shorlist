@@ -1,0 +1,31 @@
+id: "candidate"
+title: "Python hmac with hashlib.sha1"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "Python / hmac"
+negative: false
+literal: "tag = hmac.new(key, msg, hashlib.sha1).digest()"
+context_filename: "mac.py"
+context_template: |
+  import hashlib
+  import hmac
+
+
+  def run(key, msg):
+      tag = hmac.new(key, msg, hashlib.sha1).digest()
+      return tag
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+source:
+  - url: "https://docs.python.org/3.14/library/hashlib.html"
+    section: "Hash algorithms: named constructors"
+    read_at: "2026-11-06"
+    quote: "hashlib.sha1([data, ]*, usedforsecurity=True)"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "HMAC with weak hash: not a classically_weak form by SP 800-131A"

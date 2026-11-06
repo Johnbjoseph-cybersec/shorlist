@@ -1,0 +1,39 @@
+id: "SL-4104"
+title: "PHP openssl_encrypt 'rc4'"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "PHP / ext/openssl"
+negative: false
+literal: "$ct = openssl_encrypt($data, 'rc4', $key, OPENSSL_RAW_DATA, $iv);"
+context_filename: "enc.php"
+context_template: |
+  <?php
+
+  function run($data, $key, $iv)
+  {
+      $ct = openssl_encrypt($data, 'rc4', $key, OPENSSL_RAW_DATA, $iv);
+      return $ct;
+  }
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Cipher Algorithms: RC4 (D)"
+  quote: "| RC4 | | D |"
+source:
+  - url: "https://www.php.net/manual/en/function.openssl-encrypt.php"
+    section: "openssl_encrypt(): Parameters (cipher_algo)"
+    read_at: "2026-11-06"
+    quote: "cipher_algo The cipher method. For a list of available cipher methods, use openssl_get_cipher_methods()."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_RC4 \"RC4:1.2.840.113549.3.4\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "OpenSSL algorithm names are matched case-insensitively. In OpenSSL 3 this algorithm lives in the legacy provider, which is not loaded by default; the line is still the form a developer writes."

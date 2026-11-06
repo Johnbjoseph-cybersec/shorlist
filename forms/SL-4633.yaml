@@ -1,0 +1,31 @@
+id: "SL-4633"
+title: "Decoy: RC4 in the JDK TLS ban list"
+family: "RC4"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Java / java.security (JDK 24)"
+negative: true
+decoy_class: "ban_list"
+literal: "jdk.tls.disabledAlgorithms=RC4"
+context_filename: "java.security"
+context_template: |
+  # Site override of the JDK security properties.
+  jdk.tls.disabledAlgorithms=RC4
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 7465, Section 2"
+  quote: "TLS servers MUST NOT select an RC4 cipher suite when a TLS client sends such a cipher suite in the ClientHello message."
+source:
+  - url: "https://github.com/openjdk/jdk/blob/jdk-24-ga/src/java.base/share/conf/security/java.security"
+    section: "conf/security/java.security (jdk-24-ga), default value"
+    read_at: "2026-11-06"
+    quote: "jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, DTLSv1.0, RC4, DES,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A deny list: names RC4 only to forbid it. The value is part of the JDK 24 default, set on one line."

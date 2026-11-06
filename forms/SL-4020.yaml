@@ -1,0 +1,35 @@
+id: "SL-4020"
+title: "JCA MessageDigest MD5"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "api_string"
+language_or_product: "Java / JCA"
+negative: false
+literal: "MessageDigest md = MessageDigest.getInstance(\"MD5\");"
+context_filename: "Digest.java"
+context_template: |
+  import java.security.MessageDigest;
+
+  public class Digest {
+      public static void main(String[] args) throws Exception {
+          MessageDigest md = MessageDigest.getInstance("MD5");
+          System.out.println(md.getAlgorithm());
+      }
+  }
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: MD5 (D)"
+  quote: "| MD5 | [RFC 1321](https://www.rfc-editor.org/info/rfc1321) | D | |"
+source:
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "MessageDigest Algorithms: MD5"
+    read_at: "2026-11-06"
+    quote: "MD5 | The MD5 message digest algorithm as defined in RFC 1321."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

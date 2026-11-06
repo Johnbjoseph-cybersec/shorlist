@@ -1,0 +1,31 @@
+id: "SL-4593"
+title: "Decoy: 3des-cbc removed from the sshd cipher set"
+family: "3DES"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: true
+decoy_class: "removal_list"
+literal: "Ciphers -3des-cbc"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  Ciphers -3des-cbc
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-131A Rev. 2, Section 2 (Table 1), three-key TDEA"
+  quote: "After December 31, 2023, three-key TDEA is disallowed for encryption unless specifically allowed by other NIST guidance."
+source:
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "Ciphers (OpenBSD-current, October 30, 2026)"
+    read_at: "2026-11-06"
+    quote: "then the specified ciphers (including wildcards) will be removed from the default set instead of replacing them."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A leading '-' removes the named cipher from the default set; the line enables nothing."

@@ -1,0 +1,29 @@
+id: "SL-4516"
+title: "IANA TLS cipher suite TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA: 3DES (Recommended: D)"
+family: "3DES"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA"
+expected:
+  family: "3DES"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "NIST SP 800-52 Rev. 2, Section 3.3.1.1"
+  quote: "Cipher suites that use the Triple Data Encryption Aglorithm (TDEA, also written as 3DES) are no longer allowed due to the limited amounts of data that can be processed under a single key."
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x13"
+    read_at: "2026-11-06"
+    quote: "\"0x00,0x13\",TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Weak axis: the family is the weak primitive in the suite, not its key exchange. Same literal under another family: SL-0211 (DH)."

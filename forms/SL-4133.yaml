@@ -1,0 +1,37 @@
+id: "SL-4133"
+title: "Decoy: PHP removal list naming rc2-cbc"
+family: "RC2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "PHP / ext/openssl"
+negative: true
+decoy_class: "removal_list"
+literal: "$removed = ['rc2-cbc'];"
+context_filename: "policy.php"
+context_template: |
+  <?php
+
+  $removed = ['rc2-cbc'];
+
+  function is_removed($name, $removed)
+  {
+      return in_array(strtolower($name), $removed, true);
+  }
+expected:
+  family: "RC2"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "deprecated"
+  anchor: "IETF RFC 8551 (S/MIME 4.0), Section 2.7.2 Choosing Weak Encryption"
+  quote: "Algorithms such as RC2 are considered to be weak encryption algorithms."
+source:
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/providers/implementations/include/prov/names.h"
+    section: "providers/implementations/include/prov/names.h"
+    read_at: "2026-11-06"
+    quote: "#define PROV_NAMES_RC2_CBC \"RC2-CBC:RC2:RC2-128:1.2.840.113549.3.2\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "RC2 is named in none of SP 800-131A Rev. 2, ASVS 5.0 Appendix C or BSI TR-02102-1 (2026-01) (grep of the saved texts for 'RC2'); RFC 8551 calls it weak and never recommended but does not use the word 'disallowed', hence 'deprecated'."

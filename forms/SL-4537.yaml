@@ -1,0 +1,29 @@
+id: "SL-4537"
+title: "IANA TLS cipher suite TLS_KRB5_EXPORT_WITH_RC4_40_MD5: RC4 (Recommended: D)"
+family: "RC4"
+parameter_set: null
+role: "encryption"
+form_kind: "registry_id"
+language_or_product: "IANA TLS"
+negative: false
+literal: "CIPHER_SUITE = \"TLS_KRB5_EXPORT_WITH_RC4_40_MD5\""
+context_filename: "tls_policy.py"
+context_template: |
+  CIPHER_SUITE = "TLS_KRB5_EXPORT_WITH_RC4_40_MD5"
+expected:
+  family: "RC4"
+  role: "encryption"
+  size: "undetermined"
+weakness:
+  status: "disallowed"
+  anchor: "RFC 7465, Section 2"
+  quote: "TLS servers MUST NOT select an RC4 cipher suite when a TLS client sends such a cipher suite in the ClientHello message."
+source:
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4"
+    section: "TLS Cipher Suites registry (CSV tls-parameters-4.csv): 0x00,0x2B"
+    read_at: "2026-11-06"
+    quote: "\"0x00,0x2B\",TLS_KRB5_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Weak axis: the family is the weak primitive in the suite, not its key exchange. The suite's MAC is HMAC-MD5; the row is scored on the bulk cipher only."
