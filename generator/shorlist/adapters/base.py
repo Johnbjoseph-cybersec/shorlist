@@ -21,6 +21,7 @@ Record fields:
     is_use  True when the scanner reports the text as a USE of the algorithm; False when
             it reports it but marks it as not a use (comment, ban, removal, mention).
             A scanner with no such distinction returns True for everything.
+    cwe     "CWE-NNN" when the scanner reports a misuse (defect axis), else None
 
 The adapter is the only place that knows a scanner's field names and family spellings.
 """
@@ -38,6 +39,7 @@ class Record:
     role: str | None = None
     size: int | str | None = None
     is_use: bool = True
+    cwe: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)

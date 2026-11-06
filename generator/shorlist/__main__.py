@@ -29,6 +29,10 @@ def cmd_validate(args) -> int:
         status, detail = check(r["context_filename"], r["context_template"])
         print(f"{r['id']}  {r['context_filename']:<16} {status}{('  ' + detail) if detail else ''}")
         bad += status == FAIL
+        if "right_template" in r:
+            status, detail = check(r["context_filename"], r["right_template"])
+            print(f"{r['id']}  {'(right) ' + r['context_filename']:<16} {status}{('  ' + detail) if detail else ''}")
+            bad += status == FAIL
     print(f"{len(rows)} rows valid against the schema; {bad} template(s) fail the syntax check")
     return 1 if bad else 0
 

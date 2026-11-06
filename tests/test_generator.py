@@ -24,7 +24,12 @@ class Oracle(Adapter):
 
     def scan(self, tree, workdir):
         (f,) = list(tree.iterdir())
-        row = next(r for r in ROWS.values() if r["context_filename"] == f.name and r["context_template"] == f.read_text())
+        text = f.read_text()
+        if any(r.get("right_template") == text for r in ROWS.values() if r["context_filename"] == f.name):
+            return []  # a fixed file: nothing to report
+        row = next(r for r in ROWS.values() if r["context_filename"] == f.name and r["context_template"] == text)
+        if row.get("row_kind") == "defect":
+            return [] if row["negative"] else [Record(f.name, literal_line(row), row["family"], cwe=row["defect"]["cwe"])]
         e = row["expected"]
         role = None if e["role"] == "undetermined" else e["role"]
         return [Record(f.name, literal_line(row), e["family"], role, e["size"], is_use=not row["negative"])]

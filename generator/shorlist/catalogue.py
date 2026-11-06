@@ -15,15 +15,32 @@ def load_schema(root: Path = ROOT) -> dict:
     return json.loads((root / "schema" / "form.schema.json").read_text())
 
 
+# families.yaml group -> scoring axis. The three axes are scored and reported apart.
+AXIS_OF_GROUP = {"quantum_vulnerable": "quantum", "post_quantum": "quantum",
+                 "classically_weak": "weak", "defect_only": "defect"}
+
+
 def load_families(root: Path = ROOT) -> dict[str, dict]:
-    """Family name -> {cyclonedx: [...], parent: str|None, role: str|None}."""
+    """Family name -> {cyclonedx: [...], parent: str|None, role: str|None, axis: str}."""
     data = yaml.safe_load((root / "schema" / "families.yaml").read_text())
     out: dict[str, dict] = {}
-    for group in data.values():
+    for gname, group in data.items():
+        if gname not in AXIS_OF_GROUP:
+            raise ValueError(f"families.yaml group {gname!r} has no axis")
         for name, spec in group.items():
             out[name] = {"cyclonedx": spec.get("cyclonedx", []), "parent": spec.get("parent"),
-                         "role": spec.get("role")}
+                         "role": spec.get("role"), "axis": AXIS_OF_GROUP[gname]}
     return out
+
+
+def row_axis(row: dict, families: dict) -> str:
+    """quantum, weak or defect. A defect row is on the defect axis; a row with `weakness`
+    or a classically_weak family is on the weak axis; everything else is quantum."""
+    if row.get("row_kind") == "defect":
+        return "defect"
+    if "weakness" in row or families[row["family"]]["axis"] == "weak":
+        return "weak"
+    return "quantum"
 
 
 def catalogue_version(root: Path = ROOT) -> str:
@@ -68,6 +85,14 @@ def validate_row(row: dict, path: Path | None, schema: dict, families: dict) -> 
         errs.append(f"cyclonedx_family {cdx!r} is not mapped from family {row['family']} in families.yaml")
     if row["expected"]["family"] != row["family"]:
         errs.append("expected.family differs from family")
+    axis = families[row["family"]]["axis"]
+    if axis == "defect" and row.get("row_kind") != "defect":
+        errs.append(f"family {row['family']} is allowed only in a row with row_kind: defect")
+    if axis == "weak" and row.get("row_kind") != "defect" and "weakness" not in row:
+        errs.append(f"family {row['family']} is classically weak: the row needs `weakness`")
+    rt = row.get("right_template")
+    if rt is not None and row["literal"] in rt:
+        errs.append("right_template still contains the literal")
     return errs
 
 

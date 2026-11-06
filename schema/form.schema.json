@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:shorlist:schema:form:0.1",
+  "$id": "urn:shorlist:schema:form:0.2",
   "title": "ShorList form",
   "description": "One form: one way in which a cryptographic algorithm appears in source code or configuration text. A row is either a positive form (the text is a use of the algorithm) or a decoy (negative: true — the text names the algorithm but is not a use of it).",
   "type": "object",
@@ -31,7 +31,7 @@
     },
     "role": {
       "description": "Role of the algorithm as pinned by the form.",
-      "enum": ["signature", "key_establishment", "both", "n.a."]
+      "enum": ["signature", "key_establishment", "both", "hash", "encryption", "mac", "n.a."]
     },
     "form_kind": {
       "enum": [
@@ -67,7 +67,7 @@
       "required": ["family", "role", "size"],
       "properties": {
         "family": {"$ref": "#/$defs/family"},
-        "role": {"enum": ["signature", "key_establishment", "both", "undetermined"]},
+        "role": {"enum": ["signature", "key_establishment", "both", "hash", "encryption", "mac", "undetermined"]},
         "size": {
           "description": "Key size in bits, or 'undetermined' when the form does not pin it.",
           "oneOf": [
@@ -83,7 +83,41 @@
     },
     "decoy_class": {
       "description": "Required when negative is true.",
-      "enum": ["ban_list", "comment", "log_string", "switch_off", "removal_list"]
+      "enum": ["ban_list", "comment", "log_string", "switch_off", "removal_list", "legacy_verify_only"]
+    },
+    "row_kind": {
+      "description": "form (the default when absent): a way an algorithm is named. defect: a misuse; context_template is the wrong code, right_template the fixed one.",
+      "enum": ["form", "defect"]
+    },
+    "weakness": {
+      "description": "Classical weakness the form carries: a classically_weak family, or a weak parameter of a quantum-axis family (RSA-1024). Puts the row on the weak axis.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "anchor", "quote"],
+      "properties": {
+        "status": {"enum": ["disallowed", "deprecated", "legacy_use"]},
+        "anchor": {"description": "Standard and section, e.g. 'NIST SP 800-131A Rev. 2, Table 1'.", "type": "string", "minLength": 5},
+        "quote": {"type": "string", "minLength": 5}
+      }
+    },
+    "defect": {
+      "description": "Required when row_kind is defect.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cwe"],
+      "properties": {
+        "cwe": {"type": "string", "pattern": "^CWE-[0-9]+$"},
+        "taxonomy": {
+          "description": "The same class in other benchmarks, as references only, e.g. 'CryptoAPI-Bench: static IV'.",
+          "type": "array",
+          "items": {"type": "string", "minLength": 3}
+        }
+      }
+    },
+    "right_template": {
+      "description": "The fixed file, planted under the same context_filename. It must not contain the literal. A scanner that reports the defect here raises a false alarm.",
+      "type": "string",
+      "minLength": 1
     },
     "source": {
       "description": "Primary sources only: the specification, registry or vendor documentation that defines the form. At least one.",
@@ -126,13 +160,20 @@
       "if": {"properties": {"status": {"const": "withdrawn"}}},
       "then": {"required": ["withdrawn_reason", "withdrawn_at"]},
       "else": {"not": {"anyOf": [{"required": ["withdrawn_reason"]}, {"required": ["withdrawn_at"]}]}}
+    },
+    {
+      "if": {"properties": {"row_kind": {"const": "defect"}}, "required": ["row_kind"]},
+      "then": {"required": ["defect", "right_template"], "not": {"required": ["weakness"]}},
+      "else": {"not": {"anyOf": [{"required": ["defect"]}, {"required": ["right_template"]}]}}
     }
   ],
   "$defs": {
     "family": {
       "enum": [
         "RSA", "DSA", "DH", "EC", "ECDSA", "ECDH", "EdDSA", "X25519", "X448",
-        "ML-KEM", "ML-DSA", "SLH-DSA", "LMS", "XMSS"
+        "ML-KEM", "ML-DSA", "SLH-DSA", "LMS", "XMSS",
+        "SHA-1", "MD5", "MD4", "DES", "3DES", "RC4", "RC2",
+        "AES", "ChaCha20", "HMAC", "SHA-2", "PBKDF2", "RNG"
       ]
     }
   }

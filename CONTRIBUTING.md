@@ -37,6 +37,27 @@ CI runs the same checks. It also runs qrp-mcp on the catalogue and posts the res
 information. **That run never blocks a row.** A form no scanner recognises is exactly the
 kind of row the catalogue exists for.
 
+## Weak rows and defect rows
+
+Since v0.2 the catalogue is scored on three axes, reported apart. A scanner gains or loses
+nothing on the quantum axis for a weak or a defect row, and the headline figure is the
+quantum axis only.
+
+- **quantum** — every row above: a Shor-vulnerable or post-quantum family.
+- **weak** — a row with `weakness` (`status`, `anchor`, `quote`): a `classically_weak`
+  family (SHA-1, MD5, 3DES, RC4 …) or a weak parameter of a quantum family (RSA-1024).
+  The anchor is the standard that disallows or deprecates it, e.g. NIST SP 800-131A Rev. 2.
+  A `classically_weak` family without `weakness` is rejected.
+- **defect** — `row_kind: defect`: a misuse, not an algorithm. `context_template` is the
+  wrong code and the literal is the defective line; `right_template` is the same file,
+  fixed, and must not contain the literal. `defect.cwe` is what a scanner must report on
+  the literal's line; `defect.taxonomy` may name the same class in other benchmarks, as a
+  reference only. A scanner that reports any CWE on the fixed file raises a false alarm.
+  `defect_only` families (AES, HMAC, RNG …) are allowed only in defect rows.
+
+Write templates for defect rows yourself, from the description of the class. Copy a
+template from another benchmark only when its licence allows it, and cite it in `source`.
+
 ## Review
 
 - Every row needs **two approving reviewers** other than its author before it is merged.

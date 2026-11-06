@@ -33,3 +33,23 @@ post_quantum:          # NIST FIPS 203 / 204 / 205, SP 800-208
   SLH-DSA: {cyclonedx: [SLH-DSA], role: signature}
   LMS:     {cyclonedx: [LMS], role: signature}
   XMSS:    {cyclonedx: [XMSS], role: signature}
+
+# ── Added in v0.2 (wave 4 and wave 5). Scored on separate axes: a scanner gains or loses
+# nothing on the quantum axis for these. See CONTRIBUTING.md, "Weak rows and defect rows".
+
+classically_weak:      # broken or disallowed by classical attack; anchors SP 800-131A r2, BSI TR-02102
+  SHA-1:   {cyclonedx: [], role: hash}
+  MD5:     {cyclonedx: [], role: hash}
+  MD4:     {cyclonedx: [], role: hash}
+  DES:     {cyclonedx: [], role: encryption}
+  3DES:    {cyclonedx: [], role: encryption}
+  RC4:     {cyclonedx: [], role: encryption}
+  RC2:     {cyclonedx: [], role: encryption}
+
+defect_only:           # sound primitives; allowed only in rows with row_kind: defect (misuse)
+  AES:      {cyclonedx: [], role: encryption}
+  ChaCha20: {cyclonedx: [], role: encryption}
+  HMAC:     {cyclonedx: [], role: mac}
+  SHA-2:    {cyclonedx: [], role: hash}
+  PBKDF2:   {cyclonedx: []}
+  RNG:      {cyclonedx: [], note: "random number generation; a predictable source is the defect"}

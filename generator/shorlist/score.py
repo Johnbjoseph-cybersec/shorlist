@@ -13,24 +13,58 @@ planted file that have is_use = True:
 Decoy row (negative: true), looking at every record in the planted tree:
     false_alarm   any in-scope family reported as a use, anywhere in the tree
     ok            nothing in scope reported as a use (reporting it as not-a-use is fine)
+
+"In scope" depends on the row's axis (catalogue.row_axis), so the axes do not leak:
+    quantum   quantum_vulnerable + post_quantum families (a reported AES or MD5 is ignored)
+    weak      the quantum families + classically_weak
+
+Defect axis (row_kind: defect) scores the scanner's `cwe`, not the family:
+    hit           a record on the literal's line carries defect.cwe
+    wrong_class   no hit, but a record on that line carries another CWE
+    miss          no CWE reported on that line
+  A defect decoy is false_alarm when any CWE is reported anywhere in the tree. The fixed
+  file (right_template) is scored apart by score_fix: false_alarm when any CWE is reported.
 """
 from __future__ import annotations
 
 from .adapters.base import Record
-from .catalogue import literal_line
+from .catalogue import literal_line, row_axis
+
+SCOPE = {"quantum": {"quantum"}, "weak": {"quantum", "weak"}}
+
+
+def score_fix(row: dict, records: list[Record]) -> dict:
+    cwes = sorted({r.cwe for r in records if r.cwe})
+    return {"id": row["id"], "outcome": "false_alarm" if cwes else "ok", "reported_cwe": cwes}
+
+
+def _score_defect(row: dict, records: list[Record]) -> dict:
+    if row["negative"]:
+        cwes = sorted({r.cwe for r in records if r.cwe})
+        return {"id": row["id"], "axis": "defect", "negative": True,
+                "outcome": "false_alarm" if cwes else "ok", "reported_cwe": cwes}
+    line = literal_line(row)
+    here = sorted({r.cwe for r in records if r.cwe and r.path == row["context_filename"] and r.line == line})
+    want = row["defect"]["cwe"]
+    outcome = "hit" if want in here else ("wrong_class" if here else "miss")
+    return {"id": row["id"], "axis": "defect", "negative": False, "outcome": outcome,
+            "line": line, "reported_cwe": here}
 
 
 def score_row(row: dict, records: list[Record], families: dict) -> dict:
+    axis = row_axis(row, families)
+    if axis == "defect":
+        return _score_defect(row, records)
     exp = row["expected"]
     fam = exp["family"]
     parent = families[fam]["parent"]
     fname = row["context_filename"]
-    in_scope = [r for r in records if r.family in families]
+    in_scope = [r for r in records if r.family in families and families[r.family]["axis"] in SCOPE[axis]]
 
     if row["negative"]:
         alarms = sorted({r.family for r in in_scope if r.is_use})
         return {
-            "id": row["id"], "negative": True,
+            "id": row["id"], "axis": axis, "negative": True,
             "outcome": "false_alarm" if alarms else "ok",
             "reported_as_use": alarms,
             "reported_not_use": sorted({r.family for r in in_scope if not r.is_use}),
@@ -58,7 +92,7 @@ def score_row(row: dict, records: list[Record], families: dict) -> dict:
         if exp["size"] != "undetermined":
             size_ok = any(r.size == exp["size"] for r in hits)
     return {
-        "id": row["id"], "negative": False, "outcome": outcome,
+        "id": row["id"], "axis": axis, "negative": False, "outcome": outcome,
         "line": line,
         "reported_as_use": sorted({r.family for r in uses}),
         "reported_not_use": sorted({r.family for r in here if not r.is_use}),

@@ -109,7 +109,8 @@ def test_cdxgen_parse_source_location_property():
          "properties": [{"name": "cdx:crypto:sourceLocation", "value": "/scan/kem.py:3:1"}]},
         {"type": "library", "name": "cryptography"}]}
     recs = CdxgenAdapter.parse(bom)
-    assert Record("src/crypto.js", 12, "sha-256") in recs
+    # SHA-2 is in the vocabulary since v0.2 (defect_only); the quantum scorer still ignores it.
+    assert Record("src/crypto.js", 12, "SHA-2") in recs
     assert Record("kem.py", 3, "ML-KEM", "key_establishment") in recs
     assert len(recs) == 2
 
@@ -134,5 +135,5 @@ def test_semgrep_parse():
          "path": "/scan/h.py", "start": {"line": 2}, "extra": {}}], "errors": []}
     recs = SemgrepAdapter.parse(res)
     assert recs[0] == Record("keys.py", 3, "RSA")
-    assert recs[1].family.endswith("insecure-hash-algorithm-md5")
+    assert recs[1].family == "MD5"  # classically_weak since v0.2; scored on the weak axis only
     assert family_from_check_id("go.lang.security.audit.crypto.use_of_weak_rsa_key.use-of-weak-rsa-key") == "RSA"
