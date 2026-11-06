@@ -1,0 +1,35 @@
+id: "SL-6519"
+title: "liboqs-python: oqs.KeyEncapsulation(\"ML-KEM-512\")"
+family: "ML-KEM"
+parameter_set: "ML-KEM-512"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Python / liboqs-python"
+negative: false
+literal: "with oqs.KeyEncapsulation(\"ML-KEM-512\") as kem:"
+context_filename: "kem.py"
+context_template: |
+  import oqs
+
+  with oqs.KeyEncapsulation("ML-KEM-512") as kem:
+      pass
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://drops.dagstuhl.de/storage/00lipics/lipics-vol394-esem2026/LIPIcs.ESEM.2026.53/LIPIcs.ESEM.2026.53.pdf"
+    section: "Section 3.3, Per-Language Detection (Python)"
+    read_at: "2026-11-06"
+    quote: "(cryptography, PyCryptodome, ssl, hashlib, hmac, rsa, ecdsa, oqs, etc.)"
+  - url: "https://github.com/open-quantum-safe/liboqs-python/blob/main/README.md"
+    section: "Usage in standalone applications"
+    read_at: "2026-11-06"
+    quote: "liboqs-python defines three main classes: `KeyEncapsulation`, `Signature`, and"
+  - url: "https://github.com/open-quantum-safe/liboqs-python/blob/main/examples/kem.py"
+    section: "examples/kem.py"
+    read_at: "2026-11-06"
+    quote: "kemalg = \"ML-KEM-512\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

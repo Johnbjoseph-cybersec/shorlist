@@ -1,0 +1,66 @@
+id: "SL-6003"
+title: "JCA: PBEKeySpec with a hard-coded password"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "PBEKeySpec spec = new PBEKeySpec(\"correct-horse-battery\".toCharArray(), salt, 600000, 256);"
+context_filename: "Kdf.java"
+context_template: |
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(byte[] salt) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec("correct-horse-battery".toCharArray(), salt, 600000, 256);
+          return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+      }
+  }
+right_template: |
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(char[] password, byte[] salt) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec(password, salt, 600000, 256);
+          return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-259"
+  taxonomy:
+    - "CryptoAPI-Bench: Password in PBE"
+    - "CryptoGuard: Rule 2 Predictable/constant passwords for PBE"
+    - "MASC: 61. Using hardcoded key/password"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/259.html"
+    section: "CWE-259 Use of Hard-coded Password: Description"
+    read_at: "2026-11-06"
+    quote: "The product contains a hard-coded password, which it uses for its own inbound authentication or for outbound authentication to external components."
+  - url: "https://yaogroup.cs.vt.edu/papers/IEEE_SecDev19_CryptoAPI-Bench.pdf"
+    section: "Afrose et al., SecDev 2019, Section II.2 Passwords in PBE"
+    read_at: "2026-11-06"
+    quote: "then malicious attackers may obtain the password and predict the key"
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Table 1, vulnerability 2"
+    read_at: "2026-11-06"
+    quote: "Predictable/constant passwords for PBE"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/PBEKeySpec.html"
+    section: "Constructor PBEKeySpec(char[] password, byte[] salt, int iterationCount, int keyLength)"
+    read_at: "2026-11-06"
+    quote: "public PBEKeySpec(char[] password, byte[] salt, int iterationCount, int keyLength)"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "SecretKeyFactory Algorithms: PBKDF2With<prf>"
+    read_at: "2026-11-06"
+    quote: "| PBKDF2With<prf> | Password-based key-derivation algorithm defined in PKCS #5"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "CWE-259 (hard-coded password) rather than CWE-321: the constant is the password the key is derived from. The fixed file takes the password from the caller."

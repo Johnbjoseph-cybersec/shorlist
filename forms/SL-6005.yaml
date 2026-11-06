@@ -1,0 +1,77 @@
+id: "SL-6005"
+title: "JSSE: SSLSocket created without endpoint identification"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JSSE"
+negative: false
+row_kind: "defect"
+literal: "SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(host, 443);"
+context_filename: "Client.java"
+context_template: |
+  import javax.net.ssl.SSLSocket;
+  import javax.net.ssl.SSLSocketFactory;
+
+  public class Client {
+      static SSLSocket open(String host) throws Exception {
+          SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(host, 443);
+          socket.startHandshake();
+          return socket;
+      }
+  }
+right_template: |
+  import javax.net.ssl.SSLParameters;
+  import javax.net.ssl.SSLSocket;
+  import javax.net.ssl.SSLSocketFactory;
+
+  public class Client {
+      static SSLSocket open(String host) throws Exception {
+          SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+          SSLSocket socket = (SSLSocket) factory.createSocket(host, 443);
+          SSLParameters params = socket.getSSLParameters();
+          params.setEndpointIdentificationAlgorithm("HTTPS");
+          socket.setSSLParameters(params);
+          socket.startHandshake();
+          return socket;
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-297"
+  taxonomy:
+    - "CryptoGuard: Rule 6 Custom SSLSocketFactory w/o manual Hostname verification"
+    - "CryptoAPI-Bench: SSL Socket"
+    - "MASC: 44. SSLSocketFactory without verifying Hostname"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/297.html"
+    section: "CWE-297 Improper Validation of Certificate with Host Mismatch: Description"
+    read_at: "2026-11-06"
+    quote: "The product communicates with a host that provides a certificate, but the product does not properly ensure that the certificate is actually associated with that host."
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Section 3 (Rule 6)"
+    read_at: "2026-11-06"
+    quote: "Rule 6 is to detect whether any method uses SSLSocket directly without performing hostname verification."
+  - url: "https://yaogroup.cs.vt.edu/papers/IEEE_SecDev19_CryptoAPI-Bench.pdf"
+    section: "Afrose et al., SecDev 2019, Section II.6 SSL Sockets"
+    read_at: "2026-11-06"
+    quote: "omits the hostname verification when the socket is created"
+  - url: "https://arxiv.org/pdf/2107.07065v6"
+    section: "Ami et al. (MASC), Fig. 2 taxonomy, misuse 44"
+    read_at: "2026-11-06"
+    quote: "44. SSLSocketFactory without verifying Hostname (3)"
+  - url: "https://docs.oracle.com/en/java/javase/25/security/java-secure-socket-extension-jsse-reference-guide.html"
+    section: "JSSE Reference Guide: host name verification"
+    read_at: "2026-11-06"
+    quote: "The SSLSocket and SSLEngine classes do not automatically verify that the host name matches the host name in the peer's credentials."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/net/ssl/SSLParameters.html"
+    section: "Method setEndpointIdentificationAlgorithm(String algorithm)"
+    read_at: "2026-11-06"
+    quote: "Sets the endpoint identification algorithm."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The defect is an absence; the literal is the line that creates the socket a host-name check never reaches. The fixed file sets endpoint identification \"HTTPS\" on the socket before the handshake."

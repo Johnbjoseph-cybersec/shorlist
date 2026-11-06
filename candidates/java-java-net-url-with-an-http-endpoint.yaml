@@ -1,0 +1,38 @@
+id: "candidate"
+title: "Java: java.net.URL with an http:// endpoint"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Java / java.net"
+negative: false
+row_kind: "defect"
+literal: "return new URL(\"http://api.example.com/login\");"
+context_filename: "Fetch.java"
+context_template: |
+  import java.net.URL;
+
+  public class Fetch {
+      static URL endpoint() throws Exception {
+          return new URL("http://api.example.com/login");
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-319"
+  taxonomy:
+    - "CryptoAPI-Bench: HTTP Protocol"
+    - "CryptoGuard: Rule 7 Occasional use of HTTP"
+    - "Go detectors study (Andersson & Monperrus): #10 HTTP protocol"
+source:
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.4, #10 HTTP Protocol"
+    read_at: "2026-11-06"
+    quote: "HTTP Protocol. (#10) concerns transmitting sensitive data over unencrypted HTTP"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "Plaintext HTTP: no family in schema/families.yaml fits this class, and the schema may not be edited in this wave (the absence of TLS is not the TLS family as families.yaml defines it). Also unsettled: whether an http:// URL is a misuse without knowing the data sent."

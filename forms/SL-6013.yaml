@@ -1,0 +1,61 @@
+id: "SL-6013"
+title: "Android WebView: onReceivedSslError calls handler.proceed()"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Kotlin / Android WebView"
+negative: false
+row_kind: "defect"
+literal: "handler.proceed()"
+context_filename: "PageClient.kt"
+context_template: |
+  import android.net.http.SslError
+  import android.webkit.SslErrorHandler
+  import android.webkit.WebView
+  import android.webkit.WebViewClient
+
+  class PageClient : WebViewClient() {
+      override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
+          handler.proceed()
+      }
+  }
+right_template: |
+  import android.net.http.SslError
+  import android.webkit.SslErrorHandler
+  import android.webkit.WebView
+  import android.webkit.WebViewClient
+
+  class PageClient : WebViewClient() {
+      override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
+          handler.cancel()
+      }
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+  taxonomy:
+    - "MASC: 43. ignoring onReceivedSSLError"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295 Improper Certificate Validation: Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://arxiv.org/pdf/2107.07065v6"
+    section: "Ami et al. (MASC), Fig. 2 taxonomy, misuse 43"
+    read_at: "2026-11-06"
+    quote: "43. ignoring onReceivedSSLError (3)"
+  - url: "https://developer.android.com/reference/android/webkit/SslErrorHandler"
+    section: "Method proceed()"
+    read_at: "2026-11-06"
+    quote: "Warning: When an SSL error occurs, the host application should always call cancel() rather than proceed() because an invalid SSL certificate means the connection is not secure."
+  - url: "https://developer.android.com/reference/android/webkit/WebViewClient"
+    section: "Method onReceivedSslError(WebView view, SslErrorHandler handler, SslError error)"
+    read_at: "2026-11-06"
+    quote: "Notifies the host application that an SSL error occurred while loading a resource."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

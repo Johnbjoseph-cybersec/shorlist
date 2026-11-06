@@ -1,0 +1,57 @@
+id: "SL-6012"
+title: "Android Kotlin: SecureRandom(byte[]) with a constant seed"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+row_kind: "defect"
+literal: "val rng = SecureRandom(\"fixed-seed-2024\".toByteArray())"
+context_filename: "Keys.kt"
+context_template: |
+  import java.security.SecureRandom
+
+  fun newKey(): ByteArray {
+      val rng = SecureRandom("fixed-seed-2024".toByteArray())
+      return ByteArray(32).also { rng.nextBytes(it) }
+  }
+right_template: |
+  import java.security.SecureRandom
+
+  fun newKey(): ByteArray {
+      val rng = SecureRandom()
+      return ByteArray(32).also { rng.nextBytes(it) }
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-337"
+  taxonomy:
+    - "Egele et al. (CryptoLint): Rule 6 Do not use static seeds to seed SecureRandom"
+    - "CryptoAPI-Bench: Seed in PRNG"
+    - "CryptoGuard: Rule 8 Predictable/constant PRNG seeds"
+    - "MASC: 100. Using static seeds for Secure RNG"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/337.html"
+    section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "A Pseudo-Random Number Generator (PRNG) is initialized from a predictable seed, such as the process ID or system time."
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 4.2 Rule 6"
+    read_at: "2026-11-06"
+    quote: "Rule 6: Do not use static seeds to seed SecureRandom"
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 5.2 Rule 6"
+    read_at: "2026-11-06"
+    quote: "computes a backwards slice from all constructors of SecureRandom that accept a seed argument"
+  - url: "https://developer.android.com/reference/java/security/SecureRandom"
+    section: "Constructor SecureRandom(byte[] seed)"
+    read_at: "2026-11-06"
+    quote: "The SecureRandom instance is seeded with the specified seed bytes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Egele et al. found static SecureRandom seeds on Android, where the seeded constructor of the old SHA1PRNG provider was deterministic."

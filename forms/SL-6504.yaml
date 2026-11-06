@@ -1,0 +1,43 @@
+id: "SL-6504"
+title: "Decoy: nginx hybrid ML-KEM group in a commented-out directive"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: true
+decoy_class: "comment"
+literal: "# ssl_ecdh_curve X25519MLKEM768;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          # ssl_ecdh_curve X25519MLKEM768;
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2605.17955"
+    section: "Section IV-B, RQ3 (quantum vulnerability surface)"
+    read_at: "2026-11-06"
+    quote: "hybrid curve X25519MLKEM768 appears in exactly four"
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ecdh_curve"
+    read_at: "2026-11-06"
+    quote: "ssl_ecdh_curve prime256v1:secp384r1;"
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv)"
+    read_at: "2026-11-06"
+    quote: "4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The directive is commented out; nginx uses its default curve list. The live form is SL-0011."

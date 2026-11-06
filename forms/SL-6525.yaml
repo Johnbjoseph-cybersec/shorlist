@@ -1,0 +1,29 @@
+id: "SL-6525"
+title: "OpenSSH: HostKeyAlgorithms ecdsa-sha2-nistp256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms ecdsa-sha2-nistp256"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms ecdsa-sha2-nistp256
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://arxiv.org/pdf/2408.00054"
+    section: "Table (SSH algorithm occurrences at NCSA, Section IV-A)"
+    read_at: "2026-11-06"
+    quote: "ecdsa-sha2-nistp256 1275 (50.62%)"
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "HostKeyAlgorithms: default list"
+    read_at: "2026-11-06"
+    quote: "ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,79 @@
+id: "SL-6002"
+title: "JCA: PBEParameterSpec with 20 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "c.init(Cipher.ENCRYPT_MODE, pbeKey, new PBEParameterSpec(salt, 20));"
+context_filename: "Pbe.java"
+context_template: |
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.PBEParameterSpec;
+
+  public class Pbe {
+      static byte[] encrypt(SecretKey pbeKey, byte[] salt, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("PBEWithHmacSHA256AndAES_256");
+          c.init(Cipher.ENCRYPT_MODE, pbeKey, new PBEParameterSpec(salt, 20));
+          return c.doFinal(data);
+      }
+  }
+right_template: |
+  import javax.crypto.Cipher;
+  import javax.crypto.SecretKey;
+  import javax.crypto.spec.PBEParameterSpec;
+
+  public class Pbe {
+      static byte[] encrypt(SecretKey pbeKey, byte[] salt, byte[] data) throws Exception {
+          Cipher c = Cipher.getInstance("PBEWithHmacSHA256AndAES_256");
+          c.init(Cipher.ENCRYPT_MODE, pbeKey, new PBEParameterSpec(salt, 600000));
+          return c.doFinal(data);
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+  taxonomy:
+    - "CryptoAPI-Bench: Iteration in PBE"
+    - "Egele et al. (CryptoLint): Rule 5 Do not use fewer than 1,000 iterations for PBE"
+    - "CryptoGuard: Rule 13 Fewer than 1,000 iterations for PBE"
+    - "MASC: 75. Using < 1000 iterations for PBE"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://yaogroup.cs.vt.edu/papers/IEEE_SecDev19_CryptoAPI-Bench.pdf"
+    section: "Afrose et al., SecDev 2019, Section II.13 Iteration Count in PBE (Fig. 4)"
+    read_at: "2026-11-06"
+    quote: "Line 3 takes an iteration count of 20 that is insecure to be used in PBEParameterSpec"
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 4.2 Rule 5"
+    read_at: "2026-11-06"
+    quote: "Rule 5: Do not use fewer than 1,000 iterations for PBE."
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Table 10, row 10.1"
+    read_at: "2026-11-06"
+    quote: "javax.crypto.spec.PBEParameterSpec: void <init>(byte[],int)"
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Table 1, vulnerability 13"
+    read_at: "2026-11-06"
+    quote: "Fewer than 1,000 iterations for PBE"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/PBEParameterSpec.html"
+    section: "Constructor PBEParameterSpec(byte[] salt, int iterationCount)"
+    read_at: "2026-11-06"
+    quote: "Constructs a parameter set for password-based encryption as defined in the PKCS #5 standard."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/specs/security/standard-names.html"
+    section: "Cipher Algorithms: PBEWith<digest>And<encryption> / PBEWith<prf>And<encryption>"
+    read_at: "2026-11-06"
+    quote: "PBEWithHmacSHA256AndAES_128: The PBES2 password-based encryption algorithm as defined in PKCS #5: Password-Based Cryptography Specification, Version 2.1."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Count 20 is the value of CryptoAPI-Bench Fig. 4 (rewritten here, not copied) and is under every threshold the papers use (1,000). The fixed file uses 600,000."

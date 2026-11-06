@@ -1,0 +1,29 @@
+id: "SL-6523"
+title: "OpenSSH: curve25519-sha256@libssh.org key exchange"
+family: "X25519"
+parameter_set: "curve25519-sha256@libssh.org"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "KexAlgorithms curve25519-sha256@libssh.org"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms curve25519-sha256@libssh.org
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2408.00054"
+    section: "Table (SSH algorithm occurrences at NCSA, Section IV-A)"
+    read_at: "2026-11-06"
+    quote: "curve25519-sha256@libssh.org 473 (18.78%)"
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms: supported algorithms"
+    read_at: "2026-11-06"
+    quote: "curve25519-sha256 curve25519-sha256@libssh.org diffie-hellman-group1-sha1"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

@@ -1,0 +1,34 @@
+id: "candidate"
+title: "OpenSSH: sntrup761x25519-sha512@openssh.com key exchange"
+family: "X25519"
+parameter_set: "sntrup761x25519-sha512@openssh.com"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "KexAlgorithms sntrup761x25519-sha512@openssh.com"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  KexAlgorithms sntrup761x25519-sha512@openssh.com
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2408.00054"
+    section: "Table (SSH algorithm occurrences at NCSA, Section IV-A)"
+    read_at: "2026-11-06"
+    quote: "sntrup761x25519-sha512@openssh.com ecdsa-sha2-nistp256"
+  - url: "https://www.openssh.com/txt/release-8.5"
+    section: "New features"
+    read_at: "2026-11-06"
+    quote: "replaced with sntrup761x25519-sha512@openssh.com."
+  - url: "https://man.openbsd.org/sshd_config"
+    section: "KexAlgorithms: supported algorithms"
+    read_at: "2026-11-06"
+    quote: "sntrup761x25519-sha512 sntrup761x25519-sha512@openssh.com"
+status: "candidate"
+candidate_reason: "Streamlined NTRU Prime has no family in families.yaml; filed as X25519 only because the schema needs a value. Same decision as candidates/sshd-kex-sntrup761x25519-sha512.yaml; this is the pre-RFC @openssh.com name."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

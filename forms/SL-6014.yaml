@@ -1,0 +1,48 @@
+id: "SL-6014"
+title: "Android Kotlin: setDefaultHostnameVerifier { _, _ -> true }"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Kotlin / Android (javax.net.ssl)"
+negative: false
+row_kind: "defect"
+literal: "HttpsURLConnection.setDefaultHostnameVerifier { _, _ -> true }"
+context_filename: "Tls.kt"
+context_template: |
+  import javax.net.ssl.HttpsURLConnection
+
+  fun install() {
+      HttpsURLConnection.setDefaultHostnameVerifier { _, _ -> true }
+  }
+right_template: |
+  fun install() {
+      // the platform's default HostnameVerifier is kept
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-297"
+  taxonomy:
+    - "MASC: 20. Allowing all hostnames"
+    - "CryptoAPI-Bench: Hostname Verifier"
+    - "CryptoGuard: Rule 4 Custom Hostname verifiers to accept all hosts"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/297.html"
+    section: "CWE-297 Improper Validation of Certificate with Host Mismatch: Description"
+    read_at: "2026-11-06"
+    quote: "The product communicates with a host that provides a certificate, but the product does not properly ensure that the certificate is actually associated with that host."
+  - url: "https://arxiv.org/pdf/2107.07065v6"
+    section: "Ami et al. (MASC), Fig. 2 taxonomy, misuse 20"
+    read_at: "2026-11-06"
+    quote: "20. Allowing all hostnames (11)"
+  - url: "https://developer.android.com/reference/javax/net/ssl/HostnameVerifier"
+    section: "Method verify(String hostname, SSLSession session)"
+    read_at: "2026-11-06"
+    quote: "Verify that the host name is an acceptable match with the server's authentication scheme."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Java has the lambda form (SL-5538); this is the Kotlin trailing-lambda form. The fixed file leaves the platform verifier in place."

@@ -1,0 +1,30 @@
+id: "SL-6508"
+title: "Decoy: Node.js log line naming the negotiated hybrid group"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "JavaScript / Node.js tls"
+negative: true
+decoy_class: "log_string"
+literal: "console.log('negotiated group: X25519MLKEM768');"
+context_filename: "report.js"
+context_template: |
+  console.log('negotiated group: X25519MLKEM768');
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2607.29005"
+    section: "Abstract"
+    read_at: "2026-11-06"
+    quote: "deployment rapidly converges on a single hybrid configuration, X25519MLKEM768."
+  - url: "https://nodejs.org/api/tls.html"
+    section: "tls.createSecureContext([options]): ecdhCurve"
+    read_at: "2026-11-06"
+    quote: "for example P-521:P-384:P-256, X25519, or X25519MLKEM768."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A measurement script printing what a server negotiated; the file configures nothing."

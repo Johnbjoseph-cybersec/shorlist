@@ -1,0 +1,58 @@
+id: "SL-6007"
+title: "Android Kotlin: Cipher.getInstance(\"AES/ECB/PKCS5Padding\")"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_string"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+row_kind: "defect"
+literal: "val cipher = Cipher.getInstance(\"AES/ECB/PKCS5Padding\")"
+context_filename: "Crypto.kt"
+context_template: |
+  import javax.crypto.Cipher
+  import javax.crypto.SecretKey
+
+  fun encrypt(key: SecretKey, data: ByteArray): ByteArray {
+      val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+      cipher.init(Cipher.ENCRYPT_MODE, key)
+      return cipher.doFinal(data)
+  }
+right_template: |
+  import javax.crypto.Cipher
+  import javax.crypto.SecretKey
+
+  fun encrypt(key: SecretKey, data: ByteArray): ByteArray {
+      val cipher = Cipher.getInstance("AES/GCM/NoPadding")
+      cipher.init(Cipher.ENCRYPT_MODE, key)
+      return cipher.iv + cipher.doFinal(data)
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+  taxonomy:
+    - "Egele et al. (CryptoLint): Rule 1 Do not use ECB mode for encryption"
+    - "CryptoAPI-Bench: Mode of Operation"
+    - "CryptoGuard: Rule 11 ECB mode in symmetric ciphers"
+    - "MASC: 78. Using Electronic Code Book Mode (ECB) for encryption"
+    - "LICMA: §1"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 4.2 Rule 1"
+    read_at: "2026-11-06"
+    quote: "Rule 1: Do not use ECB mode for encryption."
+  - url: "https://developer.android.com/reference/javax/crypto/Cipher"
+    section: "Class Cipher: Android provides the following Cipher transformations"
+    read_at: "2026-11-06"
+    quote: "Android provides the following Cipher transformations: | Algorithm | Modes | Paddings | Supported API Levels | Notes | AES | CBC CFB CTR CTS ECB OFB"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The JCA form exists for Java (SL-5024); this is the Android/Kotlin form Egele et al. measured. The fixed file uses GCM, whose IV the provider generates on init and the function prepends."

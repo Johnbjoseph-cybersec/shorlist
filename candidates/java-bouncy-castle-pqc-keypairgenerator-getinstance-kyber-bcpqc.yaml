@@ -1,0 +1,31 @@
+id: "candidate"
+title: "Java Bouncy Castle PQC: KeyPairGenerator.getInstance(\"Kyber\", \"BCPQC\")"
+family: "ML-KEM"
+parameter_set: null
+role: "key_establishment"
+form_kind: "api_string"
+language_or_product: "Java / Bouncy Castle PQC provider"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"Kyber\", \"BCPQC\");"
+context_filename: "Main.java"
+context_template: |
+  import java.security.*;
+
+  public class Main {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("Kyber", "BCPQC");
+      }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://drops.dagstuhl.de/storage/00lipics/lipics-vol394-esem2026/LIPIcs.ESEM.2026.53/LIPIcs.ESEM.2026.53.pdf"
+    section: "Section 3.3, Per-Language Detection (Java)"
+    read_at: "2026-11-06"
+    quote: "DSA, AES, SHA-256; PQC: Kyber, Dilithium, ML-KEM, ML-DSA, SPHINCS+) and 6"
+status: "candidate"
+candidate_reason: "Round-3 Kyber name; families.yaml has no family for pre-standard Kyber (same decision as candidates/liboqs-kem-kyber_768.yaml). The Bouncy Castle release that registered \"Kyber\" under BCPQC has not been read yet."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

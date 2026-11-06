@@ -1,0 +1,48 @@
+id: "candidate"
+title: "Go x/crypto/ssh: HostKeyCallback ssh.InsecureIgnoreHostKey()"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / golang.org/x/crypto/ssh"
+negative: false
+row_kind: "defect"
+literal: "return &ssh.ClientConfig{User: user, Auth: auth, HostKeyCallback: ssh.InsecureIgnoreHostKey()}"
+context_filename: "conn.go"
+context_template: |
+  package conn
+
+  import "golang.org/x/crypto/ssh"
+
+  func Config(user string, auth []ssh.AuthMethod) *ssh.ClientConfig {
+  	return &ssh.ClientConfig{User: user, Auth: auth, HostKeyCallback: ssh.InsecureIgnoreHostKey()}
+  }
+right_template: |
+  package conn
+
+  import "golang.org/x/crypto/ssh"
+
+  func Config(user string, auth []ssh.AuthMethod, hostKey ssh.PublicKey) *ssh.ClientConfig {
+  	return &ssh.ClientConfig{User: user, Auth: auth, HostKeyCallback: ssh.FixedHostKey(hostKey)}
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-322"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #13 No host key verification"
+source:
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.5, #13 No Host Key Verification"
+    read_at: "2026-11-06"
+    quote: "In Go, this typically results from using ssh.InsecureIgnoreHostKey."
+  - url: "https://github.com/golang/crypto/blob/v0.43.0/ssh/client.go"
+    section: "ssh/client.go: InsecureIgnoreHostKey"
+    read_at: "2026-11-06"
+    quote: "// not be used for production code."
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "SSH host-key verification: no family in schema/families.yaml fits this class, and the schema may not be edited in this wave (TLS is defined as the TLS/X.509 layer; SSH is not it). The family field here is a placeholder."

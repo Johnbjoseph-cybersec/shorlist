@@ -1,0 +1,29 @@
+id: "candidate"
+title: "GnuTLS priority string +GROUP-X25519-MLKEM768"
+family: "ML-KEM"
+parameter_set: null
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "C / GnuTLS"
+negative: false
+literal: "gnutls_priority_set_direct(session, \"NORMAL:+GROUP-X25519-MLKEM768\", NULL);"
+context_filename: "client.c"
+context_template: |
+  #include <gnutls/gnutls.h>
+
+  int f(gnutls_session_t session) {
+      return gnutls_priority_set_direct(session, "NORMAL:+GROUP-X25519-MLKEM768", NULL);
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2606.16473"
+    section: "Section IV-C (hybrid mechanism support in libraries and servers)"
+    read_at: "2026-11-06"
+    quote: "including Go 1.24+, OpenSSL 3.5.0+, Node.js (v24.5.0+ and v22.20.0+), BoringSSL, GnuTLS (with leancrypto or liboqs), rustls 0.23.22+, and Botan 3.7.0+."
+status: "candidate"
+candidate_reason: "The paper says GnuTLS supports the hybrid; the manual's Priority Strings page as saved lists the groups GROUP-SECP192R1 ... GROUP-FFDHE8192 and no ML-KEM group (grep 'GROUP-' and 'MLKEM' in the saved page), so the keyword spelling is unconfirmed."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

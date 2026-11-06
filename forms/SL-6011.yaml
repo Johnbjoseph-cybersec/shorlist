@@ -1,0 +1,55 @@
+id: "SL-6011"
+title: "Android Kotlin: PBEKeySpec with 100 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+row_kind: "defect"
+literal: "val spec = PBEKeySpec(password, salt, 100, 256)"
+context_filename: "Kdf.kt"
+context_template: |
+  import javax.crypto.SecretKeyFactory
+  import javax.crypto.spec.PBEKeySpec
+
+  fun derive(password: CharArray, salt: ByteArray): ByteArray {
+      val spec = PBEKeySpec(password, salt, 100, 256)
+      return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).encoded
+  }
+right_template: |
+  import javax.crypto.SecretKeyFactory
+  import javax.crypto.spec.PBEKeySpec
+
+  fun derive(password: CharArray, salt: ByteArray): ByteArray {
+      val spec = PBEKeySpec(password, salt, 600000, 256)
+      return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).encoded
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+  taxonomy:
+    - "Egele et al. (CryptoLint): Rule 5 Do not use fewer than 1,000 iterations for PBE"
+    - "CryptoAPI-Bench: Iteration in PBE"
+    - "CryptoGuard: Rule 13 Fewer than 1,000 iterations for PBE"
+    - "MASC: 75. Using < 1000 iterations for PBE"
+    - "LICMA: §5"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 4.2 Rule 5"
+    read_at: "2026-11-06"
+    quote: "Rule 5: Do not use fewer than 1,000 iterations for PBE."
+  - url: "https://developer.android.com/reference/javax/crypto/spec/PBEKeySpec"
+    section: "Constructor PBEKeySpec(char[] password, byte[] salt, int iterationCount, int keyLength)"
+    read_at: "2026-11-06"
+    quote: "public PBEKeySpec (char[] password, byte[] salt, int iterationCount, int keyLength)"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

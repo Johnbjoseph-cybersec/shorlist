@@ -1,0 +1,34 @@
+id: "SL-6526"
+title: "OpenSSH: HostKeyAlgorithms +ssh-rsa re-enables RSA/SHA-1 host keys"
+family: "RSA"
+parameter_set: "ssh-rsa"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OpenSSH sshd"
+negative: false
+literal: "HostKeyAlgorithms +ssh-rsa"
+context_filename: "sshd_config"
+context_template: |
+  Port 22
+  HostKeyAlgorithms +ssh-rsa
+expected:
+  family: "RSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2408.00054"
+    section: "Table (SSH algorithm occurrences at NCSA, Section IV-A)"
+    read_at: "2026-11-06"
+    quote: "ssh-rsa** 5 (0.20%)"
+  - url: "https://www.openssh.com/txt/release-8.8"
+    section: "Potentially-incompatible changes"
+    read_at: "2026-11-06"
+    quote: "HostkeyAlgorithms +ssh-rsa"
+  - url: "https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19"
+    section: "Public Key Algorithm Names registry (CSV ssh-parameters-19.csv)"
+    read_at: "2026-11-06"
+    quote: "ssh-rsa,ssh-rsa,[RFC 4253],Section 6.6"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The leading + appends ssh-rsa to the default set; OpenSSH 8.8 removed it from the default. The signature hash is SHA-1; the row is scored on RSA."

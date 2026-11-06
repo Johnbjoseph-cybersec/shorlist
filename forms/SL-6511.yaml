@@ -1,0 +1,34 @@
+id: "SL-6511"
+title: "OpenVPN: --tls-groups X25519MLKEM768"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "cli"
+language_or_product: "OpenVPN 2.6 (OpenSSL 3.5)"
+negative: false
+literal: "exec openvpn --config server.conf --tls-groups X25519MLKEM768"
+context_filename: "run.sh"
+context_template: |
+  #!/bin/sh
+  exec openvpn --config server.conf --tls-groups X25519MLKEM768
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2603.28728"
+    section: "Section 3.5, OpenVPN: PQC migration efforts"
+    read_at: "2026-11-06"
+    quote: "group, OpenVPN can negotiate it just like any other cipher suite."
+  - url: "https://github.com/OpenVPN/openvpn/blob/master/doc/man-sections/tls-options.rst"
+    section: "--tls-groups list"
+    read_at: "2026-11-06"
+    quote: "A list of allowable groups/curves in order of preference."
+  - url: "https://docs.openssl.org/3.5/man3/SSL_CTX_set1_curves/"
+    section: "SSL_CTX_set1_groups_list: notes"
+    read_at: "2026-11-06"
+    quote: "OpenSSL 3.5 also introduces support for three hybrid ECDH PQ key exchange TLS groups: X25519MLKEM768, SecP256r1MLKEM768 and SecP384r1MLKEM1024."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). OpenVPN passes the list to the TLS library; with OpenSSL 3.5 or later the group is built in. server.conf carries no algorithm."

@@ -1,0 +1,60 @@
+id: "SL-6023"
+title: "M2Crypto: EVP.Cipher aes_128_cbc with an all-zero IV"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Python / M2Crypto"
+negative: false
+row_kind: "defect"
+literal: "c = EVP.Cipher(\"aes_128_cbc\", key, b\"\\x00\" * 16, 1)"
+context_filename: "enc.py"
+context_template: |
+  from M2Crypto import EVP
+
+
+  def encrypt(key, data):
+      c = EVP.Cipher("aes_128_cbc", key, b"\x00" * 16, 1)
+      return c.update(data) + c.final()
+right_template: |
+  import os
+
+  from M2Crypto import EVP
+
+
+  def encrypt(key, data):
+      iv = os.urandom(16)
+      c = EVP.Cipher("aes_128_cbc", key, iv, 1)
+      return iv + c.update(data) + c.final()
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-329"
+  taxonomy:
+    - "LICMA: §2"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Table 1, rule §2"
+    read_at: "2026-11-06"
+    quote: "Do not use a non-random initiliazation vector (IV) for ciphertext block chaining (CBC) encryption."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Section 3.2 Implementation"
+    read_at: "2026-11-06"
+    quote: "For Python, we cover 5 different crypto modules: cryptography, M2Crypto, PyCrypto, PyNaCl, ucryptolib."
+  - url: "https://m2crypto.readthedocs.io/en/latest/M2Crypto.html"
+    section: "M2Crypto.EVP.Cipher"
+    read_at: "2026-11-06"
+    quote: "class M2Crypto.EVP.Cipher(alg: str, key: bytes, iv: bytes, op: int, key_as_bytes: int = 0, d: str = 'md5', salt: bytes = b'12345678', i: int = 1, padding: int = 1)[source]"
+  - url: "https://gitlab.com/m2crypto/m2crypto/-/blob/0.46.2/src/SWIG/_evp.i"
+    section: "SWIG/_evp.i: cipher names"
+    read_at: "2026-11-06"
+    quote: "%rename(aes_128_cbc) EVP_aes_128_cbc;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

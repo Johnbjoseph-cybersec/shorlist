@@ -1,0 +1,37 @@
+id: "SL-6510"
+title: "Traefik dynamic config: curvePreferences X25519MLKEM768"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Traefik v3 (dynamic YAML)"
+negative: false
+literal: "        - X25519MLKEM768"
+context_filename: "dynamic.yaml"
+context_template: |
+  tls:
+    options:
+      default:
+        curvePreferences:
+          - X25519MLKEM768
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2606.16473"
+    section: "Section IV-C (hybrid mechanism support in libraries and servers)"
+    read_at: "2026-11-06"
+    quote: "It is also supported in server and networking software such as NGINX (compiled with OpenSSL 3.5+), Caddy 2.10.0+, Traefik, rpxy 0.9.4+,"
+  - url: "https://doc.traefik.io/traefik/reference/routing-configuration/http/tls/tls-options/"
+    section: "TLS Options: Curve Preferences"
+    read_at: "2026-11-06"
+    quote: "The names of the curves defined by crypto (e.g. CurveP521) and the RFC defined names (e. g. secp521r1) can be used."
+  - url: "https://pkg.go.dev/crypto/tls@go1.24.0"
+    section: "type CurveID (constants)"
+    read_at: "2026-11-06"
+    quote: "X25519MLKEM768 CurveID = 4588"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). Traefik takes Go crypto/tls CurveID names; X25519MLKEM768 is the Go name."

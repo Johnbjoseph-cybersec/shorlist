@@ -1,0 +1,35 @@
+id: "SL-6522"
+title: "Cloudflare CIRCL: mlkem768.GenerateKeyPair"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "api_call"
+language_or_product: "Go / cloudflare/circl"
+negative: false
+literal: "pk, sk, err := mlkem768.GenerateKeyPair(nil)"
+context_filename: "main.go"
+context_template: |
+  package main
+
+  import "github.com/cloudflare/circl/kem/mlkem/mlkem768"
+
+  func main() {
+  	pk, sk, err := mlkem768.GenerateKeyPair(nil)
+  	_, _, _ = pk, sk, err
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://drops.dagstuhl.de/storage/00lipics/lipics-vol394-esem2026/LIPIcs.ESEM.2026.53/LIPIcs.ESEM.2026.53.pdf"
+    section: "Section 5.4, PQC Adoption (vendored CIRCL in adopter repositories)"
+    read_at: "2026-11-06"
+    quote: "finding both resolve to a bundled copy of Cloudflare’s CIRCL library under a vendor/ path"
+  - url: "https://pkg.go.dev/github.com/cloudflare/circl/kem/mlkem/mlkem768"
+    section: "func GenerateKeyPair"
+    read_at: "2026-11-06"
+    quote: "If rand is nil, crypto/rand.Reader will be used."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

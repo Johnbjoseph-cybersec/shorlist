@@ -1,0 +1,62 @@
+id: "SL-6018"
+title: "Go golang-jwt: HS256 SignedString with a hard-coded key"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "Go / github.com/golang-jwt/jwt/v5"
+negative: false
+row_kind: "defect"
+literal: "return token.SignedString([]byte(\"secret\"))"
+context_filename: "auth.go"
+context_template: |
+  package auth
+
+  import "github.com/golang-jwt/jwt/v5"
+
+  func Sign(claims jwt.MapClaims) (string, error) {
+  	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+  	return token.SignedString([]byte("secret"))
+  }
+right_template: |
+  package auth
+
+  import (
+  	"os"
+
+  	"github.com/golang-jwt/jwt/v5"
+  )
+
+  func Sign(claims jwt.MapClaims) (string, error) {
+  	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+  	return token.SignedString([]byte(os.Getenv("JWT_HMAC_KEY")))
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+defect:
+  cwe: "CWE-321"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #04 Constant/predictable key"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/321.html"
+    section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a hard-coded, unchangeable cryptographic key."
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.2, #04 Constant/Predictable Keys"
+    read_at: "2026-11-06"
+    quote: "Constant/Predictable Keys. (#04) concerns the use of static, hardcoded, or guessable cryptographic keys."
+  - url: "https://github.com/golang-jwt/jwt/blob/v5.3.0/hmac.go"
+    section: "hmac.go: SigningMethodHMAC.Sign"
+    read_at: "2026-11-06"
+    quote: "// should ideally be providing a []byte key which was produced from a"
+  - url: "https://github.com/golang-jwt/jwt/blob/v5.3.0/token.go"
+    section: "token.go: Token.SignedString"
+    read_at: "2026-11-06"
+    quote: "// SignedString creates and returns a complete, signed JWT."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The Go study's #04 example is a default JWT signing key (Kiali, CVE-2020-1764). Go has rows for hard-coded AES and HMAC keys (SL-5042/5043); this is the JWT library form. The fixed file reads the key from the environment."

@@ -1,0 +1,66 @@
+id: "SL-6015"
+title: "Android Kotlin: X509TrustManager with an empty checkServerTrusted"
+family: "TLS"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Kotlin / Android (javax.net.ssl)"
+negative: false
+row_kind: "defect"
+literal: "override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}"
+context_filename: "TrustAll.kt"
+context_template: |
+  import java.security.cert.X509Certificate
+  import javax.net.ssl.X509TrustManager
+
+  class TrustAll : X509TrustManager {
+      override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+          throw UnsupportedOperationException()
+      }
+
+      override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}
+
+      override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+  }
+right_template: |
+  import java.security.cert.X509Certificate
+  import javax.net.ssl.X509TrustManager
+
+  class Delegating(private val platform: X509TrustManager) : X509TrustManager {
+      override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+          throw UnsupportedOperationException()
+      }
+
+      override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+          platform.checkServerTrusted(chain, authType)
+      }
+
+      override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+  }
+expected:
+  family: "TLS"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-295"
+  taxonomy:
+    - "MASC: 17. Trusting all certificates"
+    - "CryptoAPI-Bench: Certificate Validation"
+    - "CryptoGuard: Rule 5 Custom TrustManager to trust all certificates"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/295.html"
+    section: "CWE-295 Improper Certificate Validation: Description"
+    read_at: "2026-11-06"
+    quote: "The product does not validate, or incorrectly validates, a certificate."
+  - url: "https://arxiv.org/pdf/2107.07065v6"
+    section: "Ami et al. (MASC), Fig. 2 taxonomy, misuse 17"
+    read_at: "2026-11-06"
+    quote: "17. Trusting all certificates (8)"
+  - url: "https://developer.android.com/reference/javax/net/ssl/X509TrustManager"
+    section: "Method checkServerTrusted(X509Certificate[] chain, String authType)"
+    read_at: "2026-11-06"
+    quote: "build a certificate path to a trusted root and return if it can be validated and is trusted for server SSL authentication based on the authentication type."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Java has this class (SL-5539); this is the Kotlin form. The fixed file delegates to the platform trust manager, which throws on an untrusted chain."

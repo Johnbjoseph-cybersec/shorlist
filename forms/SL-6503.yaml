@@ -1,0 +1,46 @@
+id: "SL-6503"
+title: "nginx: ssl_ecdh_curve X25519"
+family: "X25519"
+parameter_set: "X25519"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "nginx"
+negative: false
+literal: "ssl_ecdh_curve X25519;"
+context_filename: "nginx.conf"
+context_template: |
+  events {}
+
+  http {
+      server {
+          listen 443 ssl;
+          ssl_certificate     cert.pem;
+          ssl_certificate_key key.pem;
+          ssl_ecdh_curve X25519;
+      }
+  }
+expected:
+  family: "X25519"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2605.17955"
+    section: "Section IV-B, RQ13 (ECDHE named curve preferences), Fig. 14"
+    read_at: "2026-11-06"
+    quote: "Only 10.4% of TLS-enabled contexts (625 of 5,982) explicitly set"
+  - url: "https://arxiv.org/pdf/2605.17955"
+    section: "Section IV-B, RQ13, list of ssl_ecdh_curve values"
+    read_at: "2026-11-06"
+    quote: "X25519 96"
+  - url: "https://nginx.org/en/docs/http/ngx_http_ssl_module.html"
+    section: "ssl_ecdh_curve"
+    read_at: "2026-11-06"
+    quote: "ssl_ecdh_curve prime256v1:secp384r1;"
+  - url: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8"
+    section: "TLS Supported Groups registry (CSV tls-parameters-8.csv)"
+    read_at: "2026-11-06"
+    quote: "29,x25519,Y,Y,[RFC 9846]; [RFC 8422],"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The paper counts this value among the ssl_ecdh_curve settings of nginx configurations on GitHub. The certificate file names are placeholders and carry no algorithm."

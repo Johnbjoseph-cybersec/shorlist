@@ -1,0 +1,49 @@
+id: "SL-6030"
+title: "Decoy: Go deny list naming aes128-cbc"
+family: "AES"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "Go / golang.org/x/crypto/ssh"
+negative: true
+decoy_class: "ban_list"
+row_kind: "defect"
+literal: "var deniedSSHCiphers = []string{\"aes128-cbc\"}"
+context_filename: "policy.go"
+context_template: |
+  package policy
+
+  var deniedSSHCiphers = []string{"aes128-cbc"}
+
+  func Denied(name string) bool {
+  	for _, c := range deniedSSHCiphers {
+  		if c == name {
+  			return true
+  		}
+  	}
+  	return false
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #12 Insecure SSH suite"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.5, #12 Insecure SSH Suite"
+    read_at: "2026-11-06"
+    quote: "Insecure SSH Suite. (#12) covers configurations using outdated ciphers (e.g., CBC mode), which enable plaintext recovery via padding oracle attacks [3]."
+  - url: "https://github.com/golang/crypto/blob/v0.43.0/ssh/common.go"
+    section: "ssh/common.go: cipher names"
+    read_at: "2026-11-06"
+    quote: "InsecureCipherAES128CBC    = \"aes128-cbc\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

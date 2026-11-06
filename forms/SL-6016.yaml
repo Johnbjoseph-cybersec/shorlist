@@ -1,0 +1,60 @@
+id: "SL-6016"
+title: "Go x/crypto/ssh: Config.Ciphers = aes128-cbc"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "config_value"
+language_or_product: "Go / golang.org/x/crypto/ssh"
+negative: false
+row_kind: "defect"
+literal: "cfg.Ciphers = []string{\"aes128-cbc\"}"
+context_filename: "conn.go"
+context_template: |
+  package conn
+
+  import "golang.org/x/crypto/ssh"
+
+  func Config(user string, auth []ssh.AuthMethod, hostKey ssh.PublicKey) *ssh.ClientConfig {
+  	cfg := &ssh.ClientConfig{User: user, Auth: auth, HostKeyCallback: ssh.FixedHostKey(hostKey)}
+  	cfg.Ciphers = []string{"aes128-cbc"}
+  	return cfg
+  }
+right_template: |
+  package conn
+
+  import "golang.org/x/crypto/ssh"
+
+  func Config(user string, auth []ssh.AuthMethod, hostKey ssh.PublicKey) *ssh.ClientConfig {
+  	cfg := &ssh.ClientConfig{User: user, Auth: auth, HostKeyCallback: ssh.FixedHostKey(hostKey)}
+  	cfg.Ciphers = []string{"aes128-gcm@openssh.com"}
+  	return cfg
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-327"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #12 Insecure SSH suite"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/327.html"
+    section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a broken or risky cryptographic algorithm or protocol."
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.5, #12 Insecure SSH Suite"
+    read_at: "2026-11-06"
+    quote: "Insecure SSH Suite. (#12) covers configurations using outdated ciphers (e.g., CBC mode), which enable plaintext recovery via padding oracle attacks [3]."
+  - url: "https://github.com/golang/crypto/blob/v0.43.0/ssh/cipher.go"
+    section: "ssh/cipher.go: cipherModes"
+    read_at: "2026-11-06"
+    quote: "// CBC mode is insecure and so is not included in the default config."
+  - url: "https://github.com/golang/crypto/blob/v0.43.0/ssh/common.go"
+    section: "ssh/common.go: cipher names"
+    read_at: "2026-11-06"
+    quote: "InsecureCipherAES128CBC    = \"aes128-cbc\""
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "sshd has a weak-axis 3des-cbc row; no row turned AES-CBC on in an SSH client library. The fixed file uses AES-GCM."

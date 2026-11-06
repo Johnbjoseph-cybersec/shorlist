@@ -1,0 +1,60 @@
+id: "SL-6006"
+title: "JCA: HmacSHA256 KeyGenerator.init(56)"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "KeyGenerator kg = KeyGenerator.getInstance(\"HmacSHA256\"); kg.init(56);"
+context_filename: "MacKeys.java"
+context_template: |
+  import javax.crypto.KeyGenerator;
+  import javax.crypto.SecretKey;
+
+  public class MacKeys {
+      static SecretKey newKey() throws Exception {
+          KeyGenerator kg = KeyGenerator.getInstance("HmacSHA256"); kg.init(56);
+          return kg.generateKey();
+      }
+  }
+right_template: |
+  import javax.crypto.KeyGenerator;
+  import javax.crypto.SecretKey;
+
+  public class MacKeys {
+      static SecretKey newKey() throws Exception {
+          KeyGenerator kg = KeyGenerator.getInstance("HmacSHA256"); kg.init(256);
+          return kg.generateKey();
+      }
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: 56
+defect:
+  cwe: "CWE-326"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #05 Short key length"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/326.html"
+    section: "CWE-326 Inadequate Encryption Strength: Description"
+    read_at: "2026-11-06"
+    quote: "The product stores or transmits sensitive data using an encryption scheme that is theoretically sound, but is not strong enough for the level of protection required."
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.2, #05 Short Key Length"
+    read_at: "2026-11-06"
+    quote: "HMAC keys should be at least 128 bits to resist brute-force attacks [30]."
+  - url: "https://docs.oracle.com/en/java/javase/25/security/oracle-providers.html"
+    section: "SunJCE Provider, Table 4-17 Key Size Restrictions: HmacSHA256"
+    read_at: "2026-11-06"
+    quote: "| HmacSHA256 | 256 | No key size restriction."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/KeyGenerator.html"
+    section: "Method init(int keysize)"
+    read_at: "2026-11-06"
+    quote: "Initializes this key generator for a certain keysize."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "SunJCE accepts any HMAC key size, so the JDK does not stop a 56-bit HMAC key (an AES KeyGenerator would throw on init(56)). The class source is the Go study's #05, which is stated for HMAC keys in general."

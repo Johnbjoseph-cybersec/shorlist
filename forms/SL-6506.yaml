@@ -1,0 +1,33 @@
+id: "SL-6506"
+title: "Decoy: Go comment naming the default hybrid ML-KEM group"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Go / crypto/tls 1.24"
+negative: true
+decoy_class: "comment"
+literal: "// X25519MLKEM768 is in the default CurvePreferences since Go 1.24."
+context_filename: "main.go"
+context_template: |
+  package main
+
+  // X25519MLKEM768 is in the default CurvePreferences since Go 1.24.
+  func main() {}
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2606.16473"
+    section: "Section IV-C (hybrid mechanism support in libraries and servers)"
+    read_at: "2026-11-06"
+    quote: "including Go 1.24+, OpenSSL 3.5.0+, Node.js (v24.5.0+ and v22.20.0+), BoringSSL, GnuTLS (with leancrypto or liboqs), rustls 0.23.22+, and Botan 3.7.0+."
+  - url: "https://pkg.go.dev/crypto/tls@go1.24.0"
+    section: "type Config: CurvePreferences"
+    read_at: "2026-11-06"
+    quote: "From Go 1.24, the default includes the [X25519MLKEM768] hybrid"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "A comment in a file that imports no crypto package."

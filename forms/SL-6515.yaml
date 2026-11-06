@@ -1,0 +1,35 @@
+id: "SL-6515"
+title: "Java JCA: KeyPairGenerator.getInstance(\"ML-DSA\")"
+family: "ML-DSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_string"
+language_or_product: "Java / JCA (JDK 24)"
+negative: false
+literal: "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"ML-DSA\");"
+context_filename: "Main.java"
+context_template: |
+  import java.security.*;
+
+  public class Main {
+      public static void main(String[] args) throws Exception {
+          KeyPairGenerator kpg = KeyPairGenerator.getInstance("ML-DSA");
+      }
+  }
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://drops.dagstuhl.de/storage/00lipics/lipics-vol394-esem2026/LIPIcs.ESEM.2026.53/LIPIcs.ESEM.2026.53.pdf"
+    section: "Section 3.3, Per-Language Detection (Java)"
+    read_at: "2026-11-06"
+    quote: "DSA, AES, SHA-256; PQC: Kyber, Dilithium, ML-KEM, ML-DSA, SPHINCS+) and 6"
+  - url: "https://docs.oracle.com/en/java/javase/24/docs/specs/security/standard-names.html"
+    section: "KeyPairGenerator Algorithms: ML-DSA"
+    read_at: "2026-11-06"
+    quote: "| ML-DSA | Generates keypairs for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA) as defined in FIPS 204."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Parameter set chosen later by initialize(); the line does not pin it."

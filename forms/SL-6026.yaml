@@ -1,0 +1,53 @@
+id: "SL-6026"
+title: "M2Crypto: EVP.pbkdf2 with 100 iterations"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / M2Crypto"
+negative: false
+row_kind: "defect"
+literal: "return EVP.pbkdf2(password, salt, 100, 32)"
+context_filename: "kdf.py"
+context_template: |
+  from M2Crypto import EVP
+
+
+  def derive(password, salt):
+      return EVP.pbkdf2(password, salt, 100, 32)
+right_template: |
+  from M2Crypto import EVP
+
+
+  def derive(password, salt):
+      return EVP.pbkdf2(password, salt, 600000, 32)
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-916"
+  taxonomy:
+    - "LICMA: §5"
+    - "Egele et al. (CryptoLint): Rule 5 Do not use fewer than 1,000 iterations for PBE"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/916.html"
+    section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Table 1, rule §5"
+    read_at: "2026-11-06"
+    quote: "Do not use fewer than 1,000 iterations for PBE."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Section 3.2 Implementation"
+    read_at: "2026-11-06"
+    quote: "For Python, we cover 5 different crypto modules: cryptography, M2Crypto, PyCrypto, PyNaCl, ucryptolib."
+  - url: "https://m2crypto.readthedocs.io/en/latest/M2Crypto.html"
+    section: "M2Crypto.EVP.pbkdf2"
+    read_at: "2026-11-06"
+    quote: "M2Crypto.EVP.pbkdf2(password: bytes, salt: bytes, iter: int, keylen: int) → bytes[source]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "M2Crypto's pbkdf2 is PBKDF2-HMAC-SHA1 (EVP.py calls m2.pkcs5_pbkdf2_hmac_sha1). Count 100 is under LICMA's and Egele's 1,000; the fixed file uses 600,000."

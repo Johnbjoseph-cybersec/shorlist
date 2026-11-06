@@ -1,0 +1,42 @@
+id: "SL-6028"
+title: "Decoy: Java log string naming new SecureRandom(seed)"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: true
+decoy_class: "log_string"
+row_kind: "defect"
+literal: "System.err.println(\"new SecureRandom(seed) with a fixed seed is rejected by the build policy\");"
+context_filename: "Policy.java"
+context_template: |
+  public class Policy {
+      static void reject() {
+          System.err.println("new SecureRandom(seed) with a fixed seed is rejected by the build policy");
+      }
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-337"
+  taxonomy:
+    - "CryptoGuard: Rule 8 Predictable/constant PRNG seeds"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/337.html"
+    section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "A Pseudo-Random Number Generator (PRNG) is initialized from a predictable seed, such as the process ID or system time."
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Table 10, row 8.1"
+    read_at: "2026-11-06"
+    quote: "java.security.SecureRandom: void <init>(byte[])"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/SecureRandom.html"
+    section: "Constructor SecureRandom(byte[] seed)"
+    read_at: "2026-11-06"
+    quote: "The SecureRandom instance is seeded with the specified seed bytes."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

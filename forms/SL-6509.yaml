@@ -1,0 +1,48 @@
+id: "SL-6509"
+title: "Caddy JSON config: tls_connection_policies curves x25519mlkem768"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "Caddy 2.10 (JSON config)"
+negative: false
+literal: "\"curves\": [\"x25519mlkem768\"]"
+context_filename: "caddy.json"
+context_template: |
+  {
+    "apps": {
+      "http": {
+        "servers": {
+          "srv0": {
+            "listen": [":443"],
+            "tls_connection_policies": [
+              {
+                "curves": ["x25519mlkem768"]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2606.16473"
+    section: "Section IV-C (hybrid mechanism support in libraries and servers)"
+    read_at: "2026-11-06"
+    quote: "It is also supported in server and networking software such as NGINX (compiled with OpenSSL 3.5+), Caddy 2.10.0+, Traefik, rpxy 0.9.4+,"
+  - url: "https://caddyserver.com/docs/caddyfile/directives/tls"
+    section: "tls directive: curves"
+    read_at: "2026-11-06"
+    quote: "x25519mlkem768 (PQC)"
+  - url: "https://caddyserver.com/docs/json/apps/http/servers/tls_connection_policies/curves/"
+    section: "apps/http/servers/tls_connection_policies/curves"
+    read_at: "2026-11-06"
+    quote: "The list of elliptic curves to support."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). The value names are listed on the Caddyfile tls page; the JSON key takes the same list."

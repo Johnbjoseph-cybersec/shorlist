@@ -1,0 +1,55 @@
+id: "SL-6025"
+title: "M2Crypto: EVP.pbkdf2 with a constant salt"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Python / M2Crypto"
+negative: false
+row_kind: "defect"
+literal: "return EVP.pbkdf2(password, b\"static-salt-1234\", 600000, 32)"
+context_filename: "kdf.py"
+context_template: |
+  from M2Crypto import EVP
+
+
+  def derive(password):
+      return EVP.pbkdf2(password, b"static-salt-1234", 600000, 32)
+right_template: |
+  import os
+
+  from M2Crypto import EVP
+
+
+  def derive(password):
+      salt = os.urandom(16)
+      return salt, EVP.pbkdf2(password, salt, 600000, 32)
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-760"
+  taxonomy:
+    - "LICMA: §4"
+    - "Egele et al. (CryptoLint): Rule 4 Do not use constant salts for PBE"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/760.html"
+    section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"
+    read_at: "2026-11-06"
+    quote: "The product uses a one-way cryptographic hash against an input that should not be reversible, such as a password, but the product uses a predictable salt as part of the input."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Table 1, rule §4"
+    read_at: "2026-11-06"
+    quote: "Do not use constant salts for password-based encryption (PBE)."
+  - url: "https://arxiv.org/pdf/2109.01109"
+    section: "Wickert et al. (LICMA), Section 3.2 Implementation"
+    read_at: "2026-11-06"
+    quote: "For Python, we cover 5 different crypto modules: cryptography, M2Crypto, PyCrypto, PyNaCl, ucryptolib."
+  - url: "https://m2crypto.readthedocs.io/en/latest/M2Crypto.html"
+    section: "M2Crypto.EVP.pbkdf2"
+    read_at: "2026-11-06"
+    quote: "M2Crypto.EVP.pbkdf2(password: bytes, salt: bytes, iter: int, keylen: int) → bytes[source]"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

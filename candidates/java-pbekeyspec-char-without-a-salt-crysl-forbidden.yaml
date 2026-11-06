@@ -1,0 +1,43 @@
+id: "candidate"
+title: "Java: PBEKeySpec(char[]) without a salt (CrySL FORBIDDEN)"
+family: "PBKDF2"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "PBEKeySpec spec = new PBEKeySpec(password);"
+context_filename: "Kdf.java"
+context_template: |
+  import javax.crypto.SecretKeyFactory;
+  import javax.crypto.spec.PBEKeySpec;
+
+  public class Kdf {
+      static byte[] derive(char[] password) throws Exception {
+          PBEKeySpec spec = new PBEKeySpec(password);
+          return SecretKeyFactory.getInstance("PBEWithHmacSHA256AndAES_256").generateSecret(spec).getEncoded();
+      }
+  }
+expected:
+  family: "PBKDF2"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-759"
+  taxonomy:
+    - "CrySL: FORBIDDEN PBEKeySpec(char[])"
+    - "MASC: 52. PBEKeySpec initialized without salt"
+source:
+  - url: "https://arxiv.org/pdf/1710.00564"
+    section: "Krüger et al. (CrySL), Section 3.2, Figure 6"
+    read_at: "2026-11-06"
+    quote: "Therefore, this constructor should not be called, and any call to it should be"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/javax/crypto/spec/PBEKeySpec.html"
+    section: "Constructor PBEKeySpec(char[] password)"
+    read_at: "2026-11-06"
+    quote: "public PBEKeySpec(char[] password)"
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "Not a defect on its own line: a PBEWith* cipher takes the salt from PBEParameterSpec at Cipher.init (or generates one), and the PBKDF2 SecretKeyFactory rejects a spec without a salt. Whether the line is a misuse depends on code elsewhere; unverified which SunJCE paths accept it."

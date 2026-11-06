@@ -1,0 +1,61 @@
+id: "SL-6008"
+title: "Android Kotlin: AES/CBC with IvParameterSpec(ByteArray(16))"
+family: "AES"
+parameter_set: null
+role: "encryption"
+form_kind: "api_call"
+language_or_product: "Kotlin / Android JCA"
+negative: false
+row_kind: "defect"
+literal: "cipher.init(Cipher.ENCRYPT_MODE, key, IvParameterSpec(ByteArray(16)))"
+context_filename: "Crypto.kt"
+context_template: |
+  import javax.crypto.Cipher
+  import javax.crypto.SecretKey
+  import javax.crypto.spec.IvParameterSpec
+
+  fun encrypt(key: SecretKey, padded: ByteArray): ByteArray {
+      val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+      cipher.init(Cipher.ENCRYPT_MODE, key, IvParameterSpec(ByteArray(16)))
+      return cipher.doFinal(padded)
+  }
+right_template: |
+  import java.security.SecureRandom
+  import javax.crypto.Cipher
+  import javax.crypto.SecretKey
+  import javax.crypto.spec.IvParameterSpec
+
+  fun encrypt(key: SecretKey, padded: ByteArray): ByteArray {
+      val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+      val iv = ByteArray(16).also { SecureRandom().nextBytes(it) }
+      cipher.init(Cipher.ENCRYPT_MODE, key, IvParameterSpec(iv))
+      return iv + cipher.doFinal(padded)
+  }
+expected:
+  family: "AES"
+  role: "encryption"
+  size: "undetermined"
+defect:
+  cwe: "CWE-329"
+  taxonomy:
+    - "Egele et al. (CryptoLint): Rule 2 Do not use a non-random IV for CBC encryption"
+    - "CryptoAPI-Bench: Initialization Vector"
+    - "CryptoGuard: Rule 12 Static IVs in CBC mode symmetric ciphers"
+    - "MASC: 87. Zeroed IV"
+    - "LICMA: §2"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/329.html"
+    section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"
+    read_at: "2026-11-06"
+    quote: "The product generates and uses a predictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode, which causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key."
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 4.2 Rule 2"
+    read_at: "2026-11-06"
+    quote: "Rule 2: Do not use a non-random IV for CBC encryption."
+  - url: "https://developer.android.com/reference/javax/crypto/spec/IvParameterSpec"
+    section: "Constructor IvParameterSpec(byte[] iv)"
+    read_at: "2026-11-06"
+    quote: "Creates an IvParameterSpec object using the bytes in iv as the IV."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"

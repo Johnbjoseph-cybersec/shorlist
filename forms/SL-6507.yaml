@@ -1,0 +1,35 @@
+id: "SL-6507"
+title: "Node.js tls: ecdhCurve 'X25519MLKEM768'"
+family: "ML-KEM"
+parameter_set: "X25519MLKEM768"
+role: "key_establishment"
+form_kind: "config_value"
+language_or_product: "JavaScript / Node.js tls"
+negative: false
+literal: "  ecdhCurve: 'X25519MLKEM768',"
+context_filename: "server.js"
+context_template: |
+  const tls = require('node:tls');
+
+  const server = tls.createServer({
+    ecdhCurve: 'X25519MLKEM768',
+  });
+
+  server.listen(8443);
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/2606.16473"
+    section: "Section IV-C (hybrid mechanism support in libraries and servers)"
+    read_at: "2026-11-06"
+    quote: "including Go 1.24+, OpenSSL 3.5.0+, Node.js (v24.5.0+ and v22.20.0+), BoringSSL, GnuTLS (with leancrypto or liboqs), rustls 0.23.22+, and Botan 3.7.0+."
+  - url: "https://nodejs.org/api/tls.html"
+    section: "tls.createSecureContext([options]): ecdhCurve"
+    read_at: "2026-11-06"
+    quote: "for example P-521:P-384:P-256, X25519, or X25519MLKEM768."
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "Hybrid: scored on the post-quantum half (ML-KEM). No key or certificate is configured; the template only has to parse."

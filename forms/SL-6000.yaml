@@ -1,0 +1,82 @@
+id: "SL-6000"
+title: "JCA: new SecureRandom(byte[]) with a constant seed"
+family: "RNG"
+parameter_set: null
+role: "n.a."
+form_kind: "api_call"
+language_or_product: "Java / JCA"
+negative: false
+row_kind: "defect"
+literal: "SecureRandom rng = new SecureRandom(\"fixed-seed-2024\".getBytes(StandardCharsets.UTF_8));"
+context_filename: "Keys.java"
+context_template: |
+  import java.nio.charset.StandardCharsets;
+  import java.security.SecureRandom;
+
+  public class Keys {
+      static byte[] newKey() {
+          SecureRandom rng = new SecureRandom("fixed-seed-2024".getBytes(StandardCharsets.UTF_8));
+          byte[] key = new byte[32];
+          rng.nextBytes(key);
+          return key;
+      }
+  }
+right_template: |
+  import java.security.SecureRandom;
+
+  public class Keys {
+      static byte[] newKey() {
+          SecureRandom rng = new SecureRandom();
+          byte[] key = new byte[32];
+          rng.nextBytes(key);
+          return key;
+      }
+  }
+expected:
+  family: "RNG"
+  role: "undetermined"
+  size: "undetermined"
+defect:
+  cwe: "CWE-337"
+  taxonomy:
+    - "CryptoGuard: Rule 8 Predictable/constant PRNG seeds"
+    - "Egele et al. (CryptoLint): Rule 6 Do not use static seeds to seed SecureRandom"
+    - "CryptoAPI-Bench: Seed in PRNG"
+    - "MASC: 100. Using static seeds for Secure RNG"
+source:
+  - url: "https://cwe.mitre.org/data/definitions/337.html"
+    section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"
+    read_at: "2026-11-06"
+    quote: "A Pseudo-Random Number Generator (PRNG) is initialized from a predictable seed, such as the process ID or system time."
+  - url: "https://arxiv.org/pdf/1806.06881"
+    section: "Rahaman et al. (CryptoGuard), Table 10, row 8.1"
+    read_at: "2026-11-06"
+    quote: "java.security.SecureRandom: void <init>(byte[])"
+  - url: "https://sites.cs.ucsb.edu/~chris/research/doc/ccs13_cryptolint.pdf"
+    section: "Egele et al., CCS 2013, Section 5.2 Rule 6"
+    read_at: "2026-11-06"
+    quote: "computes a backwards slice from all constructors of SecureRandom that accept a seed argument"
+  - url: "https://yaogroup.cs.vt.edu/papers/IEEE_SecDev19_CryptoAPI-Bench.pdf"
+    section: "Afrose et al., SecDev 2019, Section II.9 Seeds in PRNG"
+    read_at: "2026-11-06"
+    quote: "if a constant or static seed is provided in SecureRandom, then it is possible to have the same outcome on every run"
+  - url: "https://arxiv.org/pdf/2107.07065v6"
+    section: "Ami et al. (MASC), Fig. 2 taxonomy, misuse 100"
+    read_at: "2026-11-06"
+    quote: "100. Using static seeds for Secure RNG (14)"
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/SecureRandom.html"
+    section: "Constructor SecureRandom(byte[] seed)"
+    read_at: "2026-11-06"
+    quote: "The SecureRandom instance is seeded with the specified seed bytes."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/SecureRandom.html"
+    section: "Class SecureRandom"
+    read_at: "2026-11-06"
+    quote: "A newly created PRNG SecureRandom object is not seeded (except if it is created by SecureRandom(byte[]))."
+  - url: "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/SecureRandom.html"
+    section: "Class SecureRandom"
+    read_at: "2026-11-06"
+    quote: "Therefore, any seed material passed to a SecureRandom object must be unpredictable"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+notes: "The seed constructor, not setSeed (SL-5036): the JDK documents that an object created by SecureRandom(byte[]) is seeded at construction and does not self-seed. Whether output is fully determined by the seed depends on the provider; the row scores the constant seed, which the SecureRandom class documentation forbids. The fixed file uses the no-argument constructor."

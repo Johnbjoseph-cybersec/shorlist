@@ -1,0 +1,38 @@
+id: "candidate"
+title: "Go golang-jwt: ParseUnverified on an incoming token"
+family: "HMAC"
+parameter_set: null
+role: "mac"
+form_kind: "api_call"
+language_or_product: "Go / github.com/golang-jwt/jwt/v5"
+negative: false
+row_kind: "defect"
+literal: "_, _, err := jwt.NewParser().ParseUnverified(raw, claims)"
+context_filename: "auth.go"
+context_template: |
+  package auth
+
+  import "github.com/golang-jwt/jwt/v5"
+
+  func Claims(raw string) (jwt.MapClaims, error) {
+  	claims := jwt.MapClaims{}
+  	_, _, err := jwt.NewParser().ParseUnverified(raw, claims)
+  	return claims, err
+  }
+expected:
+  family: "HMAC"
+  role: "mac"
+  size: "undetermined"
+defect:
+  cwe: "CWE-347"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): #14 No JWT verification"
+source:
+  - url: "https://arxiv.org/pdf/2604.24085"
+    section: "Andersson & Monperrus, Section 3.1.6, #14 No JWT Verification"
+    read_at: "2026-11-06"
+    quote: "No JWT Verification. (#14) refers to missing signature checks, allowing attackers to forge tokens and access protected resources [17]."
+status: "candidate"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
+candidate_reason: "Missing JWT signature verification: no family in schema/families.yaml fits this class, and the schema may not be edited in this wave (the verifying algorithm is not pinned by the line, so HMAC is a placeholder); golang-jwt's parser.go was not fetched, and CWE-347 was not fetched either."

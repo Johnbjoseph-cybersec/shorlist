@@ -1,0 +1,25 @@
+id: "candidate"
+title: "Chef: method 'md5' attribute (Rahman et al. weak-crypto smell)"
+family: "MD5"
+parameter_set: null
+role: "hash"
+form_kind: "config_value"
+language_or_product: "Chef"
+negative: false
+literal: "method 'md5'"
+context_filename: "default.rb"
+context_template: |
+  method 'md5'
+expected:
+  family: "MD5"
+  role: "hash"
+  size: "undetermined"
+source:
+  - url: "https://arxiv.org/pdf/1907.07159"
+    section: "Section 4.1, Fig. 6 (annotated Chef script)"
+    read_at: "2026-11-06"
+    quote: "method ‘md5’ Use of weak cryptography algorithm"
+status: "candidate"
+candidate_reason: "The paper's figure shows the line without its resource; no Chef resource with a 'method' property taking 'md5' was identified, so there is no primary source that defines the form."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-06"
