@@ -115,7 +115,7 @@
       }
     },
     "right_template": {
-      "description": "The fixed file, planted under the same context_filename. It must not contain the literal. A scanner that reports the defect here raises a false alarm.",
+      "description": "Positive defect rows only: the fixed file, planted under the same context_filename. A defect decoy (negative: true, e.g. a comment that names ECB) has none. It must not contain the literal. A scanner that reports the defect here raises a false alarm.",
       "type": "string",
       "minLength": 1
     },
@@ -163,8 +163,13 @@
     },
     {
       "if": {"properties": {"row_kind": {"const": "defect"}}, "required": ["row_kind"]},
-      "then": {"required": ["defect", "right_template"], "not": {"required": ["weakness"]}},
+      "then": {"required": ["defect"], "not": {"required": ["weakness"]}},
       "else": {"not": {"anyOf": [{"required": ["defect"]}, {"required": ["right_template"]}]}}
+    },
+    {
+      "if": {"properties": {"row_kind": {"const": "defect"}, "negative": {"const": false}}, "required": ["row_kind", "negative"]},
+      "then": {"required": ["right_template"]},
+      "else": {"not": {"required": ["right_template"]}}
     }
   ],
   "$defs": {

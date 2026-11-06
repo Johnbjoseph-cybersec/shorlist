@@ -105,3 +105,47 @@ def test_axes_summary_keeps_axes_apart():
     assert a["weak"]["positive"]["hit"] == 1 and a["weak"]["positive"]["n"] == 1
     assert a["defect"]["positive"]["miss"] == 1 and a["defect"]["fixed_files"]["false_alarm"] == 1
     assert _axes(scored[:1]) == {}
+
+
+def test_defect_decoy_has_no_right_template():
+    r = ecb_row() | {"negative": True, "decoy_class": "comment",
+                     "literal": "# never use AES.MODE_ECB", "context_template": "# never use AES.MODE_ECB\n"}
+    del r["right_template"]
+    assert validate_row(r, None, SCHEMA, FAMILIES) == []
+    r["right_template"] = "x = 1\n"
+    assert validate_row(r, None, SCHEMA, FAMILIES)
+
+
+def test_run_end_to_end_with_a_defect_row(tmp_path):
+    import shutil
+    import yaml
+    from shorlist.adapters.base import Adapter
+    from shorlist.run import markdown, run
+
+    shutil.copytree(ROOT / "schema", tmp_path / "schema")
+    shutil.copy(ROOT / "VERSION", tmp_path / "VERSION")
+    (tmp_path / "forms").mkdir()
+    shutil.copy(ROOT / "forms" / "SL-0001.yaml", tmp_path / "forms" / "SL-0001.yaml")
+    row = ecb_row()
+    (tmp_path / "forms" / f"{row['id']}.yaml").write_text(yaml.safe_dump(row, sort_keys=False))
+
+    class FlagsEcb(Adapter):
+        """Reports CWE-327 on any line with MODE_ECB, and nothing else."""
+        name = "flags-ecb"
+
+        def version(self):
+            return "flags-ecb 1"
+
+        def scan(self, tree, workdir):
+            (f,) = list(tree.iterdir())
+            return [Record(f.name, n, "AES", cwe="CWE-327")
+                    for n, line in enumerate(f.read_text().split("\n"), 1) if "MODE_ECB" in line]
+
+    res = run(FlagsEcb(), tmp_path)
+    assert res["catalogue"]["by_axis"] == {"quantum": 1, "weak": 0, "defect": 1}
+    assert res["summary"]["positive"]["n"] == 1 and res["summary"]["positive"]["miss"] == 1  # quantum only
+    d = res["axes"]["defect"]
+    assert d["positive"] == {"hit": 1, "wrong_class": 0, "miss": 0, "n": 1}
+    assert d["fixed_files"] == {"ok": 1, "false_alarm": 0, "n": 1}
+    assert "SL-9001/fix" in res["raw_records"]
+    assert "fixed file: ok" in markdown(res)

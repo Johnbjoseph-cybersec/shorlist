@@ -53,6 +53,8 @@ quantum axis only.
   fixed, and must not contain the literal. `defect.cwe` is what a scanner must report on
   the literal's line; `defect.taxonomy` may name the same class in other benchmarks, as a
   reference only. A scanner that reports any CWE on the fixed file raises a false alarm.
+  A defect decoy (`negative: true`, e.g. a comment that names ECB) has no `right_template`;
+  any CWE reported in its tree is a false alarm.
   `defect_only` families (AES, HMAC, RNG …) are allowed only in defect rows.
 
 Write templates for defect rows yourself, from the description of the class. Copy a
