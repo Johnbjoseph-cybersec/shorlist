@@ -42,6 +42,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-321"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): Constant/predictable key"
 source:
   - url: "https://cwe.mitre.org/data/definitions/321.html"
     section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"

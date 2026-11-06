@@ -35,6 +35,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-321"
+  taxonomy:
+    - "LICMA: §3"
 source:
   - url: "https://cwe.mitre.org/data/definitions/321.html"
     section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"

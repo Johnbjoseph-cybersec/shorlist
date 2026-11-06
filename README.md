@@ -10,6 +10,12 @@ it. A generator plants every row into its own minimal tree, runs a scanner on it
 the output, so any cryptographic-inventory tool can be measured against the same public
 denominator, repeatably.
 
+Since v0.2 the catalogue is scored on **three axes, reported apart**: *quantum* (the
+headline: Shor-vulnerable and post-quantum forms), *weak* (classically weak algorithms and
+parameters, anchored on NIST SP 800-131A Rev. 2 and similar) and *defect* (misuse such as
+ECB, a constant IV or disabled certificate validation, scored on the CWE). A scanner gains
+or loses nothing on the quantum axis for a weak or a defect row.
+
 Version **0.1.1** · data **CC BY 4.0** · generator **Apache-2.0** · DOI [10.5281/zenodo.23974515](https://doi.org/10.5281/zenodo.23974515)
 (all versions).
 
@@ -36,7 +42,9 @@ A **form** is one way an algorithm appears in text:
 | `config_key`, `config_value` | `KexAlgorithms mlkem768x25519-sha256` in `sshd_config` |
 | `registry_id` | IANA TLS SignatureScheme `ecdsa_secp256r1_sha256` |
 | `oid` | `1.2.840.113549.1.1.1` (rsaEncryption) |
-| `curve_name`, `cli`, `file_format` | reserved in v0.1, no rows yet |
+| `curve_name` | `CURVE = "P-384"` |
+| `cli` | `openssl genpkey -algorithm RSASSA-PSS -out key.pem` |
+| `file_format` | the PEM label `-----BEGIN RSA PRIVATE KEY-----` |
 
 Half of the value is in the **decoys** (`negative: true`): text that names an algorithm
 but is not a use of it — a ban list, a comment, a log string, a switch set to off, an
@@ -57,25 +65,37 @@ broken down by `form_kind`, family and language or product.
   Whether a scanner reaches that file in a real repository (file types, sizes, vendored
   code, generated code, archives) is a different measurement — coverage — and is not
   made here.
-- **It does not measure misuse.** Static IVs, weak randomness, insecure modes and other
-  context- or data-flow-dependent defects are out of scope.
+- **Misuse only where one line shows it.** The defect axis holds misuse that a single
+  line pins (`AES/ECB/…`, an all-zero IV literal, `verify=False`, 100 PBKDF2 iterations).
+  Misuse that depends on data flow across functions or files (a key that reaches
+  `Cipher.init` from a constant three calls away, an IV reused across messages at run
+  time) is not in the catalogue.
 - **Role and key size are reported beside the outcome**, not folded into it.
 
-## Scope of v0.1
+## Scope of v0.2
 
-- Families: RSA, ECDSA and ML-KEM (including the X25519+ML-KEM-768 hybrids, scored on the
-  post-quantum half). The closed vocabulary in [`schema/families.yaml`](schema/families.yaml)
-  already lists the rest of the v1 scope — DSA, DH, EC, ECDH, EdDSA, X25519, X448, ML-DSA,
-  SLH-DSA, LMS, XMSS — with their CycloneDX mapping.
-- Languages and products: Python (pyca/cryptography), Java (JCA), Go (standard library),
-  nginx, OpenSSH `sshd`, IANA TLS / SSH / JOSE identifiers, one OID.
-- 30 rows: 20 positive forms and 10 decoys.
+2004 rows, every one checked against a primary source; 75 more wait in
+[`candidates/`](candidates/) (no primary source yet, or no family in the vocabulary).
 
-**Known not covered in v0.1:** C/C++ (OpenSSL, BoringSSL, wolfSSL…), .NET, Rust, JavaScript,
-BouncyCastle, PyCryptodome; curve names; OIDs beyond one; CLI invocations; key and
-certificate file formats; IKE/IPsec and vendor network configuration; DSA, DH, EdDSA and
-the post-quantum signatures; classically weak algorithms (SHA-1, MD5, 3DES, RSA < 2048),
-planned for v2 against OWASP ASVS 5.0 Appendix C and NIST SP 800-131A Rev. 2.
+| axis | rows | positive | decoys | families |
+|---|---|---|---|---|
+| quantum | 1510 | 1345 | 165 | RSA, DSA, DH, EC, ECDSA, ECDH, EdDSA, X25519, X448, ML-KEM, ML-DSA, SLH-DSA, LMS, XMSS |
+| weak | 307 | 276 | 31 | SHA-1, MD5, MD4, DES, 3DES, RC4, RC2, and weak parameters of quantum families (RSA-1024, DH-1024, P-192 …) |
+| defect | 187 | 162 | 25 | 14 CWE classes, e.g. CWE-327 (ECB, old TLS), CWE-321 (hard-coded key), CWE-295 (certificate validation off), CWE-780 (RSA without OAEP), CWE-916 (too few iterations), CWE-323 (nonce reuse) |
+
+Languages and products: Python, Java, Kotlin, Go, C, C++, C#, Rust, JavaScript/Node,
+PHP, Ruby, Swift; OpenSSL C API and CLI; nginx, Apache httpd, OpenSSH, strongSwan, Caddy,
+Traefik, OpenVPN; Terraform, AWS CloudFormation, AWS/Azure/Google Cloud KMS, HashiCorp
+Vault, cert-manager, PKCS#11; IANA TLS, SSH, IKEv2, JOSE and COSE identifiers; OIDs, curve
+names, PEM and JWK. Wave 6 took forms and misuse classes from the scientific literature
+(MASC, CryptoAPI-Bench, CryptoGuard, Egele et al., LICMA, a Go misuse study, PQC-migration
+studies), each with the paper and a primary definition as sources; `defect.taxonomy` names
+the same class in those benchmarks.
+
+**Known not covered in v0.2:** misuse that needs data flow (see above); families with no
+entry in the vocabulary yet (Streamlined NTRU Prime, pre-standard Kyber names, SM2/SM3/SM4,
+GOST, Blowfish, IDEA, bcrypt/scrypt/Argon2); vendor network configuration beyond a few
+FortiOS and Junos lines; binaries and archives.
 
 ## A row
 
@@ -92,6 +112,9 @@ Rows live in [`forms/`](forms/), one YAML file per row, validated by
 | `context_filename`, `context_template` | the minimal file the literal is planted in, under that name (`sshd_config`, `Main.java`) |
 | `expected` | `family`, `role`, `size` a scanner should report (for a decoy: what it would wrongly report) |
 | `negative`, `decoy_class` | decoy and its class |
+| `weakness` | weak axis: `status` (disallowed, deprecated, legacy_use), the standard and section that say so, and a quote |
+| `row_kind`, `defect` | `defect` for a misuse row; `defect.cwe` is what a scanner must report, `defect.taxonomy` the same class in other benchmarks |
+| `right_template` | positive defect rows: the same file with the defect fixed; reporting a CWE on it is a false alarm |
 | `source` | one or more **primary** sources: URL, section, date read |
 | `status` | `verified-source` (checked against the source) or `verified-run` (checked by running the product); `withdrawn` rows are kept |
 | `added_by`, `added_at`, `reviewed_by`, `notes` | provenance |
@@ -116,11 +139,18 @@ python -m shorlist table ../results/qrp-mcp-0.44.0.json
 reported as a use, count: `hit` (the expected family), `parent_only` (only `EC` for an
 expected ECDSA/ECDH), `wrong_family`, or `miss`. For a decoy, any in-scope family reported as
 a use anywhere in the planted tree is a `false_alarm`; reporting it as *not* a use (comment,
-ban) is correct. The full rules are in [`generator/shorlist/score.py`](generator/shorlist/score.py).
+ban) is correct. "In scope" follows the axis: a quantum row counts only quantum families
+(a reported MD5 is ignored), a weak row counts quantum and classically weak families. A
+defect row is scored on the CWE: `hit` when the scanner reports `defect.cwe` on the
+literal's line, `wrong_class` for another CWE there, `miss` otherwise; the fixed file is
+planted and scanned separately, and any CWE reported on it is a `false_alarm`. The full rules are in [`generator/shorlist/score.py`](generator/shorlist/score.py).
 
 **Template syntax.** "Parses" means syntax, not compilation: Python `ast.parse`, Go
-`gofmt -e`, Java `javac` (CI uses JDK 25), shell `sh -n`, and a line-shape check for
-nginx, `sshd_config` and `java.security`. See
+`gofmt -e`, Java `javac` (CI uses JDK 25), C/C++ `gcc -fsyntax-only`, Rust `rustfmt`,
+Node `node --check`, PHP `php -l`, Ruby `ruby -c`, shell `sh -n`, YAML/JSON loading, and a
+line-shape check for nginx, Apache, `sshd_config`, strongSwan, FortiOS, Cisco IOS,
+OpenSSL `.cnf`, PEM, `authorized_keys`, `known_hosts` and `java.security`. C#, Kotlin and
+Swift get only a balanced-brace check. See
 [`generator/shorlist/parsecheck.py`](generator/shorlist/parsecheck.py).
 
 **Repeatability.** Every result carries the catalogue version and **catalogue sha256**
@@ -134,12 +164,15 @@ fingerprint; the run date and host are recorded but are not part of it.
 
 Write an adapter in [`generator/shorlist/adapters/`](generator/shorlist/adapters/): a class
 with `version()` and `scan(tree, workdir) -> list[Record]`, registered in `ADAPTERS`. A
-`Record` is `{path, line, family, role, size, is_use}`; the interface is documented in
+`Record` is `{path, line, family, role, size, is_use, cwe}`; the interface is documented in
 [`adapters/base.py`](generator/shorlist/adapters/base.py) and
 [`adapters/qrp_mcp.py`](generator/shorlist/adapters/qrp_mcp.py) is a worked example. The
 adapter is the only place that knows the scanner's field names; the scorer sees records only.
 
 ## Results
+
+**These results are for v0.1 (30 rows, quantum axis only).** The v0.2 catalogue has not
+been measured yet; its results will replace this section.
 
 A 0 here means the tool reported none of these forms in this setup; it is not a judgement of the tool for its own purpose.
 

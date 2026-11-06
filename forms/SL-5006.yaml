@@ -34,6 +34,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-760"
+  taxonomy:
+    - "LICMA: §4"
 source:
   - url: "https://cwe.mitre.org/data/definitions/760.html"
     section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"

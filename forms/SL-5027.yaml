@@ -43,6 +43,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-1204"
+  taxonomy:
+    - "MASC: Reusing counter value in encryption"
 source:
   - url: "https://cwe.mitre.org/data/definitions/1204.html"
     section: "CWE-1204 Generation of Weak Initialization Vector (IV): Description"

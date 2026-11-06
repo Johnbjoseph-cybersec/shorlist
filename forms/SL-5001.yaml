@@ -32,6 +32,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-329"
+  taxonomy:
+    - "LICMA: §2"
 source:
   - url: "https://cwe.mitre.org/data/definitions/329.html"
     section: "CWE-329 Generation of Predictable IV with CBC Mode: Description"

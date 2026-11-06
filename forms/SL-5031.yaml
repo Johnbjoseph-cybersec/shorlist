@@ -39,6 +39,10 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-321"
+  taxonomy:
+    - "CryptoAPI-Bench: Cryptographic Key"
+    - "CryptoGuard: Predictable/constant cryptographic keys."
+    - "MASC: Using hardcoded key/password"
 source:
   - url: "https://cwe.mitre.org/data/definitions/321.html"
     section: "CWE-321 Use of Hard-coded Cryptographic Key: Description"

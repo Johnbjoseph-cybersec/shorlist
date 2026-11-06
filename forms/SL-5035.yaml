@@ -35,6 +35,10 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-338"
+  taxonomy:
+    - "CryptoAPI-Bench: PRNG"
+    - "CryptoGuard: Cryptographically insecure PRNGs (e.g., java.util.Random)"
+    - "MASC: Not using Secure (Pseudo) RNG"
 source:
   - url: "https://cwe.mitre.org/data/definitions/338.html"
     section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"

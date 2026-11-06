@@ -38,6 +38,11 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-337"
+  taxonomy:
+    - "CryptoAPI-Bench: Seed in PRNG"
+    - "CryptoGuard: Predictable/constant PRNG seeds"
+    - "MASC: Using static seeds for Secure RNG"
+    - "MASC: Using Setseed"
 source:
   - url: "https://cwe.mitre.org/data/definitions/337.html"
     section: "CWE-337 Predictable Seed in Pseudo-Random Number Generator (PRNG): Description"

@@ -41,6 +41,10 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-327"
+  taxonomy:
+    - "MASC: Java defaults to ECB for encryption with “AES\""
+    - "Egele et al. (CryptoLint): Rule 1: Do not use ECB mode for encryption."
+    - "CryptoGuard: ECB mode in symmetric ciphers"
 source:
   - url: "https://cwe.mitre.org/data/definitions/327.html"
     section: "CWE-327 Use of a Broken or Risky Cryptographic Algorithm: Description"

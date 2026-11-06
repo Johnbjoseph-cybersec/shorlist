@@ -37,6 +37,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-338"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): Crypto insecure PRNG"
 source:
   - url: "https://cwe.mitre.org/data/definitions/338.html"
     section: "CWE-338 Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG): Description"

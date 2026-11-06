@@ -31,6 +31,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-916"
+  taxonomy:
+    - "LICMA: §5"
 source:
   - url: "https://cwe.mitre.org/data/definitions/916.html"
     section: "CWE-916 Use of Password Hash With Insufficient Computational Effort: Description"

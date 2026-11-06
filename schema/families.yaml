@@ -38,19 +38,19 @@ post_quantum:          # NIST FIPS 203 / 204 / 205, SP 800-208
 # nothing on the quantum axis for these. See CONTRIBUTING.md, "Weak rows and defect rows".
 
 classically_weak:      # broken or disallowed by classical attack; anchors SP 800-131A r2, BSI TR-02102
-  SHA-1:   {cyclonedx: [], role: hash}
-  MD5:     {cyclonedx: [], role: hash}
-  MD4:     {cyclonedx: [], role: hash}
-  DES:     {cyclonedx: [], role: encryption}
-  3DES:    {cyclonedx: [], role: encryption}
-  RC4:     {cyclonedx: [], role: encryption}
-  RC2:     {cyclonedx: [], role: encryption}
+  SHA-1:   {cyclonedx: [SHA-1], role: hash}
+  MD5:     {cyclonedx: [MD5], role: hash}
+  MD4:     {cyclonedx: [MD4], role: hash}
+  DES:     {cyclonedx: [DES], role: encryption}
+  3DES:    {cyclonedx: [3DES], role: encryption}
+  RC4:     {cyclonedx: [RC4], role: encryption}
+  RC2:     {cyclonedx: [RC2], role: encryption}
 
 defect_only:           # sound primitives; allowed only in rows with row_kind: defect (misuse)
-  AES:      {cyclonedx: [], role: encryption}
-  ChaCha20: {cyclonedx: [], role: encryption}
-  HMAC:     {cyclonedx: [], role: mac}
-  SHA-2:    {cyclonedx: [], role: hash}
-  PBKDF2:   {cyclonedx: []}
-  RNG:      {cyclonedx: [], note: "random number generation; a predictable source is the defect"}
-  TLS:      {cyclonedx: [], note: "the TLS/X.509 layer as a whole: certificate or hostname validation switched off, an old minimum protocol version"}
+  AES:      {cyclonedx: [AES], role: encryption}
+  ChaCha20: {cyclonedx: [ChaCha20], role: encryption}
+  HMAC:     {cyclonedx: [HMAC], role: mac}
+  SHA-2:    {cyclonedx: [SHA-2], role: hash}
+  PBKDF2:   {cyclonedx: [PBKDF2]}
+  RNG:      {cyclonedx: [], note: "random number generation; a predictable source is the defect. Not CTR_DRBG/Hash_DRBG/HMAC_DRBG: those are the approved generators, not the defect"}
+  TLS:      {cyclonedx: [], note: "the TLS/X.509 layer as a whole: certificate or hostname validation switched off, an old minimum protocol version. CycloneDX has no such family (TLS-PRF is a KDF)"}

@@ -43,6 +43,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-295"
+  taxonomy:
+    - "Go detectors study (Andersson & Monperrus): TLS/SSL Issues"
 source:
   - url: "https://cwe.mitre.org/data/definitions/295.html"
     section: "CWE-295, Description"

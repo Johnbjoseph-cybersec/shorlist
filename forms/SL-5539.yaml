@@ -45,6 +45,10 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-295"
+  taxonomy:
+    - "CryptoAPI-Bench: Certificate Validation"
+    - "CryptoGuard: Custom TrustManager to trust all certificates"
+    - "MASC: Trusting all certificates"
 source:
   - url: "https://cwe.mitre.org/data/definitions/295.html"
     section: "CWE-295, Description"

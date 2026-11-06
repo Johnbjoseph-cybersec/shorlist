@@ -42,6 +42,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-323"
+  taxonomy:
+    - "MASC: Static/Reusing IV"
 source:
   - url: "https://cwe.mitre.org/data/definitions/323.html"
     section: "CWE-323 Reusing a Nonce, Key Pair in Encryption: Description"

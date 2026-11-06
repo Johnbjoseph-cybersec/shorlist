@@ -39,6 +39,12 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-760"
+  taxonomy:
+    - "CryptoAPI-Bench: Salt in PBE"
+    - "CryptoGuard: Static Salts in PBE"
+    - "Egele et al. (CryptoLint): Rule 4: Do not use constant salts for PBE."
+    - "MASC: Using constant salts for PBE"
+    - "LICMA: §4"
 source:
   - url: "https://cwe.mitre.org/data/definitions/760.html"
     section: "CWE-760 Use of a One-Way Hash with a Predictable Salt: Description"

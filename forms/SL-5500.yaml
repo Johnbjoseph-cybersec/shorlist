@@ -38,6 +38,8 @@ expected:
   size: "undetermined"
 defect:
   cwe: "CWE-780"
+  taxonomy:
+    - "MASC: Using RSA with PKCS1 padding for encryption"
 source:
   - url: "https://cwe.mitre.org/data/definitions/780.html"
     section: "CWE-780, Description"
