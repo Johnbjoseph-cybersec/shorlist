@@ -1,0 +1,1 @@
+{"protocol": "tls", "items": [{"name": "TLS_RSA_WITH_NULL_MD5", "kind": "cipher_suite", "expect": "seen", "on_wire": false, "evidence": "raw ClientHello 0x0001: {'answer': 'alert', 'alert': 40}"}], "pcap_handshake": ["<NULL>", ["(NONE)"]]}

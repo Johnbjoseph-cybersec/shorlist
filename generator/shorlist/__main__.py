@@ -3,6 +3,7 @@
     python -m shorlist validate               schema + template syntax for every row
     python -m shorlist run --adapter qrp-mcp [--command "uvx qrp-mcp@0.44.0"] --out result.json [--md result.md]
     python -m shorlist table result.json      print the Markdown tables of a result
+    python -m shorlist live --adapter ssh-audit --out-dir ../results/live   network axis (live servers)
 """
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ from pathlib import Path
 
 from .adapters import ADAPTERS
 from .catalogue import ROOT, load
+from .live import cli as live_cli
 from .parsecheck import FAIL, check
 from .run import markdown, run
 
@@ -68,6 +70,7 @@ def main(argv=None) -> int:
     t = sub.add_parser("table")
     t.add_argument("result")
     t.set_defaults(f=cmd_table)
+    live_cli.add_parser(sub)
     args = ap.parse_args(argv)
     return args.f(args)
 
