@@ -1,0 +1,76 @@
+# ShorList declaration axis row SLD-0053. Written by gen_rows.py (task folder) from the dated registry copies in
+# generator/shorlist/declared/data/ (URLs and dates: data/SOURCES.yaml); the observation is
+# observations/L-SSV-5.json (captured).
+id: SLD-0053
+title: Four TLS 1.2 suites in four spellings
+verdict: consistent
+decoy_class: identifier_spelling
+compare:
+  protocol: tls
+  category: cipher_suite
+listener: L-SSV-5
+listener_url: tls://srv:443
+focus: null
+expected_report: no discrepancy in cipher_suite
+false_alarm_if: any undeclared, overclaimed or parameter_mismatch cipher_suite is reported
+declaration:
+  bomFormat: CycloneDX
+  specVersion: '1.7'
+  version: 1
+  metadata:
+    component:
+      type: application
+      name: example-gateway
+      version: '4.2'
+      bom-ref: product
+    supplier:
+      name: Example Vendor
+  components:
+  - type: cryptographic-asset
+    name: TLSv1.2
+    bom-ref: proto/tls12
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.2'
+        cipherSuites:
+        - name: ECDHE-RSA-AES128-GCM-SHA256
+        - name: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+          identifiers:
+          - '0xC0'
+          - '0x13'
+        - name: AES128-SHA
+          identifiers:
+          - '0x00'
+          - '0x2F'
+        - name: TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+resolves_to:
+- spelled: ECDHE-RSA-AES128-GCM-SHA256
+  code: '0xC02F'
+  source:
+  - iana-tls-ciphers
+  - openssl-ciphers-V
+  quote:
+  - '"0xC0,0x2F",TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,Y,Y,[RFC 5289],'
+  - 0xC0,0x2F - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256         - ECDHE-RSA-AES128-GCM-SHA256    TLSv1.2 Kx=ECDH     Au=RSA   Enc=AESGCM(128)            Mac=AEAD
+  at: proto/tls12 cipherSuites[0]
+- spelled: '[''0xC0'',''0x13'']'
+  code: '0xC013'
+  source: iana-tls-ciphers
+  quote: '"0xC0,0x13",TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,Y,N,[RFC 8422],'
+  at: proto/tls12 cipherSuites[1]
+- spelled: AES128-SHA / ['0x00','0x2F']
+  code: '0x002F'
+  source:
+  - iana-tls-ciphers
+  - openssl-ciphers-V
+  quote:
+  - '"0x00,0x2F",TLS_RSA_WITH_AES_128_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+  - 0x00,0x2F - TLS_RSA_WITH_AES_128_CBC_SHA                  - AES128-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(128)               Mac=SHA1
+  at: proto/tls12 cipherSuites[2]
+- spelled: TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+  code: '0x009F'
+  source: iana-tls-ciphers
+  quote: '"0x00,0x9F",TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,Y,D,[RFC 5288]; [RFC 10015],'
+  at: proto/tls12 cipherSuites[3]

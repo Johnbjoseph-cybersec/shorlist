@@ -1,0 +1,29 @@
+# The dated sources every row of declared/rows/ quotes (source keys in resolves_to and focus).
+# Written from registry.SOURCES; local copies are in this folder.
+iana-tls-groups:
+  title: IANA TLS Supported Groups registry
+  url: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8
+  csv: https://www.iana.org/assignments/tls-parameters/tls-parameters-8.csv
+  local: data/iana/tls-parameters-8.csv
+  date_read: '2026-11-07'
+iana-tls-ciphers:
+  title: IANA TLS Cipher Suites registry
+  url: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4
+  csv: https://www.iana.org/assignments/tls-parameters/tls-parameters-4.csv
+  local: data/iana/tls-parameters-4.csv
+  date_read: '2026-11-07'
+openssl-ciphers-V:
+  title: OpenSSL 3.5.9 `openssl ciphers -V -stdname ALL:@SECLEVEL=0` in the harness image
+  url: https://docs.openssl.org/3.5/man1/openssl-ciphers/
+  local: data/openssl-3.5.9-ciphers-V-stdname.txt
+  date_read: '2026-11-07'
+cdx-crypto-defs:
+  title: CycloneDX cryptography-defs.json (lastUpdated 2026-02-24)
+  url: https://raw.githubusercontent.com/CycloneDX/specification/master/schema/cryptography-defs.json
+  local: data/cryptography-defs.json
+  date_read: '2026-11-07'
+cdx-1.7-schema:
+  title: CycloneDX 1.7.2 JSON schema (byte-identical to tag 1.7.2)
+  url: https://raw.githubusercontent.com/CycloneDX/specification/1.7.2/schema/bom-1.7.schema.json
+  local: data/schema/bom-1.7.schema.json
+  date_read: '2026-11-07'

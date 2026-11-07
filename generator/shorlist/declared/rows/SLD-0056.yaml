@@ -1,0 +1,67 @@
+# ShorList declaration axis row SLD-0056. Written by gen_rows.py (task folder) from the dated registry copies in
+# generator/shorlist/declared/data/ (URLs and dates: data/SOURCES.yaml); the observation is
+# observations/L-APA-3.json (captured).
+id: SLD-0056
+title: The TLS 1.2 side is not declared at all; the listener accepts TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+verdict: undeclared
+decoy_class: null
+compare:
+  protocol: tls
+  category: cipher_suite
+listener: L-APA-3
+listener_url: tls://srv:443
+focus:
+  side: observation
+  code: '0xC030'
+  name: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+  source: iana-tls-ciphers
+  quote: '"0xC0,0x30",TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,Y,Y,[RFC 5289],'
+expected_report: 'undeclared: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xC030)'
+why: The difference is a whole protocol component, so a component-level differ can see it.
+declaration:
+  bomFormat: CycloneDX
+  specVersion: '1.7'
+  version: 1
+  metadata:
+    component:
+      type: application
+      name: example-gateway
+      version: '4.2'
+      bom-ref: product
+    supplier:
+      name: Example Vendor
+  components:
+  - type: cryptographic-asset
+    name: TLSv1.3
+    bom-ref: proto/tls13
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.3'
+        cipherSuites:
+        - name: TLS_AES_128_GCM_SHA256
+          identifiers:
+          - 0x13,0x01
+        - name: TLS_AES_256_GCM_SHA384
+          identifiers:
+          - 0x13,0x02
+        - name: TLS_CHACHA20_POLY1305_SHA256
+          identifiers:
+          - 0x13,0x03
+resolves_to:
+- spelled: '[''0x13,0x01'']'
+  code: '0x1301'
+  source: iana-tls-ciphers
+  quote: '"0x13,0x01",TLS_AES_128_GCM_SHA256,Y,Y,[RFC 9846],'
+  at: proto/tls13 cipherSuites[0]
+- spelled: '[''0x13,0x02'']'
+  code: '0x1302'
+  source: iana-tls-ciphers
+  quote: '"0x13,0x02",TLS_AES_256_GCM_SHA384,Y,Y,[RFC 9846],'
+  at: proto/tls13 cipherSuites[1]
+- spelled: '[''0x13,0x03'']'
+  code: '0x1303'
+  source: iana-tls-ciphers
+  quote: '"0x13,0x03",TLS_CHACHA20_POLY1305_SHA256,Y,Y,[RFC 9846],'
+  at: proto/tls13 cipherSuites[2]

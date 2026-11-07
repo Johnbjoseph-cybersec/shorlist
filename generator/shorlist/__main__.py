@@ -6,6 +6,7 @@
     python -m shorlist run ... --shard 3/8    only rows with index 3 mod 8 (a partial result)
     python -m shorlist merge --out result.json [--md result.md] shard-*.json
     python -m shorlist live --adapter ssh-audit --out-dir ../results/live   network axis (live servers)
+    python -m shorlist declared --adapter sbom-tools --out-dir ../results/declared   declaration axis
 """
 from __future__ import annotations
 
@@ -18,6 +19,7 @@ from pathlib import Path
 from .adapters import ADAPTERS
 from .catalogue import ROOT, load
 from .live import cli as live_cli
+from .declared import cli as declared_cli
 from .parsecheck import FAIL, check
 from .run import markdown, merge, run
 
@@ -95,6 +97,7 @@ def main(argv=None) -> int:
     t.add_argument("result")
     t.set_defaults(f=cmd_table)
     live_cli.add_parser(sub)
+    declared_cli.add_parser(sub)
     args = ap.parse_args(argv)
     return args.f(args)
 

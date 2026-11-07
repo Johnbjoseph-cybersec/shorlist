@@ -1,0 +1,195 @@
+# ShorList declaration axis row SLD-0048. Written by gen_rows.py (task folder) from the dated registry copies in
+# generator/shorlist/declared/data/ (URLs and dates: data/SOURCES.yaml); the observation is
+# observations/L-SSV-4.json (captured).
+id: SLD-0048
+title: All three standard hybrids declared as combiners; the halves share components
+verdict: consistent
+decoy_class: hybrid_spelling
+compare:
+  protocol: tls
+  category: group
+listener: L-SSV-4
+listener_url: tls://srv:443
+focus: null
+expected_report: no discrepancy in group
+false_alarm_if: any undeclared, overclaimed or parameter_mismatch group is reported
+why: ML-KEM-768 is a half of two hybrids; it is never declared on its own (S9), so pure MLKEM768 is not claimed.
+declaration:
+  bomFormat: CycloneDX
+  specVersion: '1.7'
+  version: 1
+  metadata:
+    component:
+      type: application
+      name: example-gateway
+      version: '4.2'
+      bom-ref: product
+    supplier:
+      name: Example Vendor
+  components:
+  - type: cryptographic-asset
+    name: ML-KEM-768
+    bom-ref: alg/mlkem768
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ML-KEM
+        parameterSetIdentifier: '768'
+        primitive: kem
+        cryptoFunctions:
+        - keygen
+        - encapsulate
+        - decapsulate
+  - type: cryptographic-asset
+    name: ML-KEM-1024
+    bom-ref: alg/mlkem1024
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ML-KEM
+        parameterSetIdentifier: '1024'
+        primitive: kem
+        cryptoFunctions:
+        - keygen
+        - encapsulate
+        - decapsulate
+  - type: cryptographic-asset
+    name: X25519
+    bom-ref: alg/x25519
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ECDH
+        ellipticCurve: other/Curve25519
+        primitive: key-agree
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: ECDH P-256
+    bom-ref: alg/p256
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ECDH
+        ellipticCurve: secg/secp256r1
+        primitive: key-agree
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: ECDH P-384
+    bom-ref: alg/p384
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ECDH
+        ellipticCurve: nist/P-384
+        primitive: key-agree
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: X25519MLKEM768
+    bom-ref: alg/h1
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        primitive: combiner
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: SecP256r1MLKEM768
+    bom-ref: alg/h2
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        primitive: combiner
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: SecP384r1MLKEM1024
+    bom-ref: alg/h3
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        primitive: combiner
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: TLSv1.3
+    bom-ref: proto/tls13
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.3'
+        cipherSuites:
+        - name: TLS_AES_128_GCM_SHA256
+          identifiers:
+          - 0x13,0x01
+          algorithms:
+          - alg/h1
+          - alg/h2
+          - alg/h3
+          tlsGroups:
+          - secp256r1
+  - type: cryptographic-asset
+    name: TLSv1.2
+    bom-ref: proto/tls12
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.2'
+        cipherSuites:
+        - name: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+          identifiers:
+          - 0xC0,0x2B
+          tlsGroups:
+          - secp256r1
+  dependencies:
+  - ref: alg/h1
+    dependsOn:
+    - alg/mlkem768
+    - alg/x25519
+  - ref: alg/h2
+    dependsOn:
+    - alg/mlkem768
+    - alg/p256
+  - ref: alg/h3
+    dependsOn:
+    - alg/mlkem1024
+    - alg/p384
+resolves_to:
+- at: alg/h1 (combiner over alg/mlkem768 + alg/x25519)
+  ref: alg/h1
+  spelled: combiner X25519MLKEM768
+  code: '0x11EC'
+  source: iana-tls-groups
+  quote: 4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768
+- at: alg/h2 (combiner over alg/mlkem768 + alg/p256)
+  ref: alg/h2
+  spelled: combiner SecP256r1MLKEM768
+  code: '0x11EB'
+  source: iana-tls-groups
+  quote: 4587,SecP256r1MLKEM768,Y,N,[RFC 10024],Combining secp256r1 ECDH with ML-KEM-768
+- at: alg/h3 (combiner over alg/mlkem1024 + alg/p384)
+  ref: alg/h3
+  spelled: combiner SecP384r1MLKEM1024
+  code: '0x11ED'
+  source: iana-tls-groups
+  quote: 4589,SecP384r1MLKEM1024,Y,N,[RFC 10024],Combining secp384r1 ECDH with ML-KEM-1024
+- spelled: secp256r1
+  code: '0x0017'
+  source: iana-tls-groups
+  quote: 23,secp256r1,Y,Y,[RFC 8422],
+  at: proto/tls13 cipherSuites[0] tlsGroups[0]
+- spelled: secp256r1
+  code: '0x0017'
+  source: iana-tls-groups
+  quote: 23,secp256r1,Y,Y,[RFC 8422],
+  at: proto/tls12 cipherSuites[0] tlsGroups[0]

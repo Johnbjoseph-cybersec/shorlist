@@ -345,6 +345,62 @@ pyca calls. They are the next rows to add, and the score is expected to fall whe
 in. Measurements of other
 scanners are welcome as pull requests to `results/`, produced by the generator.
 
+## Declaration axis (supplier CBOM against the listener)
+
+This axis does not measure the closed product. It measures the tools a firm uses to check a
+supplier's CBOM against what the product's listener accepts, on pairs where CycloneDX 1.7
+allows exactly one reading.
+
+- **A row** ([`generator/shorlist/declared/rows/`](generator/shorlist/declared/rows/), not
+  `forms/`) is a pair: a small CycloneDX 1.7 declaration of one TLS listener (validated
+  against the 1.7.2 schema) and the set that listener **accepted** when a reference client
+  offered each candidate group and cipher suite alone, plus the one verdict for one category
+  (`group` or `cipher_suite`): `consistent`, `undeclared` (accepted, not declared),
+  `overclaimed` (declared, refused when offered alone) or `parameter_mismatch` (one declared
+  and one accepted item of the same family). Items are joined on IANA code points only; every
+  declared spelling carries a verbatim line of the dated IANA copy in `declared/data/`.
+- **Decoys** are consistent rows whose declaration spells the wire differently: identifier
+  and name spellings, a hybrid declared as a `combiner`, a group declared as an algorithm or
+  as a family without a curve, and items in a `scope: excluded` component.
+- **Observations** are captured, not written: the listeners
+  ([`declared/listeners.yaml`](generator/shorlist/declared/listeners.yaml)) are nginx 1.30.6,
+  Apache httpd 2.4.69 and `openssl s_server` 3.5.9 in the network axis's images, probed by
+  [`declared/probe.py`](generator/shorlist/declared/probe.py); results are in
+  `declared/observations/`, bound to the sha256 of the configuration they came from.
+- **SSH** rows are listed as `not_scored: no_spec_structure`: CycloneDX has no field for SSH
+  key exchange or host key algorithms ([#1162](https://github.com/CycloneDX/specification/issues/1162)).
+- **Scoring**: `hit`, `miss`, `false_alarm`, `ok`, and `partial` in its own column (a
+  parameter mismatch reported as two unlinked findings). A tool is given the declaration and
+  an observed CBOM built from the capture in one fixed way (`declared/observed.py`).
+- **Positive control**: [`declared/reference.py`](generator/shorlist/declared/reference.py),
+  a plain implementation of the scope rules. It is a reference, not a scanner, and must score
+  100%; that is what shows each row is decidable from the pair and the public registries.
+
+```sh
+cd generator
+python -m shorlist declared --validate
+docker build -t shorlist-live:1              ../containers/live        # only for --capture
+docker build -t shorlist-sbom-tools:0.3.0    ../containers/sbom-tools
+docker build -t shorlist-cyclonedx-cli:0.33.1 ../containers/cyclonedx-cli
+python -m shorlist declared --adapter reference --adapter sbom-tools --adapter cyclonedx-cli \
+    --out-dir ../results/declared
+python -m shorlist declared --capture        # re-capture the listeners (docker, shorlist-live:1)
+```
+
+| tool | non-consistent pairs reproduced | partial | false alarms on consistent pairs | fingerprint |
+|---|---|---|---|---|
+| reference comparator (control, not a scanner) | 33 / 33 | 0 | 0 / 25 | see [`results/declared/`](results/declared/) |
+| sbom-tools 0.3.0 (`diff -o json`) | 3 / 33 | 0 | 12 / 25 | see [`results/declared/`](results/declared/) |
+| cyclonedx-cli 0.33.1 (`diff --component-versions`) | 3 / 33 | 0 | 12 / 25 | see [`results/declared/`](results/declared/) |
+
+Both tools compare components, not the cipher suites and groups inside them: the 3 hits are
+the rows where a whole protocol component is missing or extra (SLD-0056 to SLD-0058, added
+after a first run scored 0 of 30, to check that a component-level difference is visible to
+these tools at all), and the false alarms are the decoys that declare algorithm components or
+an excluded component. No third-party tool we
+found compares a declaration with an observation natively; the reference comparator is ours,
+and it is a control, not a contender.
+
 ## Contributing rows
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: one row per pull request, a primary

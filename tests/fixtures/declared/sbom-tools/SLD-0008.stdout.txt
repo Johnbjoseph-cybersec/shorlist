@@ -1,0 +1,966 @@
+{
+  "metadata": {
+    "tool": {
+      "name": "sbom-tools",
+      "version": "0.3.0"
+    },
+    "generated_at": "2026-11-07T08:16:54.957343979+00:00",
+    "old_sbom": {
+      "format": "CycloneDX",
+      "file_path": "/in/declared.cdx.json",
+      "component_count": 3
+    },
+    "new_sbom": {
+      "format": "CycloneDX",
+      "file_path": "/in/observed.cdx.json",
+      "component_count": 3
+    }
+  },
+  "summary": {
+    "total_changes": 4,
+    "components": {
+      "added": 1,
+      "removed": 1,
+      "modified": 0
+    },
+    "vulnerabilities": {
+      "introduced": 0,
+      "resolved": 0,
+      "persistent": 0
+    },
+    "metadata_changes": 2,
+    "semantic_score": 66.66666666666667
+  },
+  "cra_compliance": {
+    "old": {
+      "is_compliant": false,
+      "level": "CraPhase2",
+      "violations": [
+        {
+          "severity": "Error",
+          "category": "DocumentMetadata",
+          "message": "SBOM must have creator/tool information",
+          "element": null,
+          "requirement": "Document creator identification",
+          "rule_id": "SBOM-CRA-GENERAL",
+          "sarif_rule_id": "SBOM-CRA-GENERAL"
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(16)] SBOM should identify the manufacturer (organization)",
+          "element": null,
+          "requirement": "CRA Art. 13(16): Manufacturer identification",
+          "rule_id": "SBOM-CRA-ART-13-16",
+          "sarif_rule_id": "SBOM-CRA-ART-13-16",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(16)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(17)] SBOM should include a security contact or vulnerability disclosure reference",
+          "element": null,
+          "requirement": "CRA Art. 13(17): Vulnerability disclosure contact",
+          "rule_id": "SBOM-CRA-ART-13-17-CONTACT",
+          "sarif_rule_id": "SBOM-CRA-ART-13-17-CONTACT",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(17)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (6)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (2)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(8) / 13(19)] Consider specifying a support end date for security updates",
+          "element": null,
+          "requirement": "CRA Art. 13(8) / 13(19): Support period disclosure",
+          "rule_id": "SBOM-CRA-ART-13-8",
+          "sarif_rule_id": "SBOM-CRA-ART-13-8",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(19)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "ComponentIdentification",
+          "message": "[CRA Annex I Part II (1)] Primary component 'example-gateway' missing unique identifier (PURL/CPE) for cross-update traceability",
+          "element": "example-gateway",
+          "component_id": "product",
+          "requirement": "CRA Annex I Part II (1): Product identifier traceability across updates",
+          "rule_id": "SBOM-CRA-ANNEX-I-TRACEABILITY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-07"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Annex I Part II (5)] SBOM should reference a coordinated vulnerability disclosure policy (advisories URL or disclosure URL)",
+          "element": null,
+          "requirement": "CRA Annex I Part II (5): Coordinated vulnerability disclosure policy",
+          "rule_id": "SBOM-CRA-CVD-POLICY",
+          "sarif_rule_id": "SBOM-CRA-CVD-POLICY",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (5)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "RLS-2-RQ-03-RE"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(8) / Annex II (7)] Consider including component lifecycle/end-of-support information",
+          "element": null,
+          "requirement": "CRA Annex II (7): Component lifecycle status",
+          "rule_id": "SBOM-CRA-LIFECYCLE",
+          "sarif_rule_id": "SBOM-CRA-LIFECYCLE",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "DocumentMetadata",
+          "message": "[CRA Annex V] Missing reference to the EU Declaration of Conformity (attestation or certification external reference) for product class Default",
+          "element": null,
+          "requirement": "CRA Annex V: EU Declaration of Conformity reference",
+          "rule_id": "SBOM-CRA-ANNEX-V",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-V",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex V",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "SBOM should have a serial number/unique identifier",
+          "element": null,
+          "requirement": "Document unique identification",
+          "rule_id": "SBOM-CRA-GENERAL",
+          "sarif_rule_id": "SBOM-CRA-GENERAL"
+        },
+        {
+          "severity": "Error",
+          "category": "ComponentIdentification",
+          "message": "[CRA Annex I, [PRE-7-RQ-07]] Component 'example-gateway' missing unique identifier (PURL/CPE/SWHID/SWID)",
+          "element": "example-gateway",
+          "component_id": "product",
+          "requirement": "CRA Annex I / prEN 40000-1-3 [PRE-7-RQ-07]: Unique component identifier (PURL/CPE/SWHID/SWID)",
+          "rule_id": "SBOM-CRA-ANNEX-I-IDENTIFIER",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-07"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SupplierInfo",
+          "message": "[CRA Annex I Part II (1)] Component 'example-gateway' missing supplier/manufacturer",
+          "element": "example-gateway",
+          "component_id": "product",
+          "requirement": "CRA Annex I Part II (1): Component supplier information",
+          "rule_id": "SBOM-CRA-COMPONENT-SUPPLIER",
+          "sarif_rule_id": "SBOM-CRA-COMPONENT-SUPPLIER",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-03"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "IntegrityInfo",
+          "message": "[CRA Annex I Part I (2)(f)] Component 'example-gateway' missing cryptographic hash (recommended for integrity)",
+          "element": "example-gateway",
+          "component_id": "product",
+          "requirement": "CRA Annex I Part I (2)(f): Component integrity information (hash)",
+          "rule_id": "SBOM-CRA-ANNEX-I-INTEGRITY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part I (2)(f)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Error",
+          "category": "DependencyInfo",
+          "message": "[CRA Annex I] SBOM with multiple components must include dependency relationships",
+          "element": null,
+          "requirement": "CRA Annex I: Dependency relationships",
+          "rule_id": "SBOM-CRA-ANNEX-I-DEPENDENCY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(7) / Annex I Part II (1)] SBOM has no creation timestamp; keep the documented component inventory current when components change",
+          "element": null,
+          "requirement": "CRA Art. 13(7) / Annex I Part II (1): SBOM freshness",
+          "rule_id": "SBOM-CRA-SBOM-FRESHNESS",
+          "sarif_rule_id": "SBOM-CRA-SBOM-FRESHNESS",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "LicenseInfo",
+          "message": "[CRA Art. 13(5)] 3/3 components (100%) missing license information needed to evidence third-party due diligence",
+          "element": null,
+          "counts": {
+            "affected": 3,
+            "total": 3
+          },
+          "requirement": "CRA Art. 13(5): Third-party due diligence (license tracking)",
+          "rule_id": "SBOM-CRA-ART-13-5",
+          "sarif_rule_id": "SBOM-CRA-ART-13-5",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(5)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Annex I Part II (1)] No vulnerability data or vulnerability assertion found; include vulnerability information or a statement of no known vulnerabilities",
+          "element": null,
+          "requirement": "CRA Annex I Part II (1): Documented vulnerability information",
+          "rule_id": "SBOM-CRA-VULN-STATEMENT",
+          "sarif_rule_id": "SBOM-CRA-VULN-STATEMENT",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "IntegrityInfo",
+          "message": "[CRA Annex I Part I (2)(f)] Consider adding document-level integrity metadata (serial number, digital signature, or attestation with hash)",
+          "element": null,
+          "requirement": "CRA Annex I Part I (2)(f): Document signature/integrity",
+          "rule_id": "SBOM-CRA-DOC-INTEGRITY",
+          "sarif_rule_id": "SBOM-CRA-DOC-INTEGRITY",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part I (2)(f)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(2)] No documented risk assessment referenced — add an externalReference of type 'risk-assessment' or supply riskAssessmentUrl in the CRA sidecar",
+          "element": null,
+          "requirement": "CRA Art. 13(2): Documented risk assessment",
+          "rule_id": "SBOM-CRA-ART-13-2",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(2)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14] PSIRT URL missing — required to handle external vulnerability reports",
+          "element": null,
+          "requirement": "CRA Art. 14: PSIRT contact for external vulnerability reports",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(2)(a)] 24-hour early-warning channel missing — required when an actively-exploited vulnerability is identified",
+          "element": null,
+          "requirement": "CRA Art. 14(2)(a): 24-hour early-warning channel",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(2)(b) / 14(4)(b)] 72-hour notification channel missing — required for actively exploited vulnerabilities and severe incidents",
+          "element": null,
+          "requirement": "CRA Art. 14(2)(b): 72-hour notification channel",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(7)] No ENISA single reporting platform identifier — track ENISA publication and add `enisaReportingPlatformId` to the CRA sidecar when available",
+          "element": null,
+          "requirement": "CRA Art. 14(7): ENISA single reporting platform",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        }
+      ],
+      "error_count": 3,
+      "warning_count": 12,
+      "info_count": 7,
+      "applicability": {
+        "status": "applicable"
+      },
+      "article_summary": {
+        "machine_readable_format": 0,
+        "art_13_17_contact": 1,
+        "cvd_policy": 1,
+        "art_13_8_support_period": 1,
+        "lifecycle": 1,
+        "art_13_15_product_identification": 0,
+        "art_13_16_manufacturer_identification": 1,
+        "annex_i_essential_requirements": 8,
+        "annex_v_declaration_of_conformity": 1
+      }
+    },
+    "new": {
+      "is_compliant": false,
+      "level": "CraPhase2",
+      "violations": [
+        {
+          "severity": "Error",
+          "category": "DocumentMetadata",
+          "message": "SBOM must have creator/tool information",
+          "element": null,
+          "requirement": "Document creator identification",
+          "rule_id": "SBOM-CRA-GENERAL",
+          "sarif_rule_id": "SBOM-CRA-GENERAL"
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(16)] SBOM should identify the manufacturer (organization)",
+          "element": null,
+          "requirement": "CRA Art. 13(16): Manufacturer identification",
+          "rule_id": "SBOM-CRA-ART-13-16",
+          "sarif_rule_id": "SBOM-CRA-ART-13-16",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(16)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(17)] SBOM should include a security contact or vulnerability disclosure reference",
+          "element": null,
+          "requirement": "CRA Art. 13(17): Vulnerability disclosure contact",
+          "rule_id": "SBOM-CRA-ART-13-17-CONTACT",
+          "sarif_rule_id": "SBOM-CRA-ART-13-17-CONTACT",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(17)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (6)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (2)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(8) / 13(19)] Consider specifying a support end date for security updates",
+          "element": null,
+          "requirement": "CRA Art. 13(8) / 13(19): Support period disclosure",
+          "rule_id": "SBOM-CRA-ART-13-8",
+          "sarif_rule_id": "SBOM-CRA-ART-13-8",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(19)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "ComponentIdentification",
+          "message": "[CRA Annex I Part II (1)] Primary component 'observed listener L-NGX-2' missing unique identifier (PURL/CPE) for cross-update traceability",
+          "element": "observed listener L-NGX-2",
+          "component_id": "observed",
+          "requirement": "CRA Annex I Part II (1): Product identifier traceability across updates",
+          "rule_id": "SBOM-CRA-ANNEX-I-TRACEABILITY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-07"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Annex I Part II (5)] SBOM should reference a coordinated vulnerability disclosure policy (advisories URL or disclosure URL)",
+          "element": null,
+          "requirement": "CRA Annex I Part II (5): Coordinated vulnerability disclosure policy",
+          "rule_id": "SBOM-CRA-CVD-POLICY",
+          "sarif_rule_id": "SBOM-CRA-CVD-POLICY",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (5)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "RLS-2-RQ-03-RE"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 13(8) / Annex II (7)] Consider including component lifecycle/end-of-support information",
+          "element": null,
+          "requirement": "CRA Annex II (7): Component lifecycle status",
+          "rule_id": "SBOM-CRA-LIFECYCLE",
+          "sarif_rule_id": "SBOM-CRA-LIFECYCLE",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(8)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex II (7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "DocumentMetadata",
+          "message": "[CRA Annex V] Missing reference to the EU Declaration of Conformity (attestation or certification external reference) for product class Default",
+          "element": null,
+          "requirement": "CRA Annex V: EU Declaration of Conformity reference",
+          "rule_id": "SBOM-CRA-ANNEX-V",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-V",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex V",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "SBOM should have a serial number/unique identifier",
+          "element": null,
+          "requirement": "Document unique identification",
+          "rule_id": "SBOM-CRA-GENERAL",
+          "sarif_rule_id": "SBOM-CRA-GENERAL"
+        },
+        {
+          "severity": "Error",
+          "category": "ComponentIdentification",
+          "message": "[CRA Annex I Part II (1)] Component 'observed listener L-NGX-2' missing version",
+          "element": "observed listener L-NGX-2",
+          "component_id": "observed",
+          "requirement": "CRA Annex I Part II (1): Component version",
+          "rule_id": "SBOM-CRA-COMPONENT-VERSION",
+          "sarif_rule_id": "SBOM-CRA-COMPONENT-VERSION",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-06"
+            }
+          ]
+        },
+        {
+          "severity": "Error",
+          "category": "ComponentIdentification",
+          "message": "[CRA Annex I, [PRE-7-RQ-07]] Component 'observed listener L-NGX-2' missing unique identifier (PURL/CPE/SWHID/SWID)",
+          "element": "observed listener L-NGX-2",
+          "component_id": "observed",
+          "requirement": "CRA Annex I / prEN 40000-1-3 [PRE-7-RQ-07]: Unique component identifier (PURL/CPE/SWHID/SWID)",
+          "rule_id": "SBOM-CRA-ANNEX-I-IDENTIFIER",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-07"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SupplierInfo",
+          "message": "[CRA Annex I Part II (1)] Component 'observed listener L-NGX-2' missing supplier/manufacturer",
+          "element": "observed listener L-NGX-2",
+          "component_id": "observed",
+          "requirement": "CRA Annex I Part II (1): Component supplier information",
+          "rule_id": "SBOM-CRA-COMPONENT-SUPPLIER",
+          "sarif_rule_id": "SBOM-CRA-COMPONENT-SUPPLIER",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "Pren40000_1_3",
+              "id": "PRE-7-RQ-03"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "IntegrityInfo",
+          "message": "[CRA Annex I Part I (2)(f)] Component 'observed listener L-NGX-2' missing cryptographic hash (recommended for integrity)",
+          "element": "observed listener L-NGX-2",
+          "component_id": "observed",
+          "requirement": "CRA Annex I Part I (2)(f): Component integrity information (hash)",
+          "rule_id": "SBOM-CRA-ANNEX-I-INTEGRITY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part I (2)(f)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Error",
+          "category": "DependencyInfo",
+          "message": "[CRA Annex I] SBOM with multiple components must include dependency relationships",
+          "element": null,
+          "requirement": "CRA Annex I: Dependency relationships",
+          "rule_id": "SBOM-CRA-ANNEX-I-DEPENDENCY",
+          "sarif_rule_id": "SBOM-CRA-ANNEX-I",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(7) / Annex I Part II (1)] SBOM has no creation timestamp; keep the documented component inventory current when components change",
+          "element": null,
+          "requirement": "CRA Art. 13(7) / Annex I Part II (1): SBOM freshness",
+          "rule_id": "SBOM-CRA-SBOM-FRESHNESS",
+          "sarif_rule_id": "SBOM-CRA-SBOM-FRESHNESS",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(7)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            },
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "LicenseInfo",
+          "message": "[CRA Art. 13(5)] 3/3 components (100%) missing license information needed to evidence third-party due diligence",
+          "element": null,
+          "counts": {
+            "affected": 3,
+            "total": 3
+          },
+          "requirement": "CRA Art. 13(5): Third-party due diligence (license tracking)",
+          "rule_id": "SBOM-CRA-ART-13-5",
+          "sarif_rule_id": "SBOM-CRA-ART-13-5",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(5)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Annex I Part II (1)] No vulnerability data or vulnerability assertion found; include vulnerability information or a statement of no known vulnerabilities",
+          "element": null,
+          "requirement": "CRA Annex I Part II (1): Documented vulnerability information",
+          "rule_id": "SBOM-CRA-VULN-STATEMENT",
+          "sarif_rule_id": "SBOM-CRA-VULN-STATEMENT",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part II (1)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "IntegrityInfo",
+          "message": "[CRA Annex I Part I (2)(f)] Consider adding document-level integrity metadata (serial number, digital signature, or attestation with hash)",
+          "element": null,
+          "requirement": "CRA Annex I Part I (2)(f): Document signature/integrity",
+          "rule_id": "SBOM-CRA-DOC-INTEGRITY",
+          "sarif_rule_id": "SBOM-CRA-DOC-INTEGRITY",
+          "standard_refs": [
+            {
+              "standard": "CraAnnex",
+              "id": "Annex I Part I (2)(f)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "DocumentMetadata",
+          "message": "[CRA Art. 13(2)] No documented risk assessment referenced — add an externalReference of type 'risk-assessment' or supply riskAssessmentUrl in the CRA sidecar",
+          "element": null,
+          "requirement": "CRA Art. 13(2): Documented risk assessment",
+          "rule_id": "SBOM-CRA-ART-13-2",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 13(2)",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14] PSIRT URL missing — required to handle external vulnerability reports",
+          "element": null,
+          "requirement": "CRA Art. 14: PSIRT contact for external vulnerability reports",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(2)(a)] 24-hour early-warning channel missing — required when an actively-exploited vulnerability is identified",
+          "element": null,
+          "requirement": "CRA Art. 14(2)(a): 24-hour early-warning channel",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Warning",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(2)(b) / 14(4)(b)] 72-hour notification channel missing — required for actively exploited vulnerabilities and severe incidents",
+          "element": null,
+          "requirement": "CRA Art. 14(2)(b): 72-hour notification channel",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        },
+        {
+          "severity": "Info",
+          "category": "SecurityInfo",
+          "message": "[CRA Art. 14(7)] No ENISA single reporting platform identifier — track ENISA publication and add `enisaReportingPlatformId` to the CRA sidecar when available",
+          "element": null,
+          "requirement": "CRA Art. 14(7): ENISA single reporting platform",
+          "rule_id": "SBOM-CRA-ART-14",
+          "sarif_rule_id": "SBOM-CRA-GENERAL",
+          "standard_refs": [
+            {
+              "standard": "CraArticle",
+              "id": "Art. 14",
+              "help_uri": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng"
+            }
+          ]
+        }
+      ],
+      "error_count": 4,
+      "warning_count": 12,
+      "info_count": 7,
+      "applicability": {
+        "status": "applicable"
+      },
+      "article_summary": {
+        "machine_readable_format": 0,
+        "art_13_17_contact": 1,
+        "cvd_policy": 1,
+        "art_13_8_support_period": 1,
+        "lifecycle": 1,
+        "art_13_15_product_identification": 0,
+        "art_13_16_manufacturer_identification": 1,
+        "annex_i_essential_requirements": 9,
+        "annex_v_declaration_of_conformity": 1
+      }
+    }
+  },
+  "reports": {
+    "metadata_changes": [
+      {
+        "field": "name",
+        "old_value": "example-gateway",
+        "new_value": "observed listener L-NGX-2",
+        "kind": "modified"
+      },
+      {
+        "field": "primary_component_version",
+        "old_value": "4.2",
+        "new_value": null,
+        "kind": "removed"
+      }
+    ],
+    "components": {
+      "added": [
+        {
+          "id": "observed",
+          "name": "observed listener L-NGX-2",
+          "old_version": null,
+          "new_version": null,
+          "ecosystem": null,
+          "component_type": "application",
+          "change_type": "Added",
+          "field_changes": [],
+          "cost": 10
+        }
+      ],
+      "removed": [
+        {
+          "id": "product",
+          "name": "example-gateway",
+          "old_version": "4.2",
+          "new_version": null,
+          "ecosystem": null,
+          "component_type": "application",
+          "change_type": "Removed",
+          "field_changes": [],
+          "cost": 10
+        }
+      ],
+      "modified": []
+    },
+    "dependencies": {
+      "added": [],
+      "removed": []
+    },
+    "licenses": {
+      "new_licenses": [],
+      "removed_licenses": [],
+      "conflicts": []
+    },
+    "vulnerabilities": {
+      "introduced": [],
+      "resolved": [],
+      "persistent": []
+    }
+  }
+}

@@ -1,0 +1,66 @@
+# ShorList declaration axis row SLD-0012. Written by gen_rows.py (task folder) from the dated registry copies in
+# generator/shorlist/declared/data/ (URLs and dates: data/SOURCES.yaml); the observation is
+# observations/L-NGX-3.json (captured).
+id: SLD-0012
+title: Key agreement declared as family ECDH with no curve; wire accepts secp384r1
+verdict: consistent
+decoy_class: parent_child
+compare:
+  protocol: tls
+  category: group
+listener: L-NGX-3
+listener_url: tls://srv:443
+focus: null
+expected_report: no discrepancy in group
+false_alarm_if: any undeclared, overclaimed or parameter_mismatch group is reported
+why: 'S8: a family named without a curve covers every accepted child; it can never be a parameter_mismatch.'
+declaration:
+  bomFormat: CycloneDX
+  specVersion: '1.7'
+  version: 1
+  metadata:
+    component:
+      type: application
+      name: example-gateway
+      version: '4.2'
+      bom-ref: product
+    supplier:
+      name: Example Vendor
+  components:
+  - type: cryptographic-asset
+    name: ECDH
+    bom-ref: alg/ecdh
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        algorithmFamily: ECDH
+        primitive: key-agree
+        cryptoFunctions:
+        - keygen
+        - keyderive
+  - type: cryptographic-asset
+    name: TLSv1.2
+    bom-ref: proto/tls12
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.2'
+        cipherSuites:
+        - name: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+          identifiers:
+          - 0xC0,0x2F
+          algorithms:
+          - alg/ecdh
+        - name: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+          identifiers:
+          - 0xC0,0x30
+          algorithms:
+          - alg/ecdh
+resolves_to:
+- at: alg/ecdh (referenced algorithm)
+  ref: alg/ecdh
+  spelled: key-agree family ECDH, no curve
+  family: ECDH
+  source: cdx-crypto-defs
+  note: a family without a curve covers every accepted child of that family (S8)

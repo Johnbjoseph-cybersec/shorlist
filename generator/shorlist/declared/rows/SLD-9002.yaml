@@ -1,0 +1,13 @@
+# ShorList declaration axis row SLD-9002: listed, not scored.
+id: SLD-9002
+title: 'SSH host key algorithm: declared ssh-ed25519 vs the KEXINIT host key list'
+compare: {protocol: ssh, category: hostkey}
+not_scored: no_spec_structure
+reason: >-
+  CycloneDX 1.7 has no structure for SSH algorithms. Open issue CycloneDX/specification#1162 (2026-10-16): "SSH is
+  forced to use cipherSuites for encryption algorithms, while kex/mac/hostkey algorithms can only go into
+  relatedCryptographicAssets... a consumer cannot tell whether an algorithm reference is an encryption algorithm or a
+  key exchange algorithm." A row here would test whether a tool shares our house convention, not whether it can verify
+  a declaration (PROUCHVANE.md section 6). Scored once the spec gives kex / hostkey a field.
+source: https://github.com/CycloneDX/specification/issues/1162
+registry_line_for_later: 'ssh-ed25519,ssh-ed25519,[RFC 8709],'   # IANA ssh-parameters-19.csv, read 2026-11-07
