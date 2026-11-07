@@ -59,10 +59,10 @@ way; see [Running the generator](#running-the-generator) for the full options.
 
 - **Score your scanner**: write or pick an adapter and run the generator, as in
   [Quick start](#quick-start) and [Adding a scanner](#adding-a-scanner).
-- **Filter to your stack**: run only the rows for your languages and products. *Coming before
-  the v0.2.0 release.*
-- **Add it to CI**: a GitHub Action that scores a scanner on every pull request. *Coming before
-  the v0.2.0 release.*
+- **Filter to your stack**: run only the rows for your languages and products. *Planned for
+  v0.3.*
+- **Add it to CI**: a GitHub Action that scores a scanner on every pull request. *Planned for
+  v0.3.*
 
 ## Why
 
