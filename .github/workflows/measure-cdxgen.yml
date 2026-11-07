@@ -1,0 +1,71 @@
+name: measure cdxgen
+
+# cdxgen's official image needs an x86-64-v3 CPU, so it is measured on GitHub's runners.
+# The catalogue is split into shards (rows whose index is i mod N), each shard is one job,
+# and `shorlist merge` joins them into the result an unsharded run gives. The result is an
+# artifact; it goes into results/ by hand, unedited.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [measure-cdxgen]
+
+permissions:
+  contents: read
+
+env:
+  SHARDS: "12"
+
+jobs:
+  shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - name: Free disk for the 16 GB image
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Pull the pinned image (network only here, not during the scan)
+        run: docker pull ghcr.io/cdxgen/cdxgen@sha256:d3465b2f6e76406a1a4c884deeaf0e869514c4e35c47e415e055bb44596b73ea
+      - name: Measure one shard
+        working-directory: generator
+        run: python -m shorlist run --adapter cdxgen --shard ${{ matrix.index }}/$SHARDS --out ../shard-${{ matrix.index }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.index }}
+          path: shard-${{ matrix.index }}.json
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          merge-multiple: true
+          path: shards
+      - name: Merge
+        working-directory: generator
+        run: |
+          python -m shorlist merge --out ../cdxgen.json --md ../cdxgen.md ../shards/shard-*.json
+          cat ../cdxgen.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cdxgen-result
+          path: |
+            cdxgen.json
+            cdxgen.md

@@ -3,6 +3,8 @@
     python -m shorlist validate               schema + template syntax for every row
     python -m shorlist run --adapter qrp-mcp [--command "uvx qrp-mcp@0.44.0"] --out result.json [--md result.md]
     python -m shorlist table result.json      print the Markdown tables of a result
+    python -m shorlist run ... --shard 3/8    only rows with index 3 mod 8 (a partial result)
+    python -m shorlist merge --out result.json [--md result.md] shard-*.json
 """
 from __future__ import annotations
 
@@ -15,7 +17,7 @@ from pathlib import Path
 from .adapters import ADAPTERS
 from .catalogue import ROOT, load
 from .parsecheck import FAIL, check
-from .run import markdown, run
+from .run import markdown, merge, run
 
 
 def cmd_validate(args) -> int:
@@ -39,7 +41,23 @@ def cmd_validate(args) -> int:
 
 def cmd_run(args) -> int:
     adapter = ADAPTERS[args.adapter](shlex.split(args.command) if args.command else None)
-    result = run(adapter, args.root, keep=args.keep_trees)
+    shard = tuple(int(x) for x in args.shard.split("/")) if args.shard else None
+    if shard and not 0 <= shard[0] < shard[1]:
+        raise SystemExit("--shard I/N needs 0 <= I < N")
+    result = run(adapter, args.root, keep=args.keep_trees, shard=shard)
+    Path(args.out).write_text(json.dumps(result, indent=1, ensure_ascii=False) + "\n")
+    if shard:
+        print(f"shard {shard[0]}/{shard[1]}: {len(result['rows'])} rows")
+        return 0
+    md = markdown(result)
+    if args.md:
+        Path(args.md).write_text(md)
+    print(md)
+    return 0
+
+
+def cmd_merge(args) -> int:
+    result = merge([json.loads(Path(f).read_text()) for f in args.shards], args.root)
     Path(args.out).write_text(json.dumps(result, indent=1, ensure_ascii=False) + "\n")
     md = markdown(result)
     if args.md:
@@ -64,7 +82,13 @@ def main(argv=None) -> int:
     r.add_argument("--out", required=True)
     r.add_argument("--md")
     r.add_argument("--keep-trees", type=Path, help="copy the planted trees and raw outputs here")
+    r.add_argument("--shard", help="I/N: scan only the rows whose index is I mod N; join with merge")
     r.set_defaults(f=cmd_run)
+    g = sub.add_parser("merge")
+    g.add_argument("--out", required=True)
+    g.add_argument("--md")
+    g.add_argument("shards", nargs="+")
+    g.set_defaults(f=cmd_merge)
     t = sub.add_parser("table")
     t.add_argument("result")
     t.set_defaults(f=cmd_table)
