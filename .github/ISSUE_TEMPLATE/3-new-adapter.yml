@@ -1,6 +1,7 @@
 name: New scanner adapter
 description: Propose an adapter so that the generator can run and score another scanner.
 title: "Adapter: <scanner> <version>"
+labels: [adapter]
 body:
   - type: markdown
     attributes:

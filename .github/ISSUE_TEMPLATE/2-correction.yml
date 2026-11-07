@@ -1,6 +1,7 @@
 name: Correction to a row
 description: Report that an existing row is wrong. Rows are never deleted; a wrong row is withdrawn and, if needed, replaced by a new row with a new id.
 title: "Correction: SL-NNNN"
+labels: [correction]
 body:
   - type: markdown
     attributes:

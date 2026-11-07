@@ -1,6 +1,7 @@
 name: New form (row)
 description: Propose one new row for the catalogue. One row per issue and per pull request.
 title: "New form: <family> <form_kind> in <language_or_product>"
+labels: [new-form]
 body:
   - type: markdown
     attributes:
