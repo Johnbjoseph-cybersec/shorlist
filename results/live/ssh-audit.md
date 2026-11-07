@@ -1,6 +1,6 @@
 **Of 23 positive rows planted as live servers from ShorList 0.2.0, ssh-audit v3.9.0 reports the expected wire item for 22; of 7 removal/ban decoys it reports 0 as offered. Rows the reference client could not confirm on the wire are not scored.**
 
-wire.yaml sha256 `01304235d689247f…` · catalogue 0.2.0 sha256 `e48462b539beba59…` · generator 0.1.0 · fingerprint `4f93bbce9deefd29…`
+wire.yaml sha256 `01304235d689247f…` · catalogue 0.2.0 sha256 `5d0e18007d740318…` · generator 0.1.0 · fingerprint `5e22c7f121c32101…`
 
 | positive rows | hit | miss | false alarm | decoys | ok | false alarm |
 |---|---|---|---|---|---|---|

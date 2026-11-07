@@ -1299,7 +1299,7 @@
  "fingerprint": "5841e7307c539c110e26f933117956b7461f4dff295a6acd3eeab63317c56fa2",
  "fingerprint_rule": "sha256(canonical JSON {rows_sha256, generator_version, tool_version, rows:[[id,outcome,reason]...]})",
  "run": {
-  "at": "2026-11-07T08:18:53Z",
+  "at": "2026-11-07T12:36:00Z",
   "python": "3.12.3",
   "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
  },

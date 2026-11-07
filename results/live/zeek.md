@@ -1,6 +1,6 @@
 **Of 37 positive rows planted as live servers from ShorList 0.2.0, zeek 8.0.11 reports the expected wire item for 33; of 12 removal/ban decoys it reports 0 as offered. Rows the reference client could not confirm on the wire are not scored. Passive: only the values negotiated in one broad handshake by the reference client are visible to it, not the server's offer.**
 
-wire.yaml sha256 `01304235d689247f…` · catalogue 0.2.0 sha256 `e48462b539beba59…` · generator 0.1.0 · fingerprint `5b4ce09baec077bf…`
+wire.yaml sha256 `01304235d689247f…` · catalogue 0.2.0 sha256 `5d0e18007d740318…` · generator 0.1.0 · fingerprint `0537aa7cb3332415…`
 
 | positive rows | hit | miss | false alarm | decoys | ok | false alarm |
 |---|---|---|---|---|---|---|

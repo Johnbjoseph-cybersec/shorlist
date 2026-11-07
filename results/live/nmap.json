@@ -5,7 +5,7 @@
  "catalogue": {
   "name": "ShorList",
   "version": "0.2.0",
-  "sha256": "e48462b539beba5915738d27770c667bdc34ba3d2fb42e15b40d265e86e35c1e"
+  "sha256": "5d0e18007d740318cb1247303bc1ad957de13f2a349e9e8aeab2cdc2690a6db6"
  },
  "wire": {
   "sha256": "01304235d689247fb6103d6f1e1c0ab2141be1db32071305729d262b7a8b7193",
@@ -276,7 +276,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "hit",
@@ -297,7 +297,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.5
   },
   {
    "outcome": "hit",
@@ -318,7 +318,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "miss",
@@ -342,7 +342,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "hit",
@@ -363,7 +363,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "ok",
@@ -385,7 +385,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "ok",
@@ -406,7 +406,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "ok",
@@ -427,7 +427,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "hit",
@@ -448,7 +448,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "miss",
@@ -472,7 +472,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "hit",
@@ -493,7 +493,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.6
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "not_runnable",
@@ -525,7 +525,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.7
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -546,7 +546,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -567,7 +567,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "not_runnable",
@@ -621,7 +621,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "not_scored",
@@ -653,7 +653,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 2.9
+   "scanner_seconds": 2.8
   },
   {
    "outcome": "miss",
@@ -677,7 +677,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 2.8
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -698,7 +698,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 3.3
+   "scanner_seconds": 2.9
   },
   {
    "outcome": "miss",
@@ -722,7 +722,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 2.9
+   "scanner_seconds": 2.7
   },
   {
    "outcome": "miss",
@@ -746,7 +746,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 2.8
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "ok",
@@ -767,7 +767,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 3.5
+   "scanner_seconds": 2.9
   },
   {
    "outcome": "not_runnable",
@@ -1273,7 +1273,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "not_runnable",
@@ -1350,7 +1350,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.6
+   "scanner_seconds": 1.5
   },
   {
    "outcome": "ok",
@@ -1372,7 +1372,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "ok",
@@ -1394,7 +1394,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.9
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "ok",
@@ -1416,7 +1416,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.6
+   "scanner_seconds": 1.5
   },
   {
    "outcome": "not_scored",
@@ -1448,7 +1448,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1469,7 +1469,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1490,7 +1490,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "hit",
@@ -1511,7 +1511,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1532,7 +1532,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1553,7 +1553,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1574,7 +1574,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1595,7 +1595,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "hit",
@@ -1616,7 +1616,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.4
   },
   {
    "outcome": "hit",
@@ -1637,7 +1637,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1658,7 +1658,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1679,7 +1679,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "ok",
@@ -1700,7 +1700,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "ok",
@@ -1742,7 +1742,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "ok",
@@ -1763,7 +1763,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "not_scored",
@@ -1806,7 +1806,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "hit",
@@ -1827,7 +1827,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.4
   },
   {
    "outcome": "hit",
@@ -1848,7 +1848,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "hit",
@@ -1869,7 +1869,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.6
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "not_scored",
@@ -1934,7 +1934,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.7
+   "scanner_seconds": 1.3
   },
   {
    "outcome": "hit",
@@ -1955,7 +1955,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.4
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1976,7 +1976,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.5
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "hit",
@@ -1997,7 +1997,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   },
   {
    "outcome": "hit",
@@ -2018,7 +2018,7 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.2
   },
   {
    "outcome": "ok",
@@ -2039,13 +2039,13 @@
     }
    ],
    "scanner_exit": 0,
-   "scanner_seconds": 1.3
+   "scanner_seconds": 1.1
   }
  ],
- "fingerprint": "3c0aca18bd64b8ddacbd66761b160187d8e2b7a209008582c2c54afd81b63606",
+ "fingerprint": "f9e9f18163e13180ac4ec4b6743993817eac4aa3246b561af828b553afacdf3a",
  "fingerprint_rule": "sha256(canonical JSON {wire_sha256, catalogue_sha256, generator_version, scanner_version, images, rows:[[id,outcome,reason]...]})",
  "run": {
-  "at": "2026-11-07T07:16:08Z",
+  "at": "2026-11-07T12:28:56Z",
   "python": "3.12.3",
   "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
  },
@@ -2053,17 +2053,10 @@
   "SL-0011": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -2131,17 +2124,10 @@
   "SL-0012": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     null,
-     [
-      "AES128-GCM-SHA256"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.5,
     "observed": [
      [
       "cipher_suite",
@@ -2201,14 +2187,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -2367,14 +2350,11 @@
      "server_sig_alg": [
       "ecdsa-sha2-nistp256"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -2546,14 +2526,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "mlkem768x25519-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -2653,17 +2630,10 @@
   "SL-0022": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -2773,14 +2743,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -2955,14 +2922,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -3090,17 +3054,10 @@
   "SL-1170": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp384r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -3192,17 +3149,10 @@
   "SL-1171": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "SecP384r1MLKEM1024",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -3310,14 +3260,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.6,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -3483,14 +3430,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "curve25519-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.7,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -3634,14 +3578,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group16-sha512"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -3785,14 +3726,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp384"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -3948,14 +3886,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp384"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -4079,17 +4014,10 @@
   "SL-2060": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 2.9,
+    "seconds": 2.8,
     "observed": [
      [
       "cipher_suite",
@@ -4153,17 +4081,10 @@
   "SL-2061": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "SecP384r1MLKEM1024",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 2.8,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher_suite",
@@ -4223,17 +4144,10 @@
   "SL-2062": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 3.3,
+    "seconds": 2.9,
     "observed": [
      [
       "cipher_suite",
@@ -4325,17 +4239,10 @@
   "SL-2063": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 2.9,
+    "seconds": 2.7,
     "observed": [
      [
       "cipher_suite",
@@ -4379,17 +4286,10 @@
   "SL-2064": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "<NULL>",
-     [
-      "(NONE)"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 2.8,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher_suite",
@@ -4481,17 +4381,10 @@
   "SL-2080": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 3.5,
+    "seconds": 2.9,
     "observed": [
      [
       "cipher_suite",
@@ -4631,17 +4524,10 @@
   "SL-4570": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "<NULL>",
-     [
-      "(NONE)"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": []
    }
   },
@@ -4678,17 +4564,10 @@
   "SL-4576": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.6,
+    "seconds": 1.5,
     "observed": [
      [
       "cipher_suite",
@@ -4864,17 +4743,10 @@
   "SL-4577": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "ECDHE-RSA-AES256-GCM-SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -4986,17 +4858,10 @@
   "SL-4578": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "ECDHE-RSA-AES256-GCM-SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.9,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -5108,17 +4973,10 @@
   "SL-4579": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.6,
+    "seconds": 1.5,
     "observed": [
      [
       "cipher_suite",
@@ -5340,14 +5198,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -5497,14 +5352,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -5638,14 +5490,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -5779,14 +5628,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -5920,14 +5766,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -6061,14 +5904,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -6202,14 +6042,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -6343,14 +6180,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -6484,14 +6318,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.4,
     "observed": [
      [
       "cipher",
@@ -6627,14 +6458,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group1-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -6778,14 +6606,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group14-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -6929,14 +6754,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group-exchange-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -7087,14 +6909,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -7271,14 +7090,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -7449,14 +7265,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -7584,17 +7397,10 @@
   "SL-6500": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp384r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -7706,17 +7512,10 @@
   "SL-6501": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp256r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.4,
     "observed": [
      [
       "cipher_suite",
@@ -7828,17 +7627,10 @@
   "SL-6502": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp521r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -7950,17 +7742,10 @@
   "SL-6503": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.6,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -8072,17 +7857,10 @@
   "SL-6512": {
    "status": "started",
    "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
+   "reference_extra": {},
    "scanner": {
     "exit": 0,
-    "seconds": 1.7,
+    "seconds": 1.3,
     "observed": [
      [
       "cipher_suite",
@@ -8190,14 +7968,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "curve25519-sha256@libssh.org"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.4,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -8341,14 +8116,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group-exchange-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.5,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -8496,14 +8268,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",
@@ -8671,14 +8440,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.2,
     "observed": [
      [
       "cipher",
@@ -8860,14 +8626,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 0,
-    "seconds": 1.3,
+    "seconds": 1.1,
     "observed": [
      [
       "cipher",

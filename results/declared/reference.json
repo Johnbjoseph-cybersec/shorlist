@@ -1290,7 +1290,7 @@
  "fingerprint": "d8bf8920bf564825607c2477bd51aea3a34822c3a594e4d39838fb256c1ca08f",
  "fingerprint_rule": "sha256(canonical JSON {rows_sha256, generator_version, tool_version, rows:[[id,outcome,reason]...]})",
  "run": {
-  "at": "2026-11-07T08:16:50Z",
+  "at": "2026-11-07T12:34:20Z",
   "python": "3.12.3",
   "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
  },

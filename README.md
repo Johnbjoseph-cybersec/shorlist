@@ -7,7 +7,7 @@ post-quantum ones that replace them.**
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 [![Version 0.2.0](https://img.shields.io/badge/version-0.2.0-informational.svg)](VERSION)
-[![Rows: 2004](https://img.shields.io/badge/rows-2004-success.svg)](forms/)
+[![Rows: 2035](https://img.shields.io/badge/rows-2035-success.svg)](forms/)
 [![ci](https://github.com/shorlist/shorlist/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shorlist/shorlist/actions/workflows/ci.yml)
 
 For **scanner vendors**, who want to show what their tool recognises against a public list,
@@ -29,8 +29,8 @@ or loses nothing on the quantum axis for a weak or a defect row.
 
 ```mermaid
 flowchart LR
-    C["ShorList v0.2.0<br/>2004 rows, a primary source on each"] --> Q["quantum<br/>1510 rows (165 decoys)<br/>Shor-vulnerable + post-quantum"]
-    C --> W["weak<br/>307 rows (31 decoys)<br/>SHA-1, MD5, 3DES, RSA-1024 …"]
+    C["ShorList v0.2.0<br/>2035 rows, a primary source on each"] --> Q["quantum<br/>1537 rows (169 decoys)<br/>Shor-vulnerable + post-quantum"]
+    C --> W["weak<br/>311 rows (31 decoys)<br/>SHA-1, MD5, 3DES, RSA-1024 …"]
     C --> D["defect<br/>187 rows (25 decoys)<br/>misuse, scored on the CWE"]
 ```
 
@@ -122,13 +122,13 @@ broken down by `form_kind`, family and language or product.
 
 ## Scope of v0.2
 
-2004 rows, every one checked against a primary source; 75 more wait in
+2035 rows, every one checked against a primary source; 75 more wait in
 [`candidates/`](candidates/) (no primary source yet, or no family in the vocabulary).
 
 | axis | rows | positive | decoys | families |
 |---|---|---|---|---|
-| quantum | 1510 | 1345 | 165 | RSA, DSA, DH, EC, ECDSA, ECDH, EdDSA, X25519, X448, ML-KEM, ML-DSA, SLH-DSA, LMS, XMSS |
-| weak | 307 | 276 | 31 | SHA-1, MD5, MD4, DES, 3DES, RC4, RC2, and weak parameters of quantum families (RSA-1024, DH-1024, P-192 …) |
+| quantum | 1537 | 1368 | 169 | RSA, DSA, DH, EC, ECDSA, ECDH, EdDSA, X25519, X448, ML-KEM, ML-DSA, SLH-DSA, LMS, XMSS |
+| weak | 311 | 280 | 31 | SHA-1, MD5, MD4, DES, 3DES, RC4, RC2, and weak parameters of quantum families (RSA-1024, DH-1024, P-192 …) |
 | defect | 187 | 162 | 25 | 14 CWE classes, e.g. CWE-327 (ECB, old TLS), CWE-321 (hard-coded key), CWE-295 (certificate validation off), CWE-780 (RSA without OAEP), CWE-916 (too few iterations), CWE-323 (nonce reuse) |
 
 Languages and products: Python, Java, Kotlin, Go, C, C++, C#, Rust, JavaScript/Node,
@@ -299,51 +299,69 @@ Results are in [`results/live/`](results/live/).
 
 ## Results
 
-**These results are for v0.1 (30 rows, quantum axis only).** The v0.2 catalogue has not
-been measured yet; its results will replace this section.
+Measured on ShorList 0.2.0, catalogue sha256 `5d0e18007d740318…`, all on the same rows. The
+v0.1 results (30 rows, quantum axis only) stay in [`results/v0.1.1/`](results/v0.1.1/).
 
 A 0 here means the tool reported none of these forms in this setup; it is not a judgement of the tool for its own purpose.
 
 ### Source-code scanners
 
-| scanner | positive forms recognised | decoys reported as a use | adapter caveat | fingerprint |
-|---|---|---|---|---|
-| qrp-mcp 0.44.0 | 20 / 20 | 0 / 10 | see the notes below | see [`results/v0.1.1/`](results/v0.1.1/) |
-| CSNP CryptoScan v1.5.0 | 8 / 20 (+ 3 parent `EC`) | 4 / 10 | CBOM output read; size n/a; role from CycloneDX `primitive` only; its names mapped as its PATTERNS.md defines them: `ECC` (ECC-001 "Elliptic Curve") -> `EC`, so the 3 ECDSA rows score `parent_only`; `Hybrid-KEM` (HYBRID-KEM-001 "X25519+ML-KEM") -> `ML-KEM` | see [`results/v0.1.1/`](results/v0.1.1/) |
-| qscan 1.0.0 ([EthanCratchley/qscan](https://github.com/EthanCratchley/qscan) @8b73799) | 7 / 20 | 2 / 10 | CBOM output read; role n/a (`pke` for RSA and ECDSA alike); size from `parameterSetIdentifier`; no AI triage | see [`results/v0.1.1/`](results/v0.1.1/) |
-| cdxgen 13.6.0 (`cbom`) | 0 / 20 | 0 / 10 | one fixed command, no `-t`; 0 `cryptographic-asset` components: 27 trees list no package so its evidence step is skipped, and on the 3 with a `cryptography` import its atom slicer exited with status 1 | see [`results/v0.1.1/`](results/v0.1.1/) |
-| Semgrep 1.183.0 + semgrep-rules @16b9e6d | 0 / 20 | 0 / 10 | 64 rule files from directories whose path contains `crypt`; family from `check_id` tokens; 10 of 30 planted files are in no language those rules cover | see [`results/v0.1.1/`](results/v0.1.1/) |
+Quantum axis: 1368 positive forms, 169 decoys. **Without registry rows** leaves out the 552
+`registry_id` rows (IANA TLS, SSH, IKEv2, JOSE and COSE identifiers): a tool that builds its
+name tables from the same registries finds them by construction, so the remaining 816 rows
+are the fairer comparison. Both columns are always given.
+
+| scanner | quantum: hit / 1368 | without registry rows: hit / 816 | decoys reported as a use / 169 | parent only | weak: hit / 280 (false alarm / 31) | defect: hit / 162 | result |
+|---|---|---|---|---|---|---|---|
+| qrp-mcp 0.44.0 | 1092 | 604 | 26 | 55 | 247 (0) | 0 | [md](results/v0.2.0/qrp-mcp-0.44.0.md) |
+| CSNP CryptoScan v1.5.0 | 257 | 198 | 45 | 127 | 123 (14) | 0 | [md](results/v0.2.0/cryptoscan-1.5.0.md) |
+| qscan 1.0.0 ([EthanCratchley/qscan](https://github.com/EthanCratchley/qscan) @8b73799) | 82 | 37 | 16 | 0 | 54 (4) | 0 | [md](results/v0.2.0/qscan-1.0.0.md) |
+| cdxgen 13.6.0 (`cbom`) | 13 | 13 | 0 | 0 | 6 (0) | 0 | [md](results/v0.2.0/cdxgen-13.6.0.md) |
+| Semgrep 1.183.0 + semgrep-rules @16b9e6d | 0 | 0 | 0 | 0 | 33 (0) | 5 (+6 wrong class) | [md](results/v0.2.0/semgrep-1.183.0.md) |
+
+Semgrep is the only tool so far that scores on the defect axis: 5 hits and 6 reports of the
+wrong CWE class on 162 wrong files, and 11 false alarms on the 162 fixed files planted beside
+them. Its 64 rule files look for misuse, not for which public-key algorithm is in use, so the
+0 on the quantum axis is expected. The other four report no misuse; they are inventory tools.
+
+Adapter caveats (unchanged since v0.1, details in each adapter): CryptoScan's `ECC` maps to
+`EC`, so its ECDSA and ECDH rows score `parent only`, and it reports no size; qscan reports
+no role; cdxgen ran one fixed command, no `-t`, and its evidence step is skipped on trees
+that list no package; Semgrep's family comes from `check_id` tokens.
 
 ### Tools not designed for source trees
 
 Run on the same planted trees for completeness. Each reads a file system or image, not source
 code, by its own README.
 
-| scanner | positive forms recognised | decoys reported as a use | adapter caveat | fingerprint |
+| scanner | quantum: hit / 1368 | decoys / 169 | file only (no line; not a hit) | note |
 |---|---|---|---|---|
-| CBOMkit-theia v1.1.2 | 0 / 20 | 0 / 10 | does not scan source code (its README); 0 components on all 30 trees | see [`results/v0.1.1/`](results/v0.1.1/) |
-| CipherIQ cbom-generator 1.9.3, default | 0 / 20 | 0 / 10 | scans Linux systems for certificates, keys, algorithms and cryptographic libraries (its README); README basic invocation `--output cbom.json <dirs>`; components without a location in the planted tree are dropped (the same 9 algorithms and 6 libraries appear on an empty directory); none had one | see [`results/v0.1.1/`](results/v0.1.1/) |
-| CipherIQ cbom-generator 1.9.3, `--discover-services` | 0 / 20 | 0 / 10 | README service-discovery invocation (`--discover-services --plugin-dir …/plugins/ubuntu --cyclonedx-spec=1.7`); all 60 plugins loaded; the plugins look for a service at absolute system paths (`/usr/sbin/nginx`, `/etc/nginx/nginx.conf`), not in the scanned directory, and the trees were not moved there; it found 7 checksum tools of its own container, with no location in the tree | see [`results/v0.1.1/`](results/v0.1.1/) |
+| CBOMkit-theia v1.1.2 | 1 | 0 | 0 | the hit is a PEM private key (SL-3596), plus 1 wrong family (SL-3601); does not scan source code (its README) |
+| CipherIQ cbom-generator 1.9.3, default | 0 | 0 | 4 | reports 4 of the PEM key files (SL-3596–3599), without a line |
+| CipherIQ cbom-generator 1.9.3, `--discover-services` | 0 | 0 | 4 | its plugins look for services at absolute system paths, not in the scanned directory |
+
+The PEM rows carry real throwaway keys (see [Test keys](#test-keys)); with placeholder bodies
+both tools reported 0 because they could not parse the key, not because they missed it.
 
 The open-source scanners were run in throwaway containers with no network during the scan;
-images, versions and invocations are recorded in each adapter and result file. Where a
-scanner's output has no role, the scorer takes the family's intrinsic role from
-`families.yaml`, so `role_ok` is not evidence about that scanner; where it has no size,
-`size_ok` reads "no", meaning not reported. Not measured: IBM
-sonar-cryptography (needs a SonarQube server) and CBOMkit (a service that clones a repository
-by URL).
+images, versions and invocations are recorded in each adapter and result file. Semgrep and
+cdxgen were run on GitHub's runners in 12 shards
+([`measure.yml`](.github/workflows/measure.yml)) and merged with `shorlist merge`; the merged
+result is the one an unsharded run gives. Where a scanner's output has no role, the scorer
+takes the family's intrinsic role from `families.yaml`, so `role_ok` is not evidence about
+that scanner; where it has no size, `size_ok` reads "no", meaning not reported. No row ended
+in `scanner_error` in any run. Not measured: IBM sonar-cryptography (needs a SonarQube
+server) and CBOMkit (a service that clones a repository by URL).
 
-Role is wrong on 2 of the 16 rows where a role is expected: for `TLS_RSA_WITH_AES_128_GCM_SHA256`
-and its OpenSSL name `AES128-GCM-SHA256`, qrp-mcp reports RSA as key establishment only;
-the suite uses RSA for both key transport and authentication.
+**Read qrp-mcp's row with its limits.** qrp-mcp is written by the author of ShorList (see
+[Conflict of interest](#conflict-of-interest)). 488 of its 1092 hits are registry rows, which
+it reads from the same registries the rows cite; without them it recognises 604 of 816. Its
+misses are published row by row in the result: 216 misses and 5 wrong families on the quantum
+axis, 26 false alarms on decoys, and 0 on the defect axis. No reviewer outside Elkan
+Electronic has checked these numbers yet.
 
-Read the 20 / 20 with its limits. The five IANA-identifier rows (SL-0016 to SL-0020) are
-not independent evidence for qrp-mcp, because it builds its name tables from the same
-registries. v0.1 holds only the common forms of three families. Known gaps in qrp-mcp lie
-outside this slice: OIDs, NIST `P-224`/`B-*`/`K-*` curve names, and some PyCryptodome and
-pyca calls. They are the next rows to add, and the score is expected to fall when they go
-in. Measurements of other
-scanners are welcome as pull requests to `results/`, produced by the generator.
+Measurements of other scanners are welcome as pull requests to `results/`, produced by the
+generator.
 
 ## Declaration axis (supplier CBOM against the listener)
 

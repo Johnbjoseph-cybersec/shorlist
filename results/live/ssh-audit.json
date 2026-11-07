@@ -5,7 +5,7 @@
  "catalogue": {
   "name": "ShorList",
   "version": "0.2.0",
-  "sha256": "e48462b539beba5915738d27770c667bdc34ba3d2fb42e15b40d265e86e35c1e"
+  "sha256": "5d0e18007d740318cb1247303bc1ad957de13f2a349e9e8aeab2cdc2690a6db6"
  },
  "wire": {
   "sha256": "01304235d689247fb6103d6f1e1c0ab2141be1db32071305729d262b7a8b7193",
@@ -211,7 +211,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 2.8
+   "scanner_seconds": 2.5
   },
   {
    "outcome": "miss",
@@ -235,7 +235,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -256,7 +256,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 2.2
+   "scanner_seconds": 1.7
   },
   {
    "outcome": "ok",
@@ -277,7 +277,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "ok",
@@ -298,7 +298,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.8
   },
   {
    "outcome": "hit",
@@ -319,7 +319,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.7
+   "scanner_seconds": 2.4
   },
   {
    "outcome": "not_runnable",
@@ -351,7 +351,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.4
+   "scanner_seconds": 2.8
   },
   {
    "outcome": "hit",
@@ -372,7 +372,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.8
+   "scanner_seconds": 3.0
   },
   {
    "outcome": "hit",
@@ -393,7 +393,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "not_runnable",
@@ -447,7 +447,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.7
   },
   {
    "outcome": "hit",
@@ -468,7 +468,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -489,7 +489,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.4
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -510,7 +510,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.3
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -531,7 +531,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.5
+   "scanner_seconds": 2.7
   },
   {
    "outcome": "hit",
@@ -552,7 +552,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -573,7 +573,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -594,7 +594,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.3
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -615,7 +615,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.3
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -636,7 +636,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.5
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -657,7 +657,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.8
   },
   {
    "outcome": "hit",
@@ -678,7 +678,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -699,7 +699,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 4.1
+   "scanner_seconds": 3.4
   },
   {
    "outcome": "ok",
@@ -720,7 +720,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "ok",
@@ -762,7 +762,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 3.0
   },
   {
    "outcome": "ok",
@@ -783,7 +783,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.8
+   "scanner_seconds": 2.7
   },
   {
    "outcome": "not_scored",
@@ -815,7 +815,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.3
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "hit",
@@ -836,7 +836,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 4.0
+   "scanner_seconds": 3.2
   },
   {
    "outcome": "hit",
@@ -857,7 +857,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.4
   },
   {
    "outcome": "hit",
@@ -878,7 +878,7 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.2
+   "scanner_seconds": 2.6
   },
   {
    "outcome": "ok",
@@ -899,43 +899,17 @@
     }
    ],
    "scanner_exit": 3,
-   "scanner_seconds": 3.1
+   "scanner_seconds": 2.6
   }
  ],
- "fingerprint": "4f93bbce9deefd294e580b6efab9cc0c4cbbf01fea80fce66a191b26220ed77f",
+ "fingerprint": "5e22c7f121c321017b6a14a96e4d14082eabe8896819caf88b2a7b5e9754ed73",
  "fingerprint_rule": "sha256(canonical JSON {wire_sha256, catalogue_sha256, generator_version, scanner_version, images, rows:[[id,outcome,reason]...]})",
  "run": {
-  "at": "2026-11-07T07:16:06Z",
+  "at": "2026-11-07T12:12:05Z",
   "python": "3.12.3",
   "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
  },
  "raw": {
-  "SL-0011": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-0012": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     null,
-     [
-      "AES128-GCM-SHA256"
-     ]
-    ]
-   },
-   "scanner": null
-  },
   "SL-0013": {
    "status": "started",
    "error": null,
@@ -987,14 +961,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 2.8,
+    "seconds": 2.5,
     "observed": [
      [
       "cipher",
@@ -1153,14 +1124,11 @@
      "server_sig_alg": [
       "ecdsa-sha2-nistp256"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -1332,14 +1300,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "mlkem768x25519-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 2.2,
+    "seconds": 1.7,
     "observed": [
      [
       "cipher",
@@ -1436,19 +1401,6 @@
     ]
    }
   },
-  "SL-0022": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
   "SL-0029": {
    "status": "started",
    "error": null,
@@ -1502,14 +1454,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -1684,14 +1633,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.8,
     "observed": [
      [
       "cipher",
@@ -1816,32 +1762,6 @@
     ]
    }
   },
-  "SL-1170": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp384r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-1171": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "SecP384r1MLKEM1024",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
   "SL-1172": {
    "status": "started",
    "error": null,
@@ -1893,14 +1813,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.7,
+    "seconds": 2.4,
     "observed": [
      [
       "cipher",
@@ -2066,14 +1983,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "curve25519-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.4,
+    "seconds": 2.8,
     "observed": [
      [
       "cipher",
@@ -2217,14 +2131,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group16-sha512"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.8,
+    "seconds": 3.0,
     "observed": [
      [
       "cipher",
@@ -2368,14 +2279,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp384"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -2531,14 +2439,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp384"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.7,
     "observed": [
      [
       "cipher",
@@ -2659,227 +2564,6 @@
     ]
    }
   },
-  "SL-2060": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-2061": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "SecP384r1MLKEM1024",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-2062": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-2063": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-2064": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "<NULL>",
-     [
-      "(NONE)"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-2080": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-4562": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4563": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4564": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4565": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"DHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"DHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4566": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4567": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"RC4-MD5\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"RC4-MD5\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4568": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4569": {
-   "status": "config_rejected",
-   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4570": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "<NULL>",
-     [
-      "(NONE)"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-4571": {
-   "status": "config_rejected",
-   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4572": {
-   "status": "config_rejected",
-   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4573": {
-   "status": "config_rejected",
-   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4574": {
-   "status": "config_rejected",
-   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4575": {
-   "status": "config_rejected",
-   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
-   "reference_extra": null,
-   "scanner": null
-  },
-  "SL-4576": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-4577": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "ECDHE-RSA-AES256-GCM-SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-4578": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "ECDHE-RSA-AES256-GCM-SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-4579": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
   "SL-4581": {
    "status": "started",
    "error": null,
@@ -2929,14 +2613,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3086,14 +2767,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.4,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3227,14 +2905,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.3,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3368,14 +3043,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.5,
+    "seconds": 2.7,
     "observed": [
      [
       "cipher",
@@ -3509,14 +3181,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3650,14 +3319,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3791,14 +3457,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.3,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -3932,14 +3595,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.3,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -4073,14 +3733,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.5,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -4216,14 +3873,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group1-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.8,
     "observed": [
      [
       "cipher",
@@ -4367,14 +4021,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group14-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -4518,14 +4169,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group-exchange-sha1"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 4.1,
+    "seconds": 3.4,
     "observed": [
      [
       "cipher",
@@ -4676,14 +4324,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -4860,14 +4505,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 3.0,
     "observed": [
      [
       "cipher",
@@ -5038,14 +4680,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.8,
+    "seconds": 2.7,
     "observed": [
      [
       "cipher",
@@ -5170,71 +4809,6 @@
     ]
    }
   },
-  "SL-6500": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp384r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-6501": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp256r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-6502": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "secp521r1",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-6503": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "x25519",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
-  "SL-6512": {
-   "status": "started",
-   "error": null,
-   "reference_extra": {
-    "pcap_handshake": [
-     "X25519MLKEM768",
-     [
-      "TLS_AES_256_GCM_SHA384"
-     ]
-    ]
-   },
-   "scanner": null
-  },
   "SL-6523": {
    "status": "started",
    "error": null,
@@ -5282,14 +4856,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "curve25519-sha256@libssh.org"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.3,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -5433,14 +5004,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "diffie-hellman-group-exchange-sha256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 4.0,
+    "seconds": 3.2,
     "observed": [
      [
       "cipher",
@@ -5588,14 +5156,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.4,
     "observed": [
      [
       "cipher",
@@ -5763,14 +5328,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.2,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
@@ -5952,14 +5514,11 @@
       "rsa-sha2-256",
       "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
      ]
-    },
-    "pcap_handshake": [
-     "ecdh-sha2-nistp256"
-    ]
+    }
    },
    "scanner": {
     "exit": 3,
-    "seconds": 3.1,
+    "seconds": 2.6,
     "observed": [
      [
       "cipher",
