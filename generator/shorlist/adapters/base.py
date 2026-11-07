@@ -24,11 +24,18 @@ Record fields:
     cwe     "CWE-NNN" when the scanner reports a misuse (defect axis), else None
 
 The adapter is the only place that knows a scanner's field names and family spellings.
+
+scan() raises ScannerTimeout when the scanner did not finish on a row (after its retry); the
+generator then records that row as `scanner_error` and goes on with the next one.
 """
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from pathlib import Path
+
+
+class ScannerTimeout(RuntimeError):
+    """The scanner did not finish on one row. The row is recorded as scanner_error, not scored."""
 
 
 @dataclass(frozen=True)

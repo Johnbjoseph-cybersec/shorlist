@@ -10,8 +10,14 @@ literal: "-----BEGIN RSA PUBLIC KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN RSA PUBLIC KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIIBCgKCAQEAj4LGBis+Ao341tgB1k+YWBV1ELbcyUrXjKZmJ2PHExxPSwFYnTCR
+  BG/m8b3VX2wdLCFU/C7BMaXintwcX/1oet0CGWf15+0Yax3mw3XYLx3OahqdV0eH
+  Lj0RLHUD0EU3zYKk/HfrENZQdtBHMLeTMyE+D9DiILsDN+JE+3DPVSLQm+tlSX/r
+  IoXW8Q34lM2JE4VyK1Inrxl6oWPVPUJImTWRX3XW+WurRfdOOn8aSrPe+E0H5kTc
+  Pvrux+51wJ2KjBwGC8bxwUNl6m1RIGPrWF6Ub3R2oFNaskdf6z2uKESc90QrEceM
+  yWlcn/sfvsoT3TWYQK54Isa0BPG5EqMqLwIDAQAB
   -----END RSA PUBLIC KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "RSA"
   role: "undetermined"
@@ -28,4 +34,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material. PKCS #1 RSAPublicKey (RFC 8017, Appendix A.1.1) in PEM."
+notes: "The body is real test material, published on purpose and used nowhere: the RSA-2048 public key of a throwaway key, PKCS #1 (`openssl rsa -RSAPublicKey_out`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size. PKCS #1 RSAPublicKey (RFC 8017, Appendix A.1.1) in PEM."

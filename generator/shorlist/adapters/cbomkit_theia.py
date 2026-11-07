@@ -6,7 +6,10 @@ with --bom, java.security. It writes a CycloneDX 1.6 CBOM to stdout (README, "Ru
 
 Mapping (shared CycloneDX rules in _cyclonedx.py): one Record per
 components[].evidence.occurrences[] inside the planted tree; family from algorithmFamily/name
-via schema/families.yaml; role from primitive; size from relatedCryptoMaterialProperties.size;
+via schema/families.yaml; line: occurrences[].line + 1, because theia copies gitleaks'
+Finding.StartLine, which is 0-based when the fragment starts at 0 (gitleaks v8.30.1
+detect/location.go; theia secrets.go builds Fragment{Raw, FilePath}): a real key whose BEGIN
+line is line 1 comes out as line 0; role from primitive; size from relatedCryptoMaterialProperties.size;
 is_use True. Components with no occurrence in the tree give no Record. cwe: None; theia writes
 no CWE (none in its README at v1.1.2, no "CWE-<n>" string in the binary, 0 components on the
 weak and defect rows of v0.2).
@@ -44,4 +47,8 @@ class CbomkitTheiaAdapter(ContainerAdapter):
 
     @staticmethod
     def parse(bom: dict) -> list[Record]:
-        return _cyclonedx.records(bom)
+        return _cyclonedx.records(bom, locations=_one_based)
+
+
+def _one_based(c: dict) -> list[tuple[str, int | None]]:
+    return [(p, None if line is None else line + 1) for p, line in _cyclonedx.occurrences(c)]

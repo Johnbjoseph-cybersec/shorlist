@@ -43,6 +43,7 @@ class CipherIQAdapter(ContainerAdapter):
 
     def scan(self, tree: Path, workdir: Path) -> list[Record]:
         out = self.outdir(tree, workdir)
+        (out / "cbom.json").unlink(missing_ok=True)  # it exits 0 when it cannot write: never read an old one
         p = self.run_scan(tree, out, ["--output", f"{OUT}/cbom.json", SCAN])
         f = out / "cbom.json"
         if not f.exists():
@@ -64,6 +65,7 @@ class CipherIQServicesAdapter(CipherIQAdapter):
 
     def scan(self, tree: Path, workdir: Path) -> list[Record]:
         out = self.outdir(tree, workdir)
+        (out / "cbom.json").unlink(missing_ok=True)  # it exits 0 when it cannot write: never read an old one
         p = self.run_scan(tree, out, self.ARGS + ["--output", f"{OUT}/cbom.json", SCAN])
         f = out / "cbom.json"
         if not f.exists():

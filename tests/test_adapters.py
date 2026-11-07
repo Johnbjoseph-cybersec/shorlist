@@ -1,5 +1,6 @@
 """Parsing tests for the container adapters, on the output shapes their documentation shows.
 No docker needed: only parse() and the command plumbing are exercised."""
+import json
 import sys
 from pathlib import Path
 
@@ -217,3 +218,76 @@ def test_out_dir_keeps_the_fixed_file_apart(tmp_path, monkeypatch):
     a = CryptoScanAdapter()
     assert a.outdir(tmp_path / "SL-5000" / "tree", tmp_path).name == "SL-5000"
     assert a.outdir(tmp_path / "SL-5000" / "fix", tmp_path).name == "SL-5000-fix"
+
+
+def test_theia_line_is_one_based():
+    # theia v1.1.2 on a real RSA key whose BEGIN line is line 1 of key.pem writes line 0
+    # (ShorList v0.2.0 nuli/out/theia3/CTRL-realrsatrad/cbom.json); a lineless component stays lineless
+    from shorlist.adapters.cbomkit_theia import CbomkitTheiaAdapter
+    bom = {"components": [
+        {"type": "cryptographic-asset", "name": "RSA",
+         "cryptoProperties": {"assetType": "related-crypto-material",
+                              "relatedCryptoMaterialProperties": {"size": 2048}},
+         "evidence": {"occurrences": [{"location": "key.pem", "line": 0}]}},
+        {"type": "cryptographic-asset", "name": "ECDSA",
+         "evidence": {"occurrences": [{"location": "cert.pem"}]}}]}
+    assert CbomkitTheiaAdapter.parse(bom) == [Record(path="key.pem", line=1, family="RSA", size=2048),
+                                              Record(path="cert.pem", line=None, family="ECDSA")]
+
+
+def test_cipheriq_never_reads_a_stale_cbom(tmp_path, monkeypatch):
+    # cbom-generator exits 0 when it cannot write /out/cbom.json; an old file there must not be parsed
+    import subprocess
+    import pytest
+    monkeypatch.setenv("SHORLIST_OUT_DIR", str(tmp_path / "raw"))
+    stale = {"components": [{"type": "cryptographic-asset", "name": "RSA",
+                             "evidence": {"occurrences": [{"location": "/scan/key.pem", "line": 1}]}}]}
+    tree = tmp_path / "SL-3596" / "tree"
+    tree.mkdir(parents=True)
+    for cls in (CipherIQAdapter, CipherIQServicesAdapter):
+        a = cls()
+        out = a.outdir(tree, tmp_path)
+        (out / "cbom.json").write_text(json.dumps(stale))
+        monkeypatch.setattr(a, "run_scan", lambda *args, **kw: subprocess.CompletedProcess([], 0, "", ""))
+        with pytest.raises(RuntimeError, match="wrote no CBOM"):
+            a.scan(tree, tmp_path)
+
+
+def test_container_timeout_removes_the_container_retries_once_then_raises(tmp_path, monkeypatch):
+    import subprocess
+    import pytest
+    from shorlist.adapters import _container
+    from shorlist.adapters.base import ScannerTimeout
+    calls = []
+
+    def fake_run(argv, **kw):
+        calls.append(argv)
+        if argv[:2] == ["docker", "run"]:
+            raise subprocess.TimeoutExpired(argv, kw.get("timeout"))
+        return subprocess.CompletedProcess(argv, 0, "", "")
+
+    monkeypatch.setattr(_container.subprocess, "run", fake_run)
+    a = CipherIQAdapter()
+    tree, out = tmp_path / "SL-2095" / "tree", tmp_path / "out"
+    tree.mkdir(parents=True)
+    out.mkdir()
+    with pytest.raises(ScannerTimeout):
+        a.run_scan(tree, out, ["/scan"], timeout=1)
+    names = [c[c.index("--name") + 1] for c in calls if c[:2] == ["docker", "run"]]
+    assert [c[:2] for c in calls] == [["docker", "run"], ["docker", "rm"]] * 2
+    assert [c[3] for c in calls if c[:2] == ["docker", "rm"]] == names  # the container itself is removed
+    assert len(set(names)) == 2 and all(n.startswith("shorlist-") for n in names)
+    assert "--name" not in a.command  # the recorded command carries no per-run name
+
+    # a timeout on the first attempt only: removed, retried, and the retry's result is used
+    calls.clear()
+
+    def once(argv, **kw):
+        calls.append(argv)
+        if argv[:2] == ["docker", "run"] and sum(c[:2] == ["docker", "run"] for c in calls) == 1:
+            raise subprocess.TimeoutExpired(argv, 1)
+        return subprocess.CompletedProcess(argv, 0, "ok", "")
+
+    monkeypatch.setattr(_container.subprocess, "run", once)
+    assert a.run_scan(tree, out, ["/scan"], timeout=1).stdout == "ok"
+    assert [c[:2] for c in calls] == [["docker", "run"], ["docker", "rm"], ["docker", "run"]]

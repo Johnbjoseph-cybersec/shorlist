@@ -149,3 +149,45 @@ def test_run_end_to_end_with_a_defect_row(tmp_path):
     assert d["fixed_files"] == {"ok": 1, "false_alarm": 0, "n": 1}
     assert "SL-9001/fix" in res["raw_records"]
     assert "fixed file: ok" in markdown(res)
+
+
+def test_scanner_error_row_is_listed_and_left_out_of_the_denominators(tmp_path):
+    import shutil
+    import yaml
+    from shorlist.adapters.base import Adapter, ScannerTimeout
+    from shorlist.run import markdown, run
+
+    shutil.copytree(ROOT / "schema", tmp_path / "schema")
+    shutil.copy(ROOT / "VERSION", tmp_path / "VERSION")
+    (tmp_path / "forms").mkdir()
+    for rid in ("SL-0001", "SL-0002", "SL-3605"):
+        shutil.copy(ROOT / "forms" / f"{rid}.yaml", tmp_path / "forms" / f"{rid}.yaml")
+    row = ecb_row()
+    (tmp_path / "forms" / f"{row['id']}.yaml").write_text(yaml.safe_dump(row, sort_keys=False))
+    hang = {ROWS["SL-0002"]["context_template"], row["right_template"]}
+
+    class Hangs(Adapter):
+        name = "hangs"
+
+        def version(self):
+            return "hangs 1"
+
+        def scan(self, tree, workdir):
+            (f,) = list(tree.iterdir())
+            if f.read_text() in hang:
+                raise ScannerTimeout(f"hangs: {tree.parent.name} timed out twice after 1 s")
+            return []
+
+    res = run(Hangs(), tmp_path)
+    by = {s["id"]: s for s in res["rows"]}
+    assert by["SL-0002"]["outcome"] == "scanner_error" and by["SL-0001"]["outcome"] == "miss"
+    assert res["catalogue"]["positive"] == 2 and res["catalogue"]["decoys"] == 1  # the catalogue, in full
+    assert res["summary"]["positive"]["n"] == 1 and res["summary"]["positive"]["miss"] == 1
+    assert res["summary"]["scanner_error"] == {"n": 1, "ids": ["SL-0002"]}
+    assert res["scanner_error"] == {"n": 1, "ids": ["SL-0002"]}
+    assert "1 row(s) not scored" in res["summary"]["statement"]
+    assert sum(c["positive"] for c in res["by_family"].values()) == 1
+    d = res["axes"]["defect"]  # the defect row's fixed file timed out: left out of fixed_files
+    assert by["SL-9001"]["fix"]["outcome"] == "scanner_error" and d["fixed_files"]["n"] == 0
+    md = markdown(res)
+    assert "| SL-0002 |  | scanner_error |" in md and "not scored (scanner_error)" in md

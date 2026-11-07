@@ -10,8 +10,21 @@ literal: "-----BEGIN X9.42 DH PARAMETERS-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN X9.42 DH PARAMETERS-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIICTgKCAQEAq6Ze/sgaRqixROQEIu+PswNnSbSTC8fM+IxIHRjboHUCf9e9f511
+  PUbXCvNdNPU/RTzsS0DfYnxy5ag/4NIAnYSBsunWgk53cylmLj3c2fs4FeApCVwh
+  Pwm31IMBsPFm0moSq7RsKoAs6s+huK1N8waotD3bjGtLLAvqyCNXtQgl/PQTwwaj
+  1X/aap/J/nOppRz48e8aPANZo/67UQ3HDgYUFfv2dy+dxGfFyBfw21ThKQ04c/uC
+  I6JLggzfoAdE+SfJiatw6fby+TnaIgfCONW6tWxeK/FVWDmTTSTpfigJ//OvhskH
+  RtosX7Mhcv6ETixUiK61g7f8d6qJ/yxFbwKCAQEAqs6qbNtVVXpmElc+TQaAXfwS
+  Kqs1ivqGuPttzz2zwvFM9XmVj1MHhkvhgSttk6Z/LkitBlnBOdR3UNU7myDk/uWQ
+  tm0IX4ZooC8sjGq6lGG7pC+ebkIk8LCeVUGAnkSyEu+SLuWyW7m1/2TqzAGuv/pO
+  9TpTzGfVqSzODyZkdB4jv9+N5bqw0jfrlVI0AZI0OtRcjn2FotuSCDbGoMtIi3og
+  qwQ33udRYVcQ2RHyqsOFnbSzBfavVDwdcBzpAjIR9pz+kyDhaRazqI7A1iNB50ZU
+  ofPWJh0DyiHcGP4oemHa+0Y1PVVlei9fAVCVSD78wgGAPe5CJChCW2KQCkbrSQId
+  AKgMLM5LxXkp4BhB6KtBjhHtM3rhLf6VK7QMtaEwIwMdADUiSdA6EDakRoaR+oVk
+  f7WxvXMDbW0h9fFbSX0CAgQC
   -----END X9.42 DH PARAMETERS-----
+  ShorList public test parameters: deliberately published, never used anywhere.
 expected:
   family: "DH"
   role: "key_establishment"
@@ -24,4 +37,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: freshly generated 2048-bit X9.42 DH parameters (`openssl genpkey -genparam -algorithm DHX`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."
