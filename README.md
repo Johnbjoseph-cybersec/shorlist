@@ -175,7 +175,7 @@ The ten positive PEM rows (SL-3596 to SL-3604 and SL-3616: RSA, DSA and EC keys,
 DH parameters) carry **real key material, generated for ShorList and published on purpose**.
 It is throwaway material: it protects nothing, is used nowhere, and must never be trusted. A
 line after each END line says so. It is there because some tools recognise a key only by
-parsing it, and a placeholder body gives them nothing to parse (v0.2.0 used the body
+parsing it, and a placeholder body gives them nothing to parse (drafts of v0.2.0 used the body
 `VGhpcyBpcyBub3QgYSBrZXku`, "This is not a key."). The label on line 1 is still the row's
 literal, so `expected` is unchanged; the key size the body happens to have (RSA-2048, DSA-2048,
 P-256, 2048-bit DH) is not scored, because the label does not pin it. The commands are in
