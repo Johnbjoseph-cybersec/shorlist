@@ -1,0 +1,33 @@
+id: "SL-7028"
+title: "Decoy: Sigstore registry line on ML-DSA kept as a YAML comment"
+family: "ML-DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "config_value"
+language_or_product: "YAML (model-signing pipeline policy)"
+negative: true
+decoy_class: "comment"
+literal: "# ml-dsa-65: sign/verify. Experimental; Pure variant. Not yet fully functional."
+context_filename: "signing-policy.yaml"
+context_template: |
+  # Sigstore algorithm registry, 2026-08-13:
+  # ml-dsa-65: sign/verify. Experimental; Pure variant. Not yet fully functional.
+  model: bert-base-uncased
+  signature: model.sig
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/architecture-docs/blob/60730f3251c28a96920c718bc65a59ad69ef2dc4/algorithm-registry.md"
+    section: "Sigstore Algorithm Registry, Signature Algorithms (ML-DSA)"
+    read_at: "2026-11-07"
+    quote: "|           | ml-dsa-65                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |"
+  - url: "https://github.com/sigstore/architecture-docs/blob/60730f3251c28a96920c718bc65a59ad69ef2dc4/algorithm-registry.md"
+    section: "Sigstore Algorithm Registry, ML-DSA and Post-Quantum Cryptography (PQC)"
+    read_at: "2026-11-07"
+    quote: "⚠️ ML-DSA-44, ML-DSA-65 and ML-DSA-87 are currently not operational within Sigstore. This warning"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The registry itself is a Markdown table, and the generator has no syntax check for .md, so the registry's line is planted as a YAML comment (the class is comment, not a doc table). The keys below it name no algorithm."

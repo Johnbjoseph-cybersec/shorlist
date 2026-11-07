@@ -1,0 +1,36 @@
+id: "SL-7010"
+title: "model_signing API: verifying.Config().use_elliptic_key_verifier(public_key=...)"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "config = model_signing.verifying.Config().use_elliptic_key_verifier(public_key=\"key.pub\")"
+context_filename: "verify_model.py"
+context_template: |
+  import model_signing
+
+  config = model_signing.verifying.Config().use_elliptic_key_verifier(public_key="key.pub")
+  config.verify("finbert", "finbert.sig")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/verifying.py#L251"
+    section: "verifying.Config.use_elliptic_key_verifier (lines 251-257)"
+    read_at: "2026-11-07"
+    quote: "verification of sgistore bundles signed by an elliptic curve private"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L191"
+    section: "Verifier._verify_bundle (line 191)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(get_ec_key_hash(self._public_key)),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The README's example writes model_signing.signing.Config().use_elliptic_key_verifier(...), but the method is defined on verifying.Config (signing.Config has no such method at v1.1.1); the row uses the defined form. The quote keeps the source's spelling 'sgistore'."

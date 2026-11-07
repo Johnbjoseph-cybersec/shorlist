@@ -1,0 +1,44 @@
+id: "SL-7002"
+title: "model_signing CLI: sign certificate with key, leaf and chain"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing sign certificate bert-base-uncased --private_key key.priv --signing_certificate cert.pem --certificate_chain ca.pem"
+context_filename: "sign.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing sign certificate bert-base-uncased --private_key key.priv --signing_certificate cert.pem --certificate_chain ca.pem
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L502"
+    section: "_cli.py, subcommand (line 502)"
+    read_at: "2026-11-07"
+    quote: "@_sign.command(name=\"certificate\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L145"
+    section: "_cli.py, option (line 145)"
+    read_at: "2026-11-07"
+    quote: "\"--signing_certificate\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_certificate.py#L41"
+    section: "class Signer (line 41)"
+    read_at: "2026-11-07"
+    quote: "class Signer(ec_key.Signer):"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L109"
+    section: "Signer.sign (line 109)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(get_ec_key_hash(self._private_key.public_key())),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The certificate signer subclasses the elliptic-key signer, so the same curve check and ec.ECDSA signing apply.  The literal names no algorithm; the curve comes from the key file, so the size is undetermined."

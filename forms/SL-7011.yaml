@@ -1,0 +1,32 @@
+id: "SL-7011"
+title: "model_signing API: verifying.Config().use_certificate_verifier(...)"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "config = model_signing.verifying.Config().use_certificate_verifier(certificate_chain=[\"ca.pem\"])"
+context_filename: "verify_model.py"
+context_template: |
+  import model_signing
+
+  config = model_signing.verifying.Config().use_certificate_verifier(certificate_chain=["ca.pem"])
+  config.verify("finbert", "finbert.sig")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/verifying.py#L271"
+    section: "verifying.Config.use_certificate_verifier (line 271)"
+    read_at: "2026-11-07"
+    quote: "def use_certificate_verifier("
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_certificate.py#L165"
+    section: "Verifier._verify_bundle (line 165)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(ec_key.get_ec_key_hash(public_key)),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "ECDSA verification on the leaf certificate's key."

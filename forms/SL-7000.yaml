@@ -1,0 +1,48 @@
+id: "SL-7000"
+title: "model_signing CLI: sign key with a PEM private key"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing sign key bert-base-uncased --private_key key.priv"
+context_filename: "sign.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing sign key bert-base-uncased --private_key key.priv
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/README.md#model-signing-cli"
+    section: "README, Model Signing CLI (signing with private keys)"
+    read_at: "2026-11-07"
+    quote: "[...]$ model_signing sign key bert-base-uncased --private_key key.priv"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L403"
+    section: "_cli.py, subcommand (line 403)"
+    read_at: "2026-11-07"
+    quote: "@_sign.command(name=\"key\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L108"
+    section: "_cli.py, option (line 108)"
+    read_at: "2026-11-07"
+    quote: "\"--private_key\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L109"
+    section: "Signer.sign (line 109)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(get_ec_key_hash(self._private_key.public_key())),"
+  - url: "https://github.com/ossf/model-signing-spec/blob/91bf841e8ccf97a3ed97309387e9298d1ac18ba2/algorithm-registry.md#signing-key-types"
+    section: "OMS Algorithm Registry, Signing Key Types (extracted from spec/v1.0.md Sections 4.2 and 7)"
+    read_at: "2026-11-07"
+    quote: "| P-256 (secp256r1) | 1.2.840.10045.3.1.7 | [FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The literal names no algorithm: ECDSA is pinned by the product, whose only signer for this method checks the curve against secp256r1/secp384r1/secp521r1 and signs with ec.ECDSA. The curve is chosen by the key file, so the size is undetermined. The README's key-generation line (openssl ecparam -name prime256v1) is left out of the template: it is a second form."

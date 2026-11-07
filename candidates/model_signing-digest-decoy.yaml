@@ -1,0 +1,33 @@
+id: "candidate"
+title: "Decoy: model_signing digest (hash only, no signature)"
+family: "ECDSA"
+parameter_set: null
+role: "n.a."
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: true
+decoy_class: "comment"
+literal: "model_signing digest bert-base-uncased"
+context_filename: "digest.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing digest bert-base-uncased
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/5b8efd57cf764333cbc49474421fdfcef17756f1/src/model_signing/_cli.py#L292"
+    section: "main at 5b8efd5 (2026-10-26), subcommand digest (line 292)"
+    read_at: "2026-11-07"
+    quote: "@main.command(name=\"digest\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/5b8efd57cf764333cbc49474421fdfcef17756f1/src/model_signing/_cli.py#L305"
+    section: "digest docstring"
+    read_at: "2026-11-07"
+    quote: "The digest subcommand serializes a model directory and computes the \"root\""
+status: "candidate"
+candidate_reason: "Two reasons. (1) The subcommand exists only on main (5b8efd5, 2026-10-26), in no release: v1.1.1 has no digest command. (2) No decoy_class fits: it is not a ban list, comment, log string, switch, removal list or verify-only legacy use; it is a hash-only subcommand of a signing tool, and the hash is SHA-256 (defect_only). decoy_class comment is filled in only because the schema requires one. Needs a release containing the command and a decision on a class (e.g. hash_only) before it can be a row."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"

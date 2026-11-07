@@ -1,0 +1,40 @@
+id: "SL-7006"
+title: "model_signing API: Config().use_elliptic_key_signer(private_key=...)"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "config = model_signing.signing.Config().use_elliptic_key_signer(private_key=\"key.priv\")"
+context_filename: "sign_model.py"
+context_template: |
+  import model_signing
+
+  config = model_signing.signing.Config().use_elliptic_key_signer(private_key="key.priv")
+  config.sign("finbert", "finbert.sig")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/README.md#model-signing-api"
+    section: "README, Model Signing API"
+    read_at: "2026-11-07"
+    quote: "model_signing.signing.Config().use_elliptic_key_signer("
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/signing.py#L190"
+    section: "signing.Config.use_elliptic_key_signer (lines 190-196)"
+    read_at: "2026-11-07"
+    quote: "using a private key based on elliptic curve cryptography."
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L109"
+    section: "Signer.sign (line 109)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(get_ec_key_hash(self._private_key.public_key())),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The literal names no algorithm: ECDSA is pinned by the product, whose only signer for this method checks the curve against secp256r1/secp384r1/secp521r1 and signs with ec.ECDSA. The curve is chosen by the key file, so the size is undetermined. The README spreads the call over three lines; the template has it on one."
