@@ -10,8 +10,10 @@ literal: "-----BEGIN ECDSA PUBLIC KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN ECDSA PUBLIC KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEupHflLmKZmFTpRR9RFzEBY8SGmDO
+  NAJ1BO2l5Rv7v9aZWMe0o8HCligp+ire9KzPSPAcht8+9apdb4kHk4/iyA==
   -----END ECDSA PUBLIC KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "ECDSA"
   role: "signature"
@@ -24,4 +26,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: the P-256 public key of a throwaway key as SubjectPublicKeyInfo (`openssl ec -pubout`), relabelled: pem.h defines this label but OpenSSL 3 neither writes nor reads it; made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

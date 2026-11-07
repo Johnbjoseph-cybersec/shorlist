@@ -169,6 +169,23 @@ Rows live in [`forms/`](forms/), one YAML file per row, validated by
 
 Unverified suggestions go to [`candidates/`](candidates/), never into `forms/`.
 
+### Test keys
+
+The ten positive PEM rows (SL-3596 to SL-3604 and SL-3616: RSA, DSA and EC keys, DSA, EC and
+DH parameters) carry **real key material, generated for ShorList and published on purpose**.
+It is throwaway material: it protects nothing, is used nowhere, and must never be trusted. A
+line after each END line says so. It is there because some tools recognise a key only by
+parsing it, and a placeholder body gives them nothing to parse (v0.2.0 used the body
+`VGhpcyBpcyBub3QgYSBrZXku`, "This is not a key."). The label on line 1 is still the row's
+literal, so `expected` is unchanged; the key size the body happens to have (RSA-2048, DSA-2048,
+P-256, 2048-bit DH) is not scored, because the label does not pin it. The commands are in
+[`tools/make_test_keys.sh`](tools/make_test_keys.sh); the keys themselves are data in
+`forms/`, and the private halves of the public-key rows were not kept.
+**Secret scanners will flag these files.** That is expected: they are listed in
+[`.github/secret_scanning.yml`](.github/secret_scanning.yml) (`paths-ignore`) and in
+[`.gitleaks.toml`](.gitleaks.toml), by file, not by folder. The decoy SL-3605 is an error
+message that names the label and has no body; it stays that way.
+
 ## Running the generator
 
 Requires Python ≥ 3.10, `pyyaml`, `jsonschema`. No network access is used.
@@ -191,7 +208,23 @@ ban) is correct. "In scope" follows the axis: a quantum row counts only quantum 
 (a reported MD5 is ignored), a weak row counts quantum and classically weak families. A
 defect row is scored on the CWE: `hit` when the scanner reports `defect.cwe` on the
 literal's line, `wrong_class` for another CWE there, `miss` otherwise; the fixed file is
-planted and scanned separately, and any CWE reported on it is a `false_alarm`. The full rules are in [`generator/shorlist/score.py`](generator/shorlist/score.py).
+planted and scanned separately, and any CWE reported on it is a `false_alarm`.
+
+**File-level findings (`file_only`).** A positive row with nothing in scope on the literal's
+line, but where the scanner reports the expected family as a use in the planted file *with no
+line* (line `null` or `0`), is `file_only`. It is reported in its own column
+(`summary.positive.file_only`, `axes.weak.positive.file_only`, `file_only` in every `by_*`
+cell) and is **not a hit**: the headline figure stays line-exact. A lineless parent family or other family is still a
+`miss`. It exists because some tools (CipherIQ cbom-generator, CBOMkit-theia for certificates)
+report a key or a certificate per file, not per line.
+
+**Rows not scored (`scanner_error`).** A container scan that times out is stopped with `docker
+rm -f` and retried once; if the retry also times out, the row is recorded as `scanner_error`
+with the reason in `error`. Such rows are not a `miss` (the tool did not finish, so it neither
+found nor missed anything): they are listed in `scanner_error: {n, ids}` (top level, in
+`summary` and in each axis), left out of every `n` in `summary`, `axes` and `by_*`, and the
+statement names them. `catalogue.positive` / `catalogue.decoys` still count the catalogue in
+full. Both outcomes came with result format 0.3. The full rules are in [`generator/shorlist/score.py`](generator/shorlist/score.py).
 
 **Template syntax.** "Parses" means syntax, not compilation: Python `ast.parse`, Go
 `gofmt -e`, Java `javac` (CI uses JDK 25), C/C++ `gcc -fsyntax-only`, Rust `rustfmt`,

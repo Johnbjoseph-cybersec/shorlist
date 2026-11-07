@@ -1,0 +1,19 @@
+# gitleaks: the PEM rows of forms/ carry deliberately published throwaway keys (README, "Test keys";
+# tools/make_test_keys.sh). The default rules apply everywhere else.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "ShorList public test keys, never used anywhere"
+paths = [
+  '''^forms/SL-3596\.yaml$''',
+  '''^forms/SL-3597\.yaml$''',
+  '''^forms/SL-3598\.yaml$''',
+  '''^forms/SL-3599\.yaml$''',
+  '''^forms/SL-3600\.yaml$''',
+  '''^forms/SL-3601\.yaml$''',
+  '''^forms/SL-3602\.yaml$''',
+  '''^forms/SL-3603\.yaml$''',
+  '''^forms/SL-3604\.yaml$''',
+  '''^forms/SL-3616\.yaml$''',
+]

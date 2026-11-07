@@ -160,3 +160,32 @@ def test_qrp_adapter_parses_its_output():
     assert by[("a.py", 1, "RSA")].is_use is False
     assert ("a.py", 3, "EdDSA") in by
     assert by[("sshd_config", 1, "ECDH")].role == "key_establishment"
+
+
+def test_lineless_record_of_the_right_family_is_file_only_not_a_hit():
+    r, f, ln = _pos("SL-3596")  # PEM "RSA PRIVATE KEY"
+    s = score_row(r, [Record(f, None, "RSA", size=2048)], FAMILIES)
+    assert s["outcome"] == "file_only" and s["role_ok"] is None and s["size_ok"] is None
+    assert score_row(r, [Record(f, 0, "RSA")], FAMILIES)["outcome"] == "file_only"
+    assert score_row(r, [Record(f, None, "DSA")], FAMILIES)["outcome"] == "miss"  # wrong family
+    assert score_row(r, [Record("other.pem", None, "RSA")], FAMILIES)["outcome"] == "miss"  # wrong file
+    assert score_row(r, [Record(f, ln, "RSA")], FAMILIES)["outcome"] == "hit"
+
+
+def test_file_only_is_reported_apart_from_hits():
+    r, f, _ = _pos("SL-3596")
+
+    class Lineless(Adapter):
+        name = "lineless"
+
+        def version(self):
+            return "lineless 1"
+
+        def scan(self, tree, workdir):
+            return [Record(f, None, "RSA")] if (tree / f).exists() and (tree / f).read_text() == r["context_template"] else []
+
+    res = run(Lineless())
+    p = res["summary"]["positive"]
+    assert p["file_only"] == 1 and p["hit"] == 0
+    assert res["by_form_kind"]["file_format"]["file_only"] == 1 and res["by_form_kind"]["file_format"]["hit"] == 0
+    assert "file only" in markdown(res)

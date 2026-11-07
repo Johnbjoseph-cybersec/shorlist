@@ -10,8 +10,26 @@ literal: "-----BEGIN DSA PRIVATE KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN DSA PRIVATE KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIIDTgIBAAKCAQEAvjUPWRIDMIUR7YOLPxa8XHtzfB4T9Uw6TR4BAm6T/wHIh4N+
+  ip55+7yfxIW8UFzOSHkGZ6MGW/O1vC4VX7CSzorPBmO2WkHJWKP+/+fjA651bQWB
+  AGvYMA/KwwZJM3nIY7E2K5xYR00OL0TF2Xe/0h6ry2eK9+6BOqSqcwLuxcGx+qFs
+  9yUAFX8EwVwmNGaof4ftL7n1Girac5FX0asOrYtDhE7tKMStmI4Djlgdxxn+Bxw4
+  +Edz6RjZ4Ix1RQPRZYYNCun54ADKGS99k7C12sJeDZhUZA6lDYKG4k8k42JhDrQ5
+  HImpeXNVjgjeU3MEXzwNyuhdDhIHo3HZNvP3qQIdAMDfOvCNzT9s2gYoH9sVt71x
+  5pq2l8ioSVUrpasCggEBAJ3fq+Ue9FxD7RnhbddB9OlOwv2l9Nc1fOEmKE42fTb6
+  NWLZ9MmeXqDYilERTznH7C+TwYnG0aUQLEAknx5dxZBHfw4ZDiXCysxRiKpB6UXF
+  Ugg4p10gLqQ3wFzDTE2qJJTn3pPkypDjDCkPmxHzlBOREoa6hxuaE4BRDJnOMeFr
+  idx9hUtiGYJpSEwjYSj1+T4J7iAMYdUsr29PtrWQ/Hsc5XDTjK6rOvpWGuyZAGif
+  HCFkZ6tVfbnNuyBrtv8UyIo/iuK4+JrZ0ZbIXNJwWVCwcsVdcw024l2Du8OFb4Gh
+  atuLNdz4h39fCilQV6raJPxayBhIbVZwLdXPZUjXZxICggEAePziDdy++Q9wy65S
+  q16ZyV4duNA7hDS1OY6ZBMO+vbcwA2j6G+er1d+FhTOwMaGKr5sgj63ByAK7cCvz
+  LPpb7soCoCN6URcNCJYu3/yq6vc3En2/INf9xhGnMS08TMaGg6f3K23dMVR0PvQG
+  tj5Jv8Vy5RlnLXt0ZAS6t1LI1lLNzhmGJpFgh+VeSf3G/xTa2bC9a73bhuJeijYn
+  TxPNTVgnZ/liIoyhed8BKMveO0BGWKytuJqW3hBs9dKNjF8exKg0hRC4Z/InWkI3
+  ktxRIv7iCNR0DYq5MRdTKngRqEqee1/yeT40P2AmATSipSysdgBQMBQJcgCgRsJh
+  SeCK9wIcGq2TwOPQjfOnvdE6cGxYjG2sWvbZip2Hbu/7NA==
   -----END DSA PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "DSA"
   role: "signature"
@@ -24,4 +42,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: a throwaway 2048-bit DSA key in OpenSSL's traditional format (`openssl pkey -traditional`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

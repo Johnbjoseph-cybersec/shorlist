@@ -10,8 +10,11 @@ literal: "-----BEGIN EC PRIVATE KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN EC PRIVATE KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MHcCAQEEIIHozL5C1Sa+CXmYsvOt1g+B8q8D7YzjmRZchhnXIG+moAoGCCqGSM49
+  AwEHoUQDQgAEoFvUEUpTOlyE5XAnI+fQiNHMB8T1W4d/qwMl/cG3t3SgpSSCUXjb
+  E/VX1aXHAYmXB+2XhrNDg1LqxDjRh7r+Uw==
   -----END EC PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "EC"
   role: "undetermined"
@@ -28,4 +31,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: a throwaway P-256 key, RFC 5915 ECPrivateKey with a named curve (`openssl ecparam -genkey -noout`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

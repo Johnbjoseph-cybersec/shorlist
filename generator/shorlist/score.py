@@ -5,6 +5,10 @@ planted file that have is_use = True:
     hit           a record carries expected.family
     parent_only   no hit, but a record carries the family's parent (EC for ECDSA/ECDH)
     wrong_family  no hit or parent, but a record carries another in-scope family
+    file_only     nothing in scope on that line, but a record with no line (None or 0) in the
+                  planted file carries expected.family as a use. Reported in its own column and
+                  NOT a hit: the headline stays line-exact. A lineless parent or other family
+                  is still a miss.
     miss          nothing in scope on that line reported as a use
   role_ok / size_ok are reported beside the outcome and are not part of it. They are
   None when expected.role / expected.size is "undetermined" or there is no hit. A hit
@@ -80,6 +84,8 @@ def score_row(row: dict, records: list[Record], families: dict) -> dict:
         outcome = "parent_only"
     elif uses:
         outcome = "wrong_family"
+    elif any(r.path == fname and not r.line and r.is_use and r.family == fam for r in in_scope):
+        outcome = "file_only"
     else:
         outcome = "miss"
 

@@ -10,8 +10,26 @@ literal: "-----BEGIN DSA PUBLIC KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN DSA PUBLIC KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIIDLQKCAQEA1cGOHrigvRtRVetYEnbcoyS0oTl93pSRfIBlMkWeJesqq4Gd0yUR
+  ml06LXzRX72A4lFUZJxR915UoO9nbh5TZ+qOGWlOrrIPOkDdZOPn7Xxfar+3JgT7
+  wiWR+5FrFTsWSK/zvN7IGeLcV3JdrARnQ09r7Cuw5hoV3O2uECipjj0VREISIkSD
+  souVZ5U4syzSiekGY+eVD6YpK6ycoVX1GvBmL5rLZo1nv0RYVVoNtq6lrWWjA6Wh
+  8M5jOZtiR/By/AHDOvhCtXjaXu5Ann7NEo0O8hQaI74074riyo9bGbeqB2qZ+Ig8
+  Lw03+y6WFxsXmGA6iPBi4ZSZ+bT6yEIsYAKCAQEA3EyT7hbSeSItaOLZneOoxktZ
+  sCrJXUODvIHsVFEV2HPVG3CZ77RRQysnitBPvKVXEPPtQVOE0GJWLpavq0V/45L5
+  lqE9M1ce57/XvwXiR+PpbnSFzGmutwVbW/wwrdwGYuNFdKsi/+ZyfV7UmW1R7Av1
+  5tzj2tylg9gZ/dQGKXTsF+4RZMoWUu76hhN7Po+XB+Qd38UQj3op07Fl44B9fhOj
+  sIhOgqxufQ0YwM7tTE4G/yWc55kzk7pMTzJ53qQQQI3mLpzCrx8KUI8QR2cNo9SH
+  LNcZfg1YM7dAwu2MblZuInOAo6RazFjJi2GhYxgYvlKMXeyu8qfy+IHxnvyUyQId
+  AKPQ9X5SsT74XQ6ChAxywJWgPbntVxEbhhUFYLUCggEAMbvqix3UNWPINI1WgiZZ
+  hOQn4u/MvLglFsOkkITIz4yxLL3d3eZ9rV5LOctO3D2tYEVrOkHc7rIcX+YmFe4K
+  ReJ0XxaK3rQPOaY1iNsMfCF3JsyWL8xhZHeONlSLlfH2OnYw3uGnhXcLLzMfYq8i
+  XmZuX+akq1dQbCZWStXYx74SgGuT1us1i5+99kTzGzYVAGsZpeda4Wfg2HVwqrE/
+  el0rtVbo045xbMEl6ldibbW3lG+7bIxxHAR8bx9TgikuPh2TmYBLm4MAnoT/j7og
+  M21ug4LlJgJIMS6oXKZluWXOGmI/mcv1w+Ptgb90KrQTFKRi3+xZJNyLhliFy8Gc
+  Kg==
   -----END DSA PUBLIC KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "DSA"
   role: "signature"
@@ -24,4 +42,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: the 2048-bit public key of a throwaway DSA key, written by libcrypto's own type-specific PEM encoder (no openssl command writes this label); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

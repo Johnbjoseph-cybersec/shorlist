@@ -10,8 +10,9 @@ literal: "-----BEGIN EC PARAMETERS-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN EC PARAMETERS-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  BggqhkjOPQMBBw==
   -----END EC PARAMETERS-----
+  ShorList public test parameters: deliberately published, never used anywhere.
 expected:
   family: "EC"
   role: "undetermined"
@@ -24,4 +25,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: P-256 as a named-curve OID (`openssl ecparam -name prime256v1`), the default encoding; made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

@@ -11,7 +11,10 @@ At scan time two mounts are inserted right after `run`, and nothing else:
     <tree>   -> /scan  read-only   (the planted row)
     <outdir> -> /out   read-write  (the scanner's output files)
 
-so the command recorded in a result carries no host path. `outdir` is
+so the command recorded in a result carries no host path. Each scan also gets a unique
+`--name shorlist-<random>` (not recorded either), so that on a timeout the container itself is
+removed with `docker rm -f`: killing the docker client alone leaves the container running. A
+timed-out scan is retried once, with a new name; a second timeout raises ScannerTimeout. `outdir` is
 $SHORLIST_OUT_DIR/<row id> when that variable is set (<row id>-fix for the fixed file of a
 defect row, which run.plant() writes to <row id>/fix), else the generator's private workdir.
 """
@@ -20,9 +23,10 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import uuid
 from pathlib import Path
 
-from .base import Adapter
+from .base import Adapter, ScannerTimeout
 
 ANSI = re.compile(r"\x1b\[[0-9;]*m")
 SCAN, OUT = "/scan", "/out"
@@ -61,8 +65,17 @@ class ContainerAdapter(Adapter):
 
     def run_scan(self, tree: Path, outdir: Path, args: list[str], entrypoint: str | None = None,
                  timeout: int = 900) -> subprocess.CompletedProcess:
-        mounts = ["-v", f"{tree.resolve()}:{SCAN}:ro", "-v", f"{outdir.resolve()}:{OUT}"]
-        p = subprocess.run(self._argv(args, entrypoint, mounts), capture_output=True, text=True, timeout=timeout)
+        for attempt in (1, 2):
+            name = f"shorlist-{uuid.uuid4().hex[:12]}"
+            mounts = ["--name", name, "-v", f"{tree.resolve()}:{SCAN}:ro", "-v", f"{outdir.resolve()}:{OUT}"]
+            try:
+                p = subprocess.run(self._argv(args, entrypoint, mounts), capture_output=True, text=True, timeout=timeout)
+                break
+            except subprocess.TimeoutExpired:
+                subprocess.run(["docker", "rm", "-f", name], capture_output=True, text=True)
+                if attempt == 2:
+                    (outdir / "stderr.txt").write_text(f"timed out twice after {timeout} s\n")
+                    raise ScannerTimeout(f"{self.name}: {tree.parent.name} timed out twice after {timeout} s")
         (outdir / "stderr.txt").write_text(ANSI.sub("", p.stderr or ""))
         (outdir / "exit_code.txt").write_text(f"{p.returncode}\n")
         return p

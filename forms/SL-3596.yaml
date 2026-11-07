@@ -10,8 +10,33 @@ literal: "-----BEGIN RSA PRIVATE KEY-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN RSA PRIVATE KEY-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIIEowIBAAKCAQEAvJKkpbjoxx1crjskFQ+2eujvGcu4dSJ9FiHnruJrpi+zWwMS
+  MdPowD1a4qWAfWRIf8II7MDwPDY3EFAxsvU+5EqDU9L8+VwwLrNKRBTzVhYRKvQF
+  Sc4mIOIp31LE66PTHeZ1oDLUVhkLo8PEOEPqARPf6Dc/PvFY41YiN5v4VBwqMzQb
+  grKWNsPH6EyNPQsMmF+BJDkjY+bDLKRWQ+xDTb0sP3/C/cdYT294rIJikET2do05
+  33cdaZHzq8GSgaPtJMrdpo6xtIr+DYk7orA8O1EH9YSTMNSi4WTGImU2fcB3n5yj
+  W8clnOMu9iNNfz3zXwySAZCedUJbQQww/wCBkwIDAQABAoIBAFV2Kkt3DXwsGPRX
+  lkc7S0rR5Ybt1oeznTgaHpuaPwpepOzy69yMOvhg9h8wvZZWjCrmf8/4swe+1F6+
+  0X9W+W1SPcmQHhlPCAEqPVa0ngGeV6J9XCYyWQJfLXXqV5eptAThjN6RGr14dVd/
+  Yh7T3KonXTsrSq0WiV/iifhk5fsLzzj6j22bWZBK4CFxzT50j1xluR8KqL2g4IEw
+  /kCgXpVQ13XpXOdIzhGtwb7CcNtAYlk7Ry9Iq4WS8EDO3PH3kOO8WW0l+247oWPi
+  PjkCcO1MDB+Gsz73Bev7YUumIAjBYWuwmxxVn4GJzLUaLaYmt+x9VcegFiVAPIB4
+  Ex/MdUECgYEA6DYCSMrVk+9OINt8/ufhlECc2T4o9jCRS9vXsEMkEqkFi3kdVGaY
+  C+Qqj6czWZBRQD+04eiWxuWGM5aWcNG/SGVI46FpY8YxFsSV6O7YSywFL4dtLPsd
+  Ej+GzeDgXR/NDHpdKZqnTmGH0vnIUOXOloDyXoeEhWRFNlMvFoZXkFMCgYEAz+Qs
+  3jFu6DoJLpHRH39d+HdMAnLXOk/e40POX2yxJj0T4U7nYhMKEdFk3b4VT+T+Y9T6
+  f1t+GErfGcDsqZt6jWesPBKSHHW9R9GVYNpW27vrcQoA8s/KJhHxXnKtulXBPJWl
+  H05fP5ysI8BXdrHQtMa3baJpYC8UQRGX7hjWIcECgYAMeNomjr5p87B+k0tjZZD4
+  JYBHKs+IaZNkP6qWDQUi+3EQzLCGl/wSp26hyJk5dkbm7IUKnTN7+1f57VynMpzT
+  hp0jnMfMVBjO4EAtAqcbYoHky6FRiStGj6Lt6+YhGlQpF2lpkqTp0NM6wa/AqJcv
+  /j0GVsEHaRtOj6k3zH9ngQKBgHV5IWV5F4vAZ7naCgq7ZTVm7BuiGz7HLVLM2QwR
+  FlVeRCKX/KXtzk3dPhsTM2XPJ3TwP5DB+ZHulP0viEwbIHhRMgFMGSZd3dR8eOWe
+  22AVY2if14NdqYQztWnCcasOlEAQ65qyJZ6DgL4/DO10c1QDylj4YoVIdTCDqY+Q
+  l0fBAoGBAMyFalmLVCyx8VIMdrQ6b+vQgnENGRkmKYrm1KDrxsrLrjEGx65DKH01
+  2Y2bmMkHED+fony/A+Liso2i2oZHZlcZP9o9RTApXeuDQdB3skYqbER+EmGgqrHO
+  Q5vpjDK+iuCqL6nq0BNcfzHNez9pVVZkVBH+/i3F8YzZkccL8xXJ
   -----END RSA PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
 expected:
   family: "RSA"
   role: "undetermined"
@@ -28,4 +53,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material. PKCS #1 RSAPrivateKey (RFC 8017, Appendix A.1.2) in PEM."
+notes: "The body is real test material, published on purpose and used nowhere: a throwaway RSA-2048 key in PKCS #1 (`openssl pkey -traditional`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size. PKCS #1 RSAPrivateKey (RFC 8017, Appendix A.1.2) in PEM."

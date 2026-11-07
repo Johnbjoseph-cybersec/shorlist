@@ -10,8 +10,20 @@ literal: "-----BEGIN DSA PARAMETERS-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN DSA PARAMETERS-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIICKAKCAQEAx24RpWnkIT8dNw2reR+vBV6/aOXg2BY/a0MG/IxJiWfAnTBUN7mX
+  bHYdk1vTO6wY2EEEiFAUc/MkrlUqeWxQrstsTJ2tFt0HPxr3v4Z2AukIIJdLSmh6
+  FVWDE9XOwzBss+D3YPDPDV9pp5NMpIbsUkO7NlGdeRnYv/6oFlPIqfNExYV6k5um
+  ZtAY+w3tC0yDIf9KX/bOhauAW58tH75mdT7iUhC/U82XjFRtekCfqpSCX3G7hbZ6
+  fGwwnsgzhslGAq6EKau16s8TUopU4aHD5H/yxr2P+8rws1jg2sWlyeNi8sCPLiV2
+  2bly6nQCYcGDHGsTBqMupQswtSoWrwCsawIdALw/Sf7ztcyDoOL3d+05Zp6ha+bK
+  2G8ztWqxkFMCggEACtdjRLecnSBJ71xqo9eLvrhC6XvYnfShFkApnCihfF3ZKfau
+  ZE/vm6imoza2RLnQkE//mbICi4qZrAFRsFJ0WmOiwbdwu6TjY0kbYZyoOAMfne3/
+  zymf9U0WID+lkEGztBQlb4RL2YA9+Kmc1n4W42pWbrcb+fl8+fjKW6JVIp20gaxh
+  98E9k2lq8CB20El+q7YsH0qEFh/bAe/xTO8hIIfPOgqopEwvEjDvLtqb+hk4eIIC
+  tNm6id/z86HM7lXstvHgY0cPsZdhI/g4NiYP29S/X9H5P85B/AzKjZSziIFnrcjL
+  vubsAFU/EFsLvOpWd8rNPG0xnQjSAUH24GmpJQ==
   -----END DSA PARAMETERS-----
+  ShorList public test parameters: deliberately published, never used anywhere.
 expected:
   family: "DSA"
   role: "signature"
@@ -24,4 +36,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: freshly generated 2048-bit DSA parameters (`openssl genpkey -genparam -algorithm DSA`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."

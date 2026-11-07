@@ -10,8 +10,14 @@ literal: "-----BEGIN DH PARAMETERS-----"
 context_filename: "key.pem"
 context_template: |
   -----BEGIN DH PARAMETERS-----
-  VGhpcyBpcyBub3QgYSBrZXku
+  MIIBCAKCAQEAwonb2388k7pQqAcPvnpAdKNNpIQ/JkHj49arE7WnWKv1juMFZvVP
+  8+2uBpTkN2mMu2D6U/6oEcRxRJyWn5RgWzsVqgNH8S3dCrnMac7z3fTUVRAozCm8
+  6SSqyKZAIXlhKjNniXQIAykuB9zZ8zMlM2cnXfXwEAK0xgvOjruACOcMIj472e3V
+  d11nhzySqyWeKwmOUAdEIs1itvAMlFYl0SfXT/hpEtsmSuf8ki/cquSmmFVT2jn/
+  hjSkZh8AIlw8+cGGOcIGtGYDjW1Hora5RabAldOgeuiExXgXeW+hb/T8GCdTD+h2
+  0U8gpZOtPpQX8pf4BOtXNz06hHDtIoZTPwIBAg==
   -----END DH PARAMETERS-----
+  ShorList public test parameters: deliberately published, never used anywhere.
 expected:
   family: "DH"
   role: "key_establishment"
@@ -24,4 +30,4 @@ source:
 status: "verified-source"
 added_by: "Stanimir Tenev (Elkan Electronic)"
 added_at: "2026-11-05"
-notes: "The base64 body is a placeholder, not key material."
+notes: "The body is real test material, published on purpose and used nowhere: freshly generated 2048-bit PKCS #3 DH parameters (`openssl dhparam 2048`); made by tools/make_test_keys.sh (README, \"Test keys\"). expected.size stays undetermined: the literal is the label, which does not pin a size."
