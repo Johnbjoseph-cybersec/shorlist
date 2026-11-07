@@ -1,0 +1,79 @@
+name: measure
+
+# Measure one scanner on GitHub's runners, split into shards (rows whose index is i mod N);
+# `shorlist merge` joins them into the result an unsharded run gives. Used for the scanners
+# that are too slow (semgrep) or need an x86-64-v3 CPU (cdxgen) on a small machine.
+# The result is an artifact; it goes into results/ by hand, unedited.
+
+on:
+  workflow_dispatch:
+    inputs:
+      adapter:
+        description: "adapter to measure"
+        required: true
+        type: choice
+        options: [semgrep, cdxgen]
+
+permissions:
+  contents: read
+
+env:
+  SHARDS: "12"
+
+jobs:
+  shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - name: Free disk
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Prepare the pinned image (network only here, not during the scan)
+        run: |
+          case "${{ inputs.adapter }}" in
+            cdxgen)  docker pull ghcr.io/cdxgen/cdxgen@sha256:d3465b2f6e76406a1a4c884deeaf0e869514c4e35c47e415e055bb44596b73ea ;;
+            semgrep) docker build -t shorlist-semgrep:1.183.0 containers/semgrep ;;
+          esac
+      - name: Measure one shard
+        working-directory: generator
+        run: python -m shorlist run --adapter ${{ inputs.adapter }} --shard ${{ matrix.index }}/$SHARDS --out ../shard-${{ matrix.index }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.index }}
+          path: shard-${{ matrix.index }}.json
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          merge-multiple: true
+          path: shards
+      - name: Merge
+        working-directory: generator
+        run: |
+          python -m shorlist merge --out ../${{ inputs.adapter }}.json --md ../${{ inputs.adapter }}.md ../shards/shard-*.json
+          cat ../${{ inputs.adapter }}.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.adapter }}-result
+          path: |
+            ${{ inputs.adapter }}.json
+            ${{ inputs.adapter }}.md
