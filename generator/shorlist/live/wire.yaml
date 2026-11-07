@@ -1,0 +1,2339 @@
+# Every code point and quote below is copied from the registry or name table named in `source`
+# (read 2026-11-07), not typed by hand. forms/ is not changed by this file.
+format: shorlist-wire/0.1
+about: 'What a network scanner must see on the wire for each catalogue row whose product terminates a network protocol. Written from the IANA registries and the OpenSSL / OpenSSH name tables read on 2026-11-07;
+  forms/ is not changed. `expect: seen` - the item must be reported; `expect: not_seen` - reporting it is a false alarm.'
+sources:
+  iana-tls-groups:
+    title: IANA TLS Supported Groups registry
+    url: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-8
+    csv: https://www.iana.org/assignments/tls-parameters/tls-parameters-8.csv
+    date_read: '2026-11-07'
+  iana-tls-ciphers:
+    title: IANA TLS Cipher Suites registry
+    url: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4
+    csv: https://www.iana.org/assignments/tls-parameters/tls-parameters-4.csv
+    date_read: '2026-11-07'
+  iana-tls-sigschemes:
+    title: IANA TLS SignatureScheme registry
+    url: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme
+    csv: https://www.iana.org/assignments/tls-parameters/tls-signaturescheme.csv
+    date_read: '2026-11-07'
+  iana-ssh-kex:
+    title: IANA SSH Key Exchange Method Names
+    url: https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16
+    csv: https://www.iana.org/assignments/ssh-parameters/ssh-parameters-16.csv
+    date_read: '2026-11-07'
+  iana-ssh-enc:
+    title: IANA SSH Encryption Algorithm Names
+    url: https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-17
+    csv: https://www.iana.org/assignments/ssh-parameters/ssh-parameters-17.csv
+    date_read: '2026-11-07'
+  iana-ssh-mac:
+    title: IANA SSH MAC Algorithm Names
+    url: https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-18
+    csv: https://www.iana.org/assignments/ssh-parameters/ssh-parameters-18.csv
+    date_read: '2026-11-07'
+  iana-ssh-pk:
+    title: IANA SSH Public Key Algorithm Names
+    url: https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-19
+    csv: https://www.iana.org/assignments/ssh-parameters/ssh-parameters-19.csv
+    date_read: '2026-11-07'
+  iana-ikev2-ke:
+    title: IANA IKEv2 Transform Type 4 - Key Exchange Method Transform IDs
+    url: https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml#ikev2-parameters-8
+    csv: https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters-8.csv
+    date_read: '2026-11-07'
+  openssl-ciphers-man:
+    title: OpenSSL 3.5 openssl-ciphers(1), section CIPHER SUITE NAMES (OpenSSL name <-> standard name)
+    url: https://docs.openssl.org/3.5/man1/openssl-ciphers/
+    date_read: '2026-11-07'
+  openssh-ssh-Q:
+    title: OpenSSH_10.3p1 `ssh -Q kex|cipher|mac|HostKeyAlgorithms` in the harness image (names with @openssh.com / @libssh.org are vendor names, not in the IANA registry)
+    url: https://man.openbsd.org/ssh#Q
+    date_read: '2026-11-07'
+  rfc8308:
+    title: RFC 8308 section 3.1 server-sig-algs
+    url: https://www.rfc-editor.org/rfc/rfc8308#section-3.1
+    date_read: '2026-11-07'
+    quote: This extension is sent by the server and contains a list of public key algorithms that the server is able to process as part of a "publickey" authentication request.
+rows:
+  SL-0011:
+    product: nginx
+    literal: ssl_ecdh_curve X25519MLKEM768;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x11EC'
+      name: X25519MLKEM768
+      aliases:
+      - X25519MLKEM768
+      expect: seen
+      source: iana-tls-groups
+      quote: 4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768
+  SL-0012:
+    product: nginx
+    literal: ssl_ciphers AES128-GCM-SHA256;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: cipher_suite
+      code: '0x009C'
+      name: TLS_RSA_WITH_AES_128_GCM_SHA256
+      aliases:
+      - AES128-GCM-SHA256
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_AES_128_GCM_SHA256 AES128-GCM-SHA256
+      - '"0x00,0x9C",TLS_RSA_WITH_AES_128_GCM_SHA256,Y,D,[RFC 5288]; [RFC 10015],'
+  SL-0013:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms rsa-sha2-512
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: hostkey
+      name: rsa-sha2-512
+      expect: seen
+      source: iana-ssh-pk
+      quote: rsa-sha2-512,ssh-rsa,[RFC 8332],Section 3
+  SL-0014:
+    product: OpenSSH sshd
+    literal: PubkeyAcceptedAlgorithms ecdsa-sha2-nistp256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    note: PubkeyAcceptedAlgorithms is not in KEXINIT; OpenSSH announces it in the server-sig-algs extension (RFC 8308), sent encrypted after key exchange. A scanner sees it only if it completes key exchange
+      and reports EXT_INFO.
+    items:
+    - kind: server_sig_alg
+      name: ecdsa-sha2-nistp256
+      expect: seen
+      source:
+      - iana-ssh-pk
+      - rfc8308
+      quote: ecdsa-sha2-*,ecdsa-sha2-*,[RFC 5656],
+  SL-0015:
+    product: OpenSSH sshd
+    literal: KexAlgorithms mlkem768x25519-sha256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: mlkem768x25519-sha256
+      expect: seen
+      source: iana-ssh-kex
+      quote: mlkem768x25519-sha256,[RFC 10042],,SHOULD
+  SL-0022:
+    product: nginx
+    literal: ssl_ciphers HIGH:!kRSA:!aNULL;
+    negative: true
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    note: 'every IANA cipher suite whose name matches /^TLS_RSA_(EXPORT1024_|EXPORT_)?WITH_/ (32): !kRSA removes RSA key transport'
+    items:
+    - kind: cipher_suite
+      code: '0x0001'
+      name: TLS_RSA_WITH_NULL_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x01",TLS_RSA_WITH_NULL_MD5,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0002'
+      name: TLS_RSA_WITH_NULL_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x02",TLS_RSA_WITH_NULL_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0003'
+      name: TLS_RSA_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x03",TLS_RSA_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 4346]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0004'
+      name: TLS_RSA_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x04",TLS_RSA_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0005'
+      name: TLS_RSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x05",TLS_RSA_WITH_RC4_128_SHA,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0006'
+      name: TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x06",TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5,Y,D,[RFC 4346]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0007'
+      name: TLS_RSA_WITH_IDEA_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x07",TLS_RSA_WITH_IDEA_CBC_SHA,Y,D,[RFC 8996]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0008'
+      name: TLS_RSA_EXPORT_WITH_DES40_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x08",TLS_RSA_EXPORT_WITH_DES40_CBC_SHA,Y,D,[RFC 4346]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0009'
+      name: TLS_RSA_WITH_DES_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x09",TLS_RSA_WITH_DES_CBC_SHA,Y,D,[RFC 8996]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x000A'
+      name: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x0A",TLS_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x002F'
+      name: TLS_RSA_WITH_AES_128_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x2F",TLS_RSA_WITH_AES_128_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0035'
+      name: TLS_RSA_WITH_AES_256_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x35",TLS_RSA_WITH_AES_256_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x003B'
+      name: TLS_RSA_WITH_NULL_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x3B",TLS_RSA_WITH_NULL_SHA256,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x003C'
+      name: TLS_RSA_WITH_AES_128_CBC_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x3C",TLS_RSA_WITH_AES_128_CBC_SHA256,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x003D'
+      name: TLS_RSA_WITH_AES_256_CBC_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x3D",TLS_RSA_WITH_AES_256_CBC_SHA256,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0041'
+      name: TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x41",TLS_RSA_WITH_CAMELLIA_128_CBC_SHA,Y,D,[RFC 5932]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0084'
+      name: TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x84",TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,Y,D,[RFC 5932]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0096'
+      name: TLS_RSA_WITH_SEED_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x96",TLS_RSA_WITH_SEED_CBC_SHA,Y,D,[RFC 4162]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x009C'
+      name: TLS_RSA_WITH_AES_128_GCM_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x9C",TLS_RSA_WITH_AES_128_GCM_SHA256,Y,D,[RFC 5288]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x009D'
+      name: TLS_RSA_WITH_AES_256_GCM_SHA384
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x9D",TLS_RSA_WITH_AES_256_GCM_SHA384,Y,D,[RFC 5288]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x00BA'
+      name: TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0xBA",TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256,Y,D,[RFC 5932]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x00C0'
+      name: TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0xC0",TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256,Y,D,[RFC 5932]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC03C'
+      name: TLS_RSA_WITH_ARIA_128_CBC_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x3C",TLS_RSA_WITH_ARIA_128_CBC_SHA256,Y,D,[RFC 6209]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC03D'
+      name: TLS_RSA_WITH_ARIA_256_CBC_SHA384
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x3D",TLS_RSA_WITH_ARIA_256_CBC_SHA384,Y,D,[RFC 6209]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC050'
+      name: TLS_RSA_WITH_ARIA_128_GCM_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x50",TLS_RSA_WITH_ARIA_128_GCM_SHA256,Y,D,[RFC 6209]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC051'
+      name: TLS_RSA_WITH_ARIA_256_GCM_SHA384
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x51",TLS_RSA_WITH_ARIA_256_GCM_SHA384,Y,D,[RFC 6209]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC07A'
+      name: TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x7A",TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256,Y,D,[RFC 6367]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC07B'
+      name: TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x7B",TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384,Y,D,[RFC 6367]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC09C'
+      name: TLS_RSA_WITH_AES_128_CCM
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x9C",TLS_RSA_WITH_AES_128_CCM,Y,D,[RFC 6655]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC09D'
+      name: TLS_RSA_WITH_AES_256_CCM
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x9D",TLS_RSA_WITH_AES_256_CCM,Y,D,[RFC 6655]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC0A0'
+      name: TLS_RSA_WITH_AES_128_CCM_8
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0xA0",TLS_RSA_WITH_AES_128_CCM_8,Y,D,[RFC 6655]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC0A1'
+      name: TLS_RSA_WITH_AES_256_CCM_8
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0xA1",TLS_RSA_WITH_AES_256_CCM_8,Y,D,[RFC 6655]; [RFC 10015],'
+  SL-0029:
+    product: OpenSSH sshd
+    literal: KexAlgorithms -mlkem768x25519-sha256
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: mlkem768x25519-sha256
+      expect: not_seen
+      source: iana-ssh-kex
+      quote: mlkem768x25519-sha256,[RFC 10042],,SHOULD
+  SL-0030:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms -ssh-rsa
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: hostkey
+      name: ssh-rsa
+      expect: not_seen
+      source: iana-ssh-pk
+      quote: ssh-rsa,ssh-rsa,[RFC 4253],Section 6.6
+  SL-1164:
+    product: strongSwan swanctl
+    literal: proposals = aes128gcm16-prfsha256-ecp256
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '19'
+      name: 256-bit random ECP group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 19,256-bit random ECP group,,"[RFC 6989, Section 2.3]",[RFC 5903]
+  SL-1165:
+    product: strongSwan swanctl
+    literal: esp_proposals = aes128gcm16-modp2048
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '14'
+      name: 2048-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 14,2048-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 3526]
+  SL-1166:
+    product: strongSwan swanctl
+    literal: proposals = aes128gcm16-prfsha256-x25519
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '31'
+      name: Curve25519
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 31,Curve25519,,"[RFC 8031, Section 3.2]",[RFC 8031]
+  SL-1167:
+    product: strongSwan swanctl
+    literal: proposals = aes128gcm16-prfsha256-ecp384bp
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '29'
+      name: brainpoolP384r1
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 29,brainpoolP384r1,,"[RFC 6989, Section 2.3]",[RFC 6954]
+  SL-1168:
+    product: strongSwan swanctl
+    literal: proposals = aes128gcm16-prfsha256-mlkem768
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '36'
+      name: ml-kem-768
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 36,ml-kem-768,,"[RFC-ietf-ipsecme-ikev2-mlkem-09, Section 2.2]",[RFC-ietf-ipsecme-ikev2-mlkem-09]
+  SL-1169:
+    product: strongSwan swanctl
+    literal: proposals = aes128gcm16-prfsha256-x25519-ke1_mlkem768
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '31'
+      name: Curve25519
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 31,Curve25519,,"[RFC 8031, Section 3.2]",[RFC 8031]
+    - kind: ike_ke
+      code: '36'
+      name: ml-kem-768
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 36,ml-kem-768,,"[RFC-ietf-ipsecme-ikev2-mlkem-09, Section 2.2]",[RFC-ietf-ipsecme-ikev2-mlkem-09]
+  SL-1170:
+    product: Apache httpd mod_ssl
+    literal: SSLOpenSSLConfCmd Curves P-384
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x0018'
+      name: secp384r1
+      aliases:
+      - P-384
+      - secp384r1
+      expect: seen
+      source: iana-tls-groups
+      quote: 24,secp384r1,Y,Y,[RFC 8422],
+  SL-1171:
+    product: Apache httpd mod_ssl
+    literal: SSLOpenSSLConfCmd Groups SecP384r1MLKEM1024
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x11ED'
+      name: SecP384r1MLKEM1024
+      aliases:
+      - SecP384r1MLKEM1024
+      expect: seen
+      source: iana-tls-groups
+      quote: 4589,SecP384r1MLKEM1024,Y,N,[RFC 10024],Combining secp384r1 ECDH with ML-KEM-1024
+  SL-1172:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms ssh-ed25519
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: hostkey
+      name: ssh-ed25519
+      expect: seen
+      source: iana-ssh-pk
+      quote: ssh-ed25519,ssh-ed25519,[RFC 8709],
+  SL-1173:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms ssh-mldsa44-ed25519
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    not_runnable: config_rejected
+    reason: '/row/sshd_config line 6: Bad key types ''ssh-mldsa44-ed25519''.'
+    items:
+    - kind: hostkey
+      name: ssh-mldsa44-ed25519
+      expect: seen
+      source: iana-ssh-pk
+      quote: ssh-mldsa44-ed25519,ssh-mldsa44-ed25519,[draft-ietf-sshm-composite-sigs-00],
+  SL-1174:
+    product: OpenSSH sshd
+    literal: KexAlgorithms curve25519-sha256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: curve25519-sha256
+      expect: seen
+      source: iana-ssh-kex
+      quote: curve25519-sha256,[RFC 8731],,SHOULD
+  SL-1175:
+    product: OpenSSH sshd
+    literal: KexAlgorithms diffie-hellman-group16-sha512
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group16-sha512
+      expect: seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group16-sha512,[RFC 8268],,SHOULD
+  SL-1176:
+    product: OpenSSH sshd
+    literal: KexAlgorithms ecdh-sha2-nistp384
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: ecdh-sha2-nistp384
+      expect: seen
+      source: iana-ssh-kex
+      quote: ecdh-sha2-nistp384,[RFC 5656],,SHOULD
+  SL-1177:
+    product: OpenSSH sshd
+    literal: KexAlgorithms mlkem768nistp256-sha256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    not_runnable: config_rejected
+    reason: 'Unsupported KEX algorithm "mlkem768nistp256-sha256" / /row/sshd_config line 6: Bad SSH2 KexAlgorithms ''mlkem768nistp256-sha256''.'
+    items:
+    - kind: kex
+      name: mlkem768nistp256-sha256
+      expect: seen
+      source: iana-ssh-kex
+      quote: mlkem768nistp256-sha256,[RFC 10042],,SHOULD
+  SL-1178:
+    product: OpenSSH sshd
+    literal: CASignatureAlgorithms ecdsa-sha2-nistp521
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    not_scored: not_on_wire
+    reason: CASignatureAlgorithms restricts the algorithms a CA may have used to sign user certificates; the server does not announce it in KEXINIT or in any extension (sshd_config(5)).
+    items:
+    - kind: hostkey
+      name: ecdsa-sha2-nistp521
+      expect: seen
+      source: iana-ssh-pk
+      quote: ecdsa-sha2-*,ecdsa-sha2-*,[RFC 5656],
+  SL-1183:
+    product: Juniper Junos OS
+    literal: dh-group group20;
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Juniper Junos OS runs only on Juniper devices or vSRX images not available here
+  SL-1184:
+    product: Juniper Junos OS
+    literal: authentication-method rsa-signatures;
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Juniper Junos OS runs only on Juniper devices or vSRX images not available here
+  SL-1185:
+    product: Juniper Junos OS
+    literal: authentication-method ecdsa-signatures-256;
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Juniper Junos OS runs only on Juniper devices or vSRX images not available here
+  SL-1186:
+    product: Fortinet FortiOS
+    literal: set dhgrp 14
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Fortinet FortiOS runs only on FortiGate devices or licensed VM images not available here
+  SL-1187:
+    product: Fortinet FortiOS
+    literal: set dhgrp 19
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Fortinet FortiOS runs only on FortiGate devices or licensed VM images not available here
+  SL-1188:
+    product: Fortinet FortiOS
+    literal: set rsa-signature-format pss
+    negative: false
+    protocol: ike
+    not_runnable: appliance
+    reason: Fortinet FortiOS runs only on FortiGate devices or licensed VM images not available here
+  SL-1189:
+    product: OpenSSH sshd
+    literal: '#KexAlgorithms diffie-hellman-group14-sha256'
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-1190:
+    product: OpenSSH sshd
+    literal: KexAlgorithms -ecdh-sha2-nistp256
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: ecdh-sha2-nistp256
+      expect: not_seen
+      source: iana-ssh-kex
+      quote: ecdh-sha2-nistp256,[RFC 5656],,SHOULD
+  SL-1191:
+    product: strongSwan swanctl
+    literal: '# proposals = aes128-sha256-modp1024'
+    negative: true
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-1192:
+    product: Apache httpd mod_ssl
+    literal: '#SSLOpenSSLConfCmd Curves P-384'
+    negative: true
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-2060:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_groups_list(ctx, "X25519MLKEM768");
+    negative: false
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: rsa
+    s_server_args:
+    - -groups
+    - X25519MLKEM768
+    note: the C call's string argument is passed to `openssl s_server -groups`, which hands it to the same OpenSSL function (SSL_CTX_set1_groups_list); the C file itself is not compiled
+    items:
+    - kind: group
+      code: '0x11EC'
+      name: X25519MLKEM768
+      aliases:
+      - X25519MLKEM768
+      expect: seen
+      source: iana-tls-groups
+      quote: 4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768
+  SL-2061:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_groups_list(ctx, "SecP384r1MLKEM1024");
+    negative: false
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: rsa
+    s_server_args:
+    - -groups
+    - SecP384r1MLKEM1024
+    note: the C call's string argument is passed to `openssl s_server -groups`, which hands it to the same OpenSSL function (SSL_CTX_set1_groups_list); the C file itself is not compiled
+    items:
+    - kind: group
+      code: '0x11ED'
+      name: SecP384r1MLKEM1024
+      aliases:
+      - SecP384r1MLKEM1024
+      expect: seen
+      source: iana-tls-groups
+      quote: 4589,SecP384r1MLKEM1024,Y,N,[RFC 10024],Combining secp384r1 ECDH with ML-KEM-1024
+  SL-2062:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_groups_list(ctx, "X25519");
+    negative: false
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: rsa
+    s_server_args:
+    - -groups
+    - X25519
+    note: the C call's string argument is passed to `openssl s_server -groups`, which hands it to the same OpenSSL function (SSL_CTX_set1_groups_list); the C file itself is not compiled
+    items:
+    - kind: group
+      code: '0x001D'
+      name: x25519
+      aliases:
+      - X25519
+      - x25519
+      expect: seen
+      source: iana-tls-groups
+      quote: 29,x25519,Y,Y,[RFC 9846]; [RFC 8422],
+  SL-2063:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_sigalgs_list(ctx, "ecdsa_secp256r1_sha256");
+    negative: false
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: ecdsa
+    s_server_args:
+    - -sigalgs
+    - ecdsa_secp256r1_sha256
+    note: the C call's string argument is passed to `openssl s_server -sigalgs`, which hands it to the same OpenSSL function (SSL_CTX_set1_sigalgs_list); the C file itself is not compiled
+    items:
+    - kind: sigalg
+      code: '0x0403'
+      name: ecdsa_secp256r1_sha256
+      expect: seen
+      source: iana-tls-sigschemes
+      quote: 0x0403,ecdsa_secp256r1_sha256,Y,[RFC 9846],
+  SL-2064:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_sigalgs_list(ctx, "RSA+SHA256");
+    negative: false
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: rsa
+    s_server_args:
+    - -sigalgs
+    - RSA+SHA256
+    note: the C call's string argument is passed to `openssl s_server -sigalgs`, which hands it to the same OpenSSL function (SSL_CTX_set1_sigalgs_list); the C file itself is not compiled
+    items:
+    - kind: sigalg
+      code: '0x0401'
+      name: rsa_pkcs1_sha256
+      expect: seen
+      source: iana-tls-sigschemes
+      quote: 0x0401,rsa_pkcs1_sha256,Y,[RFC 9846],
+  SL-2080:
+    product: C / OpenSSL 3.5
+    literal: return SSL_CTX_set1_groups_list(ctx, "DEFAULT:-X25519MLKEM768");
+    negative: true
+    protocol: tls
+    server: s_server
+    planting: mapped
+    cert: rsa
+    s_server_args:
+    - -groups
+    - DEFAULT:-X25519MLKEM768
+    note: the C call's string argument is passed to `openssl s_server -groups`, which hands it to the same OpenSSL function (SSL_CTX_set1_groups_list); the C file itself is not compiled
+    items:
+    - kind: group
+      code: '0x11EC'
+      name: X25519MLKEM768
+      aliases:
+      - X25519MLKEM768
+      expect: not_seen
+      source: iana-tls-groups
+      quote: 4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768
+  SL-3064:
+    product: AWS CloudFormation / AWS::CertificateManager::Certificate
+    literal: 'KeyAlgorithm: RSA_2048'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Certificate Manager certificate is served only by AWS endpoints (ELB, CloudFront, API Gateway)
+  SL-3065:
+    product: AWS CloudFormation / AWS::CertificateManager::Certificate
+    literal: 'KeyAlgorithm: EC_prime256v1'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Certificate Manager certificate is served only by AWS endpoints (ELB, CloudFront, API Gateway)
+  SL-3066:
+    product: AWS CloudFormation / AWS::CertificateManager::Certificate
+    literal: 'KeyAlgorithm: EC_secp384r1'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Certificate Manager certificate is served only by AWS endpoints (ELB, CloudFront, API Gateway)
+  SL-3067:
+    product: Terraform / hashicorp/aws 6.72
+    literal: key_algorithm     = "EC_secp384r1"
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Certificate Manager certificate is served only by AWS endpoints (ELB, CloudFront, API Gateway)
+  SL-3068:
+    product: Terraform / hashicorp/aws 6.72
+    literal: key_algorithm     = "RSA_2048"
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Certificate Manager certificate is served only by AWS endpoints (ELB, CloudFront, API Gateway)
+  SL-3069:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-3-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3070:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-3-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3071:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3072:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3073:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3074:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Res-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3075:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext0-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3076:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext1-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3077:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext1-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3078:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext2-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3079:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext2-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3080:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-0-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3081:
+    product: AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener
+    literal: 'SslPolicy: ELBSecurityPolicy-TLS13-1-0-FIPS-PQ-2025-09'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally
+  SL-3082:
+    product: Terraform / hashicorp/aws 6.72
+    literal: ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09"
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: an AWS Elastic Load Balancing listener exists only in an AWS account; the wire would show what AWS's security policy offers, which cannot be stood up locally (Terraform aws_lb_listener)
+  SL-3205:
+    product: cert-manager 1.21 / Certificate
+    literal: 'algorithm: RSA'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3206:
+    product: cert-manager 1.21 / Certificate
+    literal: 'algorithm: ECDSA'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3207:
+    product: cert-manager 1.21 / Certificate
+    literal: 'algorithm: Ed25519'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3208:
+    product: cert-manager 1.21 / Certificate
+    literal: 'size: 4096'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3209:
+    product: cert-manager 1.21 / Certificate
+    literal: 'size: 8192'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3210:
+    product: cert-manager 1.21 / Certificate
+    literal: 'size: 384'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3211:
+    product: cert-manager 1.21 / Certificate
+    literal: 'size: 521'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3212:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: SHA256WithRSA'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3213:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: SHA384WithRSA'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3214:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: SHA512WithRSA'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3215:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: ECDSAWithSHA256'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3216:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: ECDSAWithSHA384'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3217:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: ECDSAWithSHA512'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3218:
+    product: cert-manager 1.21 / Certificate
+    literal: 'signatureAlgorithm: PureEd25519'
+    negative: false
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3219:
+    product: cert-manager 1.21 / Certificate
+    literal: '# privateKey: {algorithm: RSA, size: 4096} until the HSM issuer supports ECDSA'
+    negative: true
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3220:
+    product: cert-manager 1.21 / Certificate
+    literal: 'note.example.com/previous-key: ECDSA P-384'
+    negative: true
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-3224:
+    product: cert-manager 1.21 / Certificate
+    literal: '# signatureAlgorithm: SHA256WithRSA'
+    negative: true
+    protocol: tls
+    not_runnable: cloud
+    reason: a cert-manager Certificate needs a Kubernetes cluster, cert-manager and an Issuer; the key reaches the wire only through an ingress that serves the issued Secret
+  SL-4562:
+    product: nginx
+    literal: ssl_ciphers DES-CBC3-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("DES-CBC3-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("DES-CBC3-SHA") failed (SSL: error:0A0000B9:SSL
+      routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0x000A'
+      name: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_3DES_EDE_CBC_SHA DES-CBC3-SHA
+      - '"0x00,0x0A",TLS_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+  SL-4563:
+    product: nginx
+    literal: ssl_ciphers ECDHE-RSA-DES-CBC3-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("ECDHE-RSA-DES-CBC3-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("ECDHE-RSA-DES-CBC3-SHA") failed
+      (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0xC012'
+      name: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - ECDHE-RSA-DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA ECDHE-RSA-DES-CBC3-SHA
+      - '"0xC0,0x12",TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 8422],'
+  SL-4564:
+    product: nginx
+    literal: ssl_ciphers ECDHE-ECDSA-DES-CBC3-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: ecdsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("ECDHE-ECDSA-DES-CBC3-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("ECDHE-ECDSA-DES-CBC3-SHA") failed
+      (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0xC008'
+      name: TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - ECDHE-ECDSA-DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA ECDHE-ECDSA-DES-CBC3-SHA
+      - '"0xC0,0x08",TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 8422],'
+  SL-4565:
+    product: nginx
+    literal: ssl_ciphers DHE-RSA-DES-CBC3-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("DHE-RSA-DES-CBC3-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("DHE-RSA-DES-CBC3-SHA") failed (SSL:
+      error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0x0016'
+      name: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - DHE-RSA-DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA DHE-RSA-DES-CBC3-SHA
+      - '"0x00,0x16",TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+  SL-4566:
+    product: nginx
+    literal: ssl_ciphers RC4-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("RC4-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("RC4-SHA") failed (SSL: error:0A0000B9:SSL routines::no
+      cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0x0005'
+      name: TLS_RSA_WITH_RC4_128_SHA
+      aliases:
+      - RC4-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_RC4_128_SHA RC4-SHA
+      - '"0x00,0x05",TLS_RSA_WITH_RC4_128_SHA,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+  SL-4567:
+    product: nginx
+    literal: ssl_ciphers RC4-MD5;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("RC4-MD5") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("RC4-MD5") failed (SSL: error:0A0000B9:SSL routines::no
+      cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0x0004'
+      name: TLS_RSA_WITH_RC4_128_MD5
+      aliases:
+      - RC4-MD5
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_RC4_128_MD5 RC4-MD5
+      - '"0x00,0x04",TLS_RSA_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+  SL-4568:
+    product: nginx
+    literal: ssl_ciphers ECDHE-RSA-RC4-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("ECDHE-RSA-RC4-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("ECDHE-RSA-RC4-SHA") failed (SSL: error:0A0000B9:SSL
+      routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0xC011'
+      name: TLS_ECDHE_RSA_WITH_RC4_128_SHA
+      aliases:
+      - ECDHE-RSA-RC4-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_ECDHE_RSA_WITH_RC4_128_SHA ECDHE-RSA-RC4-SHA
+      - '"0xC0,0x11",TLS_ECDHE_RSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 9847],'
+  SL-4569:
+    product: nginx
+    literal: ssl_ciphers ECDHE-ECDSA-RC4-SHA;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: ecdsa
+    not_runnable: config_rejected
+    reason: '[emerg] SSL_CTX_set_cipher_list("ECDHE-ECDSA-RC4-SHA") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list("ECDHE-ECDSA-RC4-SHA") failed (SSL:
+      error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed'
+    items:
+    - kind: cipher_suite
+      code: '0xC007'
+      name: TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+      aliases:
+      - ECDHE-ECDSA-RC4-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_ECDHE_ECDSA_WITH_RC4_128_SHA ECDHE-ECDSA-RC4-SHA
+      - '"0xC0,0x07",TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 9847],'
+  SL-4570:
+    product: nginx
+    literal: ssl_ciphers NULL-MD5;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: cipher_suite
+      code: '0x0001'
+      name: TLS_RSA_WITH_NULL_MD5
+      aliases:
+      - NULL-MD5
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_NULL_MD5 NULL-MD5
+      - '"0x00,0x01",TLS_RSA_WITH_NULL_MD5,Y,D,[RFC 5246]; [RFC 10015],'
+  SL-4571:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite DES-CBC3-SHA
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising
+      mod_ssl, exiting. / AH00016: Configuration Failed'
+    items:
+    - kind: cipher_suite
+      code: '0x000A'
+      name: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_3DES_EDE_CBC_SHA DES-CBC3-SHA
+      - '"0x00,0x0A",TLS_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+  SL-4572:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite DHE-DSS-DES-CBC3-SHA
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising
+      mod_ssl, exiting. / AH00016: Configuration Failed'
+    note: a DHE-DSS suite needs a DSA certificate; the harness has RSA and ECDSA certificates only
+    items:
+    - kind: cipher_suite
+      code: '0x0013'
+      name: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - DHE-DSS-DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA DHE-DSS-DES-CBC3-SHA
+      - '"0x00,0x13",TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+  SL-4573:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite RC4-SHA
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising
+      mod_ssl, exiting. / AH00016: Configuration Failed'
+    items:
+    - kind: cipher_suite
+      code: '0x0005'
+      name: TLS_RSA_WITH_RC4_128_SHA
+      aliases:
+      - RC4-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_RC4_128_SHA RC4-SHA
+      - '"0x00,0x05",TLS_RSA_WITH_RC4_128_SHA,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+  SL-4574:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite RC4-MD5
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising
+      mod_ssl, exiting. / AH00016: Configuration Failed'
+    items:
+    - kind: cipher_suite
+      code: '0x0004'
+      name: TLS_RSA_WITH_RC4_128_MD5
+      aliases:
+      - RC4-MD5
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_RC4_128_MD5 RC4-MD5
+      - '"0x00,0x04",TLS_RSA_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+  SL-4575:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite ECDHE-RSA-DES-CBC3-SHA
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_runnable: config_rejected
+    reason: '[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising
+      mod_ssl, exiting. / AH00016: Configuration Failed'
+    items:
+    - kind: cipher_suite
+      code: '0xC012'
+      name: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+      aliases:
+      - ECDHE-RSA-DES-CBC3-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA ECDHE-RSA-DES-CBC3-SHA
+      - '"0xC0,0x12",TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 8422],'
+  SL-4576:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    items:
+    - kind: cipher_suite
+      code: '0x0005'
+      name: TLS_RSA_WITH_RC4_128_SHA
+      aliases:
+      - RC4-SHA
+      expect: seen
+      source:
+      - openssl-ciphers-man
+      - iana-tls-ciphers
+      quote:
+      - TLS_RSA_WITH_RC4_128_SHA RC4-SHA
+      - '"0x00,0x05",TLS_RSA_WITH_RC4_128_SHA,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+  SL-4577:
+    product: nginx
+    literal: ssl_ciphers HIGH:!aNULL:!MD5;
+    negative: true
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    note: 'every IANA cipher suite whose name matches /_MD5$/ (13): !MD5 removes suites with an MD5 MAC'
+    items:
+    - kind: cipher_suite
+      code: '0x0001'
+      name: TLS_RSA_WITH_NULL_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x01",TLS_RSA_WITH_NULL_MD5,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0003'
+      name: TLS_RSA_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x03",TLS_RSA_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 4346]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0004'
+      name: TLS_RSA_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x04",TLS_RSA_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0006'
+      name: TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x06",TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5,Y,D,[RFC 4346]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0017'
+      name: TLS_DH_anon_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x17",TLS_DH_anon_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 4346]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0018'
+      name: TLS_DH_anon_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x18",TLS_DH_anon_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0022'
+      name: TLS_KRB5_WITH_DES_CBC_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x22",TLS_KRB5_WITH_DES_CBC_MD5,Y,D,[RFC 2712]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x0023'
+      name: TLS_KRB5_WITH_3DES_EDE_CBC_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x23",TLS_KRB5_WITH_3DES_EDE_CBC_MD5,Y,N,[RFC 2712],'
+    - kind: cipher_suite
+      code: '0x0024'
+      name: TLS_KRB5_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x24",TLS_KRB5_WITH_RC4_128_MD5,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x0025'
+      name: TLS_KRB5_WITH_IDEA_CBC_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x25",TLS_KRB5_WITH_IDEA_CBC_MD5,Y,D,[RFC 2712]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x0029'
+      name: TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x29",TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5,Y,D,[RFC 2712]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x002A'
+      name: TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x2A",TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5,Y,D,[RFC 2712]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x002B'
+      name: TLS_KRB5_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x2B",TLS_KRB5_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+  SL-4578:
+    product: nginx
+    literal: ssl_ciphers HIGH:!aNULL:!3DES;
+    negative: true
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    note: 'every IANA cipher suite whose name matches /3DES_EDE/ (20): !3DES removes triple-DES suites'
+    items:
+    - kind: cipher_suite
+      code: '0x000A'
+      name: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x0A",TLS_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x000D'
+      name: TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x0D",TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0010'
+      name: TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x10",TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0013'
+      name: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x13",TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0016'
+      name: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x16",TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x001B'
+      name: TLS_DH_anon_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x1B",TLS_DH_anon_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 5246]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x001F'
+      name: TLS_KRB5_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x1F",TLS_KRB5_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 2712],'
+    - kind: cipher_suite
+      code: '0x0023'
+      name: TLS_KRB5_WITH_3DES_EDE_CBC_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x23",TLS_KRB5_WITH_3DES_EDE_CBC_MD5,Y,N,[RFC 2712],'
+    - kind: cipher_suite
+      code: '0x008B'
+      name: TLS_PSK_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x8B",TLS_PSK_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 4279],'
+    - kind: cipher_suite
+      code: '0x008F'
+      name: TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x8F",TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 4279]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0093'
+      name: TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x93",TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 4279]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC003'
+      name: TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x03",TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 8422]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC008'
+      name: TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x08",TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 8422],'
+    - kind: cipher_suite
+      code: '0xC00D'
+      name: TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x0D",TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 8422]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC012'
+      name: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x12",TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 8422],'
+    - kind: cipher_suite
+      code: '0xC017'
+      name: TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x17",TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA,Y,D,[RFC 8422]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC01A'
+      name: TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x1A",TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 5054],'
+    - kind: cipher_suite
+      code: '0xC01B'
+      name: TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x1B",TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 5054],'
+    - kind: cipher_suite
+      code: '0xC01C'
+      name: TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x1C",TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 5054],'
+    - kind: cipher_suite
+      code: '0xC034'
+      name: TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x34",TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA,Y,N,[RFC 5489],'
+  SL-4579:
+    product: Apache httpd mod_ssl
+    literal: SSLCipherSuite HIGH:!aNULL:!RC4
+    negative: true
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    note: 'every IANA cipher suite whose name matches /_RC4_/ (18): !RC4 removes RC4 suites'
+    items:
+    - kind: cipher_suite
+      code: '0x0003'
+      name: TLS_RSA_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x03",TLS_RSA_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 4346]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0004'
+      name: TLS_RSA_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x04",TLS_RSA_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0005'
+      name: TLS_RSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x05",TLS_RSA_WITH_RC4_128_SHA,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0017'
+      name: TLS_DH_anon_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x17",TLS_DH_anon_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 4346]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0018'
+      name: TLS_DH_anon_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x18",TLS_DH_anon_WITH_RC4_128_MD5,N,D,[RFC 5246]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0020'
+      name: TLS_KRB5_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x20",TLS_KRB5_WITH_RC4_128_SHA,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x0024'
+      name: TLS_KRB5_WITH_RC4_128_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x24",TLS_KRB5_WITH_RC4_128_MD5,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x0028'
+      name: TLS_KRB5_EXPORT_WITH_RC4_40_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x28",TLS_KRB5_EXPORT_WITH_RC4_40_SHA,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x002B'
+      name: TLS_KRB5_EXPORT_WITH_RC4_40_MD5
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x2B",TLS_KRB5_EXPORT_WITH_RC4_40_MD5,N,D,[RFC 2712]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x008A'
+      name: TLS_PSK_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x8A",TLS_PSK_WITH_RC4_128_SHA,N,D,[RFC 4279]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0x008E'
+      name: TLS_DHE_PSK_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x8E",TLS_DHE_PSK_WITH_RC4_128_SHA,N,D,[RFC 4279]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0x0092'
+      name: TLS_RSA_PSK_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0x00,0x92",TLS_RSA_PSK_WITH_RC4_128_SHA,N,D,[RFC 4279]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC002'
+      name: TLS_ECDH_ECDSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x02",TLS_ECDH_ECDSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC007'
+      name: TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x07",TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0xC00C'
+      name: TLS_ECDH_RSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x0C",TLS_ECDH_RSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC011'
+      name: TLS_ECDHE_RSA_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x11",TLS_ECDHE_RSA_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 9847],'
+    - kind: cipher_suite
+      code: '0xC016'
+      name: TLS_ECDH_anon_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x16",TLS_ECDH_anon_WITH_RC4_128_SHA,N,D,[RFC 8422]; [RFC 6347]; [RFC 10015],'
+    - kind: cipher_suite
+      code: '0xC033'
+      name: TLS_ECDHE_PSK_WITH_RC4_128_SHA
+      expect: not_seen
+      source: iana-tls-ciphers
+      quote: '"0xC0,0x33",TLS_ECDHE_PSK_WITH_RC4_128_SHA,N,D,[RFC 5489]; [RFC 6347]; [RFC 9847],'
+  SL-4580:
+    product: Apache httpd mod_ssl
+    literal: '#SSLCipherSuite DES-CBC3-SHA'
+    negative: true
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-4581:
+    product: OpenSSH sshd
+    literal: Ciphers 3des-cbc
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: cipher
+      name: 3des-cbc
+      expect: seen
+      source: iana-ssh-enc
+      quote: 3des-cbc,[RFC 4253],Section 6.3
+  SL-4582:
+    product: OpenSSH sshd
+    literal: MACs hmac-md5
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-md5
+      expect: seen
+      source: iana-ssh-mac
+      quote: hmac-md5,[RFC 4253],Section 6.4
+  SL-4583:
+    product: OpenSSH sshd
+    literal: MACs hmac-md5-96
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-md5-96
+      expect: seen
+      source: iana-ssh-mac
+      quote: hmac-md5-96,[RFC 4253],Section 6.4
+  SL-4584:
+    product: OpenSSH sshd
+    literal: MACs hmac-md5-etm@openssh.com
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-md5-etm@openssh.com
+      expect: seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-md5-etm@openssh.com (OpenSSH_10.3p1)'
+  SL-4585:
+    product: OpenSSH sshd
+    literal: MACs hmac-md5-96-etm@openssh.com
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-md5-96-etm@openssh.com
+      expect: seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-md5-96-etm@openssh.com (OpenSSH_10.3p1)'
+  SL-4586:
+    product: OpenSSH sshd
+    literal: MACs hmac-sha1
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-sha1
+      expect: seen
+      source: iana-ssh-mac
+      quote: hmac-sha1,[RFC 4253],Section 6.4
+  SL-4587:
+    product: OpenSSH sshd
+    literal: MACs hmac-sha1-96
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-sha1-96
+      expect: seen
+      source: iana-ssh-mac
+      quote: hmac-sha1-96,[RFC 4253],Section 6.4
+  SL-4588:
+    product: OpenSSH sshd
+    literal: MACs hmac-sha1-etm@openssh.com
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-sha1-etm@openssh.com
+      expect: seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-sha1-etm@openssh.com (OpenSSH_10.3p1)'
+  SL-4589:
+    product: OpenSSH sshd
+    literal: MACs hmac-sha1-96-etm@openssh.com
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: mac
+      name: hmac-sha1-96-etm@openssh.com
+      expect: seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-sha1-96-etm@openssh.com (OpenSSH_10.3p1)'
+  SL-4590:
+    product: OpenSSH sshd
+    literal: KexAlgorithms diffie-hellman-group1-sha1
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group1-sha1
+      expect: seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group1-sha1,[RFC 4253],Section 8.1,SHOULD NOT
+  SL-4591:
+    product: OpenSSH sshd
+    literal: KexAlgorithms diffie-hellman-group14-sha1
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group14-sha1
+      expect: seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group14-sha1,[RFC 4253],Section 8.2,MAY
+  SL-4592:
+    product: OpenSSH sshd
+    literal: KexAlgorithms diffie-hellman-group-exchange-sha1
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group-exchange-sha1
+      expect: seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group-exchange-sha1,[RFC 4419]; [RFC 8270],Section 4.1,SHOULD NOT
+  SL-4593:
+    product: OpenSSH sshd
+    literal: Ciphers -3des-cbc
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: cipher
+      name: 3des-cbc
+      expect: not_seen
+      source: iana-ssh-enc
+      quote: 3des-cbc,[RFC 4253],Section 6.3
+  SL-4594:
+    product: OpenSSH sshd
+    literal: MACs -hmac-sha1*
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    note: the removal pattern hmac-sha1* expanded to every name OpenSSH 10.3p1 lists (ssh -Q mac)
+    items:
+    - kind: mac
+      name: hmac-sha1
+      expect: not_seen
+      source: iana-ssh-mac
+      quote: hmac-sha1,[RFC 4253],Section 6.4
+    - kind: mac
+      name: hmac-sha1-96
+      expect: not_seen
+      source: iana-ssh-mac
+      quote: hmac-sha1-96,[RFC 4253],Section 6.4
+    - kind: mac
+      name: hmac-sha1-etm@openssh.com
+      expect: not_seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-sha1-etm@openssh.com (OpenSSH_10.3p1)'
+    - kind: mac
+      name: hmac-sha1-96-etm@openssh.com
+      expect: not_seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists hmac-sha1-96-etm@openssh.com (OpenSSH_10.3p1)'
+  SL-4595:
+    product: OpenSSH sshd
+    literal: KexAlgorithms -diffie-hellman-group1-sha1
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group1-sha1
+      expect: not_seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group1-sha1,[RFC 4253],Section 8.1,SHOULD NOT
+  SL-4596:
+    product: OpenSSH sshd
+    literal: '#MACs hmac-md5'
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-4650:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-modp768
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '1'
+      name: 768-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 1,768-bit MODP Group,DEPRECATED [RFC 8247],"[RFC 6989, Section 2.1]",[RFC 7296]
+  SL-4651:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-modp1024
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '2'
+      name: 1024-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 2,1024-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 7296]
+  SL-4652:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-modp1536
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '5'
+      name: 1536-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 5,1536-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 3526]
+  SL-4653:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-modp1024s160
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '22'
+      name: 1024-bit MODP Group with 160-bit Prime Order Subgroup
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 22,1024-bit MODP Group with 160-bit Prime Order Subgroup,DEPRECATED [RFC 8247],"[RFC 6989, Section 2.2]",[RFC 5114]
+  SL-4654:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-ecp192
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '25'
+      name: 192-bit Random ECP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 25,192-bit Random ECP Group,,"[RFC 6989, Section 2.3]",[RFC 5114]
+  SL-4655:
+    product: strongSwan swanctl
+    literal: proposals = 3des-sha256-modp2048
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '14'
+      name: 2048-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 14,2048-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 3526]
+  SL-4656:
+    product: strongSwan swanctl
+    literal: proposals = aes128-md5-modp2048
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '14'
+      name: 2048-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 14,2048-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 3526]
+  SL-4657:
+    product: strongSwan swanctl
+    literal: proposals = aes128-sha256-prfmd5-modp2048
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: none of the five adapters (ssh-audit, testssl.sh, sslyze, nmap, Zeek) enumerates IKEv2 proposals
+    items:
+    - kind: ike_ke
+      code: '14'
+      name: 2048-bit MODP Group
+      expect: seen
+      source: iana-ikev2-ke
+      quote: 14,2048-bit MODP Group,,"[RFC 6989, Section 2.1]",[RFC 3526]
+  SL-4658:
+    product: strongSwan swanctl
+    literal: esp_proposals = 3des-sha256
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: ESP proposal without a key exchange method (3DES / MD5 are ESP transforms, negotiated in IKE_AUTH, encrypted); none of the five adapters enumerates IKEv2 proposals
+    items: []
+  SL-4659:
+    product: strongSwan swanctl
+    literal: esp_proposals = aes128-md5
+    negative: false
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: no_scanner
+    reason: ESP proposal without a key exchange method (3DES / MD5 are ESP transforms, negotiated in IKE_AUTH, encrypted); none of the five adapters enumerates IKEv2 proposals
+    items: []
+  SL-4660:
+    product: strongSwan swanctl
+    literal: '# proposals = 3des-sha256-modp2048'
+    negative: true
+    protocol: ike
+    server: strongswan
+    planting: not_attempted
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-5545:
+    product: nginx
+    literal: proxy_ssl_verify off;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    not_scored: not_on_wire
+    reason: proxy_ssl_verify concerns nginx's outbound connection to an upstream; the template's server listens in clear on 8080 and a client-side scanner cannot observe upstream certificate checking.
+    items: []
+  SL-6500:
+    product: nginx
+    literal: ssl_ecdh_curve secp384r1;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x0018'
+      name: secp384r1
+      aliases:
+      - secp384r1
+      expect: seen
+      source: iana-tls-groups
+      quote: 24,secp384r1,Y,Y,[RFC 8422],
+  SL-6501:
+    product: nginx
+    literal: ssl_ecdh_curve prime256v1;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x0017'
+      name: secp256r1
+      aliases:
+      - prime256v1
+      - secp256r1
+      expect: seen
+      source: iana-tls-groups
+      quote: 23,secp256r1,Y,Y,[RFC 8422],
+  SL-6502:
+    product: nginx
+    literal: ssl_ecdh_curve secp521r1;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x0019'
+      name: secp521r1
+      aliases:
+      - secp521r1
+      expect: seen
+      source: iana-tls-groups
+      quote: 25,secp521r1,Y,N,[RFC 8422],
+  SL-6503:
+    product: nginx
+    literal: ssl_ecdh_curve X25519;
+    negative: false
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x001D'
+      name: x25519
+      aliases:
+      - X25519
+      - x25519
+      expect: seen
+      source: iana-tls-groups
+      quote: 29,x25519,Y,Y,[RFC 9846]; [RFC 8422],
+  SL-6504:
+    product: nginx
+    literal: '# ssl_ecdh_curve X25519MLKEM768;'
+    negative: true
+    protocol: tls
+    server: nginx
+    planting: verbatim
+    cert: rsa
+    not_scored: comment_decoy
+    reason: 'comment: the line has no effect, so the wire shows the server''s default set; it cannot test a scanner''s decoy handling'
+    items: []
+  SL-6509:
+    product: Caddy 2.10 (JSON config)
+    literal: '"curves": ["x25519mlkem768"]'
+    negative: false
+    protocol: tls
+    not_runnable: not_attempted
+    reason: 'Caddy: the template has no certificate source; not in the task''s server list, no harness built'
+  SL-6510:
+    product: Traefik v3 (dynamic YAML)
+    literal: '- X25519MLKEM768'
+    negative: false
+    protocol: tls
+    not_runnable: not_attempted
+    reason: 'Traefik: the dynamic YAML needs a static configuration with an entry point and a certificate; no harness built'
+  SL-6511:
+    product: OpenVPN 2.6 (OpenSSL 3.5)
+    literal: exec openvpn --config server.conf --tls-groups X25519MLKEM768
+    negative: false
+    protocol: tls
+    not_runnable: not_attempted
+    reason: 'OpenVPN: the template runs `openvpn --config server.conf`, which the row does not carry; no harness built'
+  SL-6512:
+    product: Apache httpd mod_ssl
+    literal: SSLOpenSSLConfCmd Groups X25519MLKEM768
+    negative: false
+    protocol: tls
+    server: apache
+    planting: preamble+include
+    cert: rsa
+    items:
+    - kind: group
+      code: '0x11EC'
+      name: X25519MLKEM768
+      aliases:
+      - X25519MLKEM768
+      expect: seen
+      source: iana-tls-groups
+      quote: 4588,X25519MLKEM768,Y,Y,[RFC 10024],Combining X25519 ECDH with ML-KEM-768
+  SL-6523:
+    product: OpenSSH sshd
+    literal: KexAlgorithms curve25519-sha256@libssh.org
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: curve25519-sha256@libssh.org
+      expect: seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists curve25519-sha256@libssh.org (OpenSSH_10.3p1)'
+  SL-6524:
+    product: OpenSSH sshd
+    literal: KexAlgorithms diffie-hellman-group-exchange-sha256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: diffie-hellman-group-exchange-sha256
+      expect: seen
+      source: iana-ssh-kex
+      quote: diffie-hellman-group-exchange-sha256,[RFC 4419]; [RFC 8270],Section 4.2,MAY
+  SL-6525:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms ecdsa-sha2-nistp256
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: hostkey
+      name: ecdsa-sha2-nistp256
+      expect: seen
+      source: iana-ssh-pk
+      quote: ecdsa-sha2-*,ecdsa-sha2-*,[RFC 5656],
+  SL-6526:
+    product: OpenSSH sshd
+    literal: HostKeyAlgorithms +ssh-rsa
+    negative: false
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: hostkey
+      name: ssh-rsa
+      expect: seen
+      source: iana-ssh-pk
+      quote: ssh-rsa,ssh-rsa,[RFC 4253],Section 6.6
+  SL-6527:
+    product: OpenSSH sshd
+    literal: KexAlgorithms -curve25519-sha256@libssh.org
+    negative: true
+    protocol: ssh
+    server: openssh
+    planting: verbatim+hostkeys
+    items:
+    - kind: kex
+      name: curve25519-sha256@libssh.org
+      expect: not_seen
+      source: openssh-ssh-Q
+      quote: '`ssh -Q` lists curve25519-sha256@libssh.org (OpenSSH_10.3p1)'

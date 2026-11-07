@@ -250,6 +250,53 @@ with `version()` and `scan(tree, workdir) -> list[Record]`, registered in `ADAPT
 [`adapters/qrp_mcp.py`](generator/shorlist/adapters/qrp_mcp.py) is a worked example. The
 adapter is the only place that knows the scanner's field names; the scorer sees records only.
 
+## Network axis (live servers)
+
+Rows whose product terminates a network protocol can also be measured from the outside, with
+network scanners, on a fourth axis reported apart from the other three. The row's configuration is
+planted as a **running server** in a container, and the scanner is pointed at it.
+
+- **What must be seen.** [`generator/shorlist/live/wire.yaml`](generator/shorlist/live/wire.yaml)
+  maps each such row to the items on the wire: the TLS group, cipher suite or signature scheme
+  (IANA name and code point, e.g. group `0x11EC` X25519MLKEM768) or the SSH name
+  (`mlkem768x25519-sha256`), each with its registry, date read and the registry line as a quote.
+  `expect: seen` for a positive row; `expect: not_seen` for a removal or ban decoy
+  (`KexAlgorithms -diffie-hellman-group1-sha1`, `HIGH:!kRSA`). `forms/` is not changed.
+- **Planting.** OpenSSH 10.3p1 (`sshd_config` verbatim, after three `HostKey` lines and
+  `PerSourcePenalties no`), nginx 1.30.6 (`nginx.conf` verbatim), Apache httpd 2.4.69 (the fragment
+  included from a fixed preamble that only loads modules), and `openssl s_server` 3.5.9 for the OpenSSL C
+  API rows (the string given to `SSL_CTX_set1_groups_list` / `SSL_CTX_set1_sigalgs_list` is passed to
+  `-groups` / `-sigalgs`). Servers and scanners are pinned by digest and run on a
+  `docker network create --internal` network, two containers at a time.
+- **Reference client.** Before any scanner, `openssl s_client`, `ssh -vv` and a raw TLS 1.2 ClientHello
+  ([`live/probe.py`](generator/shorlist/live/probe.py)) check whether each item really is on the wire.
+  A positive row whose item is not (`not_offered`) or a decoy whose item is (`expectation_contradicted`)
+  is not scored, so a miss is always a miss of something the server offers.
+- **Outcomes.** `hit`, `miss`, `false_alarm` (a `not_seen` item reported), `ok` (a decoy not reported),
+  `scanner_error`, and, not scored: `not_runnable` (`cloud`, `appliance`, `config_rejected` with the
+  server's own error, `not_attempted`) and `not_scored` (`not_on_wire`, `comment_decoy`, `no_scanner`,
+  `not_offered`, `expectation_contradicted`). A comment decoy is not a wire decoy: the line has no effect
+  and the server's default set, which may include the algorithm, is what a scanner sees.
+- **Adapters.** ssh-audit, testssl.sh, sslyze, nmap (`ssl-enum-ciphers`, `ssh2-enum-algos`) and Zeek
+  (passive: the pcap of one broad handshake by the reference client; Zeek logs the negotiated values,
+  not the server's offer). Each has a positive control: one row it must catch and one decoy.
+- **Not measured.** IANA registry rows, code rows and key-management rows have no server to start.
+  Cloud rows (AWS load balancer policies, ACM, cert-manager) and appliance rows (FortiOS, Junos) cannot
+  be stood up locally. strongSwan rows are mapped to IKEv2 transform IDs, but none of the adapters
+  enumerates IKEv2 proposals.
+
+```sh
+cd generator
+python -m shorlist live --stats                                     # what wire.yaml maps
+python -m shorlist live --adapter ssh-audit --adapter nmap --server openssh \
+    --out-dir ../results/live                                       # one <adapter>.json/.md each
+python -m shorlist live --table ../results/live/ssh-audit.json
+```
+
+The fingerprint of a live result is sha256 over wire.yaml's sha256, the catalogue sha256, the
+generator and scanner versions, the image digests and the ordered `[id, outcome, reason]` rows.
+Results are in [`results/live/`](results/live/).
+
 ## Results
 
 **These results are for v0.1 (30 rows, quantum axis only).** The v0.2 catalogue has not

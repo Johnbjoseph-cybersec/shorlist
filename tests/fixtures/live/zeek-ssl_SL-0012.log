@@ -1,0 +1,1 @@
+{"ts":1794033142.147086,"uid":"CpbZs24Ncz1DDmWUtf","id.orig_h":"172.19.0.3","id.orig_p":40318,"id.resp_h":"172.19.0.2","id.resp_p":443,"version":"TLSv12","cipher":"TLS_RSA_WITH_AES_128_GCM_SHA256","resumed":false,"established":true,"ssl_history":"CsxnGIti","cert_chain_fps":["4e59fa34a8edfe032b769d01e99821e255ee5f2d011ec069bb0fcd14f1b14d52"],"client_cert_chain_fps":[]}

@@ -1,0 +1,5290 @@
+{
+ "result_format": "live-0.1",
+ "axis": "network",
+ "statement": "Of 14 positive rows planted as live servers from ShorList 0.2.0, sslyze 6.3.1 reports the expected wire item for 7; of 5 removal/ban decoys it reports 0 as offered. Rows the reference client could not confirm on the wire are not scored.",
+ "catalogue": {
+  "name": "ShorList",
+  "version": "0.2.0",
+  "sha256": "e48462b539beba5915738d27770c667bdc34ba3d2fb42e15b40d265e86e35c1e"
+ },
+ "wire": {
+  "sha256": "01304235d689247fb6103d6f1e1c0ab2141be1db32071305729d262b7a8b7193",
+  "rows": 136,
+  "with_items": 81,
+  "items": 164,
+  "by_status": {
+   "not_runnable: appliance": 6,
+   "not_runnable: cloud": 36,
+   "not_runnable: config_rejected": 15,
+   "not_runnable: not_attempted": 3,
+   "not_scored: comment_decoy": 7,
+   "not_scored: no_scanner": 16,
+   "not_scored: not_on_wire": 2,
+   "scored": 51
+  },
+  "by_server": {
+   "-": 45,
+   "apache": 12,
+   "nginx": 20,
+   "openssh": 35,
+   "s_server": 6,
+   "strongswan": 18
+  },
+  "by_protocol": {
+   "ike": 24,
+   "ssh": 35,
+   "tls": 77
+  },
+  "scored_positive": 39,
+  "scored_decoy": 12
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "scanner": {
+  "adapter": "sslyze",
+  "image": "nablac0d3/sslyze@sha256:3060ce2f3168cf1d74e5a0989660008052bee645826875122ba7edea95e5b95c",
+  "tag": "nablac0d3/sslyze:6.3.1",
+  "version": "sslyze 6.3.1",
+  "protocols": [
+   "tls"
+  ],
+  "passive": false
+ },
+ "harness": {
+  "images": {
+   "harness_dockerfile_sha256": "e296b95b1d88ed5258067b5f013225411489fb9383b40c1c679f46ed12496128",
+   "nginx": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+   "apache": "httpd@sha256:d72968666c0a6961b07036d85fc053bc3cf640583cb1ff8360e1617818f164dc",
+   "scanner": "nablac0d3/sslyze@sha256:3060ce2f3168cf1d74e5a0989660008052bee645826875122ba7edea95e5b95c"
+  },
+  "harness_image_id": "sha256:fc33cab33289450007ceb7b48c379e8fdc9238b03cebb4d3bee41b08c079ecf4",
+  "server_versions": {
+   "nginx": "nginx/1.30.6, built with OpenSSL 3.5.8, running with OpenSSL 3.5.9 (Alpine 3.24)",
+   "apache": "Apache/2.4.69 (Unix), libssl3-3.5.9-r0 (Alpine 3.24)",
+   "openssh": "OpenSSH_10.3p1, OpenSSL 3.5.9 (Alpine 3.24.3, openssh-server-10.3_p1-r2)",
+   "s_server": "OpenSSL 3.5.9 s_server (Alpine 3.24.3, openssl-3.5.9-r0)"
+  },
+  "harness_image_versions": [
+   "3.24.3",
+   "libssl3-3.5.9-r0",
+   "openssh-client-common-10.3_p1-r2",
+   "openssh-client-default-10.3_p1-r2",
+   "openssh-keygen-10.3_p1-r2",
+   "openssh-server-10.3_p1-r2",
+   "openssh-server-common-10.3_p1-r2",
+   "openssl-3.5.9-r0",
+   "python3-3.14.10-r1",
+   "python3-pyc-3.14.10-r1",
+   "python3-pycache-pyc0-3.14.10-r1",
+   "tcpdump-4.99.6-r1",
+   "OpenSSH_10.3p1, OpenSSL 3.5.9 29 Sep 2026",
+   "OpenSSL 3.5.9 29 Sep 2026 (Library: OpenSSL 3.5.9 29 Sep 2026)",
+   ""
+  ]
+ },
+ "selection": {
+  "rows": "all",
+  "servers": "all"
+ },
+ "summary": {
+  "positive": {
+   "n": 14,
+   "hit": 7,
+   "miss": 7,
+   "false_alarm": 0
+  },
+  "decoys": {
+   "n": 5,
+   "ok": 5,
+   "false_alarm": 0
+  },
+  "not_scored": {
+   "not_runnable/cloud": 36,
+   "not_runnable/config_rejected": 13,
+   "not_runnable/not_attempted": 3,
+   "not_scored/comment_decoy": 3,
+   "not_scored/not_offered": 2,
+   "not_scored/not_on_wire": 1
+  }
+ },
+ "positive_controls": {
+  "tls": {
+   "catch": "SL-6503",
+   "catch_outcome": "hit",
+   "decoy": "SL-0022",
+   "decoy_outcome": "ok",
+   "passed": true
+  }
+ },
+ "by_server": {
+  "apache": {
+   "hit": 1,
+   "positive": 3,
+   "miss": 2,
+   "not_scored/comment_decoy": 2,
+   "not_runnable/config_rejected": 5,
+   "not_scored/not_offered": 1,
+   "ok": 1,
+   "decoys": 1
+  },
+  "nginx": {
+   "miss": 1,
+   "positive": 6,
+   "hit": 5,
+   "ok": 3,
+   "decoys": 3,
+   "not_runnable/config_rejected": 8,
+   "not_scored/not_offered": 1,
+   "not_scored/not_on_wire": 1,
+   "not_scored/comment_decoy": 1
+  },
+  "s_server": {
+   "miss": 4,
+   "positive": 5,
+   "hit": 1,
+   "ok": 1,
+   "decoys": 1
+  },
+  "—": {
+   "not_runnable/cloud": 36,
+   "not_runnable/not_attempted": 3
+  }
+ },
+ "by_family": {
+  "3DES": {
+   "not_runnable/config_rejected": 7,
+   "ok": 1,
+   "decoys": 1,
+   "not_scored/comment_decoy": 1
+  },
+  "ECDH": {
+   "hit": 4,
+   "positive": 4,
+   "not_scored/comment_decoy": 1
+  },
+  "ECDSA": {
+   "miss": 1,
+   "positive": 1,
+   "not_runnable/cloud": 10
+  },
+  "EdDSA": {
+   "not_runnable/cloud": 2
+  },
+  "MD5": {
+   "not_scored/not_offered": 1,
+   "ok": 1,
+   "decoys": 1
+  },
+  "ML-KEM": {
+   "miss": 5,
+   "positive": 5,
+   "ok": 1,
+   "decoys": 1,
+   "not_runnable/cloud": 14,
+   "not_scored/comment_decoy": 1,
+   "not_runnable/not_attempted": 3
+  },
+  "RC4": {
+   "not_runnable/config_rejected": 6,
+   "not_scored/not_offered": 1,
+   "ok": 1,
+   "decoys": 1
+  },
+  "RSA": {
+   "hit": 1,
+   "positive": 2,
+   "ok": 1,
+   "decoys": 1,
+   "miss": 1,
+   "not_runnable/cloud": 10
+  },
+  "TLS": {
+   "not_scored/not_on_wire": 1
+  },
+  "X25519": {
+   "hit": 2,
+   "positive": 2
+  }
+ },
+ "rows": [
+  {
+   "outcome": "miss",
+   "missing": [
+    "X25519MLKEM768"
+   ],
+   "id": "SL-0011",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "ssl_ecdh_curve X25519MLKEM768;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "X25519MLKEM768",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups X25519MLKEM768: negotiated X25519MLKEM768"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 2.8
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-0012",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RSA",
+   "negative": false,
+   "literal": "ssl_ciphers AES128-GCM-SHA256;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+     "kind": "cipher_suite",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "raw ClientHello 0x009C: {'answer': 'server_hello', 'version': '0x0303', 'cipher': '0x009C'}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 2.8
+  },
+  {
+   "outcome": "ok",
+   "id": "SL-0022",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RSA",
+   "negative": true,
+   "literal": "ssl_ciphers HIGH:!kRSA:!aNULL;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "32 not_seen suites",
+     "kind": "cipher_suite_set",
+     "expect": "not_seen",
+     "on_wire": false,
+     "on_wire_items": [],
+     "evidence": "raw ClientHello offering the 32 not_seen suites together: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 2.9
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-1170",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "ECDH",
+   "negative": false,
+   "literal": "SSLOpenSSLConfCmd Curves P-384",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "secp384r1",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups secp384r1: negotiated secp384r1"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.3
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "SecP384r1MLKEM1024"
+   ],
+   "id": "SL-1171",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SSLOpenSSLConfCmd Groups SecP384r1MLKEM1024",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "SecP384r1MLKEM1024",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups SecP384r1MLKEM1024: negotiated SecP384r1MLKEM1024"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.7
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "comment_decoy",
+   "id": "SL-1192",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "ECDH",
+   "negative": true,
+   "literal": "#SSLOpenSSLConfCmd Curves P-384",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "X25519MLKEM768"
+   ],
+   "id": "SL-2060",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "return SSL_CTX_set1_groups_list(ctx, \"X25519MLKEM768\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "X25519MLKEM768",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups X25519MLKEM768: negotiated X25519MLKEM768"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 4.5
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "SecP384r1MLKEM1024"
+   ],
+   "id": "SL-2061",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "return SSL_CTX_set1_groups_list(ctx, \"SecP384r1MLKEM1024\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "SecP384r1MLKEM1024",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups SecP384r1MLKEM1024: negotiated SecP384r1MLKEM1024"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 5.1
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-2062",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "X25519",
+   "negative": false,
+   "literal": "return SSL_CTX_set1_groups_list(ctx, \"X25519\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "x25519",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups x25519: negotiated x25519"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 5.4
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "ecdsa_secp256r1_sha256"
+   ],
+   "id": "SL-2063",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "return SSL_CTX_set1_sigalgs_list(ctx, \"ecdsa_secp256r1_sha256\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "ecdsa_secp256r1_sha256",
+     "kind": "sigalg",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -sigalgs ecdsa_secp256r1_sha256: peer signature type ecdsa_secp256r1_sha256"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 4.1
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "rsa_pkcs1_sha256"
+   ],
+   "id": "SL-2064",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "RSA",
+   "negative": false,
+   "literal": "return SSL_CTX_set1_sigalgs_list(ctx, \"RSA+SHA256\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "rsa_pkcs1_sha256",
+     "kind": "sigalg",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -sigalgs rsa_pkcs1_sha256: peer signature type rsa_pkcs1_sha256"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 4.8
+  },
+  {
+   "outcome": "ok",
+   "id": "SL-2080",
+   "server": "s_server",
+   "product": "C / OpenSSL 3.5",
+   "family": "ML-KEM",
+   "negative": true,
+   "literal": "return SSL_CTX_set1_groups_list(ctx, \"DEFAULT:-X25519MLKEM768\");",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "X25519MLKEM768",
+     "kind": "group",
+     "expect": "not_seen",
+     "on_wire": false,
+     "evidence": "s_client -groups X25519MLKEM768: negotiated <NULL>"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 5.2
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3064",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::CertificateManager::Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "KeyAlgorithm: RSA_2048",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3065",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::CertificateManager::Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "KeyAlgorithm: EC_prime256v1",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3066",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::CertificateManager::Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "KeyAlgorithm: EC_secp384r1",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3067",
+   "server": "—",
+   "product": "Terraform / hashicorp/aws 6.72",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "key_algorithm     = \"EC_secp384r1\"",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3068",
+   "server": "—",
+   "product": "Terraform / hashicorp/aws 6.72",
+   "family": "RSA",
+   "negative": false,
+   "literal": "key_algorithm     = \"RSA_2048\"",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3069",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-3-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3070",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-3-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3071",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3072",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3073",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3074",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Res-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3075",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext0-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3076",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext1-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3077",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext1-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3078",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext2-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3079",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-2-Ext2-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3080",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-0-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3081",
+   "server": "—",
+   "product": "AWS CloudFormation / AWS::ElasticLoadBalancingV2::Listener",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SslPolicy: ELBSecurityPolicy-TLS13-1-0-FIPS-PQ-2025-09",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3082",
+   "server": "—",
+   "product": "Terraform / hashicorp/aws 6.72",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "ssl_policy        = \"ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09\"",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3205",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "algorithm: RSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3206",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "algorithm: ECDSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3207",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "EdDSA",
+   "negative": false,
+   "literal": "algorithm: Ed25519",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3208",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "size: 4096",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3209",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "size: 8192",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3210",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "size: 384",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3211",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "size: 521",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3212",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: SHA256WithRSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3213",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: SHA384WithRSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3214",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: SHA512WithRSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3215",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: ECDSAWithSHA256",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3216",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: ECDSAWithSHA384",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3217",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: ECDSAWithSHA512",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3218",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "EdDSA",
+   "negative": false,
+   "literal": "signatureAlgorithm: PureEd25519",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3219",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": true,
+   "literal": "# privateKey: {algorithm: RSA, size: 4096} until the HSM issuer supports ECDSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3220",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "ECDSA",
+   "negative": true,
+   "literal": "note.example.com/previous-key: ECDSA P-384",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "cloud",
+   "id": "SL-3224",
+   "server": "—",
+   "product": "cert-manager 1.21 / Certificate",
+   "family": "RSA",
+   "negative": true,
+   "literal": "# signatureAlgorithm: SHA256WithRSA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4562",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "3DES",
+   "negative": false,
+   "literal": "ssl_ciphers DES-CBC3-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4563",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "3DES",
+   "negative": false,
+   "literal": "ssl_ciphers ECDHE-RSA-DES-CBC3-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4564",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "3DES",
+   "negative": false,
+   "literal": "ssl_ciphers ECDHE-ECDSA-DES-CBC3-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4565",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "3DES",
+   "negative": false,
+   "literal": "ssl_ciphers DHE-RSA-DES-CBC3-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4566",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RC4",
+   "negative": false,
+   "literal": "ssl_ciphers RC4-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4567",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RC4",
+   "negative": false,
+   "literal": "ssl_ciphers RC4-MD5;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4568",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RC4",
+   "negative": false,
+   "literal": "ssl_ciphers ECDHE-RSA-RC4-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4569",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "RC4",
+   "negative": false,
+   "literal": "ssl_ciphers ECDHE-ECDSA-RC4-SHA;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "not_offered",
+   "id": "SL-4570",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "MD5",
+   "negative": false,
+   "literal": "ssl_ciphers NULL-MD5;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "TLS_RSA_WITH_NULL_MD5",
+     "kind": "cipher_suite",
+     "expect": "seen",
+     "on_wire": false,
+     "evidence": "raw ClientHello 0x0001: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 2.2
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4571",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "3DES",
+   "negative": false,
+   "literal": "SSLCipherSuite DES-CBC3-SHA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4572",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "3DES",
+   "negative": false,
+   "literal": "SSLCipherSuite DHE-DSS-DES-CBC3-SHA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4573",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "RC4",
+   "negative": false,
+   "literal": "SSLCipherSuite RC4-SHA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4574",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "RC4",
+   "negative": false,
+   "literal": "SSLCipherSuite RC4-MD5",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "config_rejected",
+   "id": "SL-4575",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "3DES",
+   "negative": false,
+   "literal": "SSLCipherSuite ECDHE-RSA-DES-CBC3-SHA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "not_offered",
+   "id": "SL-4576",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "RC4",
+   "negative": false,
+   "literal": "SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "TLS_RSA_WITH_RC4_128_SHA",
+     "kind": "cipher_suite",
+     "expect": "seen",
+     "on_wire": false,
+     "evidence": "raw ClientHello 0x0005: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.5
+  },
+  {
+   "outcome": "ok",
+   "id": "SL-4577",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "MD5",
+   "negative": true,
+   "literal": "ssl_ciphers HIGH:!aNULL:!MD5;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "13 not_seen suites",
+     "kind": "cipher_suite_set",
+     "expect": "not_seen",
+     "on_wire": false,
+     "on_wire_items": [],
+     "evidence": "raw ClientHello offering the 13 not_seen suites together: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.2
+  },
+  {
+   "outcome": "ok",
+   "id": "SL-4578",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "3DES",
+   "negative": true,
+   "literal": "ssl_ciphers HIGH:!aNULL:!3DES;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "20 not_seen suites",
+     "kind": "cipher_suite_set",
+     "expect": "not_seen",
+     "on_wire": false,
+     "on_wire_items": [],
+     "evidence": "raw ClientHello offering the 20 not_seen suites together: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.9
+  },
+  {
+   "outcome": "ok",
+   "id": "SL-4579",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "RC4",
+   "negative": true,
+   "literal": "SSLCipherSuite HIGH:!aNULL:!RC4",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "18 not_seen suites",
+     "kind": "cipher_suite_set",
+     "expect": "not_seen",
+     "on_wire": false,
+     "on_wire_items": [],
+     "evidence": "raw ClientHello offering the 18 not_seen suites together: {'answer': 'alert', 'alert': 40}"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.5
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "comment_decoy",
+   "id": "SL-4580",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "3DES",
+   "negative": true,
+   "literal": "#SSLCipherSuite DES-CBC3-SHA",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "not_on_wire",
+   "id": "SL-5545",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "TLS",
+   "negative": false,
+   "literal": "proxy_ssl_verify off;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-6500",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "ECDH",
+   "negative": false,
+   "literal": "ssl_ecdh_curve secp384r1;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "secp384r1",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups secp384r1: negotiated secp384r1"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.3
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-6501",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "ECDH",
+   "negative": false,
+   "literal": "ssl_ecdh_curve prime256v1;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "secp256r1",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups secp256r1: negotiated secp256r1"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.1
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-6502",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "ECDH",
+   "negative": false,
+   "literal": "ssl_ecdh_curve secp521r1;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "secp521r1",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups secp521r1: negotiated secp521r1"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.3
+  },
+  {
+   "outcome": "hit",
+   "id": "SL-6503",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "X25519",
+   "negative": false,
+   "literal": "ssl_ecdh_curve X25519;",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "x25519",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups x25519: negotiated x25519"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.0
+  },
+  {
+   "outcome": "not_scored",
+   "reason": "comment_decoy",
+   "id": "SL-6504",
+   "server": "nginx",
+   "product": "nginx",
+   "family": "ML-KEM",
+   "negative": true,
+   "literal": "# ssl_ecdh_curve X25519MLKEM768;",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "not_attempted",
+   "id": "SL-6509",
+   "server": "—",
+   "product": "Caddy 2.10 (JSON config)",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "\"curves\": [\"x25519mlkem768\"]",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "not_attempted",
+   "id": "SL-6510",
+   "server": "—",
+   "product": "Traefik v3 (dynamic YAML)",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "- X25519MLKEM768",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "not_runnable",
+   "reason": "not_attempted",
+   "id": "SL-6511",
+   "server": "—",
+   "product": "OpenVPN 2.6 (OpenSSL 3.5)",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "exec openvpn --config server.conf --tls-groups X25519MLKEM768",
+   "protocol": "tls"
+  },
+  {
+   "outcome": "miss",
+   "missing": [
+    "X25519MLKEM768"
+   ],
+   "id": "SL-6512",
+   "server": "apache",
+   "product": "Apache httpd mod_ssl",
+   "family": "ML-KEM",
+   "negative": false,
+   "literal": "SSLOpenSSLConfCmd Groups X25519MLKEM768",
+   "protocol": "tls",
+   "reference": [
+    {
+     "name": "X25519MLKEM768",
+     "kind": "group",
+     "expect": "seen",
+     "on_wire": true,
+     "evidence": "s_client -groups X25519MLKEM768: negotiated X25519MLKEM768"
+    }
+   ],
+   "scanner_exit": 0,
+   "scanner_seconds": 3.2
+  }
+ ],
+ "fingerprint": "a8331c8675b123a9d2bed12a21b5163356917e9a9305fe3d9a6492c55823ed60",
+ "fingerprint_rule": "sha256(canonical JSON {wire_sha256, catalogue_sha256, generator_version, scanner_version, images, rows:[[id,outcome,reason]...]})",
+ "run": {
+  "at": "2026-11-07T07:16:07Z",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
+ },
+ "raw": {
+  "SL-0011": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 2.8,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ]
+    ]
+   }
+  },
+  "SL-0012": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     null,
+     [
+      "AES128-GCM-SHA256"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 2.8,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ]
+    ]
+   }
+  },
+  "SL-0013": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-0014": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ecdsa-sha2-nistp256"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-0015": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "mlkem768x25519-sha256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-0022": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 2.9,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-0029": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-0030": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-1170": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "secp384r1",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.3,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ]
+    ]
+   }
+  },
+  "SL-1171": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "SecP384r1MLKEM1024",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.7,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ]
+    ]
+   }
+  },
+  "SL-1172": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-1173": {
+   "status": "config_rejected",
+   "error": "/row/sshd_config line 6: Bad key types 'ssh-mldsa44-ed25519'.",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-1174": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "curve25519-sha256",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "curve25519-sha256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-1175": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "diffie-hellman-group16-sha512",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "diffie-hellman-group16-sha512"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-1176": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "ecdh-sha2-nistp384",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp384"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-1177": {
+   "status": "config_rejected",
+   "error": "Unsupported KEX algorithm \"mlkem768nistp256-sha256\" / /row/sshd_config line 6: Bad SSH2 KexAlgorithms 'mlkem768nistp256-sha256'.",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-1190": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp384"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-2060": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 4.5,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ]
+    ]
+   }
+  },
+  "SL-2061": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "SecP384r1MLKEM1024",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 5.1,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ]
+    ]
+   }
+  },
+  "SL-2062": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "x25519",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 5.4,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "group",
+      "x25519"
+     ]
+    ]
+   }
+  },
+  "SL-2063": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 4.1,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-2064": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "<NULL>",
+     [
+      "(NONE)"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 4.8,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-2080": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "x25519",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 5.2,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-4562": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4563": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4564": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4565": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"DHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"DHE-RSA-DES-CBC3-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4566": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4567": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"RC4-MD5\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"RC4-MD5\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4568": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-RSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4569": {
+   "status": "config_rejected",
+   "error": "[emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: [emerg] SSL_CTX_set_cipher_list(\"ECDHE-ECDSA-RC4-SHA\") failed (SSL: error:0A0000B9:SSL routines::no cipher match) / nginx: configuration file /etc/nginx/nginx.conf test failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4570": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "<NULL>",
+     [
+      "(NONE)"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 2.2,
+    "observed": []
+   }
+  },
+  "SL-4571": {
+   "status": "config_rejected",
+   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4572": {
+   "status": "config_rejected",
+   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4573": {
+   "status": "config_rejected",
+   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4574": {
+   "status": "config_rejected",
+   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4575": {
+   "status": "config_rejected",
+   "error": "[ssl:emerg] AH01898: Unable to configure permitted SSL ciphers / [ssl:emerg] SSL Library Error: error:0A0000B9:SSL routines::no cipher match / [ssl:emerg] AH02312: Fatal error initialising mod_ssl, exiting. / AH00016: Configuration Failed",
+   "reference_extra": null,
+   "scanner": null
+  },
+  "SL-4576": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.5,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-4577": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "x25519",
+     [
+      "ECDHE-RSA-AES256-GCM-SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.2,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-4578": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "x25519",
+     [
+      "ECDHE-RSA-AES256-GCM-SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.9,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-4579": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.5,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ],
+     [
+      "group",
+      "x25519"
+     ],
+     [
+      "group",
+      "x448"
+     ]
+    ]
+   }
+  },
+  "SL-4581": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "3des-cbc"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4582": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-md5"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4583": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-md5-96"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4584": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-md5-etm@openssh.com"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4585": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-md5-96-etm@openssh.com"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4586": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4587": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-sha1-96"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4588": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-sha1-etm@openssh.com"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4589": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "hmac-sha1-96-etm@openssh.com"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4590": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "diffie-hellman-group1-sha1",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "diffie-hellman-group1-sha1"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4591": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "diffie-hellman-group14-sha1",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "diffie-hellman-group14-sha1"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4592": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "diffie-hellman-group-exchange-sha1",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "diffie-hellman-group-exchange-sha1"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4593": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4594": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-4595": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-6500": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "secp384r1",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.3,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp384r1"
+     ]
+    ]
+   }
+  },
+  "SL-6501": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "secp256r1",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.1,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp256r1"
+     ]
+    ]
+   }
+  },
+  "SL-6502": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "secp521r1",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.3,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "secp521r1"
+     ]
+    ]
+   }
+  },
+  "SL-6503": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "x25519",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.0,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CCM"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_ARIA_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256"
+     ],
+     [
+      "group",
+      "x25519"
+     ]
+    ]
+   }
+  },
+  "SL-6512": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "pcap_handshake": [
+     "X25519MLKEM768",
+     [
+      "TLS_AES_256_GCM_SHA384"
+     ]
+    ]
+   },
+   "scanner": {
+    "exit": 0,
+    "seconds": 3.2,
+    "observed": [
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+     ],
+     [
+      "cipher_suite",
+      "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_128_GCM_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_CBC_SHA256"
+     ],
+     [
+      "cipher_suite",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ]
+    ]
+   }
+  },
+  "SL-6523": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "curve25519-sha256@libssh.org",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "curve25519-sha256@libssh.org"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-6524": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "diffie-hellman-group-exchange-sha256",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "diffie-hellman-group-exchange-sha256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-6525": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "ecdsa-sha2-nistp256"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-6526": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "curve25519-sha256@libssh.org",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ssh-rsa",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  },
+  "SL-6527": {
+   "status": "started",
+   "error": null,
+   "reference_extra": {
+    "server_lists": {
+     "kex": [
+      "mlkem768x25519-sha256",
+      "sntrup761x25519-sha512",
+      "sntrup761x25519-sha512@openssh.com",
+      "curve25519-sha256",
+      "ecdh-sha2-nistp256",
+      "ecdh-sha2-nistp384",
+      "ecdh-sha2-nistp521",
+      "ext-info-s",
+      "kex-strict-s-v00@openssh.com"
+     ],
+     "hostkey": [
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "ecdsa-sha2-nistp256",
+      "ssh-ed25519"
+     ],
+     "cipher": [
+      "chacha20-poly1305@openssh.com",
+      "aes128-gcm@openssh.com",
+      "aes256-gcm@openssh.com",
+      "aes128-ctr",
+      "aes192-ctr",
+      "aes256-ctr"
+     ],
+     "mac": [
+      "umac-64-etm@openssh.com",
+      "umac-128-etm@openssh.com",
+      "hmac-sha2-256-etm@openssh.com",
+      "hmac-sha2-512-etm@openssh.com",
+      "hmac-sha1-etm@openssh.com",
+      "umac-64@openssh.com",
+      "umac-128@openssh.com",
+      "hmac-sha2-256",
+      "hmac-sha2-512",
+      "hmac-sha1"
+     ],
+     "server_sig_alg": [
+      "ssh-ed25519",
+      "ecdsa-sha2-nistp256",
+      "ecdsa-sha2-nistp384",
+      "ecdsa-sha2-nistp521",
+      "sk-ssh-ed25519@openssh.com",
+      "sk-ecdsa-sha2-nistp256@openssh.com",
+      "rsa-sha2-512",
+      "rsa-sha2-256",
+      "webauthn-sk-ecdsa-sha2-nistp256@openssh.com"
+     ]
+    },
+    "pcap_handshake": [
+     "ecdh-sha2-nistp256"
+    ]
+   },
+   "scanner": null
+  }
+ }
+}
