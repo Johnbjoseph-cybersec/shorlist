@@ -13,12 +13,17 @@ on:
         required: true
         type: choice
         options: [semgrep, cdxgen]
+  # Until this file is on the default branch, dispatch is unavailable: push the commit to
+  # run-semgrep or run-cdxgen instead (git push origin v0.2:run-semgrep).
+  push:
+    branches: [run-semgrep, run-cdxgen]
 
 permissions:
   contents: read
 
 env:
   SHARDS: "12"
+  ADAPTER: ${{ inputs.adapter || (github.ref_name == 'run-semgrep' && 'semgrep') || 'cdxgen' }}
 
 jobs:
   shard:
@@ -40,13 +45,13 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Prepare the pinned image (network only here, not during the scan)
         run: |
-          case "${{ inputs.adapter }}" in
+          case "$ADAPTER" in
             cdxgen)  docker pull ghcr.io/cdxgen/cdxgen@sha256:d3465b2f6e76406a1a4c884deeaf0e869514c4e35c47e415e055bb44596b73ea ;;
             semgrep) docker build -t shorlist-semgrep:1.183.0 containers/semgrep ;;
           esac
       - name: Measure one shard
         working-directory: generator
-        run: python -m shorlist run --adapter ${{ inputs.adapter }} --shard ${{ matrix.index }}/$SHARDS --out ../shard-${{ matrix.index }}.json
+        run: python -m shorlist run --adapter $ADAPTER --shard ${{ matrix.index }}/$SHARDS --out ../shard-${{ matrix.index }}.json
       - uses: actions/upload-artifact@v4
         with:
           name: shard-${{ matrix.index }}
@@ -69,11 +74,11 @@ jobs:
       - name: Merge
         working-directory: generator
         run: |
-          python -m shorlist merge --out ../${{ inputs.adapter }}.json --md ../${{ inputs.adapter }}.md ../shards/shard-*.json
-          cat ../${{ inputs.adapter }}.md >> "$GITHUB_STEP_SUMMARY"
+          python -m shorlist merge --out ../$ADAPTER.json --md ../$ADAPTER.md ../shards/shard-*.json
+          cat ../$ADAPTER.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.adapter }}-result
+          name: ${{ env.ADAPTER }}-result
           path: |
-            ${{ inputs.adapter }}.json
-            ${{ inputs.adapter }}.md
+            ${{ env.ADAPTER }}.json
+            ${{ env.ADAPTER }}.md
