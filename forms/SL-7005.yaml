@@ -1,0 +1,36 @@
+id: "SL-7005"
+title: "model_signing CLI: verify certificate with a CA chain"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing verify certificate bert-base-uncased --signature model.sig --certificate_chain ca.pem"
+context_filename: "verify.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing verify certificate bert-base-uncased --signature model.sig --certificate_chain ca.pem
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L769"
+    section: "_cli.py, subcommand (line 769)"
+    read_at: "2026-11-07"
+    quote: "@_verify.command(name=\"certificate\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L127"
+    section: "_cli.py, option (line 127)"
+    read_at: "2026-11-07"
+    quote: "\"--certificate_chain\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_certificate.py#L165"
+    section: "Verifier._verify_bundle (line 165)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(ec_key.get_ec_key_hash(public_key)),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The certificate verifier checks the DSSE signature with ec.ECDSA on the leaf's public key; an RSA leaf cannot verify."

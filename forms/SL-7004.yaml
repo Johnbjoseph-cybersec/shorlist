@@ -1,0 +1,44 @@
+id: "SL-7004"
+title: "model_signing CLI: verify key with a PEM public key"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing verify key bert-base-uncased --signature model.sig --public_key key.pub"
+context_filename: "verify.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing verify key bert-base-uncased --signature model.sig --public_key key.pub
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/README.md#model-signing-cli"
+    section: "README, Model Signing CLI (key verification)"
+    read_at: "2026-11-07"
+    quote: "[...]$ model_signing verify key bert-base-uncased \\"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L713"
+    section: "_cli.py, subcommand (line 713)"
+    read_at: "2026-11-07"
+    quote: "@_verify.command(name=\"key\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L720"
+    section: "_cli.py, option (line 720)"
+    read_at: "2026-11-07"
+    quote: "\"--public_key\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L191"
+    section: "Verifier._verify_bundle (line 191)"
+    read_at: "2026-11-07"
+    quote: "ec.ECDSA(get_ec_key_hash(self._public_key)),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "Verification is a use of the family (ECDSA verify). The README splits the command over two lines with a backslash; the template has it on one."

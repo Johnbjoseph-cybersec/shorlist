@@ -1,0 +1,52 @@
+id: "SL-7014"
+title: "OMS bundle (pre-v1.1.0): publicKey.keyDetails PKIX_ECDSA_P521_SHA_512"
+family: "ECDSA"
+parameter_set: "P-521"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "OMS bundle (pre-v1.1.0, model_signing <= 1.0.x)"
+negative: false
+literal: "\"keyDetails\": \"PKIX_ECDSA_P521_SHA_512\""
+context_filename: "model.sig.json"
+context_template: |
+  {
+    "mediaType": "application/vnd.dev.sigstore.bundle.v0.3+json",
+    "verificationMaterial": {
+      "publicKey": {
+        "rawBytes": "<base64-encoded DER public key>",
+        "keyDetails": "PKIX_ECDSA_P521_SHA_512"
+      },
+      "tlogEntries": []
+    },
+    "dsseEnvelope": {
+      "payload": "<base64-encoded in-toto statement>",
+      "payloadType": "application/vnd.in-toto+json",
+      "signatures": [
+        {
+          "sig": "<base64-encoded signature>",
+          "keyid": null
+        }
+      ]
+    }
+  }
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 521
+source:
+  - url: "https://github.com/ossf/model-signing-spec/blob/91bf841e8ccf97a3ed97309387e9298d1ac18ba2/spec/v1.0.md#111-known-field-differences-across-versions-and-implementations"
+    section: "OMS spec v1.0, Section 11.1 Known Field Differences"
+    read_at: "2026-11-07"
+    quote: "| `publicKey` | `{\"hint\": \"<fingerprint>\"}` | Pre-v1.1.0: `{\"rawBytes\": \"...\", \"keyDetails\": \"...\"}` | MUST accept either `hint` or `rawBytes` |"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.0.0/src/model_signing/_signing/sign_ec_key.py#L135"
+    section: "model_signing v1.0.0, Signer._get_verification_material (line 135)"
+    read_at: "2026-11-07"
+    quote: "key_details = common_pb.PublicKeyDetails.PKIX_ECDSA_P521_SHA_512"
+  - url: "https://github.com/sigstore/protobuf-specs/blob/v0.5.2/protos/sigstore_common.proto#L85"
+    section: "enum PublicKeyDetails"
+    read_at: "2026-11-07"
+    quote: "PKIX_ECDSA_P521_SHA_512 = 13;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "Current OMS bundles (v1.1.0+) carry only publicKey.hint and pin no key algorithm; this field appears in bundles written by model_signing v0.3.1 to v1.0.0, which verifiers must still accept (Section 11.2). The template follows the spec's Appendix A placeholders. OMS Section 9 says the bundle SHOULD be named with a .sig extension; the .json suffix here is for the generator's syntax check."

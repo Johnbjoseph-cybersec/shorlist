@@ -1,0 +1,31 @@
+id: "SL-7027"
+title: "Decoy: TODO comment to sign models with ML-DSA-65 once supported"
+family: "ML-DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / model_signing (sigstore/model-transparency)"
+negative: true
+decoy_class: "comment"
+literal: "# TODO: sign models with ml-dsa-65 once Sigstore and model_signing support it"
+context_filename: "release.py"
+context_template: |
+  # TODO: sign models with ml-dsa-65 once Sigstore and model_signing support it
+  MODEL_DIR = "bert-base-uncased"
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/architecture-docs/blob/60730f3251c28a96920c718bc65a59ad69ef2dc4/algorithm-registry.md"
+    section: "Sigstore Algorithm Registry, Signature Algorithms (ML-DSA)"
+    read_at: "2026-11-07"
+    quote: "|           | ml-dsa-65                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_ec_key.py#L50"
+    section: "_check_supported_ec_key (line 50)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "A plan in a comment, not a use. ml-dsa-65 is the Sigstore registry's name for the algorithm; model_signing v1.1.1 accepts only the three NIST curves."

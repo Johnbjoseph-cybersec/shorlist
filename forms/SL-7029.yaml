@@ -1,0 +1,33 @@
+id: "SL-7029"
+title: "Decoy: log line that model signing with ML-DSA is not available"
+family: "ML-DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "api_string"
+language_or_product: "Python / logging"
+negative: true
+decoy_class: "log_string"
+literal: "log.warning(\"ML-DSA-65 model signing is not available yet; model left unsigned\")"
+context_filename: "publish.py"
+context_template: |
+  import logging
+
+  log = logging.getLogger("publish")
+  log.warning("ML-DSA-65 model signing is not available yet; model left unsigned")
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/protobuf-specs/blob/v0.5.2/protos/sigstore_common.proto#L119"
+    section: "enum PublicKeyDetails, ML-DSA comment"
+    read_at: "2026-11-07"
+    quote: "// they are not yet fully functional. This warning will be removed when "
+  - url: "https://github.com/sigstore/protobuf-specs/blob/v0.5.2/protos/sigstore_common.proto#L127"
+    section: "enum PublicKeyDetails"
+    read_at: "2026-11-07"
+    quote: "ML_DSA_65 = 21;"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "A log string that names the family; nothing is signed."

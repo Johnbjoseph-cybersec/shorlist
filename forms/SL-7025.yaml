@@ -1,0 +1,54 @@
+id: "SL-7025"
+title: "CycloneDX 1.6 ML-BOM: model component hash alg SHA-1"
+family: "SHA-1"
+parameter_set: null
+role: "hash"
+form_kind: "config_value"
+language_or_product: "CycloneDX 1.6 JSON (ML-BOM)"
+negative: false
+literal: "\"alg\": \"SHA-1\""
+context_filename: "bom.json"
+context_template: |
+  {
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "version": 1,
+    "components": [
+      {
+        "type": "machine-learning-model",
+        "name": "bert-base-uncased",
+        "version": "1.0",
+        "hashes": [
+          {
+            "alg": "SHA-1",
+            "content": "0000000000000000000000000000000000000000"
+          }
+        ]
+      }
+    ]
+  }
+expected:
+  family: "SHA-1"
+  role: "hash"
+  size: "undetermined"
+weakness:
+  status: "legacy_use"
+  anchor: "OWASP ASVS 5.0.0, Appendix C, Hash Functions for General Use Cases: SHA-1 (L)"
+  quote: "| SHA-1 | [RFC 3174](https://www.rfc-editor.org/info/rfc3174) & [RFC 6194](https://www.rfc-editor.org/info/rfc6194) | L | Not suitable for HMAC, KDF, RBG, digital signatures |"
+source:
+  - url: "https://github.com/CycloneDX/specification/blob/1.6.2/schema/bom-1.6.schema.json#L1207"
+    section: "definitions/hash-alg (lines 1207-1224)"
+    read_at: "2026-11-07"
+    quote: "\"description\": \"The algorithm that generated the hash value.\","
+  - url: "https://github.com/CycloneDX/specification/blob/1.6.2/schema/bom-1.6.schema.json#L1213"
+    section: "definitions/hash-alg enum"
+    read_at: "2026-11-07"
+    quote: "\"SHA-1\","
+  - url: "https://github.com/CycloneDX/specification/blob/1.6.2/schema/bom-1.6.schema.json#L862"
+    section: "component type descriptions"
+    read_at: "2026-11-07"
+    quote: "\"machine-learning-model\": \"A model based on training data that can make predictions or decisions without being explicitly programmed to do so.\","
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The template validates against bom-1.6.schema.json (CycloneDX 1.6.2). The same enum value exists in 1.5 and 1.7. The hash identifies the model; ASVS rates SHA-1 as a whole, which is the status taken here, as in SL-400x. SP 800-131A Rev. 2 rates SHA-1 by use and accepts it outside signatures, so it is not the anchor."

@@ -1,0 +1,44 @@
+id: "SL-7003"
+title: "model_signing CLI: sign pkcs11-certificate"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing sign pkcs11-certificate bert-base-uncased --pkcs11_uri \"pkcs11:token=models;object=signing-key\" --signing_certificate cert.pem --certificate_chain ca.pem"
+context_filename: "sign.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing sign pkcs11-certificate bert-base-uncased --pkcs11_uri "pkcs11:token=models;object=signing-key" --signing_certificate cert.pem --certificate_chain ca.pem
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L557"
+    section: "_cli.py, subcommand (line 557)"
+    read_at: "2026-11-07"
+    quote: "@_sign.command(name=\"pkcs11-certificate\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L117"
+    section: "_cli.py, option (line 117)"
+    read_at: "2026-11-07"
+    quote: "\"--pkcs11_uri\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L212"
+    section: "class CertSigner (line 212)"
+    read_at: "2026-11-07"
+    quote: "class CertSigner(Signer):"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L62"
+    section: "_check_supported_ec_key (line 62)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L174"
+    section: "Signer.sign (line 174)"
+    read_at: "2026-11-07"
+    quote: "mecha=PyKCS11.Mechanism(PyKCS11.CKM_ECDSA, None),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "CertSigner subclasses the PKCS #11 signer: P-256/384/521 only, CKM_ECDSA. Size undetermined."

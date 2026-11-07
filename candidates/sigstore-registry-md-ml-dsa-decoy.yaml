@@ -1,0 +1,31 @@
+id: "candidate"
+title: "Decoy: Sigstore algorithm-registry Markdown table row naming ml-dsa-65 as experimental"
+family: "ML-DSA"
+parameter_set: null
+role: "n.a."
+form_kind: "registry_id"
+language_or_product: "Sigstore Algorithm Registry (Markdown)"
+negative: true
+decoy_class: "comment"
+literal: "|           | ml-dsa-65                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |"
+context_filename: "algorithm-registry.md"
+context_template: |
+  # Algorithm Registry
+
+  | Algorithm | Name                       | Usage       | Notes                                                                            |
+  |-----------|----------------------------|-------------| -------------------------------------------------------------------------------- |
+  | ML-DSA    | ml-dsa-44                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |
+  |           | ml-dsa-65                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/architecture-docs/blob/60730f3251c28a96920c718bc65a59ad69ef2dc4/algorithm-registry.md"
+    section: "Sigstore Algorithm Registry, Signature Algorithms (ML-DSA)"
+    read_at: "2026-11-07"
+    quote: "|           | ml-dsa-65                  | sign/verify | Experimental; Pure variant. Not yet fully functional.                           |"
+status: "candidate"
+candidate_reason: "The generator has no syntax check for .md (parsecheck returns FAIL for it), and generator changes are out of scope for this wave. decoy_class would be comment for a documentation table, which is a stretch. SL-7028 carries the same line as a YAML comment in the meantime."
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"

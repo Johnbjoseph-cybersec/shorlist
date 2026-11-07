@@ -1,0 +1,49 @@
+id: "SL-7019"
+title: "Sigstore trusted root: tlogs[].publicKey.keyDetails PKIX_ED25519_PH"
+family: "EdDSA"
+parameter_set: "Ed25519ph"
+role: "signature"
+form_kind: "config_value"
+language_or_product: "Sigstore trusted root JSON"
+negative: false
+literal: "\"keyDetails\": \"PKIX_ED25519_PH\""
+context_filename: "trusted_root.json"
+context_template: |
+  {
+    "mediaType": "application/vnd.dev.sigstore.trustedroot+json;version=0.1",
+    "tlogs": [
+      {
+        "baseUrl": "https://rekor.example.internal",
+        "publicKey": {
+          "keyDetails": "PKIX_ED25519_PH",
+          "validFor": {
+            "start": "2026-01-01T00:00:00Z"
+          }
+        },
+        "logId": {
+          "keyId": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        }
+      }
+    ]
+  }
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/protobuf-specs/blob/v0.5.2/protos/sigstore_common.proto#L89"
+    section: "enum PublicKeyDetails"
+    read_at: "2026-11-07"
+    quote: "PKIX_ED25519_PH = 8;"
+  - url: "https://github.com/sigstore/protobuf-specs/blob/v0.5.2/protos/sigstore_common.proto#L173"
+    section: "message PublicKey"
+    read_at: "2026-11-07"
+    quote: "PublicKeyDetails key_details = 2;"
+  - url: "https://github.com/sigstore/architecture-docs/blob/60730f3251c28a96920c718bc65a59ad69ef2dc4/algorithm-registry.md"
+    section: "Sigstore Algorithm Registry, Signature Algorithms (EdDSA)"
+    read_at: "2026-11-07"
+    quote: "|           | ed25519-ph                 | sign/verify | Recommended only for `hashedrekord`.                                             |"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "The same object is the trustedRoot member of the client trust config that model_signing sign/verify take through --trust_config (README, Model Signing CLI). raw_bytes is optional in the message and is left out so that no encoded key stands in the template; the keyId is a placeholder."

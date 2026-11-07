@@ -1,0 +1,48 @@
+id: "SL-7001"
+title: "model_signing CLI: sign pkcs11-key with a PKCS #11 URI"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "cli"
+language_or_product: "CLI / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "model_signing sign pkcs11-key --signature model.sig --pkcs11_uri \"pkcs11:token=models;object=signing-key\" bert-base-uncased"
+context_filename: "sign.sh"
+context_template: |
+  #!/bin/sh
+  set -e
+
+  model_signing sign pkcs11-key --signature model.sig --pkcs11_uri "pkcs11:token=models;object=signing-key" bert-base-uncased
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/README.md#signing-with-pkcs-11-uris"
+    section: "README, Signing with PKCS #11 URIs"
+    read_at: "2026-11-07"
+    quote: "[...]$ model_signing sign pkcs11-key --signature model.sig \\"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/README.md#signing-with-pkcs-11-uris"
+    section: "README, Signing with PKCS #11 URIs"
+    read_at: "2026-11-07"
+    quote: "The signing key must be of type NIST P256/384/521 (secp256/384/512r1)."
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L456"
+    section: "_cli.py, subcommand (line 456)"
+    read_at: "2026-11-07"
+    quote: "@_sign.command(name=\"pkcs11-key\")"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_cli.py#L117"
+    section: "_cli.py, option (line 117)"
+    read_at: "2026-11-07"
+    quote: "\"--pkcs11_uri\","
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L62"
+    section: "_check_supported_ec_key (line 62)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L174"
+    section: "Signer.sign (line 174)"
+    read_at: "2026-11-07"
+    quote: "mecha=PyKCS11.Mechanism(PyKCS11.CKM_ECDSA, None),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "ECDSA is pinned by the product: the PKCS #11 signer accepts only P-256/384/521 keys and signs with CKM_ECDSA. The README writes the URI as \"pkcs11:...\"; the template fills in an RFC 7512 token and object, which carry no algorithm."

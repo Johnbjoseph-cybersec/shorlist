@@ -1,0 +1,36 @@
+id: "SL-7008"
+title: "model_signing API: Config().use_pkcs11_signer(pkcs11_uri=...)"
+family: "ECDSA"
+parameter_set: null
+role: "signature"
+form_kind: "api_call"
+language_or_product: "Python / model_signing (sigstore/model-transparency)"
+negative: false
+literal: "config = model_signing.signing.Config().use_pkcs11_signer(pkcs11_uri=\"pkcs11:token=models;object=signing-key\")"
+context_filename: "sign_model.py"
+context_template: |
+  import model_signing
+
+  config = model_signing.signing.Config().use_pkcs11_signer(pkcs11_uri="pkcs11:token=models;object=signing-key")
+  config.sign("finbert", "finbert.sig")
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/signing.py#L236"
+    section: "signing.Config.use_pkcs11_signer (lines 236-242)"
+    read_at: "2026-11-07"
+    quote: "using a private key based on elliptic curve cryptography."
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L62"
+    section: "_check_supported_ec_key (line 62)"
+    read_at: "2026-11-07"
+    quote: "if curve not in [\"secp256r1\", \"secp384r1\", \"secp521r1\"]:"
+  - url: "https://github.com/sigstore/model-transparency/blob/v1.1.1/src/model_signing/_signing/sign_pkcs11.py#L174"
+    section: "Signer.sign (line 174)"
+    read_at: "2026-11-07"
+    quote: "mecha=PyKCS11.Mechanism(PyKCS11.CKM_ECDSA, None),"
+status: "verified-source"
+added_by: "Stanimir Tenev (Elkan Electronic)"
+added_at: "2026-11-07"
+notes: "P-256/384/521 only, CKM_ECDSA. Needs the pkcs11 extra (pip install model-signing[pkcs11])."
