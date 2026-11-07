@@ -1,0 +1,74 @@
+# ShorList declaration axis row SLD-0044. Written by gen_rows.py (task folder) from the dated registry copies in
+# generator/shorlist/declared/data/ (URLs and dates: data/SOURCES.yaml); the observation is
+# observations/L-SSV-3.json (captured).
+id: SLD-0044
+title: secp521r1 declared as algorithm 'EC' with curve nist/P-521, secp256r1 as a group name
+verdict: consistent
+decoy_class: parent_child
+compare:
+  protocol: tls
+  category: group
+listener: L-SSV-3
+listener_url: tls://srv:443
+focus: null
+expected_report: no discrepancy in group
+false_alarm_if: any undeclared, overclaimed or parameter_mismatch group is reported
+declaration:
+  bomFormat: CycloneDX
+  specVersion: '1.7'
+  version: 1
+  metadata:
+    component:
+      type: application
+      name: example-gateway
+      version: '4.2'
+      bom-ref: product
+    supplier:
+      name: Example Vendor
+  components:
+  - type: cryptographic-asset
+    name: EC
+    bom-ref: alg/ec521
+    cryptoProperties:
+      assetType: algorithm
+      algorithmProperties:
+        primitive: key-agree
+        cryptoFunctions:
+        - keygen
+        - keyderive
+        ellipticCurve: nist/P-521
+  - type: cryptographic-asset
+    name: TLSv1.2
+    bom-ref: proto/tls12
+    cryptoProperties:
+      assetType: protocol
+      protocolProperties:
+        type: tls
+        version: '1.2'
+        cipherSuites:
+        - name: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+          identifiers:
+          - 0xC0,0x2F
+          algorithms:
+          - alg/ec521
+          tlsGroups:
+          - secp256r1
+        - name: TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+          identifiers:
+          - 0xCC,0xA8
+          algorithms:
+          - alg/ec521
+resolves_to:
+- at: alg/ec521 (referenced algorithm)
+  ref: alg/ec521
+  spelled: key-agree nist/P-521
+  code: '0x0019'
+  source:
+  - iana-tls-groups
+  - cdx-crypto-defs
+  quote: 25,secp521r1,Y,N,[RFC 8422],
+- spelled: secp256r1
+  code: '0x0017'
+  source: iana-tls-groups
+  quote: 23,secp256r1,Y,Y,[RFC 8422],
+  at: proto/tls12 cipherSuites[0] tlsGroups[0]

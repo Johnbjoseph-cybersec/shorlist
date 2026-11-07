@@ -1,0 +1,2783 @@
+{
+ "result_format": "declared-0.1",
+ "axis": "declared",
+ "statement": "Of 33 non-consistent pairs on the ShorList declaration axis, shorlist reference comparator 0.1.0 (reference comparator: positive control, not a scanner) reproduces 33 verdicts (0 partial); of 25 consistent pairs (20 of them decoys), it raises 0 false alarms. 2 SSH rows are not scored (no_spec_structure, CycloneDX #1162).",
+ "rows": {
+  "n": 60,
+  "sha256": "fd4daaf3918662fa15ea80f565d743e18e40b51bcc49c29b5d43b769ea31f2d4",
+  "rows": 60,
+  "not_scored": 2,
+  "by_verdict": {
+   "consistent": 25,
+   "overclaimed": 13,
+   "undeclared": 14,
+   "parameter_mismatch": 6
+  },
+  "by_server": {
+   "nginx": 21,
+   "apache": 16,
+   "s_server": 21
+  },
+  "by_category": {
+   "group": 33,
+   "cipher_suite": 25
+  },
+  "by_decoy": {
+   "hybrid_spelling": 3,
+   "identifier_spelling": 8,
+   "-": 38,
+   "parent_child": 6,
+   "inactive_scope": 3
+  },
+  "listeners": 12
+ },
+ "data_sha256": {
+  "SOURCES.yaml": "b3eb9b5fa567842fc767fd173f382e06988d35b11c109d343f4d70302d19d5e5",
+  "cryptography-defs.json": "14c1867f3a20d731b039f8583b2e0bd4b8b4439d3c42171a32c6134f3879e5a7",
+  "iana/tls-parameters-4.csv": "949ed87e901bb77314a96ad5a7b78c0b4b38ec56d16425efa2057a2efbd1570f",
+  "iana/tls-parameters-8.csv": "d35959b23d588f8b4daa038788f168227cc1e909500a8a4d8412b0f6aeffbc17",
+  "openssl-3.5.9-ciphers-V-stdname.txt": "65fb18a312d70008dabdaa04f22adbe76450d63d11848e8355c901dc04254e89",
+  "schema/bom-1.7.schema.json": "73308edec3ab2d38bfffd993e96a042b594314143b6971a6e9ed98bbb6bd76ce",
+  "schema/cryptography-defs.schema.json": "013919cfb1c6209f919cd7253a4e3f740cb44023697bb4657a5f0584d6f47137",
+  "schema/jsf-0.82.schema.json": "8bae002c25e723db7ee1f26afde680ae1a2b1a8f6b4b4b0fd65dc3becb090aae",
+  "schema/spdx.schema.json": "4b345e2329f209f34e960ae2a8e7cb46a166907e6a45e94978565925dc47b359"
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "tool": {
+  "name": "reference",
+  "version": "shorlist reference comparator 0.1.0",
+  "image": "-",
+  "image_id": "-",
+  "command": "in process: shorlist.declared.reference.compare (reference comparator (positive control; not a scanner))"
+ },
+ "observed_cbom": "observed.build(): one protocol component per TLS version, IANA names, identifiers in IANA CSV form",
+ "summary": {
+  "non_consistent": {
+   "n": 33,
+   "hit": 33,
+   "partial": 0,
+   "miss": 0,
+   "tool_error": 0
+  },
+  "consistent": {
+   "n": 25,
+   "ok": 25,
+   "false_alarm": 0,
+   "tool_error": 0
+  },
+  "decoys": {
+   "n": 20,
+   "false_alarm": 0
+  },
+  "not_scored": 2
+ },
+ "by_verdict": {
+  "consistent": {
+   "n": 25,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 25,
+   "tool_error": 0
+  },
+  "overclaimed": {
+   "n": 13,
+   "hit": 13,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "parameter_mismatch": {
+   "n": 6,
+   "hit": 6,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "undeclared": {
+   "n": 14,
+   "hit": 14,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  }
+ },
+ "by_server": {
+  "apache": {
+   "n": 16,
+   "hit": 10,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 6,
+   "tool_error": 0
+  },
+  "nginx": {
+   "n": 21,
+   "hit": 12,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 9,
+   "tool_error": 0
+  },
+  "s_server": {
+   "n": 21,
+   "hit": 11,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 10,
+   "tool_error": 0
+  }
+ },
+ "by_decoy": {
+  "-": {
+   "n": 5,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 5,
+   "tool_error": 0
+  },
+  "hybrid_spelling": {
+   "n": 3,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 3,
+   "tool_error": 0
+  },
+  "identifier_spelling": {
+   "n": 8,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 8,
+   "tool_error": 0
+  },
+  "inactive_scope": {
+   "n": 3,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 3,
+   "tool_error": 0
+  },
+  "parent_child": {
+   "n": 6,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 6,
+   "tool_error": 0
+  }
+ },
+ "by_category": {
+  "cipher_suite": {
+   "n": 25,
+   "hit": 14,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 11,
+   "tool_error": 0
+  },
+  "group": {
+   "n": 33,
+   "hit": 19,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 14,
+   "tool_error": 0
+  }
+ },
+ "rows_scored": [
+  {
+   "id": "SLD-0001",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0002",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0003",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x0017"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0004",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x11EC"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0005",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0006",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x1303"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0007",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0008",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0018",
+      "observed": "0x0017"
+     },
+     "tool_says": "parameter_mismatch in family ECDH"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0009",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0010",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xC02F"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0011",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0012",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0013",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0017",
+      "observed": "0x0018"
+     },
+     "tool_says": "parameter_mismatch in family ECDH"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0014",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xCCA8"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0015",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0016",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0017",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x11ED"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0018",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x11EC"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0019",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x1303"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0020",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0021",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x001D"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0022",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0019",
+      "observed": "0x0017"
+     },
+     "tool_says": "parameter_mismatch in family ECDH"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0023",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0024",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x1303"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0025",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0026",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x0017"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0027",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0028",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x009C"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0029",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xC030"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0030",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0031",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0202",
+      "observed": "0x0201"
+     },
+     "tool_says": "parameter_mismatch in family ML-KEM"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0032",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x0201"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0033",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0034",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xC02F"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0035",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0036",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x0200"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0037",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0200",
+      "observed": "0x0202"
+     },
+     "tool_says": "parameter_mismatch in family ML-KEM"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0038",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0039",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0040",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "parameter_mismatch",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": [
+    {
+     "verdict": "parameter_mismatch",
+     "category": "group",
+     "element": {
+      "declared": "0x0101",
+      "observed": "0x0100"
+     },
+     "tool_says": "parameter_mismatch in family FFDH"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0041",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x001E"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0042",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0043",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x1302"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0044",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0045",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x0019"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0046",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0047",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xCCA8"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0048",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0049",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x001D"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0050",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "group",
+     "element": {
+      "value": "0x11EB"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0051",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0052",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x002F"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0053",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0054",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0x009E"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0055",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0056",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xC030"
+     },
+     "tool_says": "accepted, not declared"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0057",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "value": "0xC02F"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0058",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "value": "0x001D"
+     },
+     "tool_says": "declared, refused"
+    }
+   ]
+  },
+  {
+   "id": "SLD-9001",
+   "verdict": null,
+   "category": "kex",
+   "decoy_class": null,
+   "outcome": "not_scored",
+   "reason": "no_spec_structure",
+   "server": "-",
+   "listener": "-"
+  },
+  {
+   "id": "SLD-9002",
+   "verdict": null,
+   "category": "hostkey",
+   "decoy_class": null,
+   "outcome": "not_scored",
+   "reason": "no_spec_structure",
+   "server": "-",
+   "listener": "-"
+  }
+ ],
+ "fingerprint": "d8bf8920bf564825607c2477bd51aea3a34822c3a594e4d39838fb256c1ca08f",
+ "fingerprint_rule": "sha256(canonical JSON {rows_sha256, generator_version, tool_version, rows:[[id,outcome,reason]...]})",
+ "run": {
+  "at": "2026-11-07T08:16:50Z",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
+ },
+ "raw": {
+  "SLD-0001": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0002": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0003": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x0017"
+    ],
+    "items": {
+     "0x0017": "overclaimed",
+     "0x001D": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x0017"
+   }
+  },
+  "SLD-0004": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [
+     "0x11EC"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x11EC": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x11EC"
+   }
+  },
+  "SLD-0005": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0006": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0x1303"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x1303"
+    ],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0x1303": "overclaimed"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x1303"
+   }
+  },
+  "SLD-0007": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x001D": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0008": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0018",
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x001D",
+     "0x11EC"
+    ],
+    "undeclared": [
+     "0x0017"
+    ],
+    "overclaimed": [
+     "0x0018"
+    ],
+    "items": {
+     "0x0017": "parameter_mismatch",
+     "0x0018": "parameter_mismatch",
+     "0x001D": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0018",
+     "observed": "0x0017",
+     "family": "ECDH"
+    }
+   }
+  },
+  "SLD-0009": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1302",
+     "0xC02F",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1302",
+     "0xC02F",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1302": "consistent",
+     "0xC02F": "consistent",
+     "0xC030": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0010": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1302",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1302",
+     "0xC02F",
+     "0xC030"
+    ],
+    "undeclared": [
+     "0xC02F"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x1302": "consistent",
+     "0xC02F": "undeclared",
+     "0xC030": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0xC02F"
+   }
+  },
+  "SLD-0011": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1302",
+     "0xC02F",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1302",
+     "0xC02F",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1302": "consistent",
+     "0xC02F": "consistent",
+     "0xC030": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0012": {
+   "reference": {
+    "category": "group",
+    "declared": [],
+    "declared_families": [
+     "ECDH"
+    ],
+    "accepted": [
+     "0x0018"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0018": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0013": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0018"
+    ],
+    "undeclared": [
+     "0x0018"
+    ],
+    "overclaimed": [
+     "0x0017"
+    ],
+    "items": {
+     "0x0017": "parameter_mismatch",
+     "0x0018": "parameter_mismatch"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0017",
+     "observed": "0x0018",
+     "family": "ECDH"
+    }
+   }
+  },
+  "SLD-0014": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0xC02F",
+     "0xC030",
+     "0xCCA8"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0xC02F",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0xCCA8"
+    ],
+    "items": {
+     "0xC02F": "consistent",
+     "0xC030": "consistent",
+     "0xCCA8": "overclaimed"
+    },
+    "verdict": "overclaimed",
+    "focus": "0xCCA8"
+   }
+  },
+  "SLD-0015": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0xC02F",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0xC02F",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0xC02F": "consistent",
+     "0xC030": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0016": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0018",
+     "0x11EB",
+     "0x11ED"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0018",
+     "0x11EB",
+     "0x11ED"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0018": "consistent",
+     "0x11EB": "consistent",
+     "0x11ED": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0017": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0018",
+     "0x11EB"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0018",
+     "0x11EB",
+     "0x11ED"
+    ],
+    "undeclared": [
+     "0x11ED"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x0018": "consistent",
+     "0x11EB": "consistent",
+     "0x11ED": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x11ED"
+   }
+  },
+  "SLD-0018": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0018",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0018",
+     "0x11EB",
+     "0x11ED"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x11EC"
+    ],
+    "items": {
+     "0x0018": "consistent",
+     "0x11EB": "consistent",
+     "0x11EC": "overclaimed",
+     "0x11ED": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x11EC"
+   }
+  },
+  "SLD-0019": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302",
+     "0x1303"
+    ],
+    "undeclared": [
+     "0x1303"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0x1303": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x1303"
+   }
+  },
+  "SLD-0020": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x11EC": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0021": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x001D",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EC"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x001D"
+    ],
+    "items": {
+     "0x0017": "consistent",
+     "0x001D": "overclaimed",
+     "0x11EC": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x001D"
+   }
+  },
+  "SLD-0022": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0019",
+     "0x11EC"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EC"
+    ],
+    "undeclared": [
+     "0x0017"
+    ],
+    "overclaimed": [
+     "0x0019"
+    ],
+    "items": {
+     "0x0017": "parameter_mismatch",
+     "0x0019": "parameter_mismatch",
+     "0x11EC": "consistent"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0019",
+     "observed": "0x0017",
+     "family": "ECDH"
+    }
+   }
+  },
+  "SLD-0023": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1302",
+     "0x1303"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1302",
+     "0x1303"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1302": "consistent",
+     "0x1303": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0024": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1302"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1302",
+     "0x1303"
+    ],
+    "undeclared": [
+     "0x1303"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x1302": "consistent",
+     "0x1303": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x1303"
+   }
+  },
+  "SLD-0025": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x001D"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x001D"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x001D": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0026": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x001D"
+    ],
+    "undeclared": [
+     "0x0017"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "undeclared",
+     "0x001D": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0x0017"
+   }
+  },
+  "SLD-0027": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x009C",
+     "0x009E",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x009C",
+     "0x009E",
+     "0xC02F"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x009C": "consistent",
+     "0x009E": "consistent",
+     "0xC02F": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0028": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x009E",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x009C",
+     "0x009E",
+     "0xC02F"
+    ],
+    "undeclared": [
+     "0x009C"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x009C": "undeclared",
+     "0x009E": "consistent",
+     "0xC02F": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0x009C"
+   }
+  },
+  "SLD-0029": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x009C",
+     "0x009E",
+     "0xC02F",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x009C",
+     "0x009E",
+     "0xC02F"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0xC030"
+    ],
+    "items": {
+     "0x009C": "consistent",
+     "0x009E": "consistent",
+     "0xC02F": "consistent",
+     "0xC030": "overclaimed"
+    },
+    "verdict": "overclaimed",
+    "focus": "0xC030"
+   }
+  },
+  "SLD-0030": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x0201"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x0201"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x0201": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0031": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x0202"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x0201"
+    ],
+    "undeclared": [
+     "0x0201"
+    ],
+    "overclaimed": [
+     "0x0202"
+    ],
+    "items": {
+     "0x001D": "consistent",
+     "0x0201": "parameter_mismatch",
+     "0x0202": "parameter_mismatch"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0202",
+     "observed": "0x0201",
+     "family": "ML-KEM"
+    }
+   }
+  },
+  "SLD-0032": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x0201"
+    ],
+    "undeclared": [
+     "0x0201"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x0201": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x0201"
+   }
+  },
+  "SLD-0033": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0x1303",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302",
+     "0x1303",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0x1303": "consistent",
+     "0xC030": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0034": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0x1303",
+     "0xC02F",
+     "0xC030"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302",
+     "0x1303",
+     "0xC030"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0xC02F"
+    ],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0x1303": "consistent",
+     "0xC02F": "overclaimed",
+     "0xC030": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0xC02F"
+   }
+  },
+  "SLD-0035": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0201",
+     "0x0202"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0201",
+     "0x0202"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0201": "consistent",
+     "0x0202": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0036": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0200",
+     "0x0201",
+     "0x0202"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0201",
+     "0x0202"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x0200"
+    ],
+    "items": {
+     "0x0200": "overclaimed",
+     "0x0201": "consistent",
+     "0x0202": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x0200"
+   }
+  },
+  "SLD-0037": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0200",
+     "0x0201"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0201",
+     "0x0202"
+    ],
+    "undeclared": [
+     "0x0202"
+    ],
+    "overclaimed": [
+     "0x0200"
+    ],
+    "items": {
+     "0x0200": "parameter_mismatch",
+     "0x0201": "consistent",
+     "0x0202": "parameter_mismatch"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0200",
+     "observed": "0x0202",
+     "family": "ML-KEM"
+    }
+   }
+  },
+  "SLD-0038": {
+   "reference": {
+    "category": "group",
+    "declared": [],
+    "declared_families": [
+     "ML-KEM"
+    ],
+    "accepted": [
+     "0x0201",
+     "0x0202"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0201": "consistent",
+     "0x0202": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0039": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x001E",
+     "0x0100"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x001E",
+     "0x0100"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x001E": "consistent",
+     "0x0100": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0040": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x001E",
+     "0x0101"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x001E",
+     "0x0100"
+    ],
+    "undeclared": [
+     "0x0100"
+    ],
+    "overclaimed": [
+     "0x0101"
+    ],
+    "items": {
+     "0x001D": "consistent",
+     "0x001E": "consistent",
+     "0x0100": "parameter_mismatch",
+     "0x0101": "parameter_mismatch"
+    },
+    "verdict": "parameter_mismatch",
+    "focus": {
+     "declared": "0x0101",
+     "observed": "0x0100",
+     "family": "FFDH"
+    }
+   }
+  },
+  "SLD-0041": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x001D",
+     "0x0100"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x001D",
+     "0x001E",
+     "0x0100"
+    ],
+    "undeclared": [
+     "0x001E"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x001D": "consistent",
+     "0x001E": "undeclared",
+     "0x0100": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0x001E"
+   }
+  },
+  "SLD-0042": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1303"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1303"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0x1303": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0043": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0x1303"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1303"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x1302"
+    ],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "overclaimed",
+     "0x1303": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x1302"
+   }
+  },
+  "SLD-0044": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x0019"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x0019"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x0019": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0045": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x0019"
+    ],
+    "undeclared": [
+     "0x0019"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x0019": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0x0019"
+   }
+  },
+  "SLD-0046": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0xC02F",
+     "0xCCA8"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0xC02F",
+     "0xCCA8"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0xC02F": "consistent",
+     "0xCCA8": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0047": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0xC02F",
+     "0xCCA8"
+    ],
+    "undeclared": [
+     "0xCCA8"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0xC02F": "consistent",
+     "0xCCA8": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0xCCA8"
+   }
+  },
+  "SLD-0048": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x11EB": "consistent",
+     "0x11EC": "consistent",
+     "0x11ED": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0049": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x001D",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x001D"
+    ],
+    "items": {
+     "0x0017": "consistent",
+     "0x001D": "overclaimed",
+     "0x11EB": "consistent",
+     "0x11EC": "consistent",
+     "0x11ED": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x001D"
+   }
+  },
+  "SLD-0050": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017",
+     "0x11EB",
+     "0x11EC",
+     "0x11ED"
+    ],
+    "undeclared": [
+     "0x11EB"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent",
+     "0x11EB": "undeclared",
+     "0x11EC": "consistent",
+     "0x11ED": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0x11EB"
+   }
+  },
+  "SLD-0051": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0xC02B"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0xC02B"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0xC02B": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0052": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x002F",
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "undeclared": [
+     "0x002F"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x002F": "undeclared",
+     "0x009F": "consistent",
+     "0xC013": "consistent",
+     "0xC02F": "consistent"
+    },
+    "verdict": "undeclared",
+    "focus": "0x002F"
+   }
+  },
+  "SLD-0053": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x002F",
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x002F",
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x002F": "consistent",
+     "0x009F": "consistent",
+     "0xC013": "consistent",
+     "0xC02F": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0054": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x002F",
+     "0x009E",
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x002F",
+     "0x009F",
+     "0xC013",
+     "0xC02F"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x009E"
+    ],
+    "items": {
+     "0x002F": "consistent",
+     "0x009E": "overclaimed",
+     "0x009F": "consistent",
+     "0xC013": "consistent",
+     "0xC02F": "consistent"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x009E"
+   }
+  },
+  "SLD-0055": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0017"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0017"
+    ],
+    "undeclared": [],
+    "overclaimed": [],
+    "items": {
+     "0x0017": "consistent"
+    },
+    "verdict": "consistent",
+    "focus": null
+   }
+  },
+  "SLD-0056": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0x1303"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302",
+     "0x1303",
+     "0xC030"
+    ],
+    "undeclared": [
+     "0xC030"
+    ],
+    "overclaimed": [],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0x1303": "consistent",
+     "0xC030": "undeclared"
+    },
+    "verdict": "undeclared",
+    "focus": "0xC030"
+   }
+  },
+  "SLD-0057": {
+   "reference": {
+    "category": "cipher_suite",
+    "declared": [
+     "0x1301",
+     "0x1302",
+     "0xC02F"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x1301",
+     "0x1302"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0xC02F"
+    ],
+    "items": {
+     "0x1301": "consistent",
+     "0x1302": "consistent",
+     "0xC02F": "overclaimed"
+    },
+    "verdict": "overclaimed",
+    "focus": "0xC02F"
+   }
+  },
+  "SLD-0058": {
+   "reference": {
+    "category": "group",
+    "declared": [
+     "0x0018",
+     "0x001D"
+    ],
+    "declared_families": [],
+    "accepted": [
+     "0x0018"
+    ],
+    "undeclared": [],
+    "overclaimed": [
+     "0x001D"
+    ],
+    "items": {
+     "0x0018": "consistent",
+     "0x001D": "overclaimed"
+    },
+    "verdict": "overclaimed",
+    "focus": "0x001D"
+   }
+  }
+ },
+ "controls": "positive control PASSED: the reference comparator must score 33/33 hits and 25/25 ok",
+ "control_passed": true
+}

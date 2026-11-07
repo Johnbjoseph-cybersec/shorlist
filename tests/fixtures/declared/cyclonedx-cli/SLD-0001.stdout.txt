@@ -1,0 +1,112 @@
+{
+  "componentVersions": {
+    "TLSv1.3": {
+      "added": [],
+      "removed": [],
+      "unchanged": [
+        {
+          "type": "cryptographic-asset",
+          "bom-ref": "proto/tls13",
+          "name": "TLSv1.3",
+          "cryptoProperties": {
+            "assetType": "protocol",
+            "protocolProperties": {
+              "type": "tls",
+              "version": "1.3",
+              "cipherSuites": [
+                {
+                  "name": "TLS_AES_128_GCM_SHA256",
+                  "algorithms": [
+                    "alg/hybrid"
+                  ],
+                  "identifiers": [
+                    "0x13,0x01"
+                  ]
+                },
+                {
+                  "name": "TLS_AES_256_GCM_SHA384",
+                  "identifiers": [
+                    "0x13,0x02"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ML-KEM-768": {
+      "added": [],
+      "removed": [
+        {
+          "type": "cryptographic-asset",
+          "bom-ref": "alg/mlkem768",
+          "name": "ML-KEM-768",
+          "cryptoProperties": {
+            "assetType": "algorithm",
+            "algorithmProperties": {
+              "primitive": "kem",
+              "parameterSetIdentifier": "768",
+              "cryptoFunctions": [
+                "keygen",
+                "encapsulate",
+                "decapsulate"
+              ],
+              "classicalSecurityLevel": 0,
+              "nistQuantumSecurityLevel": 0
+            },
+            "oid": "2.16.840.1.101.3.4.4.2"
+          }
+        }
+      ],
+      "unchanged": []
+    },
+    "X25519": {
+      "added": [],
+      "removed": [
+        {
+          "type": "cryptographic-asset",
+          "bom-ref": "alg/x25519",
+          "name": "X25519",
+          "cryptoProperties": {
+            "assetType": "algorithm",
+            "algorithmProperties": {
+              "primitive": "key-agree",
+              "cryptoFunctions": [
+                "keygen",
+                "keyderive"
+              ],
+              "classicalSecurityLevel": 0,
+              "nistQuantumSecurityLevel": 0
+            },
+            "oid": "1.3.101.110"
+          }
+        }
+      ],
+      "unchanged": []
+    },
+    "ML-KEM-768 hybrid with X25519 (RFC 10024)": {
+      "added": [],
+      "removed": [
+        {
+          "type": "cryptographic-asset",
+          "bom-ref": "alg/hybrid",
+          "name": "ML-KEM-768 hybrid with X25519 (RFC 10024)",
+          "cryptoProperties": {
+            "assetType": "algorithm",
+            "algorithmProperties": {
+              "primitive": "combiner",
+              "cryptoFunctions": [
+                "keygen",
+                "keyderive"
+              ],
+              "classicalSecurityLevel": 0,
+              "nistQuantumSecurityLevel": 0
+            }
+          }
+        }
+      ],
+      "unchanged": []
+    }
+  }
+}

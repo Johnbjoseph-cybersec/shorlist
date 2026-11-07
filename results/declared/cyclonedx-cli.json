@@ -1,0 +1,1540 @@
+{
+ "result_format": "declared-0.1",
+ "axis": "declared",
+ "statement": "Of 33 non-consistent pairs on the ShorList declaration axis, cyclonedx-cli 0.33.1 reproduces 3 verdicts (0 partial); of 25 consistent pairs (20 of them decoys), it raises 12 false alarms. 2 SSH rows are not scored (no_spec_structure, CycloneDX #1162).",
+ "rows": {
+  "n": 60,
+  "sha256": "fd4daaf3918662fa15ea80f565d743e18e40b51bcc49c29b5d43b769ea31f2d4",
+  "rows": 60,
+  "not_scored": 2,
+  "by_verdict": {
+   "consistent": 25,
+   "overclaimed": 13,
+   "undeclared": 14,
+   "parameter_mismatch": 6
+  },
+  "by_server": {
+   "nginx": 21,
+   "apache": 16,
+   "s_server": 21
+  },
+  "by_category": {
+   "group": 33,
+   "cipher_suite": 25
+  },
+  "by_decoy": {
+   "hybrid_spelling": 3,
+   "identifier_spelling": 8,
+   "-": 38,
+   "parent_child": 6,
+   "inactive_scope": 3
+  },
+  "listeners": 12
+ },
+ "data_sha256": {
+  "SOURCES.yaml": "b3eb9b5fa567842fc767fd173f382e06988d35b11c109d343f4d70302d19d5e5",
+  "cryptography-defs.json": "14c1867f3a20d731b039f8583b2e0bd4b8b4439d3c42171a32c6134f3879e5a7",
+  "iana/tls-parameters-4.csv": "949ed87e901bb77314a96ad5a7b78c0b4b38ec56d16425efa2057a2efbd1570f",
+  "iana/tls-parameters-8.csv": "d35959b23d588f8b4daa038788f168227cc1e909500a8a4d8412b0f6aeffbc17",
+  "openssl-3.5.9-ciphers-V-stdname.txt": "65fb18a312d70008dabdaa04f22adbe76450d63d11848e8355c901dc04254e89",
+  "schema/bom-1.7.schema.json": "73308edec3ab2d38bfffd993e96a042b594314143b6971a6e9ed98bbb6bd76ce",
+  "schema/cryptography-defs.schema.json": "013919cfb1c6209f919cd7253a4e3f740cb44023697bb4657a5f0584d6f47137",
+  "schema/jsf-0.82.schema.json": "8bae002c25e723db7ee1f26afde680ae1a2b1a8f6b4b4b0fd65dc3becb090aae",
+  "schema/spdx.schema.json": "4b345e2329f209f34e960ae2a8e7cb46a166907e6a45e94978565925dc47b359"
+ },
+ "generator": {
+  "name": "shorlist",
+  "version": "0.1.0"
+ },
+ "tool": {
+  "name": "cyclonedx-cli",
+  "version": "cyclonedx-cli 0.33.1",
+  "image": "shorlist-cyclonedx-cli:0.33.1",
+  "image_id": "sha256:ced246dd73d68c0d75d74c09a5a650a2f3e686604280d5961d500ef877c54b68",
+  "command": "docker run --rm --network none --cap-drop ALL --security-opt no-new-privileges --memory 512m --cpus 1 --pids-limit 256 -v <pair>:/in:ro shorlist-cyclonedx-cli:0.33.1 diff /in/declared.cdx.json /in/observed.cdx.json --from-format json --to-format json --output-format json --component-versions"
+ },
+ "observed_cbom": "observed.build(): one protocol component per TLS version, IANA names, identifiers in IANA CSV form",
+ "summary": {
+  "non_consistent": {
+   "n": 33,
+   "hit": 3,
+   "partial": 0,
+   "miss": 30,
+   "tool_error": 0
+  },
+  "consistent": {
+   "n": 25,
+   "ok": 13,
+   "false_alarm": 12,
+   "tool_error": 0
+  },
+  "decoys": {
+   "n": 20,
+   "false_alarm": 12
+  },
+  "not_scored": 2
+ },
+ "by_verdict": {
+  "consistent": {
+   "n": 25,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 12,
+   "ok": 13,
+   "tool_error": 0
+  },
+  "overclaimed": {
+   "n": 13,
+   "hit": 2,
+   "partial": 0,
+   "miss": 11,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "parameter_mismatch": {
+   "n": 6,
+   "hit": 0,
+   "partial": 0,
+   "miss": 6,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "undeclared": {
+   "n": 14,
+   "hit": 1,
+   "partial": 0,
+   "miss": 13,
+   "false_alarm": 0,
+   "ok": 0,
+   "tool_error": 0
+  }
+ },
+ "by_server": {
+  "apache": {
+   "n": 16,
+   "hit": 1,
+   "partial": 0,
+   "miss": 9,
+   "false_alarm": 3,
+   "ok": 3,
+   "tool_error": 0
+  },
+  "nginx": {
+   "n": 21,
+   "hit": 2,
+   "partial": 0,
+   "miss": 10,
+   "false_alarm": 5,
+   "ok": 4,
+   "tool_error": 0
+  },
+  "s_server": {
+   "n": 21,
+   "hit": 0,
+   "partial": 0,
+   "miss": 11,
+   "false_alarm": 4,
+   "ok": 6,
+   "tool_error": 0
+  }
+ },
+ "by_decoy": {
+  "-": {
+   "n": 5,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 5,
+   "tool_error": 0
+  },
+  "hybrid_spelling": {
+   "n": 3,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 3,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "identifier_spelling": {
+   "n": 8,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 0,
+   "ok": 8,
+   "tool_error": 0
+  },
+  "inactive_scope": {
+   "n": 3,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 3,
+   "ok": 0,
+   "tool_error": 0
+  },
+  "parent_child": {
+   "n": 6,
+   "hit": 0,
+   "partial": 0,
+   "miss": 0,
+   "false_alarm": 6,
+   "ok": 0,
+   "tool_error": 0
+  }
+ },
+ "by_category": {
+  "cipher_suite": {
+   "n": 25,
+   "hit": 2,
+   "partial": 0,
+   "miss": 12,
+   "false_alarm": 3,
+   "ok": 8,
+   "tool_error": 0
+  },
+  "group": {
+   "n": 33,
+   "hit": 1,
+   "partial": 0,
+   "miss": 18,
+   "false_alarm": 9,
+   "ok": 5,
+   "tool_error": 0
+  }
+ },
+ "rows_scored": [
+  {
+   "id": "SLD-0001",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 3,
+   "tool_verdict": "overclaimed x3",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ML-KEM-768'].removed; componentVersions['X25519'].removed; componentVersions['ML-KEM-768 hybrid with X25519 (RFC 10024)'].removed",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem768",
+      "name": "ML-KEM-768"
+     },
+     "tool_says": "componentVersions['ML-KEM-768'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/x25519",
+      "name": "X25519"
+     },
+     "tool_says": "componentVersions['X25519'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/hybrid",
+      "name": "ML-KEM-768 hybrid with X25519 (RFC 10024)"
+     },
+     "tool_says": "componentVersions['ML-KEM-768 hybrid with X25519 (RFC 10024)'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0002",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0003",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0004",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0005",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0006",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0007",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['EC'].removed",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/ec",
+      "name": "EC"
+     },
+     "tool_says": "componentVersions['EC'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0008",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0009",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0010",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0011",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['TLSv1.2 (recovery console, not built in)'].removed",
+   "server": "nginx",
+   "listener": "L-NGX-2",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "proto/tls12-recovery",
+      "name": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+      "identifiers": [
+       "0x00,0x9C"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.2 (recovery console, not built in)'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0012",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ECDH'].removed",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/ecdh",
+      "name": "ECDH"
+     },
+     "tool_says": "componentVersions['ECDH'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0013",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0014",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0015",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0016",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 6,
+   "tool_verdict": "overclaimed x6",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ML-KEM-768'].removed; componentVersions['ECDH P-256'].removed; componentVersions['ML-KEM-1024'].removed; componentVersions['ECDH P-384'].removed; componentVersions['SecP256r1MLKEM768 hybrid'].removed; componentVersions['SecP384r1MLKEM1024 hybrid'].removed",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem768",
+      "name": "ML-KEM-768"
+     },
+     "tool_says": "componentVersions['ML-KEM-768'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/p256",
+      "name": "ECDH P-256"
+     },
+     "tool_says": "componentVersions['ECDH P-256'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem1024",
+      "name": "ML-KEM-1024"
+     },
+     "tool_says": "componentVersions['ML-KEM-1024'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/p384",
+      "name": "ECDH P-384"
+     },
+     "tool_says": "componentVersions['ECDH P-384'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/hyb1",
+      "name": "SecP256r1MLKEM768 hybrid"
+     },
+     "tool_says": "componentVersions['SecP256r1MLKEM768 hybrid'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/hyb2",
+      "name": "SecP384r1MLKEM1024 hybrid"
+     },
+     "tool_says": "componentVersions['SecP384r1MLKEM1024 hybrid'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0017",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0018",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0019",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "nginx",
+   "listener": "L-NGX-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0020",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0021",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0022",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0023",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['TLSv1.3 (FIPS build profile, not shipped)'].removed",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "proto/tls13-fips",
+      "name": "TLS_AES_128_GCM_SHA256",
+      "identifiers": [
+       "0x13,0x01"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.3 (FIPS build profile, not shipped)'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0024",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0025",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 2,
+   "tool_verdict": "overclaimed x2",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['X25519'].removed; componentVersions['EC'].removed",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/x25519",
+      "name": "X25519"
+     },
+     "tool_says": "componentVersions['X25519'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/ec",
+      "name": "EC"
+     },
+     "tool_says": "componentVersions['EC'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0026",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0027",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0028",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0029",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0030",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ML-KEM-768'].removed",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem768",
+      "name": "ML-KEM-768"
+     },
+     "tool_says": "componentVersions['ML-KEM-768'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0031",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0032",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0033",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0034",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0035",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0036",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0037",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0038",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ML-KEM'].removed",
+   "server": "s_server",
+   "listener": "L-SSV-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem",
+      "name": "ML-KEM"
+     },
+     "tool_says": "componentVersions['ML-KEM'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0039",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0040",
+   "verdict": "parameter_mismatch",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0041",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0042",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0043",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-2",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0044",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "parent_child",
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['EC'].removed",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/ec521",
+      "name": "EC"
+     },
+     "tool_says": "componentVersions['EC'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0045",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0046",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0047",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-3",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0048",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": "hybrid_spelling",
+   "findings": 8,
+   "tool_verdict": "overclaimed x8",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['ML-KEM-768'].removed; componentVersions['ML-KEM-1024'].removed; componentVersions['X25519'].removed; componentVersions['ECDH P-256'].removed; componentVersions['ECDH P-384'].removed; componentVersions['X25519MLKEM768'].removed; componentVersions['SecP256r1MLKEM768'].removed; componentVersions['SecP384r1MLKEM1024'].removed",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem768",
+      "name": "ML-KEM-768"
+     },
+     "tool_says": "componentVersions['ML-KEM-768'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/mlkem1024",
+      "name": "ML-KEM-1024"
+     },
+     "tool_says": "componentVersions['ML-KEM-1024'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/x25519",
+      "name": "X25519"
+     },
+     "tool_says": "componentVersions['X25519'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/p256",
+      "name": "ECDH P-256"
+     },
+     "tool_says": "componentVersions['ECDH P-256'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/p384",
+      "name": "ECDH P-384"
+     },
+     "tool_says": "componentVersions['ECDH P-384'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/h1",
+      "name": "X25519MLKEM768"
+     },
+     "tool_says": "componentVersions['X25519MLKEM768'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/h2",
+      "name": "SecP256r1MLKEM768"
+     },
+     "tool_says": "componentVersions['SecP256r1MLKEM768'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "alg/h3",
+      "name": "SecP384r1MLKEM1024"
+     },
+     "tool_says": "componentVersions['SecP384r1MLKEM1024'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0049",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0050",
+   "verdict": "undeclared",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0051",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "inactive_scope",
+   "findings": 2,
+   "tool_verdict": "overclaimed x2",
+   "outcome": "false_alarm",
+   "reason": "componentVersions['TLSv1.2 (legacy RSA profile, removed in 4.0)'].removed; componentVersions['TLSv1.2 (legacy RSA profile, removed in 4.0)'].removed",
+   "server": "s_server",
+   "listener": "L-SSV-4",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "proto/tls12-legacy",
+      "name": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+      "identifiers": [
+       "0x00,0x9C"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.2 (legacy RSA profile, removed in 4.0)'].removed"
+    },
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "proto/tls12-legacy",
+      "name": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+      "identifiers": [
+       "0xC0,0x2F"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.2 (legacy RSA profile, removed in 4.0)'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0052",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0053",
+   "verdict": "consistent",
+   "category": "cipher_suite",
+   "decoy_class": "identifier_spelling",
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0054",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "miss",
+   "reason": "nothing reported in the category",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0055",
+   "verdict": "consistent",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 0,
+   "tool_verdict": "consistent",
+   "outcome": "ok",
+   "reason": "",
+   "server": "s_server",
+   "listener": "L-SSV-5",
+   "tool_findings": []
+  },
+  {
+   "id": "SLD-0056",
+   "verdict": "undeclared",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "undeclared",
+   "outcome": "hit",
+   "reason": "",
+   "server": "apache",
+   "listener": "L-APA-3",
+   "tool_findings": [
+    {
+     "verdict": "undeclared",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "observed/tls12",
+      "name": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+      "identifiers": [
+       "0xC0,0x30"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.2'].added"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0057",
+   "verdict": "overclaimed",
+   "category": "cipher_suite",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-1",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "cipher_suite",
+     "element": {
+      "ref": "proto/tls12",
+      "name": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+      "identifiers": [
+       "0xC0,0x2F"
+      ]
+     },
+     "tool_says": "componentVersions['TLSv1.2'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-0058",
+   "verdict": "overclaimed",
+   "category": "group",
+   "decoy_class": null,
+   "findings": 1,
+   "tool_verdict": "overclaimed",
+   "outcome": "hit",
+   "reason": "",
+   "server": "nginx",
+   "listener": "L-NGX-3",
+   "tool_findings": [
+    {
+     "verdict": "overclaimed",
+     "category": "group",
+     "element": {
+      "ref": "proto/tls13",
+      "value": "x25519"
+     },
+     "tool_says": "componentVersions['TLSv1.3'].removed"
+    }
+   ]
+  },
+  {
+   "id": "SLD-9001",
+   "verdict": null,
+   "category": "kex",
+   "decoy_class": null,
+   "outcome": "not_scored",
+   "reason": "no_spec_structure",
+   "server": "-",
+   "listener": "-"
+  },
+  {
+   "id": "SLD-9002",
+   "verdict": null,
+   "category": "hostkey",
+   "decoy_class": null,
+   "outcome": "not_scored",
+   "reason": "no_spec_structure",
+   "server": "-",
+   "listener": "-"
+  }
+ ],
+ "fingerprint": "5841e7307c539c110e26f933117956b7461f4dff295a6acd3eeab63317c56fa2",
+ "fingerprint_rule": "sha256(canonical JSON {rows_sha256, generator_version, tool_version, rows:[[id,outcome,reason]...]})",
+ "run": {
+  "at": "2026-11-07T08:18:53Z",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39"
+ },
+ "raw": {
+  "SLD-0001": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0002": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0003": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0004": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0005": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0006": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0007": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0008": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0009": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0010": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0011": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0012": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0013": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0014": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0015": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0016": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0017": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0018": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0019": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0020": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0021": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0022": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0023": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0024": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0025": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0026": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0027": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0028": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0029": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0030": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0031": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0032": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0033": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0034": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0035": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0036": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0037": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0038": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0039": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0040": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0041": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0042": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0043": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0044": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0045": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0046": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0047": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0048": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0049": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0050": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0051": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0052": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0053": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0054": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0055": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0056": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0057": {
+   "exit": 0,
+   "unmapped": []
+  },
+  "SLD-0058": {
+   "exit": 0,
+   "unmapped": []
+  }
+ }
+}

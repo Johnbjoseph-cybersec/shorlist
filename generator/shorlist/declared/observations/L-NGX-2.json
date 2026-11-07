@@ -1,0 +1,1490 @@
+{
+ "format": "shorlist-declared-observation/0.1",
+ "listener": "L-NGX-2",
+ "observation_status": "captured",
+ "protocol": "tls",
+ "method": "accepted",
+ "server": "nginx",
+ "server_image": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+ "server_version": "nginx/1.30.6, built with OpenSSL 3.5.8, running with OpenSSL 3.5.9 (Alpine 3.24)",
+ "config_sha256": "7c84e2a821c591596428be446707fff9360433b55bfa0605b7bb26a118a60d66",
+ "reference_client": "OpenSSL 3.5.9 29 Sep 2026 (Library: OpenSSL 3.5.9 29 Sep 2026) s_client (groups, TLS 1.3 suites) and a raw TLS 1.2 ClientHello (TLS 1.2 suites), one handshake per candidate; declared/probe.py",
+ "candidates": {
+  "group": [
+   "0x11EC",
+   "0x11EB",
+   "0x11ED",
+   "0x0200",
+   "0x0201",
+   "0x0202",
+   "0x001D",
+   "0x001E",
+   "0x0017",
+   "0x0018",
+   "0x0019",
+   "0x0100",
+   "0x0101",
+   "0x0102",
+   "0x0103",
+   "0x0104"
+  ],
+  "cipher_suite": [
+   "0x1301",
+   "0x1302",
+   "0x1303",
+   "0x0001",
+   "0x0002",
+   "0x002C",
+   "0x002D",
+   "0x002E",
+   "0x002F",
+   "0x0032",
+   "0x0033",
+   "0x0034",
+   "0x0035",
+   "0x0038",
+   "0x0039",
+   "0x003A",
+   "0x003B",
+   "0x003C",
+   "0x003D",
+   "0x0040",
+   "0x0041",
+   "0x0044",
+   "0x0045",
+   "0x0046",
+   "0x0067",
+   "0x006A",
+   "0x006B",
+   "0x006C",
+   "0x006D",
+   "0x0084",
+   "0x0087",
+   "0x0088",
+   "0x0089",
+   "0x008C",
+   "0x008D",
+   "0x0090",
+   "0x0091",
+   "0x0094",
+   "0x0095",
+   "0x009C",
+   "0x009D",
+   "0x009E",
+   "0x009F",
+   "0x00A2",
+   "0x00A3",
+   "0x00A6",
+   "0x00A7",
+   "0x00A8",
+   "0x00A9",
+   "0x00AA",
+   "0x00AB",
+   "0x00AC",
+   "0x00AD",
+   "0x00AE",
+   "0x00AF",
+   "0x00B0",
+   "0x00B1",
+   "0x00B2",
+   "0x00B3",
+   "0x00B4",
+   "0x00B5",
+   "0x00B6",
+   "0x00B7",
+   "0x00B8",
+   "0x00B9",
+   "0x00BA",
+   "0x00BD",
+   "0x00BE",
+   "0x00BF",
+   "0x00C0",
+   "0x00C3",
+   "0x00C4",
+   "0x00C5",
+   "0xC006",
+   "0xC009",
+   "0xC00A",
+   "0xC010",
+   "0xC013",
+   "0xC014",
+   "0xC015",
+   "0xC018",
+   "0xC019",
+   "0xC01D",
+   "0xC01E",
+   "0xC01F",
+   "0xC020",
+   "0xC021",
+   "0xC022",
+   "0xC023",
+   "0xC024",
+   "0xC027",
+   "0xC028",
+   "0xC02B",
+   "0xC02C",
+   "0xC02F",
+   "0xC030",
+   "0xC035",
+   "0xC036",
+   "0xC037",
+   "0xC038",
+   "0xC039",
+   "0xC03A",
+   "0xC03B",
+   "0xC050",
+   "0xC051",
+   "0xC052",
+   "0xC053",
+   "0xC056",
+   "0xC057",
+   "0xC05C",
+   "0xC05D",
+   "0xC060",
+   "0xC061",
+   "0xC06A",
+   "0xC06B",
+   "0xC06C",
+   "0xC06D",
+   "0xC06E",
+   "0xC06F",
+   "0xC072",
+   "0xC073",
+   "0xC076",
+   "0xC077",
+   "0xC094",
+   "0xC095",
+   "0xC096",
+   "0xC097",
+   "0xC098",
+   "0xC099",
+   "0xC09A",
+   "0xC09B",
+   "0xC09C",
+   "0xC09D",
+   "0xC09E",
+   "0xC09F",
+   "0xC0A0",
+   "0xC0A1",
+   "0xC0A2",
+   "0xC0A3",
+   "0xC0A4",
+   "0xC0A5",
+   "0xC0A6",
+   "0xC0A7",
+   "0xC0A8",
+   "0xC0A9",
+   "0xC0AA",
+   "0xC0AB",
+   "0xC0AC",
+   "0xC0AD",
+   "0xC0AE",
+   "0xC0AF",
+   "0xCCA8",
+   "0xCCA9",
+   "0xCCAA",
+   "0xCCAB",
+   "0xCCAC",
+   "0xCCAD",
+   "0xCCAE"
+  ]
+ },
+ "accepted": {
+  "group": [
+   {
+    "code": "0x11EC",
+    "name": "X25519MLKEM768",
+    "versions": [
+     "1.3"
+    ]
+   },
+   {
+    "code": "0x001D",
+    "name": "x25519",
+    "versions": [
+     "1.3",
+     "1.2"
+    ]
+   },
+   {
+    "code": "0x0017",
+    "name": "secp256r1",
+    "versions": [
+     "1.3",
+     "1.2"
+    ]
+   }
+  ],
+  "cipher_suite": [
+   {
+    "code": "0x1302",
+    "name": "TLS_AES_256_GCM_SHA384",
+    "versions": [
+     "1.3"
+    ]
+   },
+   {
+    "code": "0xC02F",
+    "name": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+    "versions": [
+     "1.2"
+    ]
+   },
+   {
+    "code": "0xC030",
+    "name": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+    "versions": [
+     "1.2"
+    ]
+   }
+  ]
+ },
+ "evidence": {
+  "groups": [
+   {
+    "name": "X25519MLKEM768",
+    "tls1_3": true,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups X25519MLKEM768: negotiated X25519MLKEM768"
+    ]
+   },
+   {
+    "name": "SecP256r1MLKEM768",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups SecP256r1MLKEM768: negotiated None"
+    ]
+   },
+   {
+    "name": "SecP384r1MLKEM1024",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups SecP384r1MLKEM1024: negotiated None"
+    ]
+   },
+   {
+    "name": "MLKEM512",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups MLKEM512: negotiated None"
+    ]
+   },
+   {
+    "name": "MLKEM768",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups MLKEM768: negotiated None"
+    ]
+   },
+   {
+    "name": "MLKEM1024",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups MLKEM1024: negotiated None"
+    ]
+   },
+   {
+    "name": "x25519",
+    "tls1_3": true,
+    "tls1_2": true,
+    "evidence": [
+     "s_client -tls1_3 -groups x25519: negotiated x25519",
+     "s_client -tls1_2 -cipher ECDHE:@SECLEVEL=0 -groups x25519: temp key x25519"
+    ]
+   },
+   {
+    "name": "x448",
+    "tls1_3": false,
+    "tls1_2": false,
+    "evidence": [
+     "s_client -tls1_3 -groups x448: negotiated None",
+     "s_client -tls1_2 -cipher ECDHE:@SECLEVEL=0 -groups x448: temp key None"
+    ]
+   },
+   {
+    "name": "secp256r1",
+    "tls1_3": true,
+    "tls1_2": true,
+    "evidence": [
+     "s_client -tls1_3 -groups secp256r1: negotiated secp256r1",
+     "s_client -tls1_2 -cipher ECDHE:@SECLEVEL=0 -groups secp256r1: temp key secp256r1"
+    ]
+   },
+   {
+    "name": "secp384r1",
+    "tls1_3": false,
+    "tls1_2": false,
+    "evidence": [
+     "s_client -tls1_3 -groups secp384r1: negotiated None",
+     "s_client -tls1_2 -cipher ECDHE:@SECLEVEL=0 -groups secp384r1: temp key None"
+    ]
+   },
+   {
+    "name": "secp521r1",
+    "tls1_3": false,
+    "tls1_2": false,
+    "evidence": [
+     "s_client -tls1_3 -groups secp521r1: negotiated None",
+     "s_client -tls1_2 -cipher ECDHE:@SECLEVEL=0 -groups secp521r1: temp key None"
+    ]
+   },
+   {
+    "name": "ffdhe2048",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups ffdhe2048: negotiated None"
+    ]
+   },
+   {
+    "name": "ffdhe3072",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups ffdhe3072: negotiated None"
+    ]
+   },
+   {
+    "name": "ffdhe4096",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups ffdhe4096: negotiated None"
+    ]
+   },
+   {
+    "name": "ffdhe6144",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups ffdhe6144: negotiated None"
+    ]
+   },
+   {
+    "name": "ffdhe8192",
+    "tls1_3": false,
+    "tls1_2": null,
+    "evidence": [
+     "s_client -tls1_3 -groups ffdhe8192: negotiated None"
+    ]
+   }
+  ],
+  "suites": [
+   {
+    "code": "0x1301",
+    "name": "TLS_AES_128_GCM_SHA256",
+    "version": "1.3",
+    "accepted": false,
+    "evidence": "s_client -tls1_3 -ciphersuites TLS_AES_128_GCM_SHA256: None None"
+   },
+   {
+    "code": "0x1302",
+    "name": "TLS_AES_256_GCM_SHA384",
+    "version": "1.3",
+    "accepted": true,
+    "evidence": "s_client -tls1_3 -ciphersuites TLS_AES_256_GCM_SHA384: TLSv1.3 TLS_AES_256_GCM_SHA384"
+   },
+   {
+    "code": "0x1303",
+    "name": "TLS_CHACHA20_POLY1305_SHA256",
+    "version": "1.3",
+    "accepted": false,
+    "evidence": "s_client -tls1_3 -ciphersuites TLS_CHACHA20_POLY1305_SHA256: None None"
+   },
+   {
+    "code": "0x0001",
+    "name": "TLS_RSA_WITH_NULL_MD5",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0001 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0002",
+    "name": "TLS_RSA_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0002 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x002C",
+    "name": "TLS_PSK_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x002C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x002D",
+    "name": "TLS_DHE_PSK_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x002D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x002E",
+    "name": "TLS_RSA_PSK_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x002E alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x002F",
+    "name": "TLS_RSA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x002F alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0032",
+    "name": "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0032 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0033",
+    "name": "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0033 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0034",
+    "name": "TLS_DH_anon_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0034 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0035",
+    "name": "TLS_RSA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0035 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0038",
+    "name": "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0038 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0039",
+    "name": "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0039 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x003A",
+    "name": "TLS_DH_anon_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x003A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x003B",
+    "name": "TLS_RSA_WITH_NULL_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x003B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x003C",
+    "name": "TLS_RSA_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x003C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x003D",
+    "name": "TLS_RSA_WITH_AES_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x003D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0040",
+    "name": "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0040 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0041",
+    "name": "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0041 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0044",
+    "name": "TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0044 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0045",
+    "name": "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0045 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0046",
+    "name": "TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0046 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0067",
+    "name": "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0067 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x006A",
+    "name": "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x006A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x006B",
+    "name": "TLS_DHE_RSA_WITH_AES_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x006B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x006C",
+    "name": "TLS_DH_anon_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x006C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x006D",
+    "name": "TLS_DH_anon_WITH_AES_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x006D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0084",
+    "name": "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0084 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0087",
+    "name": "TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0087 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0088",
+    "name": "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0088 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0089",
+    "name": "TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0089 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x008C",
+    "name": "TLS_PSK_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x008C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x008D",
+    "name": "TLS_PSK_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x008D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0090",
+    "name": "TLS_DHE_PSK_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0090 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0091",
+    "name": "TLS_DHE_PSK_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0091 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0094",
+    "name": "TLS_RSA_PSK_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0094 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x0095",
+    "name": "TLS_RSA_PSK_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x0095 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x009C",
+    "name": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x009C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x009D",
+    "name": "TLS_RSA_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x009D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x009E",
+    "name": "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x009E alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x009F",
+    "name": "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x009F alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A2",
+    "name": "TLS_DHE_DSS_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A2 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A3",
+    "name": "TLS_DHE_DSS_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A3 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A6",
+    "name": "TLS_DH_anon_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A6 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A7",
+    "name": "TLS_DH_anon_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A7 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A8",
+    "name": "TLS_PSK_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A8 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00A9",
+    "name": "TLS_PSK_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00A9 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AA",
+    "name": "TLS_DHE_PSK_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AA alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AB",
+    "name": "TLS_DHE_PSK_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AB alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AC",
+    "name": "TLS_RSA_PSK_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AC alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AD",
+    "name": "TLS_RSA_PSK_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AD alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AE",
+    "name": "TLS_PSK_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AE alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00AF",
+    "name": "TLS_PSK_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00AF alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B0",
+    "name": "TLS_PSK_WITH_NULL_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B0 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B1",
+    "name": "TLS_PSK_WITH_NULL_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B1 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B2",
+    "name": "TLS_DHE_PSK_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B2 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B3",
+    "name": "TLS_DHE_PSK_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B3 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B4",
+    "name": "TLS_DHE_PSK_WITH_NULL_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B4 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B5",
+    "name": "TLS_DHE_PSK_WITH_NULL_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B5 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B6",
+    "name": "TLS_RSA_PSK_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B6 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B7",
+    "name": "TLS_RSA_PSK_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B7 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B8",
+    "name": "TLS_RSA_PSK_WITH_NULL_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B8 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00B9",
+    "name": "TLS_RSA_PSK_WITH_NULL_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00B9 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00BA",
+    "name": "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00BA alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00BD",
+    "name": "TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00BD alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00BE",
+    "name": "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00BE alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00BF",
+    "name": "TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00BF alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00C0",
+    "name": "TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00C0 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00C3",
+    "name": "TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00C3 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00C4",
+    "name": "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00C4 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0x00C5",
+    "name": "TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0x00C5 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC006",
+    "name": "TLS_ECDHE_ECDSA_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC006 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC009",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC009 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC00A",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC00A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC010",
+    "name": "TLS_ECDHE_RSA_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC010 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC013",
+    "name": "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC013 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC014",
+    "name": "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC014 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC015",
+    "name": "TLS_ECDH_anon_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC015 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC018",
+    "name": "TLS_ECDH_anon_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC018 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC019",
+    "name": "TLS_ECDH_anon_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC019 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC01D",
+    "name": "TLS_SRP_SHA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC01D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC01E",
+    "name": "TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC01E alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC01F",
+    "name": "TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC01F alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC020",
+    "name": "TLS_SRP_SHA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC020 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC021",
+    "name": "TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC021 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC022",
+    "name": "TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC022 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC023",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC023 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC024",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC024 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC027",
+    "name": "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC027 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC028",
+    "name": "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC028 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC02B",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC02B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC02C",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC02C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC02F",
+    "name": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": true,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC02F alone: {'answer': 'server_hello', 'version': '0x0303', 'cipher': '0xC02F'}"
+   },
+   {
+    "code": "0xC030",
+    "name": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": true,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC030 alone: {'answer': 'server_hello', 'version': '0x0303', 'cipher': '0xC030'}"
+   },
+   {
+    "code": "0xC035",
+    "name": "TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC035 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC036",
+    "name": "TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC036 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC037",
+    "name": "TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC037 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC038",
+    "name": "TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC038 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC039",
+    "name": "TLS_ECDHE_PSK_WITH_NULL_SHA",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC039 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC03A",
+    "name": "TLS_ECDHE_PSK_WITH_NULL_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC03A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC03B",
+    "name": "TLS_ECDHE_PSK_WITH_NULL_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC03B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC050",
+    "name": "TLS_RSA_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC050 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC051",
+    "name": "TLS_RSA_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC051 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC052",
+    "name": "TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC052 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC053",
+    "name": "TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC053 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC056",
+    "name": "TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC056 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC057",
+    "name": "TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC057 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC05C",
+    "name": "TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC05C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC05D",
+    "name": "TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC05D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC060",
+    "name": "TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC060 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC061",
+    "name": "TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC061 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06A",
+    "name": "TLS_PSK_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06B",
+    "name": "TLS_PSK_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06C",
+    "name": "TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06D",
+    "name": "TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06E",
+    "name": "TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06E alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC06F",
+    "name": "TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC06F alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC072",
+    "name": "TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC072 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC073",
+    "name": "TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC073 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC076",
+    "name": "TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC076 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC077",
+    "name": "TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC077 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC094",
+    "name": "TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC094 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC095",
+    "name": "TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC095 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC096",
+    "name": "TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC096 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC097",
+    "name": "TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC097 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC098",
+    "name": "TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC098 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC099",
+    "name": "TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC099 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09A",
+    "name": "TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09A alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09B",
+    "name": "TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09B alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09C",
+    "name": "TLS_RSA_WITH_AES_128_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09C alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09D",
+    "name": "TLS_RSA_WITH_AES_256_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09D alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09E",
+    "name": "TLS_DHE_RSA_WITH_AES_128_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09E alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC09F",
+    "name": "TLS_DHE_RSA_WITH_AES_256_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC09F alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A0",
+    "name": "TLS_RSA_WITH_AES_128_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A0 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A1",
+    "name": "TLS_RSA_WITH_AES_256_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A1 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A2",
+    "name": "TLS_DHE_RSA_WITH_AES_128_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A2 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A3",
+    "name": "TLS_DHE_RSA_WITH_AES_256_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A3 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A4",
+    "name": "TLS_PSK_WITH_AES_128_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A4 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A5",
+    "name": "TLS_PSK_WITH_AES_256_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A5 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A6",
+    "name": "TLS_DHE_PSK_WITH_AES_128_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A6 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A7",
+    "name": "TLS_DHE_PSK_WITH_AES_256_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A7 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A8",
+    "name": "TLS_PSK_WITH_AES_128_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A8 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0A9",
+    "name": "TLS_PSK_WITH_AES_256_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0A9 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AA",
+    "name": "TLS_PSK_DHE_WITH_AES_128_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AA alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AB",
+    "name": "TLS_PSK_DHE_WITH_AES_256_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AB alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AC",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_128_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AC alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AD",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_256_CCM",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AD alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AE",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AE alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xC0AF",
+    "name": "TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xC0AF alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCA8",
+    "name": "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCA8 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCA9",
+    "name": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCA9 alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCAA",
+    "name": "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCAA alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCAB",
+    "name": "TLS_PSK_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCAB alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCAC",
+    "name": "TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCAC alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCAD",
+    "name": "TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCAD alone: {'answer': 'alert', 'alert': 40}"
+   },
+   {
+    "code": "0xCCAE",
+    "name": "TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256",
+    "version": "1.2",
+    "accepted": false,
+    "evidence": "raw TLS 1.2 ClientHello offering 0xCCAE alone: {'answer': 'alert', 'alert': 40}"
+   }
+  ],
+  "openssl": "OpenSSL 3.5.9 29 Sep 2026 (Library: OpenSSL 3.5.9 29 Sep 2026)"
+ },
+ "captured_at": "2026-11-07T07:56:13Z",
+ "harness_image_id": "sha256:fc33cab33289450007ceb7b48c379e8fdc9238b03cebb4d3bee41b08c079ecf4"
+}
