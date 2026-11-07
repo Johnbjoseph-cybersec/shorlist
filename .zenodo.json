@@ -6,7 +6,7 @@
     {"name": "Tenev, Stanimir", "affiliation": "Elkan Electronic"}
   ],
   "license": "cc-by-4.0",
-  "keywords": ["cryptography", "post-quantum cryptography", "cryptographic inventory", "CBOM", "benchmark", "static analysis"],
+  "keywords": ["cryptography", "post-quantum cryptography", "PQC migration", "quantum-safe", "cryptographic inventory", "CBOM", "CycloneDX", "crypto-agility", "ML-KEM", "ML-DSA", "benchmark", "dataset", "ground truth", "static analysis", "SAST", "CWE", "cryptographic misuse"],
   "related_identifiers": [
     {"identifier": "https://github.com/shorlist/shorlist", "relation": "isSupplementTo", "scheme": "url"}
   ]

@@ -1,0 +1,72 @@
+name: New scanner adapter
+description: Propose an adapter so that the generator can run and score another scanner.
+title: "Adapter: <scanner> <version>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An adapter is a class in `generator/shorlist/adapters/` with `version()` and `scan(tree, workdir) -> list[Record]`,
+        registered in `ADAPTERS`. A `Record` is `{path, line, family, role, size, is_use, cwe}`. The adapter is the only place that
+        knows the scanner's field names. See [`adapters/base.py`](https://github.com/shorlist/shorlist/blob/main/generator/shorlist/adapters/base.py)
+        and [`adapters/qrp_mcp.py`](https://github.com/shorlist/shorlist/blob/main/generator/shorlist/adapters/qrp_mcp.py).
+        Results committed to `results/` must be produced by the generator, unedited, and include the scanner's version string.
+  - type: input
+    id: scanner
+    attributes:
+      label: Scanner name and URL
+      placeholder: Example Scanner, https://github.com/example/scanner
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and how it reports its version string
+      placeholder: "1.2.3 (`scanner --version`)"
+    validations:
+      required: true
+  - type: input
+    id: licence
+    attributes:
+      label: Scanner licence
+      placeholder: Apache-2.0
+    validations:
+      required: true
+  - type: textarea
+    id: invocation
+    attributes:
+      label: Invocation
+      description: The command, container image (with digest if possible), and whether it runs without network.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: output
+    attributes:
+      label: Output format
+      placeholder: CycloneDX 1.6 CBOM, SARIF 2.1.0, JSON …
+    validations:
+      required: true
+  - type: checkboxes
+    id: fields
+    attributes:
+      label: Record fields the scanner's output can fill
+      description: Fields it cannot fill are reported as such, not guessed.
+      options:
+        - label: path and line
+        - label: family
+        - label: role
+        - label: size
+        - label: is_use (distinguishes a use from a comment, ban or mention)
+        - label: cwe (misuse, defect axis)
+  - type: textarea
+    id: mapping
+    attributes:
+      label: Family name mapping
+      description: How the scanner's own names map to schema/families.yaml, with a link to where the scanner defines them.
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Contribution
+      options:
+        - label: I can open the pull request with the adapter and its tests.
+        - label: I agree that adapter code is licensed under Apache-2.0.

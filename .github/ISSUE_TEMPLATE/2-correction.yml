@@ -1,0 +1,57 @@
+name: Correction to a row
+description: Report that an existing row is wrong. Rows are never deleted; a wrong row is withdrawn and, if needed, replaced by a new row with a new id.
+title: "Correction: SL-NNNN"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A row found to be wrong gets `status: withdrawn`, `withdrawn_reason` and `withdrawn_at`, and keeps the rest as it was,
+        so earlier results remain interpretable. A corrected form is a new row with a new id. See
+        [CONTRIBUTING.md, "Correcting or withdrawing a row"](https://github.com/shorlist/shorlist/blob/main/CONTRIBUTING.md#correcting-or-withdrawing-a-row).
+  - type: input
+    id: row_id
+    attributes:
+      label: Row id
+      placeholder: SL-0001
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: What is wrong
+      multiple: true
+      options:
+        - literal (the form does not exist, or is spelled differently)
+        - family / cyclonedx_family / parameter_set
+        - expected (family, role or size)
+        - decoy (it is in fact a use, or the decoy_class is wrong)
+        - context_template or right_template (not minimal, contains another form, does not parse)
+        - source (not primary, or does not say what the row says)
+        - weakness or defect (status, anchor, CWE)
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: explanation
+    attributes:
+      label: Explanation
+      description: What the row says, and what it should say.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary source evidence
+      description: URL, section, date read and a verbatim quote, or the product version and command that shows the behaviour.
+    validations:
+      required: true
+  - type: dropdown
+    id: action
+    attributes:
+      label: Proposed action
+      options:
+        - Withdraw the row (status withdrawn, reason, date)
+        - Withdraw the row and add a corrected row with a new id
+        - Not sure
+    validations:
+      required: true

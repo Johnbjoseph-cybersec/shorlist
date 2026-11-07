@@ -1,0 +1,172 @@
+name: New form (row)
+description: Propose one new row for the catalogue. One row per issue and per pull request.
+title: "New form: <family> <form_kind> in <language_or_product>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. A row is admitted on its **primary source**, never on whether a scanner
+        (including the initiator's) recognises it. Read [CONTRIBUTING.md](https://github.com/shorlist/shorlist/blob/main/CONTRIBUTING.md) first.
+        Rows are validated by [`schema/form.schema.json`](https://github.com/shorlist/shorlist/blob/main/schema/form.schema.json).
+        If you have no primary source yet, the row is a **candidate** and goes to `candidates/`, not `forms/`.
+  - type: dropdown
+    id: axis
+    attributes:
+      label: Axis
+      description: "quantum: Shor-vulnerable or post-quantum family. weak: classically weak family or weak parameter (needs `weakness`). defect: a misuse, scored on the CWE (`row_kind: defect`)."
+      options:
+        - quantum
+        - weak
+        - defect
+    validations:
+      required: true
+  - type: input
+    id: family
+    attributes:
+      label: Family (expected.family)
+      description: From the closed vocabulary in schema/families.yaml, e.g. RSA, ECDSA, ML-KEM, SHA-1, AES.
+      placeholder: ML-KEM
+    validations:
+      required: true
+  - type: dropdown
+    id: form_kind
+    attributes:
+      label: form_kind
+      options:
+        - api_call
+        - api_string
+        - config_key
+        - config_value
+        - registry_id
+        - oid
+        - curve_name
+        - cli
+        - file_format
+    validations:
+      required: true
+  - type: input
+    id: language_or_product
+    attributes:
+      label: language_or_product
+      placeholder: Python (pyca/cryptography), OpenSSH sshd_config, Terraform AWS provider …
+    validations:
+      required: true
+  - type: input
+    id: literal
+    attributes:
+      label: literal
+      description: The exact text of the form, on one line. It must occur verbatim in the context template.
+      placeholder: "KexAlgorithms mlkem768x25519-sha256"
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Primary source URL
+      description: The specification, registry, or the vendor's own documentation or source code. Not a blog, tutorial, scanner rule set or model answer. Must start with https://
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: source_section
+    attributes:
+      label: Primary source section
+      placeholder: "§3.2, Table 4"
+    validations:
+      required: true
+  - type: input
+    id: source_read_at
+    attributes:
+      label: Date you read the source (YYYY-MM-DD)
+      placeholder: "2026-11-07"
+    validations:
+      required: true
+  - type: textarea
+    id: source_quote
+    attributes:
+      label: Verbatim quote from the source
+      description: A short quote that settles the question.
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: status
+      options:
+        - verified-source (checked against the primary source)
+        - verified-run (also ran the product or library and saw it accept the form)
+        - candidate (neither; goes to candidates/)
+    validations:
+      required: true
+  - type: dropdown
+    id: decoy
+    attributes:
+      label: Is this a decoy? (negative / decoy_class)
+      description: A decoy names the algorithm but is not a use of it. For a decoy, `expected` is what a scanner would wrongly report.
+      options:
+        - "no (negative: false)"
+        - ban_list
+        - comment
+        - log_string
+        - switch_off
+        - removal_list
+        - legacy_verify_only
+    validations:
+      required: true
+  - type: textarea
+    id: row
+    attributes:
+      label: The row
+      description: |
+        The full YAML row (copy an existing file in forms/ of the same form_kind). The context template is the
+        smallest valid file in which the form stands, with no other cryptographic form; a decoy's template must
+        contain no real use. Leave `id` as SL-XXXX; the next free id is assigned on merge.
+      render: yaml
+      value: |
+        id: SL-XXXX
+        title:
+        family:
+        parameter_set:
+        role:            # signature | key_establishment | both | hash | encryption | mac | n.a.
+        form_kind:
+        language_or_product:
+        literal:
+        context_filename:
+        context_template: |
+          
+        expected:
+          family:
+          role:          # or undetermined
+          size:          # integer bits, or undetermined
+        negative: false
+        source:
+          - url: https://
+            section:
+            read_at: YYYY-MM-DD
+            quote:
+        status: verified-source
+        added_by:
+        added_at: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: weak_defect
+    attributes:
+      label: Weak or defect axis only
+      description: |
+        weak: `weakness` with `status` (disallowed, deprecated, legacy_use), `anchor` (standard and section, e.g. NIST SP 800-131A Rev. 2, Table 1) and `quote`.
+        defect: `row_kind: defect`, `defect.cwe` (CWE-NNN, what a scanner must report on the literal's line), optional `defect.taxonomy`,
+        and for a positive defect row `right_template` (the same file, fixed, not containing the literal).
+      render: yaml
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The source is primary, and its section and quote say what the row says.
+          required: true
+        - label: The literal occurs verbatim in context_template, and the template contains no other cryptographic form.
+          required: true
+        - label: I considered a decoy for this form (added one where one is natural).
+        - label: I agree that this row is licensed under CC BY 4.0.
+          required: true

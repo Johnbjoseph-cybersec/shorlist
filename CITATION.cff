@@ -20,7 +20,18 @@ date-released: 2026-11-05
 keywords:
   - cryptography
   - post-quantum cryptography
+  - PQC migration
+  - quantum-safe
   - cryptographic inventory
   - CBOM
+  - CycloneDX
+  - crypto-agility
+  - ML-KEM
+  - ML-DSA
   - benchmark
+  - dataset
+  - ground truth
   - static analysis
+  - SAST
+  - CWE
+  - cryptographic misuse

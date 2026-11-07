@@ -1,7 +1,18 @@
 # ShorList
 
-**The open catalogue of the cryptographic forms Shor's algorithm breaks — and the
+**An open catalogue of the cryptographic forms Shor's algorithm breaks — and the
 post-quantum ones that replace them.**
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23974515.svg)](https://doi.org/10.5281/zenodo.23974515)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
+[![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
+[![Version 0.2.0](https://img.shields.io/badge/version-0.2.0-informational.svg)](VERSION)
+[![Rows: 2004](https://img.shields.io/badge/rows-2004-success.svg)](forms/)
+[![ci](https://github.com/shorlist/shorlist/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shorlist/shorlist/actions/workflows/ci.yml)
+
+For **scanner vendors**, who want to show what their tool recognises against a public list,
+and for **firms that buy scanners**, who want to compare tools on the same rows before they
+choose one.
 
 ShorList is a versioned, citable list of *forms*: the concrete ways in which a public-key
 algorithm appears in source code and configuration text. Each row is one form, the minimal
@@ -16,13 +27,50 @@ parameters, anchored on NIST SP 800-131A Rev. 2 and similar) and *defect* (misus
 ECB, a constant IV or disabled certificate validation, scored on the CWE). A scanner gains
 or loses nothing on the quantum axis for a weak or a defect row.
 
+```mermaid
+flowchart LR
+    C["ShorList v0.2.0<br/>2004 rows, a primary source on each"] --> Q["quantum<br/>1510 rows (165 decoys)<br/>Shor-vulnerable + post-quantum"]
+    C --> W["weak<br/>307 rows (31 decoys)<br/>SHA-1, MD5, 3DES, RSA-1024 …"]
+    C --> D["defect<br/>187 rows (25 decoys)<br/>misuse, scored on the CWE"]
+```
+
 Version **0.2.0** · data **CC BY 4.0** · generator **Apache-2.0** · DOI [10.5281/zenodo.23974515](https://doi.org/10.5281/zenodo.23974515)
 (all versions).
+
+**Contents:** [Quick start](#quick-start) · [Use it](#use-it) · [Why](#why) ·
+[The unit of measure](#the-unit-of-measure) · [What it does not measure](#what-it-does-not-measure) ·
+[Scope of v0.2](#scope-of-v02) · [A row](#a-row) · [Running the generator](#running-the-generator) ·
+[Results](#results) · [Contributing rows](#contributing-rows) ·
+[Conflict of interest](#conflict-of-interest) · [Citing](#citing) · [Licences](#licences)
+
+## Quick start
+
+```sh
+pip install -r requirements.txt qrp-mcp==0.44.0
+cd generator
+python -m shorlist validate                                   # schema + template syntax, every row
+python -m shorlist run --adapter qrp-mcp --out ../run.json --md ../run.md
+```
+
+Any adapter in [`generator/shorlist/adapters/`](generator/shorlist/adapters/) runs the same
+way; see [Running the generator](#running-the-generator) for the full options.
+
+## Use it
+
+- **Score your scanner**: write or pick an adapter and run the generator, as in
+  [Quick start](#quick-start) and [Adding a scanner](#adding-a-scanner).
+- **Filter to your stack**: run only the rows for your languages and products. *Coming before
+  the v0.2.0 release.*
+- **Add it to CI**: a GitHub Action that scores a scanner on every pull request. *Coming before
+  the v0.2.0 release.*
 
 ## Why
 
 Cryptographic inventories (CBOMs) are produced by scanners, and a scanner's output says
-what it found, not what it could not read. There is no shared list to measure against.
+what it found, not what it could not read. Shared test sets exist for crypto-API misuse
+(CryptoAPI-Bench, CamBench, OWASP Benchmark) and a few small quantum-labelled corpora, but
+we know of no open list of the forms in code and configuration, scored on a quantum axis of
+its own, with decoys and a primary source on every row, to measure against.
 The national guidance documents that come closest say so explicitly: BSI TR-02102-1
 (2026-01) states that "no claim is made to completeness", and ANSSI's guide to the
 selection of cryptographic algorithms (PA-079, v1.0) says of its list that it is "ni
