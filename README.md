@@ -419,6 +419,16 @@ an excluded component. No third-party tool we
 found compares a declaration with an observation natively; the reference comparator is ours,
 and it is a control, not a contender.
 
+Found on the way: cyclonedx-cli 0.33.1, through the CycloneDX .NET library it is built on,
+drops `algorithmFamily`, `ellipticCurve`, `tlsGroups` and `tlsSignatureSchemes` when it reads
+and writes a 1.7 BOM, and writes absent security levels as `0`, while `validate` on the same
+BOM passes. Reported as
+[cyclonedx-dotnet-library#455](https://github.com/CycloneDX/cyclonedx-dotnet-library/issues/455);
+a fix is proposed in
+[#456](https://github.com/CycloneDX/cyclonedx-dotnet-library/pull/456), not merged at the time
+of writing. The declaration adapter reads these fields from the document the tool was given,
+so the scores above do not depend on the loss.
+
 ## Contributing rows
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: one row per pull request, a primary
