@@ -1,0 +1,31 @@
+id: "SL-3647"
+title: "Decoy: ML-KEM-768 private key named in an error message"
+family: "ML-KEM"
+parameter_set: null
+role: "n.a."
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: true
+decoy_class: "log_string"
+literal: "echo \"expected an ML-KEM-768 key (-----BEGIN PRIVATE KEY-----) in key.pem\" >&2"
+context_filename: "check_key.sh"
+context_template: |
+  #!/bin/sh
+  echo "expected an ML-KEM-768 key (-----BEGIN PRIVATE KEY-----) in key.pem" >&2
+expected:
+  family: "ML-KEM"
+  role: "undetermined"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 10"
+    read_at: "2026-11-10"
+    quote: "Unencrypted PKCS #8 Private Key Information Syntax structures (PrivateKeyInfo), renamed to Asymmetric Key Packages (OneAsymmetricKey), are encoded using the \"PRIVATE KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc9935"
+    section: "RFC 9935, Section 3"
+    read_at: "2026-11-10"
+    quote: "id-alg-ml-kem-768 OBJECT IDENTIFIER ::= { kems 2 }"
+status: "verified-source"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "The ML-KEM counterpart of SL-3605: the algorithm name and the PKCS #8 label stand in an error message, with no key and no crypto call in the tree. A scanner that matches the label or the name as text reports a use that is not there."

@@ -67,7 +67,33 @@ q openssl dhparam -out SL-3604.pem 2048
 # SL-3616  X9.42 DH PARAMETERS  X9.42 DomainParameters, 2048-bit p, FIPS 186-4 generation
 q openssl genpkey -genparam -algorithm DHX -pkeyopt dh_paramgen_prime_len:2048 -out SL-3616.pem
 
+# SL-3637..3646: the generic labels, written with default settings. ML-KEM and ML-DSA need
+# OpenSSL 3.5 or newer; its default private-key output is seed-priv (RFC 9935 / RFC 9881 "both").
+# SL-3637  PRIVATE KEY          PKCS #8, RSA-2048
+q openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out SL-3637.pem
+# SL-3638  PRIVATE KEY          PKCS #8, id-ecPublicKey on P-256
+q openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 -out SL-3638.pem
+# SL-3639  PRIVATE KEY          PKCS #8, Ed25519 (RFC 8410)
+q openssl genpkey -algorithm ED25519 -out SL-3639.pem
+# SL-3640  PUBLIC KEY           SubjectPublicKeyInfo, RSA-2048 (of a key whose private half is discarded)
+q openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out rsa-e.p8
+q openssl pkey -in rsa-e.p8 -pubout -out SL-3640.pem
+# SL-3641  CERTIFICATE          self-signed, RSA-2048, sha256WithRSAEncryption
+q openssl req -x509 -newkey rsa:2048 -nodes -keyout rsa-f.p8 -subj "/CN=ShorList test RSA" -days 3650 -sha256 -out SL-3641.pem
+# SL-3642  CERTIFICATE          self-signed, P-256, ecdsa-with-SHA256
+q openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -keyout ec-g.p8 -subj "/CN=ShorList test P-256" -days 3650 -sha256 -out SL-3642.pem
+# SL-3643  PRIVATE KEY          PKCS #8, ML-KEM-768, seed and expanded key
+q openssl genpkey -algorithm ML-KEM-768 -out SL-3643.pem
+# SL-3644  PUBLIC KEY           SubjectPublicKeyInfo, ML-KEM-768 (private half discarded)
+q openssl genpkey -algorithm ML-KEM-768 -out mlkem-a.p8
+q openssl pkey -in mlkem-a.p8 -pubout -out SL-3644.pem
+# SL-3645  PRIVATE KEY          PKCS #8, ML-DSA-65, seed and expanded key
+q openssl genpkey -algorithm ML-DSA-65 -out SL-3645.pem
+# SL-3646  CERTIFICATE          self-signed, ML-DSA-65
+q openssl req -x509 -newkey ML-DSA-65 -nodes -keyout mldsa-a.p8 -subj "/CN=ShorList test ML-DSA-65" -days 3650 -out SL-3646.pem
+
 rm -f rsa-a.p8 rsa-b.p8 dsa-a.p8 dsa-b.p8 ec-b.pem   # private halves not planted anywhere
+rm -f rsa-e.p8 rsa-f.p8 ec-g.p8 mlkem-a.p8 mldsa-a.p8
 cd - >/dev/null
 
 python3 - "$OUT" <<'PY'
@@ -78,13 +104,15 @@ import yaml
 out = Path(sys.argv[1])
 MARK = {True: "ShorList public test key: deliberately published, never used anywhere, protects nothing.",
         False: "ShorList public test parameters: deliberately published, never used anywhere."}
+CERT_MARK = "ShorList public test certificate: deliberately published, never used anywhere, protects nothing."
 for pem in sorted(out.glob("SL-*.pem")):
     rid, text = pem.stem, pem.read_text()
     f = Path("forms") / f"{rid}.yaml"
     row = yaml.safe_load(f.read_text())
     if text.splitlines()[0] != row["literal"]:
         sys.exit(f"{rid}: generated first line {text.splitlines()[0]!r} is not the literal {row['literal']!r}")
-    body = text.rstrip("\n") + "\n" + MARK["PARAMETERS" not in row["literal"]] + "\n"
+    mark = (CERT_MARK if "CERTIFICATE" in row["literal"] else MARK["PARAMETERS" not in row["literal"]])
+    body = text.rstrip("\n") + "\n" + mark + "\n"
     src = f.read_text()
     head, rest = src.split("context_template: |\n", 1)
     old, tail = rest.split("expected:\n", 1)

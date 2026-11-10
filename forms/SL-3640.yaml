@@ -1,0 +1,42 @@
+id: "SL-3640"
+title: "PEM label \"PUBLIC KEY\": RSA-2048 SubjectPublicKeyInfo"
+family: "RSA"
+parameter_set: "2048"
+role: "both"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN PUBLIC KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr8KPd2nRzBqTa8L+7zE5
+  ghuwKkhdtlSqP6QZDXw8PWyMfvZ5knHz4YqPhDc2U57eMDipsblddOaUyedJ/9We
+  APcErZwcDvBH5RVHfAGqrYbn7V9loa6DBr6ZLlNyjcHjC+fezg0KyvuGlGzK8elk
+  NfDWgmrhGxxgf3gGoXH58WCU//moUo58bPIiura7KyHEVNtwA2UDpjKwpMQ/zLKe
+  hLb2KxguCsJSSRLBjfJG4Uh2ModF2OkLH05BVNFv69kV+UQRpiaTUizwOhNKjLne
+  sbe3pZu+a1pNO25wcAe3F2Yc3cIx+Mz1rVcQIy1jpPU9tggb176/dOF/eHWzjrZq
+  LwIDAQAB
+  -----END PUBLIC KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "RSA"
+  role: "undetermined"
+  size: 2048
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 13"
+    read_at: "2026-11-10"
+    quote: "Public keys are encoded using the \"PUBLIC KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017"
+    section: "RFC 8017, Appendix A.1"
+    read_at: "2026-11-10"
+    quote: "rsaEncryption    OBJECT IDENTIFIER ::= { pkcs-1 1 }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_PUBLIC"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_PUBLIC       \"PUBLIC KEY\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl pkey -pubout` from a fresh RSA-2048 key whose private half was discarded (OpenSSL 3.6.5): SubjectPublicKeyInfo (RFC 5280, Section 4.1.2.7), not the PKCS #1 RSA PUBLIC KEY of SL-3597. The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

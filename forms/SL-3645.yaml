@@ -1,0 +1,125 @@
+id: "SL-3645"
+title: "PEM label \"PRIVATE KEY\": ML-DSA-65 PKCS #8, seed and expanded key (openssl genpkey)"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN PRIVATE KEY-----
+  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
+  rpeKuB88TnLOkyXTXFPHbnGI
+  -----END PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 10"
+    read_at: "2026-11-10"
+    quote: "Unencrypted PKCS #8 Private Key Information Syntax structures (PrivateKeyInfo), renamed to Asymmetric Key Packages (OneAsymmetricKey), are encoded using the \"PRIVATE KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc9881"
+    section: "RFC 9881, Section 2"
+    read_at: "2026-11-10"
+    quote: "id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }"
+  - url: "https://www.rfc-editor.org/rfc/rfc9881"
+    section: "RFC 9881, Section 6"
+    read_at: "2026-11-10"
+    quote: "The both format contains both the seed and expanded private key, allowing for interoperability; some may want to use and retain the seed and others may only support expanded private keys."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/doc/man7/EVP_PKEY-ML-DSA.pod"
+    section: "EVP_PKEY-ML-DSA(7), \"ml-dsa.output_formats\""
+    read_at: "2026-11-10"
+    quote: "The default order is equivalent to C<seed-priv> first and C<priv-only> second, with both seed and key output when the seed is available, and just the key otherwise."
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl genpkey -algorithm ML-DSA-65` (OpenSSL 3.6.5), default provider settings: the privateKey is the RFC 9881 `both` CHOICE, a SEQUENCE of the 32-octet seed and the 4032-octet expanded key (OpenSSL's seed-priv). AlgorithmIdentifier is id-ml-dsa-65 (2.16.840.1.101.3.4.3.18) with no parameters. The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

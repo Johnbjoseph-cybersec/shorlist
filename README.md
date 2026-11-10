@@ -186,6 +186,15 @@ P-256, 2048-bit DH) is not scored, because the label does not pin it. The comman
 [`.gitleaks.toml`](.gitleaks.toml), by file, not by folder. The decoy SL-3605 is an error
 message that names the label and has no body; it stays that way.
 
+SL-3637 to SL-3646 are the generic labels: `PRIVATE KEY` (PKCS #8 / OneAsymmetricKey), `PUBLIC
+KEY` (SubjectPublicKeyInfo) and `CERTIFICATE`, for RSA-2048, P-256, Ed25519, ML-KEM-768 and
+ML-DSA-65, as `openssl genpkey`, `openssl pkey -pubout` and `openssl req -x509` write them with
+default settings (OpenSSL 3.5 or newer for ML-KEM and ML-DSA; the PKCS #8 bodies hold the seed
+and the expanded key, RFC 9935 and RFC 9881 `both`). Here the label does not name the
+algorithm: the AlgorithmIdentifier in the body does, so the body pins `expected` (family, and
+the key size where there is one), still scored on the BEGIN line. They are made by the same
+script and listed in the same two files. SL-3647 is the ML-KEM counterpart of SL-3605.
+
 ## Running the generator
 
 Requires Python ≥ 3.10, `pyyaml`, `jsonschema`. No network access is used.

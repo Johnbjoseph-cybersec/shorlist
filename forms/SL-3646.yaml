@@ -1,0 +1,151 @@
+id: "SL-3646"
+title: "PEM label \"CERTIFICATE\": self-signed ML-DSA-65 X.509 (openssl req -x509)"
+family: "ML-DSA"
+parameter_set: "ML-DSA-65"
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN CERTIFICATE-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN CERTIFICATE-----
+  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
+  AAAAAAAAAAAAAAAACA4WGiAn
+  -----END CERTIFICATE-----
+  ShorList public test certificate: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "ML-DSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 5.1"
+    read_at: "2026-11-10"
+    quote: "Public-key certificates are encoded using the \"CERTIFICATE\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc9881"
+    section: "RFC 9881, Section 2"
+    read_at: "2026-11-10"
+    quote: "id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_X509"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_X509         \"CERTIFICATE\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl req -x509 -newkey ML-DSA-65 -nodes -subj \"/CN=ShorList test ML-DSA-65\" -days 3650` (OpenSSL 3.6.5); the private key was discarded. Subject key and signature algorithm are both id-ml-dsa-65 (RFC 9881, Sections 3 and 4). The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

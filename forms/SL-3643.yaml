@@ -1,0 +1,92 @@
+id: "SL-3643"
+title: "PEM label \"PRIVATE KEY\": ML-KEM-768 PKCS #8, seed and expanded key (openssl genpkey)"
+family: "ML-KEM"
+parameter_set: "ML-KEM-768"
+role: "key_establishment"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN PRIVATE KEY-----
+  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
+  bIU=
+  -----END PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "ML-KEM"
+  role: "key_establishment"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 10"
+    read_at: "2026-11-10"
+    quote: "Unencrypted PKCS #8 Private Key Information Syntax structures (PrivateKeyInfo), renamed to Asymmetric Key Packages (OneAsymmetricKey), are encoded using the \"PRIVATE KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc9935"
+    section: "RFC 9935, Section 3"
+    read_at: "2026-11-10"
+    quote: "id-alg-ml-kem-768 OBJECT IDENTIFIER ::= { kems 2 }"
+  - url: "https://www.rfc-editor.org/rfc/rfc9935"
+    section: "RFC 9935, Section 6"
+    read_at: "2026-11-10"
+    quote: "The both format contains both the seed and expanded private key, allowing for interoperability; some may want to use and retain the seed and others may only support expanded private keys."
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/doc/man7/EVP_PKEY-ML-KEM.pod"
+    section: "EVP_PKEY-ML-KEM(7), \"ml-kem.output_formats\""
+    read_at: "2026-11-10"
+    quote: "The default order is equivalent to C<seed-priv> first and C<priv-only> second, with both seed and key output when the seed is available, and just the key otherwise."
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl genpkey -algorithm ML-KEM-768` (OpenSSL 3.6.5), default provider settings: the privateKey is the RFC 9935 `both` CHOICE, a SEQUENCE of the 64-octet seed and the 2400-octet expanded key (OpenSSL's seed-priv, its default output when the seed is known). AlgorithmIdentifier is id-alg-ml-kem-768 (2.16.840.1.101.3.4.4.2) with no parameters. The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

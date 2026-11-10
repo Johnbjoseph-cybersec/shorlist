@@ -1,0 +1,48 @@
+id: "SL-3642"
+title: "PEM label \"CERTIFICATE\": self-signed P-256 X.509, ecdsa-with-SHA256"
+family: "ECDSA"
+parameter_set: "P-256"
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN CERTIFICATE-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN CERTIFICATE-----
+  MIIBkTCCATegAwIBAgIUAwqX5OUT0yJoP6aXzQeLFZJJhjowCgYIKoZIzj0EAwIw
+  HjEcMBoGA1UEAwwTU2hvckxpc3QgdGVzdCBQLTI1NjAeFw0yNjExMTAwNjQ4NDZa
+  Fw0zNjExMDcwNjQ4NDZaMB4xHDAaBgNVBAMME1Nob3JMaXN0IHRlc3QgUC0yNTYw
+  WTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASgWwr6Ql0h5VSh3/xXvKZyT+E2D0ME
+  nU45hsek+kpI6j5cHT73f2L8qYk4Yg6SfLGVX5QG0ClGZUowrwT+Le2Oo1MwUTAd
+  BgNVHQ4EFgQUz+7a/1HWQnTdvLgqU9pJUddeck8wHwYDVR0jBBgwFoAUz+7a/1HW
+  QnTdvLgqU9pJUddeck8wDwYDVR0TAQH/BAUwAwEB/zAKBggqhkjOPQQDAgNIADBF
+  AiEArDpJ2yzCOw0xk/5hOT8w2BKEEp5zN6ONnCTvRstFCCsCIBqJknome0cQhGMC
+  biid4HmdLRBMW4Jd9FPvbNqP7Pnl
+  -----END CERTIFICATE-----
+  ShorList public test certificate: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "ECDSA"
+  role: "signature"
+  size: 256
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 5.1"
+    read_at: "2026-11-10"
+    quote: "Public-key certificates are encoded using the \"CERTIFICATE\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc5758"
+    section: "RFC 5758, Section 3.2"
+    read_at: "2026-11-10"
+    quote: "ecdsa-with-SHA256 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 2 }"
+  - url: "https://www.rfc-editor.org/rfc/rfc5480"
+    section: "RFC 5480, Sections 2.1.1 and 2.1.1.1"
+    read_at: "2026-11-10"
+    quote: "secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_X509"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_X509         \"CERTIFICATE\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -sha256 -subj \"/CN=ShorList test P-256\" -days 3650` (OpenSSL 3.6.5); the private key was discarded. The subject key is id-ecPublicKey on prime256v1 and the certificate is signed with ecdsa-with-SHA256, which pins ECDSA. The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

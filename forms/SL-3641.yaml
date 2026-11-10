@@ -1,0 +1,57 @@
+id: "SL-3641"
+title: "PEM label \"CERTIFICATE\": self-signed RSA-2048 X.509, sha256WithRSAEncryption"
+family: "RSA"
+cyclonedx_family: "RSASSA-PKCS1"
+parameter_set: "2048"
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN CERTIFICATE-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN CERTIFICATE-----
+  MIIDGTCCAgGgAwIBAgIUAQq6ZMR7BOmAjfGXEKivsNgfugAwDQYJKoZIhvcNAQEL
+  BQAwHDEaMBgGA1UEAwwRU2hvckxpc3QgdGVzdCBSU0EwHhcNMjYxMTEwMDY0ODQ2
+  WhcNMzYxMTA3MDY0ODQ2WjAcMRowGAYDVQQDDBFTaG9yTGlzdCB0ZXN0IFJTQTCC
+  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKq1TLyy14FkjwixU1U2P4sF
+  l7wuFPpdggReuBc1eBCeC/UTBGv0ddj15XKJ6tvawY500aLTpXMGEWus5R7tGwkQ
+  A4pcvHCn1+87leb+fJgZ8N81th6EP+UfyiXTSzFd9WS6Fn9qKIg3wIMdATe/aQ92
+  BGP1HR9sG3bP7uf7gEJ/JaTnRoykqBZONFDAC0IN38qaF/sOxbGvTrA+L6yj36D5
+  aaJiFt1koil+HtfmAegOvtdbiGvixAgHVwj6YSk46uD0whK6Mj8gaisCqKI9UJqG
+  MjkPDLipDCTn9MOGCHtOuEdbF38+zaIZJDRKZ0CpYz76Y0xMcD/PnF7RpXg6LW8C
+  AwEAAaNTMFEwHQYDVR0OBBYEFKu8Fg7Ej+Lfb7ndfDcQQRp4rxE1MB8GA1UdIwQY
+  MBaAFKu8Fg7Ej+Lfb7ndfDcQQRp4rxE1MA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZI
+  hvcNAQELBQADggEBAH5h3x95QtcvbM+hSIAx6nESJom9kAT0+J1/LC3BQjwL4Vew
+  0/jB5BcRnO8IPekOUylNJ+tuiNelXy+8OjX1Ba2ukgOR4W5ABWm9ufu0VS7eyMG7
+  mUCeia25Ajx329RspzH7yjbD3XcAAUukgePb3mlCxAF4KmNOFjFVpVyuoz8HMcSD
+  Lujm1BJUghuloZlVx4om3r+dsof4CjlhdvPDnn5mWkyP5Ro/QlKFQF5idl7DCrP0
+  qzKJ7lMq3nMc44Z9wTQGp/nXN1vmvj2XnmnXXQUvs8hBlWltw5lx1DINzlZ4h1ui
+  RoCI0UVRa9ZKlUaBUctSe5ratvN52SJx3Pk0Tdg=
+  -----END CERTIFICATE-----
+  ShorList public test certificate: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "RSA"
+  role: "signature"
+  size: 2048
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 5.1"
+    read_at: "2026-11-10"
+    quote: "Public-key certificates are encoded using the \"CERTIFICATE\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc8017"
+    section: "RFC 8017, Appendix C (ASN.1 module)"
+    read_at: "2026-11-10"
+    quote: "sha256WithRSAEncryption      OBJECT IDENTIFIER ::= { pkcs-1 11 }"
+  - url: "https://www.rfc-editor.org/rfc/rfc8017"
+    section: "RFC 8017, Appendix A.1"
+    read_at: "2026-11-10"
+    quote: "rsaEncryption    OBJECT IDENTIFIER ::= { pkcs-1 1 }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_X509"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_X509         \"CERTIFICATE\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj \"/CN=ShorList test RSA\" -days 3650` (OpenSSL 3.6.5); the private key was discarded. The certificate carries an RSA-2048 subject key and is signed with sha256WithRSAEncryption (RSASSA-PKCS1-v1_5). The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

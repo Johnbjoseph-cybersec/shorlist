@@ -1,0 +1,36 @@
+id: "SL-3639"
+title: "PEM label \"PRIVATE KEY\": Ed25519 in PKCS #8 (openssl genpkey)"
+family: "EdDSA"
+parameter_set: "Ed25519"
+role: "signature"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN PRIVATE KEY-----
+  MC4CAQAwBQYDK2VwBCIEID1ggNy3yYxLgSYzuVxNyrF1x7+sthhFoQSlGVECvNBp
+  -----END PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "EdDSA"
+  role: "signature"
+  size: "undetermined"
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 10"
+    read_at: "2026-11-10"
+    quote: "Unencrypted PKCS #8 Private Key Information Syntax structures (PrivateKeyInfo), renamed to Asymmetric Key Packages (OneAsymmetricKey), are encoded using the \"PRIVATE KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc8410"
+    section: "RFC 8410, Sections 3 and 7"
+    read_at: "2026-11-10"
+    quote: "id-Ed25519   OBJECT IDENTIFIER ::= { 1 3 101 112 }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_PKCS8INF"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_PKCS8INF     \"PRIVATE KEY\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl genpkey -algorithm ED25519` (OpenSSL 3.6.5): PKCS #8 with id-Ed25519 (RFC 8410, Section 7 format). Ed25519 has no traditional PEM label; PKCS #8 is the only form OpenSSL writes. The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."

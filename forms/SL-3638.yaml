@@ -1,0 +1,42 @@
+id: "SL-3638"
+title: "PEM label \"PRIVATE KEY\": EC P-256 in PKCS #8 (openssl genpkey)"
+family: "EC"
+parameter_set: "P-256"
+role: "both"
+form_kind: "file_format"
+language_or_product: "PEM / OpenSSL 3.5"
+negative: false
+literal: "-----BEGIN PRIVATE KEY-----"
+context_filename: "key.pem"
+context_template: |
+  -----BEGIN PRIVATE KEY-----
+  MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgn+aEbfHtO3qyRIEo
+  XGn8g6kuxEULnVuFYXA/6HlxTW2hRANCAATHB3HSOcd9abB4CWiCwGeZNQxCvT0Q
+  Xw4JvtOk+nWy7IBR11mqhQCKlNlRSRvXTxPL848QkigkqsWxdTbjiIi8
+  -----END PRIVATE KEY-----
+  ShorList public test key: deliberately published, never used anywhere, protects nothing.
+expected:
+  family: "EC"
+  role: "undetermined"
+  size: 256
+source:
+  - url: "https://www.rfc-editor.org/rfc/rfc7468"
+    section: "RFC 7468, Section 10"
+    read_at: "2026-11-10"
+    quote: "Unencrypted PKCS #8 Private Key Information Syntax structures (PrivateKeyInfo), renamed to Asymmetric Key Packages (OneAsymmetricKey), are encoded using the \"PRIVATE KEY\" label."
+  - url: "https://www.rfc-editor.org/rfc/rfc5958"
+    section: "RFC 5958, Section 2"
+    read_at: "2026-11-10"
+    quote: "privateKeyAlgorithm identifies the private-key algorithm and optionally contains parameters associated with the asymmetric key pair."
+  - url: "https://www.rfc-editor.org/rfc/rfc5480"
+    section: "RFC 5480, Sections 2.1.1 and 2.1.1.1"
+    read_at: "2026-11-10"
+    quote: "secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }"
+  - url: "https://github.com/openssl/openssl/blob/openssl-3.5.0/include/openssl/pem.h"
+    section: "include/openssl/pem.h: PEM_STRING_PKCS8INF"
+    read_at: "2026-11-10"
+    quote: "# define PEM_STRING_PKCS8INF     \"PRIVATE KEY\""
+status: "verified-run"
+added_by: "John B Joseph (Purplecop Security)"
+added_at: "2026-11-10"
+notes: "Made with `openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256` (OpenSSL 3.6.5): PKCS #8 with id-ecPublicKey and the named curve prime256v1, an RFC 5915 ECPrivateKey inside. Compare SL-3601 (traditional EC PRIVATE KEY). The label on the literal's line does not name the algorithm: the family is in the AlgorithmIdentifier of the DER body, so a scanner has to decode the body to report it. expected is the key in the body, reported on the BEGIN line, as for the other PEM rows. id-ecPublicKey does not pin ECDSA or ECDH, so the family is EC. The body is real throwaway test material, published on purpose and used nowhere (README, \"Test keys\"; tools/make_test_keys.sh). verified-run: OpenSSL 3.6.5 reads the file back (`openssl pkey`/`openssl x509 -noout -text`) and `openssl asn1parse` shows the AlgorithmIdentifier above."
